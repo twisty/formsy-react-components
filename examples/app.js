@@ -4,6 +4,7 @@ var React = require('react');
 var Formsy = require('formsy-react');
 var Row = require('../src/row');
 var Input = require('../src/input');
+var Select = require('../src/select');
 var Textarea = require('../src/textarea');
 var RadioGroup = require('../src/radio-group');
 
@@ -12,7 +13,8 @@ var Examples = React.createClass({
     getInitialState: function() {
         return {
             layout: 'horizontal',
-            validatePristine: false
+            validatePristine: false,
+            disabled: false
         }
     },
 
@@ -82,6 +84,18 @@ var Examples = React.createClass({
                                 </label>
                             </div>
                         </Row>
+                        <Row layout="horizontal" label="disabled">
+                            <div className="checkbox">
+                                <label>
+                                    <input
+                                        type="checkbox"
+                                        defaultChecked={this.state.disabled}
+                                        name="disabled"
+                                        onChange={this.changeSelectProp}
+                                    /> Yes
+                                </label>
+                            </div>
+                        </Row>
                     </Formsy.Form>
                 </div>
                 <div className="page-header">
@@ -89,10 +103,11 @@ var Examples = React.createClass({
                 </div>
                 <Formsy.Form className={formClassName} ref="form">
                     <Textarea
-                        name="txtArea"
+                        name="txtArea1"
                         label="Textarea"
                         layout={this.state.layout}
                         validatePristine={this.state.validatePristine}
+                        disabled={this.state.disabled}
                         placeholder="This field requires 10 characters."
                         help="This is some help text for the textarea."
                         validations="minLength:10"
@@ -101,21 +116,22 @@ var Examples = React.createClass({
                         }}
                     />
                     <Input
-                        type="text"
-                        name="test"
-                        label="Text"
+                        name="textInput1"
                         value=""
+                        label="Text"
+                        type="text"
                         layout={this.state.layout}
                         validatePristine={this.state.validatePristine}
+                        disabled={this.state.disabled}
                         help="This is a required text input."
                         required
                     />
-                    <Input
-                        type="select"
-                        name="test"
+                    <Select
+                        name="select1"
                         label="Select"
                         layout={this.state.layout}
                         validatePristine={this.state.validatePristine}
+                        disabled={this.state.disabled}
                         help="This is a required select element."
                         options={selectOptions}
                         required
@@ -126,6 +142,7 @@ var Examples = React.createClass({
                         label="Radio group (inline)"
                         layout={this.state.layout}
                         validatePristine={this.state.validatePristine}
+                        disabled={this.state.disabled}
                         help="This is a required radio group."
                         options={radioOptions}
                         required
@@ -137,6 +154,7 @@ var Examples = React.createClass({
                         label="Radio group (stacked)"
                         layout={this.state.layout}
                         validatePristine={this.state.validatePristine}
+                        disabled={this.state.disabled}
                         help="Here, “Option B” is initially selected."
                         options={radioOptions}
                     />
