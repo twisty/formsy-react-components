@@ -80,12 +80,19 @@ var Row = React.createClass({
             classNames.formGroup.push('has-feedback');
         }
 
-        return (
-            <div className={classNames.formGroup.join(' ')}>
-                {this.renderLabel()}
+        var element = this.props.children;
+        if (this.props.layout === 'horizontal') {
+            element = (
                 <div className={classNames.elementWrapper.join(' ')}>
                     {this.props.children}
                 </div>
+            );
+        }
+
+        return (
+            <div className={classNames.formGroup.join(' ')}>
+                {this.renderLabel()}
+                {element}
             </div>
         );
     }
