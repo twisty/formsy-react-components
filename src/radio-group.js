@@ -102,17 +102,16 @@ var RadioGroup = React.createClass({
     render: function() {
 
         var controls = '';
-
-        if (this.props.type === 'radio') {
-            controls = this.radioControls();
-        }
-
-        if (this.props.type === 'radio-inline') {
-            controls = this.radioInlineControls();
-        }
-
-        if (this.props.type === 'checkbox') {
-            controls = this.checkboxControls();
+        switch (this.props.type) {
+            case 'radio':
+                controls = this.radioControls();
+                break;
+            case 'radio-inline':
+                controls = this.radioInlineControls();
+                break;
+            case 'checkbox':
+                controls = this.checkboxControls();
+                break;
         }
 
         return (
