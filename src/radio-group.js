@@ -48,7 +48,7 @@ var RadioGroup = React.createClass({
                             type="checkbox"
                             value={checkbox.value}
                             onChange={_this.changeRadio}
-                            disabled={_this.isFormDisabled() || checkbox.disabled}
+                            disabled={_this.isFormDisabled() || checkbox.disabled || _this.props.disabled}
                         /> {checkbox.label}
                     </label>
                 </div>
@@ -61,7 +61,7 @@ var RadioGroup = React.createClass({
         var _this = this;
         var controls = this.props.options.map(function(radio, key) {
             var checked = (_this.getValue() === radio.value);
-            var disabled = _this.isFormDisabled() || radio.disabled;
+            var disabled = _this.isFormDisabled() || radio.disabled || _this.props.disabled;
             var className = 'radio' + (disabled ? ' disabled' : '');
             return (
                 <div className={className} key={key}>
@@ -84,6 +84,7 @@ var RadioGroup = React.createClass({
         var _this = this;
         var controls = this.props.options.map(function(radio, key) {
             var checked = (_this.getValue() === radio.value);
+            var disabled = _this.isFormDisabled() || radio.disabled || _this.props.disabled;
             return (
                 <label className="radio-inline" key={key}>
                     <input
@@ -91,7 +92,7 @@ var RadioGroup = React.createClass({
                         type="radio"
                         value={radio.value}
                         onChange={_this.changeRadio}
-                        disabled={_this.isFormDisabled() || radio.disabled}
+                        disabled={disabled}
                     /> {radio.label}
                 </label>
             );
