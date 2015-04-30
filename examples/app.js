@@ -10,7 +10,8 @@ var Examples = React.createClass({
 
     getInitialState: function() {
         return {
-            layout: 'horizontal'
+            layout: 'horizontal',
+            validatePristine: true
         }
     },
 
@@ -20,6 +21,18 @@ var Examples = React.createClass({
 
     changeLayout: function(layout) {
         this.setState({layout: layout});
+    },
+
+    changeSelectProp: function(event) {
+        var target = event.currentTarget;
+        this.changeProp(target.name, target.checked);
+    },
+
+    changeProp: function(name, value) {
+        var newState = {};
+        newState[name] = value;
+        console.log(newState);
+        this.setState(newState);
     },
 
     render: function() {
@@ -38,19 +51,44 @@ var Examples = React.createClass({
         return (
             <div className="row">
                 <div className="page-header">
-                    <h1>Examples</h1>
+                    <h1>Form Playground</h1>
                 </div>
-                <button className="btn btn-default btn-sm" onClick={this.changeLayout.bind(this, 'horizontal')}>Horizontal</button>
-                {' '}
-                <button className="btn btn-default btn-sm" onClick={this.changeLayout.bind(this, 'vertical')}>Vertical</button>
+                <h3>Options…</h3>
+                <div className="well">
+                    <Formsy.Form className="form-horizontal">
+                        <RadioGroup
+                            name="layout"
+                            label="layout"
+                            options={[
+                                {value: 'horizontal', label: <code>horizontal</code>},
+                                {value: 'vertical', label: <code>vertical</code>},
+                                {value: 'elementOnly', label: <code>elementOnly</code>}
+                            ]}
+                            onChange={this.changeProp}
+                        />
+                    <Row layout="horizontal" label="validatePristine">
+                        <div className="checkbox">
+                            <label>
+                                <input
+                                    type="checkbox"
+                                    defaultChecked={this.state.validatePristine}
+                                    name="validatePristine"
+                                    onChange={this.changeSelectProp}
+                                /> Yes
+                            </label>
+                        </div>
+                    </Row>
+                    </Formsy.Form>
+                </div>
                 <div className="page-header">
-                    <h2>Form layout: <code>{this.state.layout}</code></h2>
+                    <h2>Layout: <code>{this.state.layout}</code></h2>
                 </div>
                 <Formsy.Form className={formClassName} ref="form">
                     <Textarea
                         name="txtArea"
                         label="Textarea"
                         layout={this.state.layout}
+                        validatePristine={this.state.validatePristine}
                         placeholder="This field requires 10 characters."
                         help="This is some help text for the textarea."
                         validations="minLength:10"
@@ -63,6 +101,7 @@ var Examples = React.createClass({
                         type="radio-inline"
                         label="Radio group (inline)"
                         layout={this.state.layout}
+                        validatePristine={this.state.validatePristine}
                         help="This is a required radio group."
                         options={radioOptions}
                         required
@@ -73,6 +112,7 @@ var Examples = React.createClass({
                         type="radio"
                         label="Radio group (stacked)"
                         layout={this.state.layout}
+                        validatePristine={this.state.validatePristine}
                         help="Here, “Option B” is initially selected."
                         options={radioOptions}
                     />
