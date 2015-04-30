@@ -76,6 +76,8 @@ var Row = React.createClass({
 
         if (this.props.hasErrors) {
             classNames.formGroup.push('has-error');
+            classNames.formGroup.push('has-warning');
+            classNames.formGroup.push('has-feedback');
         }
 
         return (

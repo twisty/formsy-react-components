@@ -3,6 +3,7 @@
 var React = require('react');
 var Formsy = require('formsy-react');
 var Row = require('../src/row');
+var Input = require('../src/input');
 var Textarea = require('../src/textarea');
 var RadioGroup = require('../src/radio-group');
 
@@ -11,7 +12,7 @@ var Examples = React.createClass({
     getInitialState: function() {
         return {
             layout: 'horizontal',
-            validatePristine: true
+            validatePristine: false
         }
     },
 
@@ -31,7 +32,6 @@ var Examples = React.createClass({
     changeProp: function(name, value) {
         var newState = {};
         newState[name] = value;
-        console.log(newState);
         this.setState(newState);
     },
 
@@ -42,6 +42,9 @@ var Examples = React.createClass({
             {value: 'b', label: 'Option B'},
             {value: 'c', label: 'Option C'}
         ];
+
+        var selectOptions = radioOptions.slice(0);
+        selectOptions.unshift({value: '', label: 'Please select…'});
 
         var formClassName = '';
         if (this.state.layout === 'horizontal') {
@@ -59,6 +62,7 @@ var Examples = React.createClass({
                         <RadioGroup
                             name="layout"
                             label="layout"
+                            value={this.state.layout}
                             options={[
                                 {value: 'horizontal', label: <code>horizontal</code>},
                                 {value: 'vertical', label: <code>vertical</code>},
@@ -66,18 +70,18 @@ var Examples = React.createClass({
                             ]}
                             onChange={this.changeProp}
                         />
-                    <Row layout="horizontal" label="validatePristine">
-                        <div className="checkbox">
-                            <label>
-                                <input
-                                    type="checkbox"
-                                    defaultChecked={this.state.validatePristine}
-                                    name="validatePristine"
-                                    onChange={this.changeSelectProp}
-                                /> Yes
-                            </label>
-                        </div>
-                    </Row>
+                        <Row layout="horizontal" label="validatePristine">
+                            <div className="checkbox">
+                                <label>
+                                    <input
+                                        type="checkbox"
+                                        defaultChecked={this.state.validatePristine}
+                                        name="validatePristine"
+                                        onChange={this.changeSelectProp}
+                                    /> Yes
+                                </label>
+                            </div>
+                        </Row>
                     </Formsy.Form>
                 </div>
                 <div className="page-header">
@@ -95,6 +99,26 @@ var Examples = React.createClass({
                         validationErrors={{
                             minLength: 'Please provide at least 10 characters.'
                         }}
+                    />
+                    <Input
+                        type="text"
+                        name="test"
+                        label="Text"
+                        value=""
+                        layout={this.state.layout}
+                        validatePristine={this.state.validatePristine}
+                        help="This is a required text input."
+                        required
+                    />
+                    <Input
+                        type="select"
+                        name="test"
+                        label="Select"
+                        layout={this.state.layout}
+                        validatePristine={this.state.validatePristine}
+                        help="This is a required select element."
+                        options={selectOptions}
+                        required
                     />
                     <RadioGroup
                         name="radioGrp1"

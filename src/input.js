@@ -4,11 +4,13 @@
 
 var React = require('react');
 var Formsy = require('formsy-react');
-var Icon = require('../../icon.js');
+var FRCMixin = require('./mixin');
+var Row = require('./row');
+var Icon = require('./icon.js');
 
 var Input = React.createClass({
 
-    mixins: [Formsy.Mixin],
+    mixins: [Formsy.Mixin, FRCMixin],
 
     propTypes: {
         type: React.PropTypes.oneOf(['text', 'select', 'hidden'])
@@ -28,22 +30,10 @@ var Input = React.createClass({
 
         var formElement = '';
         var warningIcon = '';
-        var formGroupClassNames = 'form-group';
-        var errorMessage = this.getErrorMessage();
-        var errorMessageNode = '';
 
-        if (this.isValid() === false) {
-            formGroupClassNames += ' has-error has-feedback';
+        if (this.showErrors()) {
             warningIcon = (
                 <Icon symbol="remove" className="form-control-feedback" />
-            );
-        }
-
-        if (errorMessage) {
-            errorMessageNode = (
-                <span className="help-block">
-                    {errorMessage}
-                </span>
             );
         }
 
@@ -57,18 +47,19 @@ var Input = React.createClass({
                 warningIcon = ''; // only supported on text types
                 break;
         }
+
         return (
-            <div className={formGroupClassNames}>
-                <label htmlFor={this.props.name} className="col-sm-3 control-label">
-                    {this.props.label}
-                    {this.isRequired() ? ' *' : null}
-                </label>
-                <div className="col-sm-9">
-                    {formElement}
-                    {warningIcon}
-                    {errorMessageNode}
-                </div>
-            </div>
+            <Row
+                label={this.props.label}
+                required={this.isRequired()}
+                hasErrors={this.showErrors()}
+                layout={this.props.layout}
+            >
+                {formElement}
+                {warningIcon}
+                {this.renderHelp()}
+                {this.renderErrorMessage()}
+            </Row>
         );
     },
 
