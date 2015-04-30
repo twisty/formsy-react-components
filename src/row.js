@@ -11,6 +11,7 @@ var Row = React.createClass({
         required: React.PropTypes.bool,
         hasErrors: React.PropTypes.bool,
         fakeLabel: React.PropTypes.bool,
+        layout: React.PropTypes.oneOf(['horizontal', 'vertical', 'elementOnly']),
         htmlFor: React.PropTypes.string
     },
 
@@ -24,6 +25,10 @@ var Row = React.createClass({
     },
 
     renderLabel: function() {
+
+        if (this.props.layout === 'elementOnly') {
+            return '';
+        }
 
         var labelWrapper = [];
         labelWrapper.push('control-label');
@@ -51,6 +56,14 @@ var Row = React.createClass({
     },
 
     render: function() {
+
+        if (this.props.layout === 'elementOnly') {
+            return (
+                <span>
+                {this.props.children}
+                </span>
+            );
+        }
 
         var classNames = {
             formGroup: ['form-group'],

@@ -20,8 +20,7 @@ var RadioGroup = React.createClass({
         return {
             type: 'radio-inline',
             label: '',
-            help: null,
-            wrap: true
+            help: null
         };
     },
 
@@ -114,16 +113,6 @@ var RadioGroup = React.createClass({
 
         if (this.props.type === 'checkbox') {
             controls = this.checkboxControls();
-        }
-
-        if (this.props.wrap === false) {
-            return (
-                <div>
-                    {controls}
-                    {this.renderHelp()}
-                    {this.renderErrorMessage()}
-                </div>
-            );
         }
 
         return (
