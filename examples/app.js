@@ -45,6 +45,12 @@ var Examples = React.createClass({
             {value: 'c', label: 'Option C'}
         ];
 
+        var radioOptionsDisabled = [
+            {value: 'a', label: 'Option A'},
+            {value: 'b', label: 'Option B', disabled: true},
+            {value: 'c', label: 'Option C'}
+        ];
+
         var selectOptions = radioOptions.slice(0);
         selectOptions.unshift({value: '', label: 'Please select…'});
 
@@ -63,6 +69,7 @@ var Examples = React.createClass({
                     <Formsy.Form className="form-horizontal">
                         <RadioGroup
                             name="layout"
+                            type="inline"
                             label="layout"
                             value={this.state.layout}
                             options={[
@@ -123,8 +130,19 @@ var Examples = React.createClass({
                         layout={this.state.layout}
                         validatePristine={this.state.validatePristine}
                         disabled={this.state.disabled}
+                        placeholder="Here is a text input."
                         help="This is a required text input."
                         required
+                    />
+                    <Input
+                        name="textInput2"
+                        value=""
+                        label="Email"
+                        type="email"
+                        layout={this.state.layout}
+                        validatePristine={this.state.validatePristine}
+                        disabled={this.state.disabled}
+                        placeholder="This is an email input."
                     />
                     <Select
                         name="select1"
@@ -138,7 +156,17 @@ var Examples = React.createClass({
                     />
                     <RadioGroup
                         name="radioGrp1"
-                        type="radio-inline"
+                        value="b"
+                        label="Radio group (stacked)"
+                        layout={this.state.layout}
+                        validatePristine={this.state.validatePristine}
+                        disabled={this.state.disabled}
+                        help="Here, “Option B” is initially selected."
+                        options={radioOptions}
+                    />
+                    <RadioGroup
+                        name="radioGrp2"
+                        type="inline"
                         label="Radio group (inline)"
                         layout={this.state.layout}
                         validatePristine={this.state.validatePristine}
@@ -148,15 +176,14 @@ var Examples = React.createClass({
                         required
                     />
                     <RadioGroup
-                        name="radioGrp2"
-                        value="b"
-                        type="radio"
-                        label="Radio group (stacked)"
+                        name="radioGrp3"
+                        type="inline"
+                        label="Radio group (disabled)"
                         layout={this.state.layout}
                         validatePristine={this.state.validatePristine}
                         disabled={this.state.disabled}
-                        help="Here, “Option B” is initially selected."
-                        options={radioOptions}
+                        help="Here, “Option B” is disabled."
+                        options={radioOptionsDisabled}
                     />
                     <Row layout={this.state.layout}>
                         <input className="btn btn-default" onClick={this.resetForm} type="reset" defaultValue="Reset" />
