@@ -13,21 +13,16 @@ var RadioGroup = React.createClass({
 
     propTypes: {
         name: React.PropTypes.string.isRequired,
+        type: React.PropTypes.oneOf(['inline', 'stacked']),
         options: React.PropTypes.array.isRequired
     },
 
     getDefaultProps: function() {
         return {
-            type: 'radio-inline',
+            type: 'stacked',
             label: '',
             help: null
         };
-    },
-
-    changeCheckbox: function(event) {
-        var value = event.currentTarget.value;
-        this.setValue(value);
-        this.props.onChange(this.props.name, value);
     },
 
     changeRadio: function(event) {
@@ -36,33 +31,25 @@ var RadioGroup = React.createClass({
         this.props.onChange(this.props.name, value);
     },
 
-    checkboxControls: function() {
-        var _this = this;
-        var controls = this.props.options.map(function(checkbox, key) {
-            var checked = (_this.getValue() === checkbox.value);
-            return (
-                <div className="checkbox" key={key}>
-                    <label>
-                        <input
-                            checked={checked}
-                            type="checkbox"
-                            value={checkbox.value}
-                            onChange={_this.changeRadio}
-                            disabled={_this.isFormDisabled() || checkbox.disabled || _this.props.disabled}
-                        /> {checkbox.label}
-                    </label>
-                </div>
-            );
-        });
-        return controls;
-    },
-
-    radioControls: function() {
+    renderElement: function() {
         var _this = this;
         var controls = this.props.options.map(function(radio, key) {
             var checked = (_this.getValue() === radio.value);
             var disabled = _this.isFormDisabled() || radio.disabled || _this.props.disabled;
             var className = 'radio' + (disabled ? ' disabled' : '');
+            if (_this.props.type === 'inline') {
+                return (
+                    <label className="radio-inline" key={key}>
+                        <input
+                            checked={checked}
+                            type="radio"
+                            value={radio.value}
+                            onChange={_this.changeRadio}
+                            disabled={disabled}
+                        /> {radio.label}
+                    </label>
+                );
+            }
             return (
                 <div className={className} key={key}>
                     <label>
@@ -80,39 +67,12 @@ var RadioGroup = React.createClass({
         return controls;
     },
 
-    radioInlineControls: function() {
-        var _this = this;
-        var controls = this.props.options.map(function(radio, key) {
-            var checked = (_this.getValue() === radio.value);
-            var disabled = _this.isFormDisabled() || radio.disabled || _this.props.disabled;
-            return (
-                <label className="radio-inline" key={key}>
-                    <input
-                        checked={checked}
-                        type="radio"
-                        value={radio.value}
-                        onChange={_this.changeRadio}
-                        disabled={disabled}
-                    /> {radio.label}
-                </label>
-            );
-        });
-        return controls;
-    },
-
     render: function() {
 
-        var controls = '';
-        switch (this.props.type) {
-            case 'radio':
-                controls = this.radioControls();
-                break;
-            case 'radio-inline':
-                controls = this.radioInlineControls();
-                break;
-            case 'checkbox':
-                controls = this.checkboxControls();
-                break;
+        if (this.props.layout === 'elementOnly') {
+            return (
+                <div>{this.renderElement()}</div>
+            );
         }
 
         return (
@@ -123,7 +83,7 @@ var RadioGroup = React.createClass({
                 layout={this.props.layout}
                 fakeLabel={true}
             >
-                {controls}
+                {this.renderElement()}
                 {this.renderHelp()}
                 {this.renderErrorMessage()}
             </Row>
