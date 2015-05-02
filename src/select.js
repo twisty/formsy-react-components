@@ -17,7 +17,9 @@ var Select = React.createClass({
 
     render: function() {
 
-        var formElement = '';
+        if (this.props.layout === 'elementOnly') {
+            return this.renderElement();
+        }
 
         return (
             <Row
