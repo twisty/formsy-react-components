@@ -13,7 +13,7 @@ var Input = React.createClass({
     mixins: [Formsy.Mixin, FRCMixin],
 
     propTypes: {
-        type: React.PropTypes.oneOf(['text', 'hidden'])
+        type: React.PropTypes.oneOf(['text', 'email', 'hidden'])
     },
 
     changeValue: function(event) {
@@ -34,6 +34,10 @@ var Input = React.createClass({
             warningIcon = (
                 <Icon symbol="remove" className="form-control-feedback" />
             );
+        }
+
+        if (this.props.layout === 'elementOnly') {
+            return this.renderElement();
         }
 
         return (
