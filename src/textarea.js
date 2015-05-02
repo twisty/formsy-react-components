@@ -17,11 +17,11 @@ var Textarea = React.createClass({
         this.props.onChange(this.props.name, value);
     },
 
-    renderInput: function() {
+    renderElement: function() {
         return (
             <textarea
                 className="form-control"
-                name="{this.props.name}"
+                name={this.props.name}
                 rows="3"
                 value={this.getValue()}
                 onChange={this.changeValue}
@@ -32,6 +32,11 @@ var Textarea = React.createClass({
     },
 
     render: function() {
+
+        if (this.props.layout === 'elementOnly') {
+            return this.renderElement();
+        }
+
         return (
             <Row
                 label={this.props.label}
@@ -40,7 +45,7 @@ var Textarea = React.createClass({
                 layout={this.props.layout}
                 htmlFor={this.props.name}
             >
-                {this.renderInput()}
+                {this.renderElement()}
                 {this.renderHelp()}
                 {this.renderErrorMessage()}
             </Row>
