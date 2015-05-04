@@ -67,7 +67,8 @@ var Input = React.createClass({
                 disabled={this.isFormDisabled() || this.props.disabled}
             />
         );
-    },
+    }
+
 });
 
 module.exports = Input;

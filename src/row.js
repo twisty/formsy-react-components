@@ -99,4 +99,4 @@ var Row = React.createClass({
 
 });
 
-module.exports = Row
+module.exports = Row;

@@ -15,7 +15,7 @@ var Examples = React.createClass({
             layout: 'horizontal',
             validatePristine: false,
             disabled: false
-        }
+        };
     },
 
     resetForm: function () {
