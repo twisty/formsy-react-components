@@ -24,17 +24,16 @@ module.exports = {
     },
 
     renderErrorMessage: function() {
-        if (this.showErrors()) {
-            var errorMessage = this.getErrorMessage();
-            if (errorMessage) {
-                return (
-                    <span className="help-block">
-                        {errorMessage}
-                    </span>
-                );
-            }
+        if (!this.showErrors()) {
+            return '';
         }
-        return '';
+        var errorMessage = this.getErrorMessage();
+        if (!errorMessage) {
+            return '';
+        }
+        return (
+            <span className="help-block">{errorMessage}</span>
+        );
     },
 
     showErrors: function() {
@@ -45,4 +44,4 @@ module.exports = {
         }
         return (this.isValid() === false);
     }
-}
+};
