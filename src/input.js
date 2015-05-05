@@ -13,7 +13,7 @@ var Input = React.createClass({
     mixins: [Formsy.Mixin, FRCMixin],
 
     propTypes: {
-        type: React.PropTypes.oneOf(['text', 'email', 'hidden'])
+        type: React.PropTypes.oneOf(['text', 'date', 'email', 'password', 'hidden'])
     },
 
     changeValue: function(event) {
@@ -36,7 +36,7 @@ var Input = React.createClass({
             );
         }
 
-        if (this.props.layout === 'elementOnly') {
+        if (this.props.layout === 'elementOnly' || this.props.type === 'hidden') {
             return this.renderElement();
         }
 
