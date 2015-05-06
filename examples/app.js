@@ -174,6 +174,8 @@ var Examples = React.createClass({
                     <fieldset>
                         <legend>Textarea</legend>
                         <Textarea
+                            rows={3}
+                            cols={40}
                             name="txtArea1"
                             label="Textarea"
                             layout={this.state.layout}

@@ -11,6 +11,18 @@ var Textarea = React.createClass({
 
     mixins: [Formsy.Mixin, FRCMixin],
 
+    propTypes: {
+        rows: React.PropTypes.number,
+        cols: React.PropTypes.number
+    },
+
+    getDefaultProps: function() {
+        return {
+            rows: 3,
+            cols: 0 // React doesn't render the cols attribute if it is zero
+        };
+    },
+
     changeValue: function(event) {
         var value = event.currentTarget.value;
         this.setValue(value);
@@ -22,7 +34,8 @@ var Textarea = React.createClass({
             <textarea
                 className="form-control"
                 name={this.props.name}
-                rows="3"
+                rows={this.props.rows}
+                cols={this.props.cols}
                 value={this.getValue()}
                 onChange={this.changeValue}
                 placeholder={this.props.placeholder}
