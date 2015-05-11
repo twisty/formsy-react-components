@@ -4,10 +4,10 @@
   "description": "A set of React JS components for use in a formsy-react form. Markup adheres to Bootstrap structure.",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "NODE_ENV=production gulp production",
-    "lint": "eslint src"
+    "lint": "eslint src",
+    "release": "jsx --no-cache-dir src release"
   },
-  "main": "./src/main.js",
+  "main": "./release/main.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/twisty/formsy-react-components.git"
