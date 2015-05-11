@@ -1,0 +1,41 @@
+{
+  "name": "formsy-react-components",
+  "version": "0.0.0",
+  "description": "A set of React JS components for use in a formsy-react form. Markup adheres to Bootstrap structure.",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "NODE_ENV=production gulp production",
+    "lint": "eslint src"
+  },
+  "main": "./src/main.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/twisty/formsy-react-components.git"
+  },
+  "keywords": [
+    "react",
+    "formsy-react",
+    "bootstrap"
+  ],
+  "author": "Tim Brayshaw <tim@brayshaw.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/twisty/formsy-react-components/issues"
+  },
+  "peerDependencies": {
+    "react": "~0.13.2",
+    "react-tools": "^0.13.2",
+    "formsy-react": "~0.13.1"
+  },
+  "devDependencies": {
+    "browserify": "~10.0.0",
+    "codemirror": "^5.2.0",
+    "gulp": "~3.8.11",
+    "gulp-notify": "~2.2.0",
+    "gulp-util": "~3.0.4",
+    "js-beautify": "^1.5.5",
+    "reactify": "~1.1.0",
+    "vinyl-source-stream": "~1.1.0",
+    "watchify": "~3.2.1"
+  }
+}
