@@ -8,7 +8,7 @@ var Select = require('../src/select');
 var Textarea = require('../src/textarea');
 var RadioGroup = require('../src/radio-group');
 
-var Examples = React.createClass({
+var Playground = React.createClass({
 
     getInitialState: function() {
         return {
@@ -248,6 +248,6 @@ var Examples = React.createClass({
 });
 
 React.render(
-    <Examples />,
-    document.getElementById('examples')
+    <Playground />,
+    document.getElementById('playground')
 );

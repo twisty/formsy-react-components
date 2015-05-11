@@ -8,7 +8,7 @@ var reactify = require('reactify');
 var source = require('vinyl-source-stream');
 var notify = require('gulp-notify');
 
-var dependencies = ['react', 'formsy-react'];
+var dependencies = ['react', 'react-tools', 'formsy-react'];
 
 var browserifyTask = function(options) {
 
@@ -58,11 +58,20 @@ gulp.task('production', function() {
     });
 });
 
-gulp.task('default', function() {
+gulp.task('playground', function() {
     browserifyTask({
         development: true,
-        bundle: 'dev.bundle.js',
-        src: './examples/app.js',
+        bundle: 'dev.playground.js',
+        src: './examples/playground.js',
+        dest: './examples'
+    });
+});
+
+gulp.task('docs', function() {
+    browserifyTask({
+        development: true,
+        bundle: 'dev.docs.js',
+        src: './examples/docs.js',
         dest: './examples'
     });
 });
