@@ -44,7 +44,7 @@ var Select = React.createClass({
         return (
             <select
                 className="form-control"
-                name={this.props.name}
+                {...this.props}
                 value={this.getValue()}
                 onChange={this.changeValue}
                 disabled={this.isFormDisabled() || this.props.disabled}

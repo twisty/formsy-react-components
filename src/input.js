@@ -59,10 +59,9 @@ var Input = React.createClass({
         return (
             <input
                 className="form-control"
-                type={this.props.type}
-                name={this.props.name}
+                {...this.props}
+                label={null}
                 value={this.getValue()}
-                placeholder={this.props.placeholder}
                 onChange={this.changeValue}
                 disabled={this.isFormDisabled() || this.props.disabled}
             />

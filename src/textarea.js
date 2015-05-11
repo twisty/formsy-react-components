@@ -33,12 +33,9 @@ var Textarea = React.createClass({
         return (
             <textarea
                 className="form-control"
-                name={this.props.name}
-                rows={this.props.rows}
-                cols={this.props.cols}
+                {...this.props}
                 value={this.getValue()}
                 onChange={this.changeValue}
-                placeholder={this.props.placeholder}
                 disabled={this.isFormDisabled() || this.props.disabled}
             ></textarea>
         );
