@@ -26,7 +26,8 @@ var Example = React.createClass({
 
     getInitialState: function() {
         return {
-            markup: 'NONE',
+            reactElement: <div></div>,
+            markup: '<div></div>',
             error: null
         };
     },
@@ -54,17 +55,18 @@ var Example = React.createClass({
 
     // renderToStaticMarkup here.
     // https://github.com/facebook/react/issues/3344#issuecomment-77972846
-    refreshMarkup: function(code) {
+    refreshMarkup: function(jsxString) {
         /*
         var result = function(str) {
           return eval(str);
         }.call(this, compiledCode);
         */
         try {
-            var compiledCode = transform(code);
-            var result = eval(compiledCode); // eslint-disable-line no-eval
-            var markup = React.renderToStaticMarkup(result);
+            var jsString = transform(jsxString);
+            var reactElement = eval(jsString); // eslint-disable-line no-eval
+            var markup = React.renderToStaticMarkup(reactElement);
             this.setState({
+                reactElement: reactElement,
                 markup: markup,
                 error: null
             });
@@ -98,6 +100,7 @@ var Example = React.createClass({
                 <pre>
                     {beautify.html(this.state.markup)}
                 </pre>
+                {this.state.reactElement}
                 <button
                     className="btn btn-default btn-xs"
                     onClick={this.refreshMarkupClick}
