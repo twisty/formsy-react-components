@@ -61,6 +61,12 @@ var Playground = React.createClass({
             formClassName = 'form-horizontal';
         }
 
+        var sharedProps = {
+            layout: this.state.layout,
+            validatePristine: this.state.validatePristine,
+            disabled: this.state.disabled
+        };
+
         return (
             <div className="row">
                 <div className="page-header">
@@ -114,75 +120,87 @@ var Playground = React.createClass({
                     <fieldset>
                         <legend>Input types</legend>
                         <Input
+                            {...sharedProps}
                             name="text1"
                             value=""
                             label="Text"
                             type="text"
-                            layout={this.state.layout}
-                            validatePristine={this.state.validatePristine}
-                            disabled={this.state.disabled}
                             placeholder="Here is a text input."
                             help="This is a required text input."
                             required
                         />
                         <Input
+                            {...sharedProps}
                             name="date1"
                             value=""
                             label="Date"
                             type="date"
-                            layout={this.state.layout}
-                            validatePristine={this.state.validatePristine}
-                            disabled={this.state.disabled}
                             placeholder="This is a date input."
                             required
                         />
                         <Input
+                            {...sharedProps}
                             name="email1"
                             value=""
                             label="Email"
                             type="email"
-                            layout={this.state.layout}
-                            validatePristine={this.state.validatePristine}
-                            disabled={this.state.disabled}
                             placeholder="This is an email input."
                         />
                         <Input
+                            {...sharedProps}
                             name="password1"
                             value=""
                             label="Password"
                             type="password"
-                            layout={this.state.layout}
-                            validatePristine={this.state.validatePristine}
                             validations="minLength:8"
                             validationError="Your password must be at least 8 characters long."
-                            disabled={this.state.disabled}
                             placeholder="Choose a password"
                         />
                         <Input
+                            {...sharedProps}
                             name="password2"
                             value=""
                             label="Confirm password"
                             type="password"
-                            layout={this.state.layout}
-                            validatePristine={this.state.validatePristine}
-                            disabled={this.state.disabled}
                             validations="equalsField:password1"
                             validationErrors={{
                                 equalsField: 'Passwords must match.'
                             }}
                             placeholder="Retype password"
                         />
+                        <Input
+                            {...sharedProps}
+                            type="color"
+                            name="colour1"
+                            label="Colour input"
+                            value="#000000"
+                            validations="equals:#000000"
+                            validationError="You can have any color, as long as it's black."
+                        />
+                        <Input
+                            {...sharedProps}
+                            type="file"
+                            name="file1"
+                            label="File picker"
+                        />
+                        <Input
+                            {...sharedProps}
+                            type="range"
+                            name="range1"
+                            label="Range input"
+                            min={0}
+                            max={10}
+                            step={2}
+                        />
                     </fieldset>
                     <fieldset>
                         <legend>Textarea</legend>
                         <Textarea
+                            {...sharedProps}
                             rows={3}
                             cols={40}
                             name="txtArea1"
                             label="Textarea"
-                            layout={this.state.layout}
-                            validatePristine={this.state.validatePristine}
-                            disabled={this.state.disabled}
                             placeholder="This field requires 10 characters."
                             help="This is some help text for the textarea."
                             validations="minLength:10"
@@ -194,11 +212,9 @@ var Playground = React.createClass({
                     <fieldset>
                         <legend>Select</legend>
                         <Select
+                            {...sharedProps}
                             name="select1"
                             label="Select"
-                            layout={this.state.layout}
-                            validatePristine={this.state.validatePristine}
-                            disabled={this.state.disabled}
                             help="This is a required select element."
                             options={selectOptions}
                             required
@@ -207,33 +223,27 @@ var Playground = React.createClass({
                     <fieldset>
                         <legend>Radio group</legend>
                         <RadioGroup
+                            {...sharedProps}
                             name="radioGrp1"
                             value="b"
                             label="Radio group (stacked)"
-                            layout={this.state.layout}
-                            validatePristine={this.state.validatePristine}
-                            disabled={this.state.disabled}
                             help="Here, “Option B” is initially selected."
                             options={radioOptions}
                         />
                         <RadioGroup
+                            {...sharedProps}
                             name="radioGrp2"
                             type="inline"
                             label="Radio group (inline)"
-                            layout={this.state.layout}
-                            validatePristine={this.state.validatePristine}
-                            disabled={this.state.disabled}
                             help="This is a required radio group."
                             options={radioOptions}
                             required
                         />
                         <RadioGroup
+                            {...sharedProps}
                             name="radioGrp3"
                             type="inline"
                             label="Radio group (disabled)"
-                            layout={this.state.layout}
-                            validatePristine={this.state.validatePristine}
-                            disabled={this.state.disabled}
                             help="Here, “Option B” is disabled."
                             options={radioOptionsDisabled}
                         />
