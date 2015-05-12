@@ -13,7 +13,7 @@ var Input = React.createClass({displayName: "Input",
     mixins: [Formsy.Mixin, FRCMixin],
 
     propTypes: {
-        type: React.PropTypes.oneOf(['text', 'date', 'email', 'password', 'hidden'])
+        type: React.PropTypes.oneOf(['color', 'date', 'datetime', 'datetime-local', 'email', 'file', 'hidden', 'month', 'number', 'password', 'range', 'tel', 'text', 'time', 'url', 'week'])
     },
 
     changeValue: function(event) {
@@ -56,9 +56,14 @@ var Input = React.createClass({displayName: "Input",
     },
 
     renderElement: function() {
+        var className = 'form-control';
+        var nonTextTypes = ['range', 'file'];
+        if (nonTextTypes.indexOf(this.props.type) !== -1) {
+            className = null;
+        }
         return (
             React.createElement("input", React.__spread({
-                className: "form-control"}, 
+                className: className}, 
                 this.props, 
                 {label: null, 
                 value: this.getValue(), 
