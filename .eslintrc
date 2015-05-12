@@ -1,0 +1,22 @@
+{
+    "parser": "babel-eslint",
+    "env": {
+        "browser": true,
+        "node": true
+    },
+    "ecmaFeatures": {
+        "jsx": true
+    },
+    "plugins": [
+        "react"
+    ],
+    "rules": {
+        "react/jsx-uses-react": 1,
+        "react/jsx-no-undef": 1,
+        "strict": [2, "global"],
+        "quotes": [2, "single"],
+        "no-unused-vars": 2,
+        "camelcase": 2,
+        "no-underscore-dangle": 0
+    }
+}
