@@ -13,7 +13,7 @@ var Input = React.createClass({
     mixins: [Formsy.Mixin, FRCMixin],
 
     propTypes: {
-        type: React.PropTypes.oneOf(['text', 'date', 'email', 'password', 'hidden'])
+        type: React.PropTypes.oneOf(['color', 'date', 'datetime', 'datetime-local', 'email', 'file', 'hidden', 'month', 'number', 'password', 'range', 'tel', 'text', 'time', 'url', 'week'])
     },
 
     changeValue: function(event) {
