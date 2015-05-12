@@ -56,9 +56,14 @@ var Input = React.createClass({
     },
 
     renderElement: function() {
+        var className = 'form-control';
+        var nonTextTypes = ['range', 'file'];
+        if (nonTextTypes.indexOf(this.props.type) !== -1) {
+            className = null;
+        }
         return (
             <input
-                className="form-control"
+                className={className}
                 {...this.props}
                 label={null}
                 value={this.getValue()}
