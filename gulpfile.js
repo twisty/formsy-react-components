@@ -18,6 +18,8 @@ var dependencies = [
     'js-beautify'
 ];
 
+var production = process.env.NODE_ENV === 'production';
+
 var browserifyTask = function(options) {
 
     var b = browserify({
@@ -27,7 +29,7 @@ var browserifyTask = function(options) {
         cache: {},
         packageCache: {}
     });
-    b.external(options.development ? dependencies : []);
+    b.external(dependencies);
 
     var rebundle = function() {
 
@@ -52,32 +54,39 @@ var browserifyTask = function(options) {
 
 gulp.task('vendor', function() {
     var bundler = browserify({
-        debug: false,
+        debug: !production,
         require: dependencies
     });
-    bundler.transform({
-        global: true
-    }, uglifyify);
+    if (production) {
+        bundler.transform({
+            global: true
+        }, uglifyify);
+    }
     bundler
         .bundle()
         .pipe(source('bundle.js'))
         .pipe(gulp.dest('vendor'));
 });
 
-gulp.task('playground', ['vendor'], function() {
+gulp.task('playground', function() {
     browserifyTask({
-        development: true,
+        development: !production,
         bundle: 'bundle.js',
         src: './playground/app.js',
         dest: './playground'
     });
 });
 
-gulp.task('docs', ['vendor'], function() {
+gulp.task('docs', function() {
     browserifyTask({
-        development: true,
+        development: !production,
         bundle: 'bundle.js',
         src: './examples/app.js',
         dest: './examples'
     });
 });
+
+gulp.task('dev-docs', ['vendor', 'playground']);
+gulp.task('dev-playground', ['vendor', 'playground']);
+gulp.task('release', ['vendor', 'playground', 'docs']);
+
