@@ -12,7 +12,20 @@ var Select = React.createClass({displayName: "Select",
     mixins: [Formsy.Mixin, FRCMixin],
 
     changeValue: function(event) {
-        this.setValue(event.currentTarget.value);
+        var target = event.currentTarget;
+        var value;
+        if (this.props.multiple) {
+            value = [];
+            for (var i = 0; i < target.length; i++){
+                var option = target.options[i];
+                if (option.selected) {
+                    value.push(option.value);
+                }
+            }
+        } else {
+            value = target.value;
+        }
+        this.setValue(value);
     },
 
     render: function() {
