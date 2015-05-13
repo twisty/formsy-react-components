@@ -32,7 +32,7 @@ module.exports = {
             return '';
         }
         return (
-            <span className="help-block">{errorMessage}</span>
+            <span className="help-block validation-message">{errorMessage}</span>
         );
     },
 
