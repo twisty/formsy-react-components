@@ -13,7 +13,24 @@ var Input = React.createClass({
     mixins: [Formsy.Mixin, FRCMixin],
 
     propTypes: {
-        type: React.PropTypes.oneOf(['color', 'date', 'datetime', 'datetime-local', 'email', 'file', 'hidden', 'month', 'number', 'password', 'range', 'tel', 'text', 'time', 'url', 'week'])
+        type: React.PropTypes.oneOf([
+            'color',
+            'date',
+            'datetime',
+            'datetime-local',
+            'email',
+            'file',
+            'hidden',
+            'month',
+            'number',
+            'password',
+            'range',
+            'tel',
+            'text',
+            'time',
+            'url',
+            'week'
+        ])
     },
 
     changeValue: function(event) {
@@ -28,16 +45,17 @@ var Input = React.createClass({
 
     render: function() {
 
-        var warningIcon = '';
+        var element = this.renderElement();
 
+        if (this.props.layout === 'elementOnly' || this.props.type === 'hidden') {
+            return element;
+        }
+
+        var warningIcon = '';
         if (this.showErrors()) {
             warningIcon = (
                 <Icon symbol="remove" className="form-control-feedback" />
             );
-        }
-
-        if (this.props.layout === 'elementOnly' || this.props.type === 'hidden') {
-            return this.renderElement();
         }
 
         return (
@@ -47,7 +65,7 @@ var Input = React.createClass({
                 hasErrors={this.showErrors()}
                 layout={this.props.layout}
             >
-                {this.renderElement()}
+                {element}
                 {warningIcon}
                 {this.renderHelp()}
                 {this.renderErrorMessage()}
@@ -57,8 +75,7 @@ var Input = React.createClass({
 
     renderElement: function() {
         var className = 'form-control';
-        var nonTextTypes = ['range', 'file'];
-        if (nonTextTypes.indexOf(this.props.type) !== -1) {
+        if (['file', 'range'].indexOf(this.props.type) !== -1) {
             className = null;
         }
         return (
