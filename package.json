@@ -31,6 +31,6 @@
     "eslint": "^0.21.0",
     "eslint-plugin-react": "^2.2.0",
     "gulp": "~3.8.11",
-    "react-tools": "^0.13.2"
+    "gulp-react": "^3.0.1"
   }
 }
