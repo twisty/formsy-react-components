@@ -32,7 +32,7 @@ module.exports = {
             return '';
         }
         return (
-            React.createElement("span", {className: "help-block"}, errorMessage)
+            React.createElement("span", {className: "help-block validation-message"}, errorMessage)
         );
     },
 
