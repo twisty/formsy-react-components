@@ -21,8 +21,12 @@ var Playground = React.createClass({displayName: "Playground",
         };
     },
 
-    resetForm: function () {
+    resetForm: function() {
         this.refs.form.reset();
+    },
+
+    submitForm: function(data) {
+        console.log(data);
     },
 
     changeLayout: function(layout) {
@@ -117,7 +121,7 @@ var Playground = React.createClass({displayName: "Playground",
                 React.createElement("div", {className: "page-header"}, 
                     React.createElement("h2", null, "Layout: ", React.createElement("code", null, this.state.layout))
                 ), 
-                React.createElement(Formsy.Form, {className: formClassName, ref: "form"}, 
+                React.createElement(Formsy.Form, {className: formClassName, onSubmit: this.submitForm, ref: "form"}, 
                     React.createElement("fieldset", null, 
                         React.createElement("legend", null, "Input types"), 
                         React.createElement(Input, React.__spread({}, 
@@ -219,6 +223,15 @@ var Playground = React.createClass({displayName: "Playground",
                             help: "This is a required select element.", 
                             options: selectOptions, 
                             required: true})
+                        ), 
+                        React.createElement(Select, React.__spread({}, 
+                            sharedProps, 
+                            {name: "select2", 
+                            value: ['a', 'c'], 
+                            label: "Select (multiple)", 
+                            help: "Here, “Option A” and “Option C” are initially selected.", 
+                            options: radioOptions, 
+                            multiple: true})
                         )
                     ), 
                     React.createElement("fieldset", null, 
@@ -252,7 +265,7 @@ var Playground = React.createClass({displayName: "Playground",
                     React.createElement(Row, {layout: this.state.layout}, 
                         React.createElement("input", {className: "btn btn-default", onClick: this.resetForm, type: "reset", defaultValue: "Reset"}), 
                         ' ', 
-                        React.createElement("input", {className: "btn btn-primary", type: "submit", defaultValue: "Submit"})
+                        React.createElement("input", {className: "btn btn-primary", formNoValidate: true, type: "submit", defaultValue: "Submit"})
                     )
                 )
             )
@@ -309,7 +322,25 @@ var Input = React.createClass({displayName: "Input",
     mixins: [Formsy.Mixin, FRCMixin],
 
     propTypes: {
-        type: React.PropTypes.oneOf(['color', 'date', 'datetime', 'datetime-local', 'email', 'file', 'hidden', 'month', 'number', 'password', 'range', 'tel', 'text', 'time', 'url', 'week'])
+        type: React.PropTypes.oneOf([
+            'color',
+            'date',
+            'datetime',
+            'datetime-local',
+            'email',
+            'file',
+            'hidden',
+            'month',
+            'number',
+            'password',
+            'range',
+            'search',
+            'tel',
+            'text',
+            'time',
+            'url',
+            'week'
+        ])
     },
 
     changeValue: function(event) {
@@ -324,16 +355,17 @@ var Input = React.createClass({displayName: "Input",
 
     render: function() {
 
-        var warningIcon = '';
+        var element = this.renderElement();
 
+        if (this.props.layout === 'elementOnly' || this.props.type === 'hidden') {
+            return element;
+        }
+
+        var warningIcon = '';
         if (this.showErrors()) {
             warningIcon = (
                 React.createElement(Icon, {symbol: "remove", className: "form-control-feedback"})
             );
-        }
-
-        if (this.props.layout === 'elementOnly' || this.props.type === 'hidden') {
-            return this.renderElement();
         }
 
         return (
@@ -343,7 +375,7 @@ var Input = React.createClass({displayName: "Input",
                 hasErrors: this.showErrors(), 
                 layout: this.props.layout
             }, 
-                this.renderElement(), 
+                element, 
                 warningIcon, 
                 this.renderHelp(), 
                 this.renderErrorMessage()
@@ -353,8 +385,7 @@ var Input = React.createClass({displayName: "Input",
 
     renderElement: function() {
         var className = 'form-control';
-        var nonTextTypes = ['range', 'file'];
-        if (nonTextTypes.indexOf(this.props.type) !== -1) {
+        if (['file', 'range'].indexOf(this.props.type) !== -1) {
             className = null;
         }
         return (
@@ -420,7 +451,7 @@ module.exports = {
             return '';
         }
         return (
-            React.createElement("span", {className: "help-block"}, errorMessage)
+            React.createElement("span", {className: "help-block validation-message"}, errorMessage)
         );
     },
 
@@ -649,7 +680,20 @@ var Select = React.createClass({displayName: "Select",
     mixins: [Formsy.Mixin, FRCMixin],
 
     changeValue: function(event) {
-        this.setValue(event.currentTarget.value);
+        var target = event.currentTarget;
+        var value;
+        if (this.props.multiple) {
+            value = [];
+            for (var i = 0; i < target.length; i++){
+                var option = target.options[i];
+                if (option.selected) {
+                    value.push(option.value);
+                }
+            }
+        } else {
+            value = target.value;
+        }
+        this.setValue(value);
     },
 
     render: function() {
