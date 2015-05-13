@@ -20,8 +20,12 @@ var Playground = React.createClass({
         };
     },
 
-    resetForm: function () {
+    resetForm: function() {
         this.refs.form.reset();
+    },
+
+    submitForm: function(data) {
+        console.log(data);
     },
 
     changeLayout: function(layout) {
@@ -116,7 +120,7 @@ var Playground = React.createClass({
                 <div className="page-header">
                     <h2>Layout: <code>{this.state.layout}</code></h2>
                 </div>
-                <Formsy.Form className={formClassName} ref="form">
+                <Formsy.Form className={formClassName} onSubmit={this.submitForm} ref="form">
                     <fieldset>
                         <legend>Input types</legend>
                         <Input
@@ -219,6 +223,15 @@ var Playground = React.createClass({
                             options={selectOptions}
                             required
                         />
+                        <Select
+                            {...sharedProps}
+                            name="select2"
+                            value={['a', 'c']}
+                            label="Select (multiple)"
+                            help="Here, “Option A” and “Option C” are initially selected."
+                            options={radioOptions}
+                            multiple
+                        />
                     </fieldset>
                     <fieldset>
                         <legend>Radio group</legend>
@@ -251,7 +264,7 @@ var Playground = React.createClass({
                     <Row layout={this.state.layout}>
                         <input className="btn btn-default" onClick={this.resetForm} type="reset" defaultValue="Reset" />
                         {' '}
-                        <input className="btn btn-primary" type="submit" defaultValue="Submit" />
+                        <input className="btn btn-primary" formNoValidate={true} type="submit" defaultValue="Submit" />
                     </Row>
                 </Formsy.Form>
             </div>
