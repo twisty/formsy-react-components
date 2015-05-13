@@ -86,7 +86,7 @@ gulp.task('docs', function() {
     });
 });
 
-gulp.task('dev-docs', ['vendor', 'playground']);
+gulp.task('dev-docs', ['vendor', 'docs']);
 gulp.task('dev-playground', ['vendor', 'playground']);
 gulp.task('release', ['vendor', 'playground', 'docs']);
 
