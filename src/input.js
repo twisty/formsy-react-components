@@ -25,6 +25,7 @@ var Input = React.createClass({
             'number',
             'password',
             'range',
+            'search',
             'tel',
             'text',
             'time',
