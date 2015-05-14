@@ -9,6 +9,7 @@ var Input = FRC.Input;
 var Select = FRC.Select;
 var Textarea = FRC.Textarea;
 var RadioGroup = FRC.RadioGroup;
+var CheckboxGroup = FRC.CheckboxGroup;
 
 var Playground = React.createClass({
 
@@ -228,6 +229,18 @@ var Playground = React.createClass({
                             name="select2"
                             value={['a', 'c']}
                             label="Select (multiple)"
+                            help="Here, “Option A” and “Option C” are initially selected."
+                            options={radioOptions}
+                            multiple
+                        />
+                    </fieldset>
+                    <fieldset>
+                        <legend>Checkbox group</legend>
+                        <CheckboxGroup
+                            {...sharedProps}
+                            name="checkboxGrp1"
+                            value={['a', 'c']}
+                            label="Checkbox group (stacked)"
                             help="Here, “Option A” and “Option C” are initially selected."
                             options={radioOptions}
                             multiple
