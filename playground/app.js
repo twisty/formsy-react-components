@@ -4,12 +4,13 @@ var React = require('react');
 var Formsy = require('formsy-react');
 var FRC = require('formsy-react-components');
 
-var Row = FRC.Row;
+var Checkbox = FRC.Checkbox;
+var CheckboxGroup = FRC.CheckboxGroup;
 var Input = FRC.Input;
+var RadioGroup = FRC.RadioGroup;
+var Row = FRC.Row;
 var Select = FRC.Select;
 var Textarea = FRC.Textarea;
-var RadioGroup = FRC.RadioGroup;
-var CheckboxGroup = FRC.CheckboxGroup;
 
 var Playground = React.createClass({
 
@@ -235,7 +236,15 @@ var Playground = React.createClass({
                         />
                     </fieldset>
                     <fieldset>
-                        <legend>Checkbox group</legend>
+                        <legend>Checkboxes</legend>
+                        <Checkbox
+                            {...sharedProps}
+                            name="checkbox1"
+                            value="Foo"
+                            label="Check me out"
+                            rowLabel="Checkbox (single)"
+                            value={true}
+                        />
                         <CheckboxGroup
                             {...sharedProps}
                             name="checkboxGrp1"
