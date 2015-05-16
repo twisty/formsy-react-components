@@ -4,17 +4,18 @@
 
 var React = require('react');
 var Formsy = require('formsy-react');
+var FRCMixin = require('./mixin');
+var Row = require('./row');
 
 var Checkbox = React.createClass({
 
-    mixins: [Formsy.Mixin],
+    mixins: [Formsy.Mixin, FRCMixin],
 
     getDefaultProps: function() {
         return {
             label: '',
-            value: false,
-            onChange: function() {},
-            disabled: false
+            rowLabel: '',
+            value: false
         };
     },
 
@@ -24,19 +25,41 @@ var Checkbox = React.createClass({
         this.props.onChange(this.props.name, target.checked);
     },
 
-    render: function() {
+    renderElement: function() {
         return (
             <div className="checkbox">
                 <label>
                     <input
-                        checked={this.getValue() === true}
+                        {...this.props}
                         type="checkbox"
-                        value={this.props.value}
+                        checked={this.getValue() === true}
                         onChange={this.changeValue}
                         disabled={this.isFormDisabled() || this.props.disabled}
                     /> {this.props.label}
                 </label>
             </div>
+        );
+    },
+
+    render: function() {
+
+        var element = this.renderElement();
+
+        if (this.props.layout === 'elementOnly') {
+            return element;
+        }
+
+        return (
+            <Row
+                label={this.props.rowLabel}
+                required={this.isRequired()}
+                hasErrors={this.showErrors()}
+                layout={this.props.layout}
+            >
+                {element}
+                {this.renderHelp()}
+                {this.renderErrorMessage()}
+            </Row>
         );
     }
 });
