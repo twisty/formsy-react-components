@@ -16,3 +16,5 @@ gulp.task('release', function() {
         .pipe(react())
         .pipe(gulp.dest('./release'));
 });
+
+gulp.task('default', ['release']);
