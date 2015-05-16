@@ -5,12 +5,13 @@ var React = require('react');
 var Formsy = require('formsy-react');
 var FRC = require('formsy-react-components');
 
-var Row = FRC.Row;
+var Checkbox = FRC.Checkbox;
+var CheckboxGroup = FRC.CheckboxGroup;
 var Input = FRC.Input;
+var RadioGroup = FRC.RadioGroup;
+var Row = FRC.Row;
 var Select = FRC.Select;
 var Textarea = FRC.Textarea;
-var RadioGroup = FRC.RadioGroup;
-var CheckboxGroup = FRC.CheckboxGroup;
 
 var Playground = React.createClass({displayName: "Playground",
 
@@ -236,7 +237,15 @@ var Playground = React.createClass({displayName: "Playground",
                         )
                     ), 
                     React.createElement("fieldset", null, 
-                        React.createElement("legend", null, "Checkbox group"), 
+                        React.createElement("legend", null, "Checkboxes"), 
+                        React.createElement(Checkbox, React.__spread({}, 
+                            sharedProps, 
+                            {name: "checkbox1", 
+                            value: "Foo", 
+                            label: "Check me out", 
+                            rowLabel: "Checkbox (single)", 
+                            value: true})
+                        ), 
                         React.createElement(CheckboxGroup, React.__spread({}, 
                             sharedProps, 
                             {name: "checkboxGrp1", 
@@ -292,7 +301,7 @@ React.render(
 );
 
 
-},{"formsy-react":"formsy-react","formsy-react-components":5,"react":"react"}],2:[function(require,module,exports){
+},{"formsy-react":"formsy-react","formsy-react-components":6,"react":"react"}],2:[function(require,module,exports){
 /*jshint node:true */
 
 'use strict';
@@ -379,7 +388,76 @@ var CheckboxGroup = React.createClass({displayName: "CheckboxGroup",
 
 module.exports = CheckboxGroup;
 
-},{"./mixin":6,"./row":8,"formsy-react":"formsy-react","react":"react"}],3:[function(require,module,exports){
+},{"./mixin":7,"./row":9,"formsy-react":"formsy-react","react":"react"}],3:[function(require,module,exports){
+/*jshint node:true */
+
+'use strict';
+
+var React = require('react');
+var Formsy = require('formsy-react');
+var FRCMixin = require('./mixin');
+var Row = require('./row');
+
+var Checkbox = React.createClass({displayName: "Checkbox",
+
+    mixins: [Formsy.Mixin, FRCMixin],
+
+    getDefaultProps: function() {
+        return {
+            label: '',
+            rowLabel: '',
+            value: false
+        };
+    },
+
+    changeValue: function(event) {
+        var target = event.currentTarget;
+        this.setValue(target.checked);
+        this.props.onChange(this.props.name, target.checked);
+    },
+
+    renderElement: function() {
+        return (
+            React.createElement("div", {className: "checkbox"}, 
+                React.createElement("label", null, 
+                    React.createElement("input", React.__spread({}, 
+                        this.props, 
+                        {type: "checkbox", 
+                        checked: this.getValue() === true, 
+                        onChange: this.changeValue, 
+                        disabled: this.isFormDisabled() || this.props.disabled})
+                    ), " ", this.props.label
+                )
+            )
+        );
+    },
+
+    render: function() {
+
+        var element = this.renderElement();
+
+        if (this.props.layout === 'elementOnly') {
+            return element;
+        }
+
+        return (
+            React.createElement(Row, {
+                label: this.props.rowLabel, 
+                required: this.isRequired(), 
+                hasErrors: this.showErrors(), 
+                layout: this.props.layout
+            }, 
+                element, 
+                this.renderHelp(), 
+                this.renderErrorMessage()
+            )
+        );
+    }
+});
+
+module.exports = Checkbox;
+
+},{"./mixin":7,"./row":9,"formsy-react":"formsy-react","react":"react"}],4:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -406,7 +484,7 @@ var Icon = React.createClass({displayName: "Icon",
 
 module.exports = Icon;
 
-},{"react":"react"}],4:[function(require,module,exports){
+},{"react":"react"}],5:[function(require,module,exports){
 /*jshint node:true */
 
 'use strict';
@@ -504,20 +582,21 @@ var Input = React.createClass({displayName: "Input",
 
 module.exports = Input;
 
-},{"./icon.js":3,"./mixin":6,"./row":8,"formsy-react":"formsy-react","react":"react"}],5:[function(require,module,exports){
+},{"./icon.js":4,"./mixin":7,"./row":9,"formsy-react":"formsy-react","react":"react"}],6:[function(require,module,exports){
 'use strict';
 
 module.exports = {
-    Input: require('./input'),
-    Textarea: require('./textarea'),
-    Select: require('./select'),
+    Checkbox: require('./checkbox'),
     CheckboxGroup: require('./checkbox-group'),
+    Icon: require('./icon'),
+    Input: require('./input'),
     RadioGroup: require('./radio-group'),
     Row: require('./row'),
-    Icon: require('./icon')
+    Select: require('./select'),
+    Textarea: require('./textarea')
 };
 
-},{"./checkbox-group":2,"./icon":3,"./input":4,"./radio-group":7,"./row":8,"./select":9,"./textarea":10}],6:[function(require,module,exports){
+},{"./checkbox":3,"./checkbox-group":2,"./icon":4,"./input":5,"./radio-group":8,"./row":9,"./select":10,"./textarea":11}],7:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -566,7 +645,7 @@ module.exports = {
     }
 };
 
-},{"react":"react"}],7:[function(require,module,exports){
+},{"react":"react"}],8:[function(require,module,exports){
 /*jshint node:true */
 
 'use strict';
@@ -662,7 +741,7 @@ var RadioGroup = React.createClass({displayName: "RadioGroup",
 
 module.exports = RadioGroup;
 
-},{"./mixin":6,"./row":8,"formsy-react":"formsy-react","react":"react"}],8:[function(require,module,exports){
+},{"./mixin":7,"./row":9,"formsy-react":"formsy-react","react":"react"}],9:[function(require,module,exports){
 /*jshint node:true */
 
 'use strict';
@@ -765,7 +844,7 @@ var Row = React.createClass({displayName: "Row",
 
 module.exports = Row;
 
-},{"react":"react"}],9:[function(require,module,exports){
+},{"react":"react"}],10:[function(require,module,exports){
 /*jshint node:true */
 
 'use strict';
@@ -838,7 +917,7 @@ var Select = React.createClass({displayName: "Select",
 
 module.exports = Select;
 
-},{"./mixin":6,"./row":8,"formsy-react":"formsy-react","react":"react"}],10:[function(require,module,exports){
+},{"./mixin":7,"./row":9,"formsy-react":"formsy-react","react":"react"}],11:[function(require,module,exports){
 /*jshint node:true */
 
 'use strict';
@@ -906,4 +985,4 @@ var Textarea = React.createClass({displayName: "Textarea",
 
 module.exports = Textarea;
 
-},{"./mixin":6,"./row":8,"formsy-react":"formsy-react","react":"react"}]},{},[1]);
+},{"./mixin":7,"./row":9,"formsy-react":"formsy-react","react":"react"}]},{},[1]);
