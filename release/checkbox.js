@@ -4,17 +4,18 @@
 
 var React = require('react');
 var Formsy = require('formsy-react');
+var FRCMixin = require('./mixin');
+var Row = require('./row');
 
 var Checkbox = React.createClass({displayName: "Checkbox",
 
-    mixins: [Formsy.Mixin],
+    mixins: [Formsy.Mixin, FRCMixin],
 
     getDefaultProps: function() {
         return {
             label: '',
-            value: false,
-            onChange: function() {},
-            disabled: false
+            rowLabel: '',
+            value: false
         };
     },
 
@@ -24,18 +25,40 @@ var Checkbox = React.createClass({displayName: "Checkbox",
         this.props.onChange(this.props.name, target.checked);
     },
 
-    render: function() {
+    renderElement: function() {
         return (
             React.createElement("div", {className: "checkbox"}, 
                 React.createElement("label", null, 
-                    React.createElement("input", {
+                    React.createElement("input", React.__spread({}, 
+                        this.props, 
+                        {type: "checkbox", 
                         checked: this.getValue() === true, 
-                        type: "checkbox", 
-                        value: this.props.value, 
                         onChange: this.changeValue, 
-                        disabled: this.isFormDisabled() || this.props.disabled}
+                        disabled: this.isFormDisabled() || this.props.disabled})
                     ), " ", this.props.label
                 )
+            )
+        );
+    },
+
+    render: function() {
+
+        var element = this.renderElement();
+
+        if (this.props.layout === 'elementOnly') {
+            return element;
+        }
+
+        return (
+            React.createElement(Row, {
+                label: this.props.rowLabel, 
+                required: this.isRequired(), 
+                hasErrors: this.showErrors(), 
+                layout: this.props.layout
+            }, 
+                element, 
+                this.renderHelp(), 
+                this.renderErrorMessage()
             )
         );
     }

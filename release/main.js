@@ -1,11 +1,12 @@
 'use strict';
 
 module.exports = {
-    Input: require('./input'),
-    Textarea: require('./textarea'),
-    Select: require('./select'),
+    Checkbox: require('./checkbox'),
     CheckboxGroup: require('./checkbox-group'),
+    Icon: require('./icon'),
+    Input: require('./input'),
     RadioGroup: require('./radio-group'),
     Row: require('./row'),
-    Icon: require('./icon')
+    Select: require('./select'),
+    Textarea: require('./textarea')
 };
