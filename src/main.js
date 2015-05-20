@@ -8,5 +8,7 @@ module.exports = {
     RadioGroup: require('./radio-group'),
     Row: require('./row'),
     Select: require('./select'),
-    Textarea: require('./textarea')
+    Textarea: require('./textarea'),
+    ComponentMixin: require('./mixin'),
+    ParentContextMixin: require('./mixins/parent-context')
 };

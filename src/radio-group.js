@@ -4,12 +4,12 @@
 
 var React = require('react');
 var Formsy = require('formsy-react');
-var FRCMixin = require('./mixin');
+var ComponentMixin = require('./mixin');
 var Row = require('./row');
 
 var RadioGroup = React.createClass({
 
-    mixins: [Formsy.Mixin, FRCMixin],
+    mixins: [Formsy.Mixin, ComponentMixin],
 
     propTypes: {
         name: React.PropTypes.string.isRequired,
@@ -69,7 +69,7 @@ var RadioGroup = React.createClass({
 
     render: function() {
 
-        if (this.props.layout === 'elementOnly') {
+        if (this.getLayout() === 'elementOnly') {
             return (
                 <div>{this.renderElement()}</div>
             );
@@ -80,7 +80,7 @@ var RadioGroup = React.createClass({
                 label={this.props.label}
                 required={this.isRequired()}
                 hasErrors={this.showErrors()}
-                layout={this.props.layout}
+                layout={this.getLayout()}
                 fakeLabel={true}
             >
                 {this.renderElement()}
