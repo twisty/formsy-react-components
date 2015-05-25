@@ -4,7 +4,7 @@
 
 var React = require('react');
 var Formsy = require('formsy-react');
-var ComponentMixin = require('./mixin');
+var ComponentMixin = require('./mixins/component');
 var Row = require('./row');
 
 var Select = React.createClass({

@@ -9,6 +9,6 @@ module.exports = {
     Row: require('./row'),
     Select: require('./select'),
     Textarea: require('./textarea'),
-    ComponentMixin: require('./mixin'),
+    ComponentMixin: require('./mixins/component'),
     ParentContextMixin: require('./mixins/parent-context')
 };
