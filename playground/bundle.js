@@ -241,10 +241,9 @@ var Playground = React.createClass({displayName: "Playground",
                         React.createElement(Checkbox, React.__spread({}, 
                             sharedProps, 
                             {name: "checkbox1", 
-                            value: "Foo", 
+                            value: true, 
                             label: "Check me out", 
-                            rowLabel: "Checkbox (single)", 
-                            value: true})
+                            rowLabel: "Checkbox (single)"})
                         ), 
                         React.createElement(CheckboxGroup, React.__spread({}, 
                             sharedProps, 
