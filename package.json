@@ -1,6 +1,7 @@
 {
   "scripts": {
-    "release": "NODE_ENV=production gulp release"
+    "release": "NODE_ENV=production gulp release",
+    "lint-jsx": "jsx playground/app.js | eslint --stdin --rule 'quotes: 1' --rule 'no-trailing-spaces: 1' --quiet"
   },
   "dependencies": {
     "babel-eslint": "^3.1.1",
@@ -9,7 +10,7 @@
     "eslint": "^0.21.0",
     "eslint-plugin-react": "^2.2.0",
     "formsy-react": "~0.13.1",
-    "formsy-react-components": "^0.1.1",
+    "formsy-react-components": "^0.2.1",
     "gulp": "~3.8.11",
     "gulp-notify": "~2.2.0",
     "gulp-util": "~3.0.4",

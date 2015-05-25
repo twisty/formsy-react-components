@@ -240,10 +240,9 @@ var Playground = React.createClass({
                         <Checkbox
                             {...sharedProps}
                             name="checkbox1"
-                            value="Foo"
+                            value={true}
                             label="Check me out"
                             rowLabel="Checkbox (single)"
-                            value={true}
                         />
                         <CheckboxGroup
                             {...sharedProps}
