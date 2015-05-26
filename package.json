@@ -1,6 +1,6 @@
 {
   "name": "formsy-react-components",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "description": "A set of React JS components for use in a formsy-react form. Markup adheres to Bootstrap structure.",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
