@@ -4,12 +4,12 @@
 
 var React = require('react');
 var Formsy = require('formsy-react');
-var FRCMixin = require('./mixin');
+var ComponentMixin = require('./mixins/component');
 var Row = require('./row');
 
 var Select = React.createClass({displayName: "Select",
 
-    mixins: [Formsy.Mixin, FRCMixin],
+    mixins: [Formsy.Mixin, ComponentMixin],
 
     changeValue: function(event) {
         var target = event.currentTarget;
@@ -30,7 +30,7 @@ var Select = React.createClass({displayName: "Select",
 
     render: function() {
 
-        if (this.props.layout === 'elementOnly') {
+        if (this.getLayout() === 'elementOnly') {
             return this.renderElement();
         }
 
@@ -39,7 +39,7 @@ var Select = React.createClass({displayName: "Select",
                 label: this.props.label, 
                 required: this.isRequired(), 
                 hasErrors: this.showErrors(), 
-                layout: this.props.layout
+                layout: this.getLayout()
             }, 
                 this.renderElement(), 
                 this.renderHelp(), 

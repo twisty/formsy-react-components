@@ -4,12 +4,12 @@
 
 var React = require('react');
 var Formsy = require('formsy-react');
-var FRCMixin = require('./mixin');
+var ComponentMixin = require('./mixins/component');
 var Row = require('./row');
 
 var Checkbox = React.createClass({displayName: "Checkbox",
 
-    mixins: [Formsy.Mixin, FRCMixin],
+    mixins: [Formsy.Mixin, ComponentMixin],
 
     getDefaultProps: function() {
         return {
@@ -45,7 +45,7 @@ var Checkbox = React.createClass({displayName: "Checkbox",
 
         var element = this.renderElement();
 
-        if (this.props.layout === 'elementOnly') {
+        if (this.getLayout() === 'elementOnly') {
             return element;
         }
 
@@ -54,7 +54,7 @@ var Checkbox = React.createClass({displayName: "Checkbox",
                 label: this.props.rowLabel, 
                 required: this.isRequired(), 
                 hasErrors: this.showErrors(), 
-                layout: this.props.layout
+                layout: this.getLayout()
             }, 
                 element, 
                 this.renderHelp(), 

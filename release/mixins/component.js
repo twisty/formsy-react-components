@@ -3,15 +3,28 @@
 var React = require('react');
 
 module.exports = {
+
+    propTypes: {
+        layout: React.PropTypes.string
+    },
+
+    contextTypes: {
+        layout: React.PropTypes.string
+    },
+
     getDefaultProps: function() {
         return {
             disabled: false,
             validatePristine: false,
-            layout: 'horizontal',
             onChange: function() {},
             onFocus: function() {},
             onBlur: function() {}
         };
+    },
+
+    getLayout: function() {
+        var defaultLayout = this.context.layout || 'horizontal';
+        return this.props.layout ? this.props.layout : defaultLayout;
     },
 
     renderHelp: function() {
