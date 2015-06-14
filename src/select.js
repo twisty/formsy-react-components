@@ -26,6 +26,13 @@ var Select = React.createClass({
             value = target.value;
         }
         this.setValue(value);
+        this.props.onChange(event); 
+    },
+
+    getDefaultProps: function() {
+        return {
+            onChange: function() {}
+        }
     },
 
     render: function() {
