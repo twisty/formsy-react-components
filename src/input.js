@@ -19,7 +19,6 @@ var Input = React.createClass({
             'datetime',
             'datetime-local',
             'email',
-            'file',
             'hidden',
             'month',
             'number',
@@ -34,18 +33,19 @@ var Input = React.createClass({
         ])
     },
 
-    changeValue: function(event) {
-        this.setValue(event.currentTarget.value);
-    },
-
     getDefaultProps: function() {
         return {
             type: 'text'
         };
     },
 
-    render: function() {
+    changeValue: function(event) {
+        var value = event.currentTarget.value;
+        this.setValue(value);
+        this.props.onChange(this.props.name, value);
+    },
 
+    render: function() {
         var element = this.renderElement();
 
         if (this.getLayout() === 'elementOnly' || this.props.type === 'hidden') {
@@ -76,7 +76,7 @@ var Input = React.createClass({
 
     renderElement: function() {
         var className = 'form-control';
-        if (['file', 'range'].indexOf(this.props.type) !== -1) {
+        if (['range'].indexOf(this.props.type) !== -1) {
             className = null;
         }
         return (
