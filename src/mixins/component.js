@@ -22,6 +22,18 @@ module.exports = {
         };
     },
 
+    hashString: function(string) {
+        var hash = 0;
+        for (var i = 0; i < string.length; i++) {
+            hash = (((hash << 5) - hash) + string.charCodeAt(i)) & 0xFFFFFFFF;
+        }
+        return hash;
+    },
+
+    getId: function() {
+        return this.props.id || this.props.name + this.hashString(JSON.stringify(this.props));
+    },
+
     getLayout: function() {
         var defaultLayout = this.context.layout || 'horizontal';
         return this.props.layout ? this.props.layout : defaultLayout;

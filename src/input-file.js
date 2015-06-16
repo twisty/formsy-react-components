@@ -46,6 +46,7 @@ var File = React.createClass({
                 required={this.isRequired()}
                 hasErrors={this.showErrors()}
                 layout={this.getLayout()}
+                htmlFor={this.getId()}
             >
                 {element}
                 {warningIcon}
@@ -59,6 +60,7 @@ var File = React.createClass({
         return (
             <input
                 {...this.props}
+                id={this.getId()}
                 type="file"
                 label={null}
                 onChange={this.changeValue}

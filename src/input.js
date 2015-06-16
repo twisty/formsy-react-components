@@ -65,6 +65,7 @@ var Input = React.createClass({
                 required={this.isRequired()}
                 hasErrors={this.showErrors()}
                 layout={this.getLayout()}
+                htmlFor={this.getId()}
             >
                 {element}
                 {warningIcon}
@@ -83,6 +84,7 @@ var Input = React.createClass({
             <input
                 className={className}
                 {...this.props}
+                id={this.getId()}
                 label={null}
                 value={this.getValue()}
                 onChange={this.changeValue}

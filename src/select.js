@@ -41,6 +41,7 @@ var Select = React.createClass({
                 required={this.isRequired()}
                 hasErrors={this.showErrors()}
                 layout={this.getLayout()}
+                htmlFor={this.getId()}
             >
                 {this.renderElement()}
                 {this.renderHelp()}
@@ -59,6 +60,7 @@ var Select = React.createClass({
             <select
                 className="form-control"
                 {...this.props}
+                id={this.getId()}
                 value={this.getValue()}
                 onChange={this.changeValue}
                 disabled={this.isFormDisabled() || this.props.disabled}

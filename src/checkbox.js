@@ -31,6 +31,7 @@ var Checkbox = React.createClass({
                 <label>
                     <input
                         {...this.props}
+                        id={this.getId()}
                         type="checkbox"
                         checked={this.getValue() === true}
                         onChange={this.changeValue}
@@ -55,6 +56,7 @@ var Checkbox = React.createClass({
                 required={this.isRequired()}
                 hasErrors={this.showErrors()}
                 layout={this.getLayout()}
+                htmlFor={this.getId()}
             >
                 {element}
                 {this.renderHelp()}
