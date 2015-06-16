@@ -31,7 +31,7 @@ module.exports = {
     },
 
     getId: function() {
-        return this.props.id || this.props.name + this.hashString(JSON.stringify(this.props));
+        return this.props.id || this.props.name.split('[').join('_').replace(']', '') + this.hashString(JSON.stringify(this.props));
     },
 
     getLayout: function() {
