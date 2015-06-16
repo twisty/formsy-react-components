@@ -15,7 +15,8 @@
   "keywords": [
     "react",
     "formsy-react",
-    "bootstrap"
+    "bootstrap",
+    "react-component"
   ],
   "author": "Tim Brayshaw <tim@brayshaw.com>",
   "license": "MIT",
