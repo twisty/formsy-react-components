@@ -26,6 +26,7 @@ var Select = React.createClass({displayName: "Select",
             value = target.value;
         }
         this.setValue(value);
+        this.props.onChange(this.props.name, value);
     },
 
     render: function() {
@@ -39,7 +40,8 @@ var Select = React.createClass({displayName: "Select",
                 label: this.props.label, 
                 required: this.isRequired(), 
                 hasErrors: this.showErrors(), 
-                layout: this.getLayout()
+                layout: this.getLayout(), 
+                htmlFor: this.getId()
             }, 
                 this.renderElement(), 
                 this.renderHelp(), 
@@ -58,7 +60,8 @@ var Select = React.createClass({displayName: "Select",
             React.createElement("select", React.__spread({
                 className: "form-control"}, 
                 this.props, 
-                {value: this.getValue(), 
+                {id: this.getId(), 
+                value: this.getValue(), 
                 onChange: this.changeValue, 
                 disabled: this.isFormDisabled() || this.props.disabled
             }), 

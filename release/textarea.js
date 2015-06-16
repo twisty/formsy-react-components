@@ -34,7 +34,8 @@ var Textarea = React.createClass({displayName: "Textarea",
             React.createElement("textarea", React.__spread({
                 className: "form-control"}, 
                 this.props, 
-                {value: this.getValue(), 
+                {id: this.getId(), 
+                value: this.getValue(), 
                 onChange: this.changeValue, 
                 disabled: this.isFormDisabled() || this.props.disabled
             }))
@@ -53,7 +54,7 @@ var Textarea = React.createClass({displayName: "Textarea",
                 required: this.isRequired(), 
                 hasErrors: this.showErrors(), 
                 layout: this.getLayout(), 
-                htmlFor: this.props.name
+                htmlFor: this.getId()
             }, 
                 this.renderElement(), 
                 this.renderHelp(), 

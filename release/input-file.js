@@ -8,41 +8,22 @@ var ComponentMixin = require('./mixins/component');
 var Row = require('./row');
 var Icon = require('./icon');
 
-var Input = React.createClass({displayName: "Input",
+var File = React.createClass({displayName: "File",
 
     mixins: [Formsy.Mixin, ComponentMixin],
 
-    propTypes: {
-        type: React.PropTypes.oneOf([
-            'color',
-            'date',
-            'datetime',
-            'datetime-local',
-            'email',
-            'hidden',
-            'month',
-            'number',
-            'password',
-            'range',
-            'search',
-            'tel',
-            'text',
-            'time',
-            'url',
-            'week'
-        ])
-    },
-
-    getDefaultProps: function() {
+    getInitialState: function() {
         return {
-            type: 'text'
+            fileList: []
         };
     },
 
     changeValue: function(event) {
-        var value = event.currentTarget.value;
-        this.setValue(value);
-        this.props.onChange(this.props.name, value);
+        var target = event.currentTarget;
+        var value = target.value;
+        this.setState({fileList: target.files});
+        this.setValue(target.files);
+        this.props.onChange(this.props.name, target.files, value);
     },
 
     render: function() {
@@ -76,17 +57,12 @@ var Input = React.createClass({displayName: "Input",
     },
 
     renderElement: function() {
-        var className = 'form-control';
-        if (['range'].indexOf(this.props.type) !== -1) {
-            className = null;
-        }
         return (
-            React.createElement("input", React.__spread({
-                className: className}, 
+            React.createElement("input", React.__spread({}, 
                 this.props, 
                 {id: this.getId(), 
+                type: "file", 
                 label: null, 
-                value: this.getValue(), 
                 onChange: this.changeValue, 
                 disabled: this.isFormDisabled() || this.props.disabled})
             )
@@ -95,4 +71,4 @@ var Input = React.createClass({displayName: "Input",
 
 });
 
-module.exports = Input;
+module.exports = File;
