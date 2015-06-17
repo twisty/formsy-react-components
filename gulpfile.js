@@ -13,6 +13,7 @@ var dependencies = [
     'react',
     'react-tools',
     'formsy-react',
+    'formsy-react-components',
     'codemirror',
     'codemirror/mode/xml/xml',
     'js-beautify'

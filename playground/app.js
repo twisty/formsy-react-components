@@ -10,6 +10,7 @@ var Input = FRC.Input;
 var RadioGroup = FRC.RadioGroup;
 var Row = FRC.Row;
 var Select = FRC.Select;
+var File = FRC.File;
 var Textarea = FRC.Textarea;
 
 var Playground = React.createClass({
@@ -128,6 +129,7 @@ var Playground = React.createClass({
                         <Input
                             {...sharedProps}
                             name="text1"
+                            id="artisanCraftedBespokeId"
                             value=""
                             label="Text"
                             type="text"
@@ -137,7 +139,7 @@ var Playground = React.createClass({
                         />
                         <Input
                             {...sharedProps}
-                            name="date1"
+                            name="date[0]"
                             value=""
                             label="Date"
                             type="date"
@@ -185,18 +187,19 @@ var Playground = React.createClass({
                         />
                         <Input
                             {...sharedProps}
-                            type="file"
-                            name="file1"
-                            label="File picker"
-                        />
-                        <Input
-                            {...sharedProps}
                             type="range"
                             name="range1"
                             label="Range input"
                             min={0}
                             max={10}
                             step={2}
+                        />
+                        <File
+                            {...sharedProps}
+                            name="file1"
+                            label="File picker"
+                            help="Warning: this returns a FileList that will need custom coding to be useful."
+                            multiple
                         />
                     </fieldset>
                     <fieldset>
