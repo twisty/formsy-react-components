@@ -2,7 +2,8 @@
 
 var React = require('react');
 
-var Icon = React.createClass({displayName: "Icon",
+var Icon = React.createClass({
+    displayName: 'Icon',
 
     requiredProps: {
         symbol: React.PropTypes.string.isRequired,
@@ -13,11 +14,9 @@ var Icon = React.createClass({displayName: "Icon",
         className: ''
     },
 
-    render: function() {
+    render: function render() {
         var className = 'glyphicon glyphicon-' + this.props.symbol + ' ' + this.props.className;
-        return (
-            React.createElement("span", {className: className, "aria-hidden": "true"})
-        );
+        return React.createElement('span', { className: className, 'aria-hidden': 'true' });
     }
 
 });

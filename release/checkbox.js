@@ -2,16 +2,19 @@
 
 'use strict';
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 var React = require('react');
 var Formsy = require('formsy-react');
 var ComponentMixin = require('./mixins/component');
 var Row = require('./row');
 
-var Checkbox = React.createClass({displayName: "Checkbox",
+var Checkbox = React.createClass({
+    displayName: 'Checkbox',
 
     mixins: [Formsy.Mixin, ComponentMixin],
 
-    getDefaultProps: function() {
+    getDefaultProps: function getDefaultProps() {
         return {
             label: '',
             rowLabel: '',
@@ -19,30 +22,33 @@ var Checkbox = React.createClass({displayName: "Checkbox",
         };
     },
 
-    changeValue: function(event) {
+    changeValue: function changeValue(event) {
         var target = event.currentTarget;
         this.setValue(target.checked);
         this.props.onChange(this.props.name, target.checked);
     },
 
-    renderElement: function() {
-        return (
-            React.createElement("div", {className: "checkbox"}, 
-                React.createElement("label", null, 
-                    React.createElement("input", React.__spread({}, 
-                        this.props, 
-                        {id: this.getId(), 
-                        type: "checkbox", 
-                        checked: this.getValue() === true, 
-                        onChange: this.changeValue, 
-                        disabled: this.isFormDisabled() || this.props.disabled})
-                    ), " ", this.props.label
-                )
+    renderElement: function renderElement() {
+        return React.createElement(
+            'div',
+            { className: 'checkbox' },
+            React.createElement(
+                'label',
+                null,
+                React.createElement('input', _extends({}, this.props, {
+                    id: this.getId(),
+                    type: 'checkbox',
+                    checked: this.getValue() === true,
+                    onChange: this.changeValue,
+                    disabled: this.isFormDisabled() || this.props.disabled
+                })),
+                ' ',
+                this.props.label
             )
         );
     },
 
-    render: function() {
+    render: function render() {
 
         var element = this.renderElement();
 
@@ -50,18 +56,18 @@ var Checkbox = React.createClass({displayName: "Checkbox",
             return element;
         }
 
-        return (
-            React.createElement(Row, {
-                label: this.props.rowLabel, 
-                required: this.isRequired(), 
-                hasErrors: this.showErrors(), 
-                layout: this.getLayout(), 
+        return React.createElement(
+            Row,
+            {
+                label: this.props.rowLabel,
+                required: this.isRequired(),
+                hasErrors: this.showErrors(),
+                layout: this.getLayout(),
                 htmlFor: this.getId()
-            }, 
-                element, 
-                this.renderHelp(), 
-                this.renderErrorMessage()
-            )
+            },
+            element,
+            this.renderHelp(),
+            this.renderErrorMessage()
         );
     }
 });

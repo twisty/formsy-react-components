@@ -12,43 +12,45 @@ module.exports = {
         layout: React.PropTypes.string
     },
 
-    getDefaultProps: function() {
+    getDefaultProps: function getDefaultProps() {
         return {
             disabled: false,
             validatePristine: false,
-            onChange: function() {},
-            onFocus: function() {},
-            onBlur: function() {}
+            onChange: function onChange() {},
+            onFocus: function onFocus() {},
+            onBlur: function onBlur() {}
         };
     },
 
-    hashString: function(string) {
+    hashString: function hashString(string) {
         var hash = 0;
         for (var i = 0; i < string.length; i++) {
-            hash = (((hash << 5) - hash) + string.charCodeAt(i)) & 0xFFFFFFFF;
+            hash = (hash << 5) - hash + string.charCodeAt(i) & 0xFFFFFFFF;
         }
         return hash;
     },
 
-    getId: function() {
+    getId: function getId() {
         return this.props.id || this.props.name.split('[').join('_').replace(']', '') + this.hashString(JSON.stringify(this.props));
     },
 
-    getLayout: function() {
+    getLayout: function getLayout() {
         var defaultLayout = this.context.layout || 'horizontal';
         return this.props.layout ? this.props.layout : defaultLayout;
     },
 
-    renderHelp: function() {
+    renderHelp: function renderHelp() {
         if (!this.props.help) {
             return '';
         }
-        return (
-            React.createElement("span", {className: "help-block"}, this.props.help)
+        return React.createElement(
+            'span',
+            { className: 'help-block' },
+            this.props.help
         );
     },
 
-    renderErrorMessage: function() {
+    renderErrorMessage: function renderErrorMessage() {
         if (!this.showErrors()) {
             return '';
         }
@@ -56,17 +58,19 @@ module.exports = {
         if (!errorMessage) {
             return '';
         }
-        return (
-            React.createElement("span", {className: "help-block validation-message"}, errorMessage)
+        return React.createElement(
+            'span',
+            { className: 'help-block validation-message' },
+            errorMessage
         );
     },
 
-    showErrors: function() {
+    showErrors: function showErrors() {
         if (this.isPristine() === true) {
             if (this.props.validatePristine === false) {
                 return false;
             }
         }
-        return (this.isValid() === false);
+        return this.isValid() === false;
     }
 };

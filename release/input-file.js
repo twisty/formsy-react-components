@@ -2,31 +2,34 @@
 
 'use strict';
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 var React = require('react');
 var Formsy = require('formsy-react');
 var ComponentMixin = require('./mixins/component');
 var Row = require('./row');
 var Icon = require('./icon');
 
-var File = React.createClass({displayName: "File",
+var File = React.createClass({
+    displayName: 'File',
 
     mixins: [Formsy.Mixin, ComponentMixin],
 
-    getInitialState: function() {
+    getInitialState: function getInitialState() {
         return {
             fileList: []
         };
     },
 
-    changeValue: function(event) {
+    changeValue: function changeValue(event) {
         var target = event.currentTarget;
         var value = target.value;
-        this.setState({fileList: target.files});
+        this.setState({ fileList: target.files });
         this.setValue(target.files);
         this.props.onChange(this.props.name, target.files, value);
     },
 
-    render: function() {
+    render: function render() {
         var element = this.renderElement();
 
         if (this.getLayout() === 'elementOnly' || this.props.type === 'hidden') {
@@ -35,38 +38,33 @@ var File = React.createClass({displayName: "File",
 
         var warningIcon = '';
         if (this.showErrors()) {
-            warningIcon = (
-                React.createElement(Icon, {symbol: "remove", className: "form-control-feedback"})
-            );
+            warningIcon = React.createElement(Icon, { symbol: 'remove', className: 'form-control-feedback' });
         }
 
-        return (
-            React.createElement(Row, {
-                label: this.props.label, 
-                required: this.isRequired(), 
-                hasErrors: this.showErrors(), 
-                layout: this.getLayout(), 
+        return React.createElement(
+            Row,
+            {
+                label: this.props.label,
+                required: this.isRequired(),
+                hasErrors: this.showErrors(),
+                layout: this.getLayout(),
                 htmlFor: this.getId()
-            }, 
-                element, 
-                warningIcon, 
-                this.renderHelp(), 
-                this.renderErrorMessage()
-            )
+            },
+            element,
+            warningIcon,
+            this.renderHelp(),
+            this.renderErrorMessage()
         );
     },
 
-    renderElement: function() {
-        return (
-            React.createElement("input", React.__spread({}, 
-                this.props, 
-                {id: this.getId(), 
-                type: "file", 
-                label: null, 
-                onChange: this.changeValue, 
-                disabled: this.isFormDisabled() || this.props.disabled})
-            )
-        );
+    renderElement: function renderElement() {
+        return React.createElement('input', _extends({}, this.props, {
+            id: this.getId(),
+            type: 'file',
+            label: null,
+            onChange: this.changeValue,
+            disabled: this.isFormDisabled() || this.props.disabled
+        }));
     }
 
 });

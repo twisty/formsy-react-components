@@ -4,7 +4,8 @@
 
 var React = require('react');
 
-var Row = React.createClass({displayName: "Row",
+var Row = React.createClass({
+    displayName: 'Row',
 
     propTypes: {
         label: React.PropTypes.string,
@@ -15,7 +16,7 @@ var Row = React.createClass({displayName: "Row",
         htmlFor: React.PropTypes.string
     },
 
-    getDefaultProps: function() {
+    getDefaultProps: function getDefaultProps() {
         return {
             label: '',
             required: false,
@@ -24,7 +25,7 @@ var Row = React.createClass({displayName: "Row",
         };
     },
 
-    renderLabel: function() {
+    renderLabel: function renderLabel() {
 
         if (this.props.layout === 'elementOnly') {
             return '';
@@ -38,30 +39,32 @@ var Row = React.createClass({displayName: "Row",
         }
 
         if (this.props.fakeLabel) {
-            return (
-                React.createElement("div", {className: labelWrapper.join(' ')}, 
-                    React.createElement("strong", null, 
-                        this.props.label, 
-                        this.props.required ? ' *' : null
-                    )
+            return React.createElement(
+                'div',
+                { className: labelWrapper.join(' ') },
+                React.createElement(
+                    'strong',
+                    null,
+                    this.props.label,
+                    this.props.required ? ' *' : null
                 )
             );
         }
-        return (
-            React.createElement("label", {className: labelWrapper.join(' '), htmlFor: this.props.htmlFor}, 
-                this.props.label, 
-                this.props.required ? ' *' : null
-            )
+        return React.createElement(
+            'label',
+            { className: labelWrapper.join(' '), htmlFor: this.props.htmlFor },
+            this.props.label,
+            this.props.required ? ' *' : null
         );
     },
 
-    render: function() {
+    render: function render() {
 
         if (this.props.layout === 'elementOnly') {
-            return (
-                React.createElement("span", null, 
+            return React.createElement(
+                'span',
+                null,
                 this.props.children
-                )
             );
         }
 
@@ -81,18 +84,18 @@ var Row = React.createClass({displayName: "Row",
 
         var element = this.props.children;
         if (this.props.layout === 'horizontal') {
-            element = (
-                React.createElement("div", {className: classNames.elementWrapper.join(' ')}, 
-                    this.props.children
-                )
+            element = React.createElement(
+                'div',
+                { className: classNames.elementWrapper.join(' ') },
+                this.props.children
             );
         }
 
-        return (
-            React.createElement("div", {className: classNames.formGroup.join(' ')}, 
-                this.renderLabel(), 
-                element
-            )
+        return React.createElement(
+            'div',
+            { className: classNames.formGroup.join(' ') },
+            this.renderLabel(),
+            element
         );
     }
 

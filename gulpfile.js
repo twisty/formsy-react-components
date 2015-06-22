@@ -1,7 +1,7 @@
 'use strict';
 
 var gulp = require('gulp');
-var react = require('gulp-react');
+var babel = require('gulp-babel');
 
 var files = {
     src: './src/**/*.js'
@@ -13,7 +13,7 @@ gulp.task('watch', ['release'], function() {
 
 gulp.task('release', function() {
     return gulp.src(files.src)
-        .pipe(react())
+        .pipe(babel())
         .pipe(gulp.dest('./release'));
 });
 

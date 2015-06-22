@@ -2,12 +2,15 @@
 
 'use strict';
 
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 var React = require('react');
 var Formsy = require('formsy-react');
 var ComponentMixin = require('./mixins/component');
 var Row = require('./row');
 
-var Textarea = React.createClass({displayName: "Textarea",
+var Textarea = React.createClass({
+    displayName: 'Textarea',
 
     mixins: [Formsy.Mixin, ComponentMixin],
 
@@ -16,50 +19,48 @@ var Textarea = React.createClass({displayName: "Textarea",
         cols: React.PropTypes.number
     },
 
-    getDefaultProps: function() {
+    getDefaultProps: function getDefaultProps() {
         return {
             rows: 3,
             cols: 0 // React doesn't render the cols attribute if it is zero
         };
     },
 
-    changeValue: function(event) {
+    changeValue: function changeValue(event) {
         var value = event.currentTarget.value;
         this.setValue(value);
         this.props.onChange(this.props.name, value);
     },
 
-    renderElement: function() {
-        return (
-            React.createElement("textarea", React.__spread({
-                className: "form-control"}, 
-                this.props, 
-                {id: this.getId(), 
-                value: this.getValue(), 
-                onChange: this.changeValue, 
-                disabled: this.isFormDisabled() || this.props.disabled
-            }))
-        );
+    renderElement: function renderElement() {
+        return React.createElement('textarea', _extends({
+            className: 'form-control'
+        }, this.props, {
+            id: this.getId(),
+            value: this.getValue(),
+            onChange: this.changeValue,
+            disabled: this.isFormDisabled() || this.props.disabled
+        }));
     },
 
-    render: function() {
+    render: function render() {
 
         if (this.getLayout() === 'elementOnly') {
             return this.renderElement();
         }
 
-        return (
-            React.createElement(Row, {
-                label: this.props.label, 
-                required: this.isRequired(), 
-                hasErrors: this.showErrors(), 
-                layout: this.getLayout(), 
+        return React.createElement(
+            Row,
+            {
+                label: this.props.label,
+                required: this.isRequired(),
+                hasErrors: this.showErrors(),
+                layout: this.getLayout(),
                 htmlFor: this.getId()
-            }, 
-                this.renderElement(), 
-                this.renderHelp(), 
-                this.renderErrorMessage()
-            )
+            },
+            this.renderElement(),
+            this.renderHelp(),
+            this.renderErrorMessage()
         );
     }
 });
