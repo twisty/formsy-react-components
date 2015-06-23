@@ -4,7 +4,10 @@ var gulp = require('gulp');
 var babel = require('gulp-babel');
 
 var files = {
-    src: './src/**/*.js'
+    src: [
+        './src/**/*.js',
+        '!./src/**/__tests__/**'
+    ]
 };
 
 gulp.task('watch', ['release'], function() {

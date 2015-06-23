@@ -3,7 +3,7 @@
   "version": "0.4.0",
   "description": "A set of React JS components for use in a formsy-react form. Markup adheres to Bootstrap structure.",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest --coverage --noHighlight --verbose",
     "lint": "eslint src",
     "release": "jsx --no-cache-dir src release"
   },
@@ -23,17 +23,34 @@
   "bugs": {
     "url": "https://github.com/twisty/formsy-react-components/issues"
   },
+  "jest": {
+    "scriptPreprocessor": "<rootDir>/node_modules/babel-jest",
+    "modulePathIgnorePatterns": [
+      "/node_modules/"
+    ],
+    "testFileExtensions": [
+      "es6",
+      "js"
+    ],
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "es6"
+    ]
+  },
   "peerDependencies": {
     "react": "^0.13.3",
     "formsy-react": "^0.14.1"
   },
   "devDependencies": {
     "babel-eslint": "^3.1.17",
+    "babel-jest": "^5.3.0",
     "eslint": "^0.23.0",
     "eslint-plugin-react": "^2.5.2",
     "formsy-react": "^0.14.1",
     "gulp": "^3.9.0",
     "gulp-babel": "^5.1.0",
+    "jest-cli": "^0.4.13",
     "react": "^0.13.3"
   }
 }
