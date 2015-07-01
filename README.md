@@ -1,7 +1,7 @@
 # formsy-react-components
 
 [![Dependencies](https://david-dm.org/twisty/formsy-react-components/gh-pages.svg)](https://david-dm.org/twisty/formsy-react-components)
-[![Build Status](https://travis-ci.org/twisty/formsy-react-components.svg?branch=master)](https://travis-ci.org/twisty/formsy-react-components)
+[![Build Status](https://travis-ci.org/twisty/formsy-react-components.svg?branch=master)](https://github.com/twisty/formsy-react-components/issues/16)
 
 This package provides a selection of components that render form elements for use within a [formsy-react](https://github.com/christianalfoni/formsy-react) form.
 
