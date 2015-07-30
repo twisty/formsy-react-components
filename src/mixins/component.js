@@ -52,13 +52,12 @@ module.exports = {
         if (!this.showErrors()) {
             return '';
         }
-        var errorMessage = this.getErrorMessage();
-        if (!errorMessage) {
-            return '';
-        }
-        return (
-            <span className="help-block validation-message">{errorMessage}</span>
-        );
+        var errorMessages = this.getErrorMessages() || [];
+        return errorMessages.map((message, key) => {
+            return (
+                <span key={key} className="help-block validation-message">{message}</span>
+            );
+        });
     },
 
     showErrors: function() {
