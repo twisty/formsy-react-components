@@ -47,12 +47,15 @@ var Row = React.createClass({
                 </div>
             );
         }
-        return (
-            <label className={labelWrapper.join(' ')} htmlFor={this.props.htmlFor}>
-                {this.props.label}
-                {this.props.required ? ' *' : null}
-            </label>
-        );
+
+        if (this.props.label) {
+            return (
+                <label className={labelWrapper.join(' ')} htmlFor={this.props.htmlFor}>
+                    {this.props.label}
+                    {this.props.required ? ' *' : null}
+                </label>
+            );
+        }
     },
 
     render: function() {
