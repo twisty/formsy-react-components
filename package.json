@@ -5,7 +5,7 @@
   "scripts": {
     "test": "jest --coverage --noHighlight --verbose",
     "lint": "eslint src",
-    "release": "jsx --no-cache-dir src release"
+    "release": "gulp release"
   },
   "main": "./release/main.js",
   "repository": {
