@@ -74,6 +74,7 @@ var Row = React.createClass({
         };
 
         if (this.props.layout === 'horizontal') {
+            classNames.formGroup.push('row');
             classNames.elementWrapper.push('col-sm-9');
         }
 
