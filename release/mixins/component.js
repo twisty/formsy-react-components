@@ -54,15 +54,14 @@ module.exports = {
         if (!this.showErrors()) {
             return '';
         }
-        var errorMessage = this.getErrorMessage();
-        if (!errorMessage) {
-            return '';
-        }
-        return React.createElement(
-            'span',
-            { className: 'help-block validation-message' },
-            errorMessage
-        );
+        var errorMessages = this.getErrorMessages() || [];
+        return errorMessages.map(function (message, key) {
+            return React.createElement(
+                'span',
+                { key: key, className: 'help-block validation-message' },
+                message
+            );
+        });
     },
 
     showErrors: function showErrors() {
