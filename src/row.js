@@ -8,6 +8,8 @@ var Row = React.createClass({
 
     propTypes: {
         label: React.PropTypes.string,
+        labelClassName: React.PropTypes.string,
+        wrapperClassName: React.PropTypes.string,
         required: React.PropTypes.bool,
         hasErrors: React.PropTypes.bool,
         fakeLabel: React.PropTypes.bool,
@@ -18,6 +20,8 @@ var Row = React.createClass({
     getDefaultProps: function() {
         return {
             label: '',
+            labelClassName: '',
+            wrapperClassName: '',
             required: false,
             hasErrors: false,
             fakeLabel: false
@@ -34,7 +38,7 @@ var Row = React.createClass({
         labelWrapper.push('control-label');
 
         if (this.props.layout === 'horizontal') {
-            labelWrapper.push('col-sm-3');
+            labelWrapper.push(this.props.labelClassName || 'col-sm-3');
         }
 
         if (this.props.fakeLabel) {
@@ -72,7 +76,7 @@ var Row = React.createClass({
 
         if (this.props.layout === 'horizontal') {
             classNames.formGroup.push('row');
-            classNames.elementWrapper.push('col-sm-9');
+            classNames.elementWrapper.push(this.props.wrapperClassName || 'col-sm-9');
         }
 
         if (this.props.hasErrors) {
