@@ -33,7 +33,7 @@ var Checkbox = React.createClass({
                         {...this.props}
                         id={this.getId()}
                         type="checkbox"
-                        checked={this.getValue() === true}
+                        checked={Boolean(this.getValue()) === true}
                         onChange={this.changeValue}
                         disabled={this.isFormDisabled() || this.props.disabled}
                     /> {this.props.label}
