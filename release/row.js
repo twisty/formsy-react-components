@@ -31,7 +31,7 @@ var Row = React.createClass({
 
     renderLabel: function renderLabel() {
 
-        if (this.props.layout === 'elementOnly') {
+        if (!this.props.label || this.props.layout === 'elementOnly') {
             return '';
         }
 
