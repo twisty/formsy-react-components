@@ -39,7 +39,7 @@ var Row = React.createClass({
         labelWrapper.push('control-label');
 
         if (this.props.layout === 'horizontal') {
-            labelWrapper.push(this.props.labelClassName);
+            labelWrapper.push(this.props.labelClassName || 'col-sm-3');
         }
 
         if (this.props.fakeLabel) {
@@ -79,7 +79,7 @@ var Row = React.createClass({
 
         if (this.props.layout === 'horizontal') {
             classNames.formGroup.push('row');
-            classNames.elementWrapper.push(this.props.wrapperClassName);
+            classNames.elementWrapper.push(this.props.wrapperClassName || 'col-sm-9');
         }
 
         if (this.props.hasErrors) {
