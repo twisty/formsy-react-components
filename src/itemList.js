@@ -1,7 +1,13 @@
-var React = require('react/addons'),
-    FormsyComponent = require('formsy-react-components');
+/*jshint node:true */
 
-var ESC_KEY = 27;
+'use strict';
+
+var React = require('react');
+var Formsy = require('formsy-react');
+var ComponentMixin = require('./mixins/component');
+var Row = require('./row');
+
+var ESCAPE_KEY = 27;
 var ENTER_KEY = 13;
 var UP_KEY = 38;
 var DOWN_KEY = 40;
@@ -47,16 +53,18 @@ var SelectedListComponent = React.createClass({
     },
     render: function() {
         // Traverse list of selected items and generate the DOM elements
-        var items = this.props.items.map(function(item) {
-            var itemKey = 'item'+item;
-            return (
-                <SelectedItemComponent
-                    key={itemKey}
-                    label={item}
-                    onRemove={this.handleItemRemove} />
-            );
-        }, this);
-
+        var items = [];
+        if (this.props.items && typeof this.props.items == 'object' && this.props.items.length > 0) {
+            items = this.props.items.map(function (item) {
+                var itemKey = 'item' + item;
+                return (
+                    <SelectedItemComponent
+                        key={itemKey}
+                        label={item}
+                        onRemove={this.handleItemRemove}/>
+                );
+            }, this);
+        }
         // Define the list style
         var listStyleClass = (['common', 'tag'].indexOf(this.props.listStyle) == -1)
             ? 'selected-list common-style'
@@ -87,7 +95,6 @@ var SuggestedItemComponent = React.createClass({
      * @param evt
      */
     handleSelect: function(evt) {
-        console.log('on sug item select: ', this.props.label);
         evt.preventDefault();
         this.props.onSelect(this.props.label);
     },
@@ -116,7 +123,6 @@ var SuggestedListComponent = React.createClass({
      * @param item
      */
     handleSelectSuggestion: function(item) {
-        console.log('on select', item);
         this.props.onSelectItem(item);
     },
     render: function() {
@@ -136,7 +142,7 @@ var SuggestedListComponent = React.createClass({
         }
 
         // Decide if the suggestion list should be displayed
-        var suggestionListClass = 'suggested-list';
+        var suggestionListClass = 'suggested-list clearfix';
         if (suggestedItems.length == 0) {
             suggestionListClass += ' hide';
         }
@@ -151,19 +157,48 @@ var SuggestedListComponent = React.createClass({
  * A helper component to render items in a list based on user input
  */
 var ItemListComponent = React.createClass({
+    mixins: [Formsy.Mixin, ComponentMixin],
+
+    /**
+     * Helper function to determine if a variable is null or undefined
+     * @param aVar
+     * @returns {boolean}
+     */
+    isDefined: function(aVar) {
+        return aVar !== null && typeof aVar !== 'undefined';
+    },
+    /**
+     * Helper function that reset the error message displayed
+     */
+    resetError: function() {
+        // There was an error, hide it since the user started typing again
+        if (this.state.errorMsg && this.state.errorMsg != '') {
+            this.setState({
+                errorMsg: false
+            })
+        }
+    },
+    getDefaultProps: function() {
+        return {
+            emptyItemError: "You can't add an empty item",
+            itemExistsError: "This item already exists",
+            listStyle: 'common',
+            suggestedItems: null
+        };
+    },
     getInitialState: function() {
         return {
             // The selected items
-            items: [],
+            items: null,
             errorMsg: false,
             // Variables used when the auto-suggest mode is enabled. Every time the user
             // clicks on the up or down arrow to select a suggested options the following
             // variables are updated
             focusedSuggestedItemLabel: '',
             focusedSuggestedItemIndex: null,
-            hideSuggestionList: false,
             // The keyword used in the input box
-            keyword: ''
+            keyword: '',
+            selectedListIsPristine: true
         };
     },
     /**
@@ -181,7 +216,7 @@ var ItemListComponent = React.createClass({
                 errorMsg: false
             };
 
-        // The user selected an item from the suggested list
+        // Suggestion mode is enabled and the user selected an item from the suggested list
         if (this.autoSuggestEnabled && this.state.focusedSuggestedItemIndex !== null && this.state.focusedSuggestedItemIndex >= 0) {
             newItem = this.filteredSuggestedItems[this.state.focusedSuggestedItemIndex];
 
@@ -192,6 +227,7 @@ var ItemListComponent = React.createClass({
                 keyword: ''
             }
         }
+        // Suggestion mode is enabled but the user hasn't selected anything from the list
         else if (this.autoSuggestEnabled) {
             newState.errorMsg = this.props.selectSuggestionError || "Choose one of the suggested items or change your keyword";
         }
@@ -201,22 +237,23 @@ var ItemListComponent = React.createClass({
             newState.errorMsg = this.props.emptyItemError || "You can't add an empty item";
         }
         // This item already exists, display an error message
-        else if (this.state.items.indexOf(newItem) >= 0) {
+        else if (this.items.indexOf(newItem) >= 0) {
             newState.errorMsg = this.props.itemExistsError || "This item already exists";
         }
         // Valid item, push it at the top of the list
         else if (!newState.errorMsg) {
             // Copy the existing items in a var and push the new item at the top
-            var newItems = this.state.items;
-            newItems.unshift(newItem);
-            newState.items = newItems;
-            this.setState({
-                items: newItems
-            });
+            this.items.unshift(newItem);
         }
 
+        // Indicate that the selected list has been altered
+        newState.selectedListIsPristine = false;
+
         // Set the new state
-        this.setState(newState);
+        this.setState(newState, function() {
+            this.setValue(this.items)
+            this.props.onChange(this.props.name, this.items);
+        }.bind(this));
 
         // Empty the value on the input field
         inputField.value = '';
@@ -242,6 +279,7 @@ var ItemListComponent = React.createClass({
             newIndex = this.state.focusedSuggestedItemIndex + 1;
         }
         newLabel = this.filteredSuggestedItems[newIndex];
+
         this.setState({
             focusedSuggestedItemLabel: newLabel,
             focusedSuggestedItemIndex: newIndex
@@ -282,22 +320,30 @@ var ItemListComponent = React.createClass({
     handleAddItem: function(evt) {
         evt.preventDefault();
         // Add a new item in the list
-        if (!this.isElementDisabled) {
+        if (!this.isElementDisabled()) {
             this.addItem();
         }
     },
     handleBlur: function(evt) {
-        if (this.autoSuggestEnabled && this.focusedSuggestedItemIndex !== null) {
+        if (this.autoSuggestEnabled && !this.isDefined(this.state.focusedSuggestedItemIndex)) {
+            console.log('on blur without suggestion....');
             this.setState({
                 hideSuggestionList: true
-            })
+            });
+        }
+        else {
+            console.log('on blur with suggestion:', this.state.focusedSuggestedItemIndex, this.state.focusedSuggestedItemLabel);
         }
     },
     handleFocus: function(evt) {
-        if (this.autoSuggestEnabled && this.focusedSuggestedItemIndex !== null) {
+        if (this.autoSuggestEnabled && !this.isDefined(this.state.focusedSuggestedItemIndex)) {
+            console.log('on focus...');
             this.setState({
                 hideSuggestionList: false
             })
+        }
+        else {
+            console.log('on focus:', this.state.focusedSuggestedItemIndex, this.state.focusedSuggestedItemLabel);
         }
     },
     /**
@@ -310,12 +356,9 @@ var ItemListComponent = React.createClass({
      */
     handleKeyUp: function(evt) {
         evt.preventDefault();
-        // There was an error, hide it since the user started typing again
-        if (this.state.errorMsg != '') {
-            this.setState({
-                errorMsg: false
-            })
-        }
+
+        // Reset error messages, if any
+        this.resetError();
 
         var value = evt.target.value.trim();
         // Add the new item to the list
@@ -348,16 +391,24 @@ var ItemListComponent = React.createClass({
      * @param item
      */
     handleRemoveItem: function(item) {
+        // Reset any error messages
+        this.resetError();
+
         // Find the item in the list
-        var itemPos = this.state.items.indexOf(item);
+        var itemPos = this.items.indexOf(item);
         if (itemPos >= 0) {
-            var items = this.state.items;
+            var items = this.items;
             items.splice(itemPos, 1);
 
             // Refresh the list
+            this.items = items;
+
+            // Indicate that the selected list has been altered
             this.setState({
-                items: items
+                selectedListIsPristine: false
             });
+            this.setValue(this.items);
+            this.props.onChange(this.props.name, this.items);
         }
     },
     /**
@@ -378,11 +429,20 @@ var ItemListComponent = React.createClass({
      * @returns {*}
      */
     isElementDisabled: function() {
-        return /*this.isFormDisabled() ||*/ this.props.disabled;
+        return this.isFormDisabled() || this.props.disabled;
     },
-    render: function() {
+    renderElement: function() {
 
-        var itemError = this.state.errorMsg;
+        //var itemError = this.state.errorMsg;
+        var itemError = this.state.errorMsg,
+            focusedSuggestedItemLabel = this.state.focusedSuggestedItemLabel,
+            focusedSuggestedItemIndex = this.state.focusedSuggestedItemIndex,
+            keyword = this.state.keyword;
+
+        // Initialize the items with the default value as long as the field list of items is pristine
+        if (this.state.selectedListIsPristine) {
+            this.items = this.getValue() || [];
+        }
 
         // Check if auto-suggest mode is enabled
         this.autoSuggestEnabled = this.props.suggestedItems && this.props.suggestedItems.length >= 0;
@@ -394,8 +454,8 @@ var ItemListComponent = React.createClass({
         // note: you need the first condition because null is actually an object
         if (this.props.suggestedItems && typeof this.props.suggestedItems == 'object' && !this.state.hideSuggestionList) {
             this.props.suggestedItems.map(function(item) {
-                var patt = new RegExp(this.state.keyword, "i");
-                if (this.state.keyword !== '' && patt.test(item) && curNumberOfSuggestions < maxNumberOfSuggestions) {
+                var patt = new RegExp(keyword, "i");
+                if (keyword !== '' && patt.test(item) && curNumberOfSuggestions < maxNumberOfSuggestions) {
                     curNumberOfSuggestions++;
                     this.filteredSuggestedItems.push(item);
                     return item;
@@ -426,7 +486,7 @@ var ItemListComponent = React.createClass({
                            onKeyUp={this.handleKeyUp} />
 
                     <SuggestedListComponent
-                        focusedItem={this.state.focusedSuggestedItemLabel}
+                        focusedItem={focusedSuggestedItemLabel}
                         items={this.filteredSuggestedItems}
                         onSelectItem={this.handleSelectSuggestion}/>
 
@@ -437,13 +497,34 @@ var ItemListComponent = React.createClass({
                 <div className={errorClassName}>{itemError}</div>
 
                 <SelectedListComponent
-                    items={this.state.items}
+                    items={this.items}
                     listStyle={this.props.listStyle}
                     onRemoveItem={this.handleRemoveItem} />
 
-                {this.props.storageInput}
+
             </div>
         )
+    },
+    render: function() {
+
+        if (this.getLayout() === 'elementOnly' || this.props.type === 'hidden') {
+            return (
+                <div>{this.renderElement()}</div>
+            );
+        }
+
+        return (
+            <Row
+                label={this.props.label}
+                required={this.isRequired()}
+                hasErrors={this.showErrors()}
+                layout={this.getLayout()}
+                >
+                {this.renderElement()}
+                {this.renderHelp()}
+                {this.renderErrorMessage()}
+            </Row>
+        );
     }
 });
 
