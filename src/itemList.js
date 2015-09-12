@@ -67,8 +67,8 @@ var SelectedListComponent = React.createClass({
         }
         // Define the list style
         var listStyleClass = (['common', 'tag'].indexOf(this.props.listStyle) == -1)
-            ? 'selected-list common-style'
-            : this.props.listStyle + '-style selected-list';
+            ? 'selected-list common-style clearfix'
+            : this.props.listStyle + '-style selected-list clearfix';
 
         // Display the list only if there are selected items
         if (items.length == 0) {
@@ -182,6 +182,7 @@ var ItemListComponent = React.createClass({
         return {
             emptyItemError: "You can't add an empty item",
             itemExistsError: "This item already exists",
+            maxNumberOfitemsError: "You can't add more items in the list",
             listStyle: 'common',
             suggestedItems: null
         };
@@ -229,16 +230,20 @@ var ItemListComponent = React.createClass({
         }
         // Suggestion mode is enabled but the user hasn't selected anything from the list
         else if (this.autoSuggestEnabled) {
-            newState.errorMsg = this.props.selectSuggestionError || "Choose one of the suggested items or change your keyword";
+            newState.errorMsg = this.props.selectSuggestionError;
         }
 
         // Empty item?
         if (newItem === '') {
-            newState.errorMsg = this.props.emptyItemError || "You can't add an empty item";
+            newState.errorMsg = this.props.emptyItemError;
         }
         // This item already exists, display an error message
         else if (this.items.indexOf(newItem) >= 0) {
-            newState.errorMsg = this.props.itemExistsError || "This item already exists";
+            newState.errorMsg = this.props.itemExistsError;
+        }
+        // There is a quota in the maximum number of items allowed in the list
+        else if (this.props.maxNumberOfItems && this.items.length >= this.props.maxNumberOfItems) {
+            newState.errorMsg = this.props.maxNumberOfitemsError;
         }
         // Valid item, push it at the top of the list
         else if (!newState.errorMsg) {
@@ -481,7 +486,7 @@ var ItemListComponent = React.createClass({
         return (
             <div className="itemlist-component">
                 <div className="input-group">
-                    <input type="text" className="form-control" ref="txtInput"
+                    <input type="text" className="form-control" ref="txtInput" autoComplete="off"
                            disabled={this.isElementDisabled()}
                            onKeyUp={this.handleKeyUp} />
 
