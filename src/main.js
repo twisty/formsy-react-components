@@ -11,6 +11,7 @@ module.exports = {
     Row: require('./row'),
     Select: require('./select'),
     Textarea: require('./textarea'),
+    Uploader: require('./uploader'),
     ComponentMixin: require('./mixins/component'),
     ParentContextMixin: require('./mixins/parent-context')
 };

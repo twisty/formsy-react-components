@@ -352,6 +352,17 @@ var ItemListComponent = React.createClass({
         }
     },
     /**
+     * Monitor key down events. The handler mainly added to provent form submission
+     * when the user clicks enter while focusing on any form field
+     *
+     * @param evt
+     */
+    handleKeyDown: function(evt) {
+        if (evt.which == ENTER_KEY) {
+            evt.preventDefault();
+        }
+    },
+    /**
      * Monitor key up events. If an enter is clicked add a new item
      * in the list, but apply basic sanity checks including addition of:
      * - empty items (e.g only whitespaces)
@@ -488,6 +499,7 @@ var ItemListComponent = React.createClass({
                 <div className="input-group">
                     <input type="text" className="form-control" ref="txtInput" autoComplete="off"
                            disabled={this.isElementDisabled()}
+                           onKeyDown={this.handleKeyDown}
                            onKeyUp={this.handleKeyUp} />
 
                     <SuggestedListComponent
