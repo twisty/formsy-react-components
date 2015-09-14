@@ -28,10 +28,14 @@ var SelectedItemComponent = React.createClass({
         this.props.onRemove(this.props.label);
     },
     render: function() {
+        var itemElem = (this.props.listItemType == 'url')
+            ? (<a href={this.props.label} className="item-link" target="_blank">{this.props.label}</a>)
+            : (<span>{this.props.label}</span>);
+
         return (
             <li>
-                <span>{this.props.label}</span>
-                <a href="#" className="fa fa-times" onClick={this.handleRemove}></a>
+                {itemElem}
+                <a href="#" className="fa fa-times rm-item-btn" onClick={this.handleRemove}></a>
             </li>
         );
     }
@@ -60,6 +64,7 @@ var SelectedListComponent = React.createClass({
                 return (
                     <SelectedItemComponent
                         key={itemKey}
+                        listItemType={this.props.listItemType}
                         label={item}
                         onRemove={this.handleItemRemove}/>
                 );
@@ -449,7 +454,6 @@ var ItemListComponent = React.createClass({
     },
     renderElement: function() {
 
-        //var itemError = this.state.errorMsg;
         var itemError = this.state.errorMsg,
             focusedSuggestedItemLabel = this.state.focusedSuggestedItemLabel,
             focusedSuggestedItemIndex = this.state.focusedSuggestedItemIndex,
@@ -515,6 +519,7 @@ var ItemListComponent = React.createClass({
 
                 <SelectedListComponent
                     items={this.items}
+                    listItemType={this.props.listItemType}
                     listStyle={this.props.listStyle}
                     onRemoveItem={this.handleRemoveItem} />
 
