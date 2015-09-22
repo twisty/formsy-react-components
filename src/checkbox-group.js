@@ -69,6 +69,8 @@ var CheckboxGroup = React.createClass({
         return (
             <Row
                 label={this.props.label}
+                labelClassName={this.props.labelClassName}
+                wrapperClassName={this.props.wrapperClassName}
                 required={this.isRequired()}
                 hasErrors={this.showErrors()}
                 layout={this.getLayout()}
