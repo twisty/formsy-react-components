@@ -53,8 +53,9 @@ var Textarea = React.createClass({
             Row,
             {
                 label: this.props.label,
+                rowClassName: this.props.rowClassName,
                 labelClassName: this.props.labelClassName,
-                wrapperClassName: this.props.wrapperClassName,
+                elementWrapperClassName: this.props.elementWrapperClassName,
                 required: this.isRequired(),
                 hasErrors: this.showErrors(),
                 layout: this.getLayout(),

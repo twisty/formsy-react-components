@@ -60,8 +60,9 @@ var Checkbox = React.createClass({
             Row,
             {
                 label: this.props.rowLabel,
+                rowClassName: this.props.rowClassName,
                 labelClassName: this.props.labelClassName,
-                wrapperClassName: this.props.wrapperClassName,
+                elementWrapperClassName: this.props.elementWrapperClassName,
                 required: this.isRequired(),
                 hasErrors: this.showErrors(),
                 layout: this.getLayout(),
