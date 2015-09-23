@@ -4,14 +4,14 @@ var gulp = require('gulp');
 var gutil = require('gulp-util');
 var browserify = require('browserify');
 var watchify = require('watchify');
-var reactify = require('reactify');
 var uglifyify = require('uglifyify');
+var babelify = require('babelify');
 var source = require('vinyl-source-stream');
 var notify = require('gulp-notify');
 
 var dependencies = [
     'react',
-    'react-tools',
+    'react-dom',
     'formsy-react',
     'formsy-react-components',
     'codemirror',
@@ -25,7 +25,7 @@ var browserifyTask = function(options) {
 
     var b = browserify({
         entries: options.src,
-        transform: [reactify],
+        transform: [babelify],
         debug: options.development,
         cache: {},
         packageCache: {}
@@ -56,6 +56,7 @@ var browserifyTask = function(options) {
 gulp.task('vendor', function() {
     var bundler = browserify({
         debug: !production,
+        transform: [babelify],
         require: dependencies
     });
     if (production) {
@@ -90,4 +91,3 @@ gulp.task('docs', function() {
 gulp.task('dev-docs', ['vendor', 'docs']);
 gulp.task('dev-playground', ['vendor', 'playground']);
 gulp.task('release', ['vendor', 'playground', 'docs']);
-

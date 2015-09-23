@@ -1,8 +1,10 @@
 'use strict';
 
 var React = require('react');
+var ReactDOM = require('react-dom');
 var Formsy = require('formsy-react');
 var FRC = require('formsy-react-components');
+var PlaygroundOptions = require('./playground-options');
 
 var Checkbox = FRC.Checkbox;
 var CheckboxGroup = FRC.CheckboxGroup;
@@ -35,12 +37,7 @@ var Playground = React.createClass({
         this.setState({layout: layout});
     },
 
-    changeSelectProp: function(event) {
-        var target = event.currentTarget;
-        this.changeProp(target.name, target.checked);
-    },
-
-    changeProp: function(name, value) {
+    changeOption: function(name, value) {
         var newState = {};
         newState[name] = value;
         this.setState(newState);
@@ -80,46 +77,12 @@ var Playground = React.createClass({
                     <h1>Form Playground</h1>
                 </div>
                 <h3>Options…</h3>
-                <div className="well">
-                    <Formsy.Form className="form-horizontal">
-                        <RadioGroup
-                            name="layout"
-                            type="inline"
-                            label="layout"
-                            value={this.state.layout}
-                            options={[
-                                {value: 'horizontal', label: <code>horizontal</code>},
-                                {value: 'vertical', label: <code>vertical</code>},
-                                {value: 'elementOnly', label: <code>elementOnly</code>}
-                            ]}
-                            onChange={this.changeProp}
-                        />
-                        <Row layout="horizontal" label="validatePristine">
-                            <div className="checkbox">
-                                <label>
-                                    <input
-                                        type="checkbox"
-                                        defaultChecked={this.state.validatePristine}
-                                        name="validatePristine"
-                                        onChange={this.changeSelectProp}
-                                    /> Yes
-                                </label>
-                            </div>
-                        </Row>
-                        <Row layout="horizontal" label="disabled">
-                            <div className="checkbox">
-                                <label>
-                                    <input
-                                        type="checkbox"
-                                        defaultChecked={this.state.disabled}
-                                        name="disabled"
-                                        onChange={this.changeSelectProp}
-                                    /> Yes
-                                </label>
-                            </div>
-                        </Row>
-                    </Formsy.Form>
-                </div>
+                <PlaygroundOptions
+                    layoutChoice={this.state.layout}
+                    validatePristineChoice={this.state.validatePristine}
+                    disabledChoice={this.state.disabled}
+                    changeOption={this.changeOption}
+                />
                 <div className="page-header">
                     <h2>Layout: <code>{this.state.layout}</code></h2>
                 </div>
@@ -148,11 +111,14 @@ var Playground = React.createClass({
                         />
                         <Input
                             {...sharedProps}
-                            name="email1"
+                            name="email"
                             value=""
                             label="Email"
                             type="email"
+                            autoComplete="off"
                             placeholder="This is an email input."
+                            help="This email field should not autocomplete."
+                            required="isEmail"
                         />
                         <Input
                             {...sharedProps}
@@ -285,6 +251,21 @@ var Playground = React.createClass({
                             options={radioOptionsDisabled}
                         />
                     </fieldset>
+                    <fieldset>
+                        <legend>Layout tweaks</legend>
+                        <Input
+                            {...sharedProps}
+                            name="cssTweaks"
+                            value=""
+                            label="This row is yellow"
+                            type="text"
+                            placeholder="Label is col-sm-5, element-wrapper is col-sm-7"
+                            rowClassName="yellow"
+                            labelClassName={[{'col-sm-3': false}, 'col-sm-5']}
+                            elementWrapperClassName={[{'col-sm-9': false}, 'col-sm-7']}
+                            help="You can set the row, label, and element-wrapper CSS classes."
+                        />
+                    </fieldset>
                     <Row layout={this.state.layout}>
                         <input className="btn btn-default" onClick={this.resetForm} type="reset" defaultValue="Reset" />
                         {' '}
@@ -296,7 +277,7 @@ var Playground = React.createClass({
     }
 });
 
-React.render(
+ReactDOM.render(
     <Playground />,
     document.getElementById('playground')
 );
