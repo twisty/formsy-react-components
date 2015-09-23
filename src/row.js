@@ -39,7 +39,9 @@ var Row = React.createClass({
         labelWrapper.push('control-label');
 
         if (this.props.layout === 'horizontal') {
-            labelWrapper.push(this.props.labelClassName || 'col-sm-3');
+            labelWrapper.push('col-sm-3');
+        }else if (this.props.layout === 'custom'){
+            labelWrapper.push(this.props.labelClassName);
         }
 
         if (this.props.fakeLabel) {
@@ -89,7 +91,7 @@ var Row = React.createClass({
         }
 
         var element = this.props.children;
-        if (this.props.layout === 'horizontal') {
+        if (this.props.layout === 'horizontal' || this.props.layout === 'custom') {
             element = (
                 <div className={classNames.elementWrapper.join(' ')}>
                     {this.props.children}

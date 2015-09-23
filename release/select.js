@@ -44,6 +44,7 @@ var Select = React.createClass({
                 label: this.props.label,
                 labelClassName: this.props.labelClassName,
                 wrapperClassName: this.props.wrapperClassName,
+                formGroup: this.props.formGroup,
                 required: this.isRequired(),
                 hasErrors: this.showErrors(),
                 layout: this.getLayout(),
