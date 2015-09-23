@@ -13,7 +13,7 @@ var Row = React.createClass({
         required: React.PropTypes.bool,
         hasErrors: React.PropTypes.bool,
         fakeLabel: React.PropTypes.bool,
-        layout: React.PropTypes.oneOf(['horizontal', 'vertical', 'elementOnly']),
+        layout: React.PropTypes.oneOf(['horizontal', 'vertical', 'elementOnly','custom']),
         htmlFor: React.PropTypes.string
     },
 
@@ -22,6 +22,7 @@ var Row = React.createClass({
             label: '',
             labelClassName: '',
             wrapperClassName: '',
+            formGroup:'',
             required: false,
             hasErrors: false,
             fakeLabel: false
@@ -30,7 +31,7 @@ var Row = React.createClass({
 
     renderLabel: function() {
 
-        if (this.props.layout === 'elementOnly') {
+        if (!this.props.label || this.props.layout === 'elementOnly') {
             return '';
         }
 
@@ -38,7 +39,9 @@ var Row = React.createClass({
         labelWrapper.push('control-label');
 
         if (this.props.layout === 'horizontal') {
-            labelWrapper.push(this.props.labelClassName || 'col-sm-3');
+            labelWrapper.push('col-sm-3');
+        }else if (this.props.layout === 'custom'){
+            labelWrapper.push(this.props.labelClassName);
         }
 
         if (this.props.fakeLabel) {
@@ -76,7 +79,10 @@ var Row = React.createClass({
 
         if (this.props.layout === 'horizontal') {
             classNames.formGroup.push('row');
-            classNames.elementWrapper.push(this.props.wrapperClassName || 'col-sm-9');
+            classNames.elementWrapper.push('col-sm-9');
+        } else if (this.props.layout === 'custom'){
+            classNames.formGroup.push(this.props.formGroup);
+            classNames.elementWrapper.push(this.props.wrapperClassName);
         }
 
         if (this.props.hasErrors) {
@@ -85,7 +91,7 @@ var Row = React.createClass({
         }
 
         var element = this.props.children;
-        if (this.props.layout === 'horizontal') {
+        if (this.props.layout === 'horizontal' || this.props.layout === 'custom') {
             element = (
                 <div className={classNames.elementWrapper.join(' ')}>
                     {this.props.children}

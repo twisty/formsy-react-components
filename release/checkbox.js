@@ -38,7 +38,7 @@ var Checkbox = React.createClass({
                 React.createElement('input', _extends({}, this.props, {
                     id: this.getId(),
                     type: 'checkbox',
-                    checked: this.getValue() === true,
+                    checked: Boolean(this.getValue()) === true,
                     onChange: this.changeValue,
                     disabled: this.isFormDisabled() || this.props.disabled
                 })),
@@ -62,6 +62,7 @@ var Checkbox = React.createClass({
                 label: this.props.rowLabel,
                 labelClassName: this.props.labelClassName,
                 wrapperClassName: this.props.wrapperClassName,
+                formGroup: this.props.formGroup,
                 required: this.isRequired(),
                 hasErrors: this.showErrors(),
                 layout: this.getLayout(),

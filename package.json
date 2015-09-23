@@ -50,7 +50,7 @@
     "formsy-react": "^0.14.1",
     "gulp": "^3.9.0",
     "gulp-babel": "^5.1.0",
-    "jest-cli": "^0.4.13",
+    "jest-cli": "^0.5.7",
     "react": "^0.13.3"
   }
 }
