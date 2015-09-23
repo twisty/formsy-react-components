@@ -13,7 +13,7 @@ var Row = React.createClass({
         required: React.PropTypes.bool,
         hasErrors: React.PropTypes.bool,
         fakeLabel: React.PropTypes.bool,
-        layout: React.PropTypes.oneOf(['horizontal', 'vertical', 'elementOnly']),
+        layout: React.PropTypes.oneOf(['horizontal', 'vertical', 'elementOnly','custom']),
         htmlFor: React.PropTypes.string
     },
 
@@ -22,6 +22,7 @@ var Row = React.createClass({
             label: '',
             labelClassName: '',
             wrapperClassName: '',
+            formGroup:'',
             required: false,
             hasErrors: false,
             fakeLabel: false
@@ -76,7 +77,10 @@ var Row = React.createClass({
 
         if (this.props.layout === 'horizontal') {
             classNames.formGroup.push('row');
-            classNames.elementWrapper.push(this.props.wrapperClassName || 'col-sm-9');
+            classNames.elementWrapper.push('col-sm-9');
+        } else if (this.props.layout === 'custom'){
+            classNames.formGroup.push(this.props.formGroup);
+            classNames.elementWrapper.push(this.props.wrapperClassName);
         }
 
         if (this.props.hasErrors) {
