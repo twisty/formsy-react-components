@@ -23,6 +23,11 @@
   "bugs": {
     "url": "https://github.com/twisty/formsy-react-components/issues"
   },
+  "browserify": {
+    "transform": [
+      "babelify"
+    ]
+  },
   "jest": {
     "scriptPreprocessor": "<rootDir>/node_modules/babel-jest",
     "modulePathIgnorePatterns": [
