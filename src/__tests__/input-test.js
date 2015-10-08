@@ -4,10 +4,11 @@
 
 jest.autoMockOff();
 
-var React = require('react/addons');
+var React = require('react');
+var ReactDOM = require('react-dom');
 var Formsy = require('formsy-react');
 var Input = require('../input.js');
-var TestUtils = React.addons.TestUtils;
+var TestUtils = require('react-addons-test-utils');
 
 describe('Input', function() {
 
@@ -35,10 +36,10 @@ describe('Input', function() {
         component = TestUtils.findRenderedComponentWithType(form, Input);
 
         // Get the label DOM node.
-        labelDOMNode = component.getDOMNode().querySelector('label');
+        labelDOMNode = ReactDOM.findDOMNode(component).querySelector('label');
 
         // Get the input DOM node.
-        inputDOMNode = component.getDOMNode().querySelector('input');
+        inputDOMNode = ReactDOM.findDOMNode(component).querySelector('input');
 
     });
 
