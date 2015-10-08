@@ -3,12 +3,16 @@
 'use strict';
 
 var React = require('react');
+var classNames = require('classnames/dedupe');
 
 var Row = React.createClass({
     displayName: 'Row',
 
     propTypes: {
         label: React.PropTypes.string,
+        rowClassName: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.array, React.PropTypes.object]),
+        labelClassName: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.array, React.PropTypes.object]),
+        elementWrapperClassName: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.array, React.PropTypes.object]),
         required: React.PropTypes.bool,
         hasErrors: React.PropTypes.bool,
         fakeLabel: React.PropTypes.bool,
@@ -19,6 +23,9 @@ var Row = React.createClass({
     getDefaultProps: function getDefaultProps() {
         return {
             label: '',
+            rowClassName: '',
+            labelClassName: '',
+            elementWrapperClassName: '',
             required: false,
             hasErrors: false,
             fakeLabel: false
@@ -31,17 +38,19 @@ var Row = React.createClass({
             return '';
         }
 
-        var labelWrapper = [];
-        labelWrapper.push('control-label');
+        var labelClassNames = [];
+        labelClassNames.push('control-label');
 
         if (this.props.layout === 'horizontal') {
-            labelWrapper.push('col-sm-3');
+            labelClassNames.push('col-sm-3');
         }
+
+        labelClassNames.push(this.props.labelClassName);
 
         if (this.props.fakeLabel) {
             return React.createElement(
                 'div',
-                { className: labelWrapper.join(' ') },
+                { className: classNames(labelClassNames) },
                 React.createElement(
                     'strong',
                     null,
@@ -52,7 +61,7 @@ var Row = React.createClass({
         }
         return React.createElement(
             'label',
-            { className: labelWrapper.join(' '), htmlFor: this.props.htmlFor },
+            { className: classNames(labelClassNames), htmlFor: this.props.htmlFor },
             this.props.label,
             this.props.required ? ' *' : null
         );
@@ -68,33 +77,36 @@ var Row = React.createClass({
             );
         }
 
-        var classNames = {
-            formGroup: ['form-group'],
+        var cssClasses = {
+            row: ['form-group'],
             elementWrapper: []
         };
 
-        if (this.props.layout === 'horizontal') {
-            classNames.formGroup.push('row');
-            classNames.elementWrapper.push('col-sm-9');
-        }
-
         if (this.props.hasErrors) {
-            classNames.formGroup.push('has-error');
-            classNames.formGroup.push('has-feedback');
+            cssClasses.row.push('has-error');
+            cssClasses.row.push('has-feedback');
         }
 
         var element = this.props.children;
         if (this.props.layout === 'horizontal') {
+
+            // Horizontal layout needs a 'row' class for Bootstrap 4
+            cssClasses.row.push('row');
+
+            cssClasses.elementWrapper.push('col-sm-9');
+            cssClasses.elementWrapper.push(this.props.elementWrapperClassName);
+
             element = React.createElement(
                 'div',
-                { className: classNames.elementWrapper.join(' ') },
+                { className: classNames(cssClasses.elementWrapper) },
                 this.props.children
             );
         }
 
+        cssClasses.row.push(this.props.rowClassName);
         return React.createElement(
             'div',
-            { className: classNames.formGroup.join(' ') },
+            { className: classNames(cssClasses.row) },
             this.renderLabel(),
             element
         );
