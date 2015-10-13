@@ -57,10 +57,10 @@ var Select = React.createClass({
     },
 
     renderElement: function renderElement() {
-        var optionNodes = this.props.options.map(function (item) {
+        var optionNodes = this.props.options.map(function (item, index) {
             return React.createElement(
                 'option',
-                { disabled: item.disabled, key: item.value, value: item.value },
+                { disabled: item.disabled, key: index, value: item.value },
                 item.label
             );
         });
