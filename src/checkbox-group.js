@@ -26,7 +26,7 @@ var CheckboxGroup = React.createClass({
     changeCheckbox: function() {
         var value = [];
         this.props.options.forEach(function(option, key) {
-            if (this.refs[key].getDOMNode().checked) {
+            if (this.refs[key].checked) {
                 value.push(option.value);
             }
 
