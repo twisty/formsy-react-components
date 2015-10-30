@@ -16,7 +16,12 @@ gulp.task('watch', ['release'], function() {
 
 gulp.task('release', function() {
     return gulp.src(files.src)
-        .pipe(babel())
+        .pipe(babel({
+            'presets': [
+                'react',
+                'es2015'
+            ]
+        }))
         .pipe(gulp.dest('./release'));
 });
 
