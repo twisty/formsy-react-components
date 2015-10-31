@@ -9,7 +9,6 @@ var Row = require('./row');
 var Icon = require('./icon');
 
 var File = React.createClass({
-    displayName: 'File',
 
     mixins: [Formsy.Mixin, ComponentMixin],
 

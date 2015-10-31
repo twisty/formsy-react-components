@@ -6,7 +6,6 @@ var React = require('react');
 var classNames = require('classnames/dedupe');
 
 var Row = React.createClass({
-    displayName: 'Row',
 
     propTypes: {
         label: React.PropTypes.string,

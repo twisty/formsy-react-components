@@ -9,7 +9,6 @@ var Row = require('./row');
 var Icon = require('./icon');
 
 var Input = React.createClass({
-    displayName: 'Input',
 
     mixins: [Formsy.Mixin, ComponentMixin],
 
