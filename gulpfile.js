@@ -20,6 +20,9 @@ gulp.task('release', function() {
             'presets': [
                 'react',
                 'es2015'
+            ],
+            'plugins': [
+                'transform-react-display-name'
             ]
         }))
         .pipe(gulp.dest('./release'));
