@@ -8,6 +8,7 @@ var ComponentMixin = require('./mixins/component');
 var Row = require('./row');
 
 var Checkbox = React.createClass({
+    displayName: 'Checkbox',
 
     mixins: [Formsy.Mixin, ComponentMixin],
 

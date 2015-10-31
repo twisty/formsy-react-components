@@ -8,6 +8,7 @@ var ComponentMixin = require('./mixins/component');
 var Row = require('./row');
 
 var Textarea = React.createClass({
+    displayName: 'Textarea',
 
     mixins: [Formsy.Mixin, ComponentMixin],
 

@@ -8,6 +8,7 @@ var ComponentMixin = require('./mixins/component');
 var Row = require('./row');
 
 var RadioGroup = React.createClass({
+    displayName: 'RadioGroup',
 
     mixins: [Formsy.Mixin, ComponentMixin],
 
