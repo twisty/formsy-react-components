@@ -8,7 +8,7 @@ var classNames = require('classnames/dedupe');
 var Row = React.createClass({
 
     propTypes: {
-        label: React.PropTypes.string,
+        label: React.PropTypes.node,
         rowClassName: React.PropTypes.oneOfType([
             React.PropTypes.string,
             React.PropTypes.array,
