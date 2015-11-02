@@ -30,6 +30,15 @@ module.exports = {
         return hash;
     },
 
+    /**
+     * getId
+     *
+     * The ID is used as an attribute on the form control, and is used to allow
+     * associating the label element with the form control.
+     *
+     * If we don't explicitly pass an `id` prop, we generate one based on the
+     * `name` property and a hash of the component props.
+     */
     getId: function() {
         return this.props.id || this.props.name.split('[').join('_').replace(']', '') + this.hashString(JSON.stringify(this.props));
     },
