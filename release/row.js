@@ -9,7 +9,7 @@ var Row = React.createClass({
     displayName: 'Row',
 
     propTypes: {
-        label: React.PropTypes.string,
+        label: React.PropTypes.node,
         rowClassName: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.array, React.PropTypes.object]),
         labelClassName: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.array, React.PropTypes.object]),
         elementWrapperClassName: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.array, React.PropTypes.object]),
