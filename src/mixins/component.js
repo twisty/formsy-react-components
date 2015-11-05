@@ -5,11 +5,43 @@ var React = require('react');
 module.exports = {
 
     propTypes: {
-        layout: React.PropTypes.string
+        layout: React.PropTypes.string,
+        validatePristine: React.PropTypes.bool,
+        rowClassName: React.PropTypes.oneOfType([
+            React.PropTypes.string,
+            React.PropTypes.array,
+            React.PropTypes.object
+        ]),
+        labelClassName: React.PropTypes.oneOfType([
+            React.PropTypes.string,
+            React.PropTypes.array,
+            React.PropTypes.object
+        ]),
+        elementWrapperClassName: React.PropTypes.oneOfType([
+            React.PropTypes.string,
+            React.PropTypes.array,
+            React.PropTypes.object
+        ])
     },
 
     contextTypes: {
-        layout: React.PropTypes.string
+        layout: React.PropTypes.string,
+        validatePristine: React.PropTypes.bool,
+        rowClassName: React.PropTypes.oneOfType([
+            React.PropTypes.string,
+            React.PropTypes.array,
+            React.PropTypes.object
+        ]),
+        labelClassName: React.PropTypes.oneOfType([
+            React.PropTypes.string,
+            React.PropTypes.array,
+            React.PropTypes.object
+        ]),
+        elementWrapperClassName: React.PropTypes.oneOfType([
+            React.PropTypes.string,
+            React.PropTypes.array,
+            React.PropTypes.object
+        ])
     },
 
     getDefaultProps: function() {
@@ -19,6 +51,50 @@ module.exports = {
             onChange: function() {},
             onFocus: function() {},
             onBlur: function() {}
+        };
+    },
+
+    /**
+     * Accessors for "special" properties.
+     *
+     * The following methods are used to merge master default properties that
+     * are optionally set on the parent form. This to to allow customising these
+     * properties 'as a whole' for the form, while retaining the ability to
+     * override the properties on a component basis.
+     *
+     * Also see the parent-context mixin.
+     */
+    getLayout: function() {
+        var defaultProperty = this.context.layout || 'horizontal';
+        return this.props.layout ? this.props.layout : defaultProperty;
+    },
+
+    getValidatePristine: function() {
+        var defaultProperty = this.context.validatePristine || false;
+        return this.props.validatePristine ? this.props.validatePristine : defaultProperty;
+    },
+
+    getRowClassName: function() {
+        return [this.context.rowClassName, this.props.rowClassName];
+    },
+
+    getLabelClassName: function() {
+        return [this.context.labelClassName, this.props.labelClassName];
+    },
+
+    getElementWrapperClassName: function() {
+        return [this.context.elementWrapperClassName, this.props.elementWrapperClassName];
+    },
+
+    getRowProperties: function() {
+        return {
+            label: this.props.label,
+            rowClassName: this.getRowClassName(),
+            labelClassName: this.getLabelClassName(),
+            elementWrapperClassName: this.getElementWrapperClassName(),
+            layout: this.getLayout(),
+            required: this.isRequired(),
+            hasErrors: this.showErrors()
         };
     },
 
@@ -41,11 +117,6 @@ module.exports = {
      */
     getId: function() {
         return this.props.id || this.props.name.split('[').join('_').replace(']', '') + this.hashString(JSON.stringify(this.props));
-    },
-
-    getLayout: function() {
-        var defaultLayout = this.context.layout || 'horizontal';
-        return this.props.layout ? this.props.layout : defaultLayout;
     },
 
     renderHelp: function() {
@@ -71,7 +142,7 @@ module.exports = {
 
     showErrors: function() {
         if (this.isPristine() === true) {
-            if (this.props.validatePristine === false) {
+            if (this.getValidatePristine() === false) {
                 return false;
             }
         }
