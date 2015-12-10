@@ -50,15 +50,7 @@ var Select = React.createClass({
     renderElement: function() {
         var optionNodes = this.props.options.map(function(item, index) {
             return (
-                <option 
-                    selected={item.selected}
-                    disabled={item.disabled}
-                    key={index}
-                    value={item.value}
-                    className={item.className}
-                >
-                    {item.label}
-                </option>
+                <option key={index} {...item} label={null}>{item.label}</option>
             );
         });
         return (
