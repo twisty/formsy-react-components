@@ -43,16 +43,9 @@ var File = React.createClass({
 
         return React.createElement(
             Row,
-            {
-                label: this.props.label,
-                rowClassName: this.props.rowClassName,
-                labelClassName: this.props.labelClassName,
-                elementWrapperClassName: this.props.elementWrapperClassName,
-                required: this.isRequired(),
-                hasErrors: this.showErrors(),
-                layout: this.getLayout(),
+            _extends({}, this.getRowProperties(), {
                 htmlFor: this.getId()
-            },
+            }),
             element,
             warningIcon,
             this.renderHelp(),

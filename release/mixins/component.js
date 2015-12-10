@@ -5,11 +5,19 @@ var React = require('react');
 module.exports = {
 
     propTypes: {
-        layout: React.PropTypes.string
+        layout: React.PropTypes.string,
+        validatePristine: React.PropTypes.bool,
+        rowClassName: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.array, React.PropTypes.object]),
+        labelClassName: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.array, React.PropTypes.object]),
+        elementWrapperClassName: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.array, React.PropTypes.object])
     },
 
     contextTypes: {
-        layout: React.PropTypes.string
+        layout: React.PropTypes.string,
+        validatePristine: React.PropTypes.bool,
+        rowClassName: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.array, React.PropTypes.object]),
+        labelClassName: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.array, React.PropTypes.object]),
+        elementWrapperClassName: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.array, React.PropTypes.object])
     },
 
     getDefaultProps: function getDefaultProps() {
@@ -19,6 +27,50 @@ module.exports = {
             onChange: function onChange() {},
             onFocus: function onFocus() {},
             onBlur: function onBlur() {}
+        };
+    },
+
+    /**
+     * Accessors for "special" properties.
+     *
+     * The following methods are used to merge master default properties that
+     * are optionally set on the parent form. This to to allow customising these
+     * properties 'as a whole' for the form, while retaining the ability to
+     * override the properties on a component basis.
+     *
+     * Also see the parent-context mixin.
+     */
+    getLayout: function getLayout() {
+        var defaultProperty = this.context.layout || 'horizontal';
+        return this.props.layout ? this.props.layout : defaultProperty;
+    },
+
+    getValidatePristine: function getValidatePristine() {
+        var defaultProperty = this.context.validatePristine || false;
+        return this.props.validatePristine ? this.props.validatePristine : defaultProperty;
+    },
+
+    getRowClassName: function getRowClassName() {
+        return [this.context.rowClassName, this.props.rowClassName];
+    },
+
+    getLabelClassName: function getLabelClassName() {
+        return [this.context.labelClassName, this.props.labelClassName];
+    },
+
+    getElementWrapperClassName: function getElementWrapperClassName() {
+        return [this.context.elementWrapperClassName, this.props.elementWrapperClassName];
+    },
+
+    getRowProperties: function getRowProperties() {
+        return {
+            label: this.props.label,
+            rowClassName: this.getRowClassName(),
+            labelClassName: this.getLabelClassName(),
+            elementWrapperClassName: this.getElementWrapperClassName(),
+            layout: this.getLayout(),
+            required: this.isRequired(),
+            hasErrors: this.showErrors()
         };
     },
 
@@ -41,11 +93,6 @@ module.exports = {
      */
     getId: function getId() {
         return this.props.id || this.props.name.split('[').join('_').replace(']', '') + this.hashString(JSON.stringify(this.props));
-    },
-
-    getLayout: function getLayout() {
-        var defaultLayout = this.context.layout || 'horizontal';
-        return this.props.layout ? this.props.layout : defaultLayout;
     },
 
     renderHelp: function renderHelp() {
@@ -75,7 +122,7 @@ module.exports = {
 
     showErrors: function showErrors() {
         if (this.isPristine() === true) {
-            if (this.props.validatePristine === false) {
+            if (this.getValidatePristine() === false) {
                 return false;
             }
         }

@@ -40,16 +40,9 @@ var Select = React.createClass({
 
         return React.createElement(
             Row,
-            {
-                label: this.props.label,
-                rowClassName: this.props.rowClassName,
-                labelClassName: this.props.labelClassName,
-                elementWrapperClassName: this.props.elementWrapperClassName,
-                required: this.isRequired(),
-                hasErrors: this.showErrors(),
-                layout: this.getLayout(),
+            _extends({}, this.getRowProperties(), {
                 htmlFor: this.getId()
-            },
+            }),
             this.renderElement(),
             this.renderHelp(),
             this.renderErrorMessage()
@@ -60,7 +53,7 @@ var Select = React.createClass({
         var optionNodes = this.props.options.map(function (item, index) {
             return React.createElement(
                 'option',
-                { disabled: item.disabled, key: index, value: item.value },
+                _extends({ key: index }, item, { label: null }),
                 item.label
             );
         });
