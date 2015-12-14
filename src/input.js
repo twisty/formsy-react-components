@@ -30,12 +30,22 @@ var Input = React.createClass({
             'time',
             'url',
             'week'
+        ]),
+        addonBefore: React.PropTypes.oneOfType([
+            React.PropTypes.string,
+            React.PropTypes.node
+        ]),
+        addonAfter: React.PropTypes.oneOfType([
+            React.PropTypes.string,
+            React.PropTypes.node
         ])
     },
 
     getDefaultProps: function() {
         return {
-            type: 'text'
+            type: 'text',
+            addonBefore: null,
+            addonAfter: null
         };
     },
 
@@ -48,7 +58,15 @@ var Input = React.createClass({
     render: function() {
         var element = this.renderElement();
 
-        if (this.getLayout() === 'elementOnly' || this.props.type === 'hidden') {
+        if (this.props.type === 'hidden') {
+            return element;
+        }
+
+        if (this.props.addonBefore || this.props.addonAfter) {
+            element = this.renderInputGroup(element);
+        }
+
+        if (this.getLayout() === 'elementOnly') {
             return element;
         }
 
@@ -88,6 +106,24 @@ var Input = React.createClass({
                 disabled={this.isFormDisabled() || this.props.disabled}
             />
         );
+    },
+
+    renderInputGroup: function(element) {
+        return (
+            <div className="input-group">
+                {this.renderAddon(this.props.addonBefore)}
+                {element}
+                {this.renderAddon(this.props.addonAfter)}
+            </div>
+        );
+    },
+
+    renderAddon: function(addon) {
+        if(!addon) {
+            return '';
+        } else {
+            return <span className="input-group-addon">{addon}</span>;
+        }
     }
 
 });

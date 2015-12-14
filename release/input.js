@@ -16,12 +16,16 @@ var Input = React.createClass({
     mixins: [Formsy.Mixin, ComponentMixin],
 
     propTypes: {
-        type: React.PropTypes.oneOf(['color', 'date', 'datetime', 'datetime-local', 'email', 'hidden', 'month', 'number', 'password', 'range', 'search', 'tel', 'text', 'time', 'url', 'week'])
+        type: React.PropTypes.oneOf(['color', 'date', 'datetime', 'datetime-local', 'email', 'hidden', 'month', 'number', 'password', 'range', 'search', 'tel', 'text', 'time', 'url', 'week']),
+        addonBefore: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.node]),
+        addonAfter: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.node])
     },
 
     getDefaultProps: function getDefaultProps() {
         return {
-            type: 'text'
+            type: 'text',
+            addonBefore: null,
+            addonAfter: null
         };
     },
 
@@ -34,7 +38,15 @@ var Input = React.createClass({
     render: function render() {
         var element = this.renderElement();
 
-        if (this.getLayout() === 'elementOnly' || this.props.type === 'hidden') {
+        if (this.props.type === 'hidden') {
+            return element;
+        }
+
+        if (this.props.addonBefore || this.props.addonAfter) {
+            element = this.renderInputGroup(element);
+        }
+
+        if (this.getLayout() === 'elementOnly') {
             return element;
         }
 
@@ -69,6 +81,28 @@ var Input = React.createClass({
             onChange: this.changeValue,
             disabled: this.isFormDisabled() || this.props.disabled
         }));
+    },
+
+    renderInputGroup: function renderInputGroup(element) {
+        return React.createElement(
+            'div',
+            { className: 'input-group' },
+            this.renderAddon(this.props.addonBefore),
+            element,
+            this.renderAddon(this.props.addonAfter)
+        );
+    },
+
+    renderAddon: function renderAddon(addon) {
+        if (!addon) {
+            return '';
+        } else {
+            return React.createElement(
+                'span',
+                { className: 'input-group-addon' },
+                addon
+            );
+        }
     }
 
 });
