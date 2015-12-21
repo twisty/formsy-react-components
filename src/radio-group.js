@@ -5,6 +5,7 @@
 var React = require('react');
 var Formsy = require('formsy-react');
 var ComponentMixin = require('./mixins/component');
+var classnames = require('classnames');
 var Row = require('./row');
 
 var RadioGroup = React.createClass({
@@ -36,11 +37,17 @@ var RadioGroup = React.createClass({
         var controls = this.props.options.map(function(radio, key) {
             var checked = (_this.getValue() === radio.value);
             var disabled = _this.isFormDisabled() || radio.disabled || _this.props.disabled;
-            var className = 'radio' + (disabled ? ' disabled' : '');
+            var className = classnames({
+                'radio':        _this.props.type !== 'inline',
+                'radio-inline': _this.props.type === 'inline',
+                'disabled':     disabled,
+                'active':       checked
+            });
             if (_this.props.type === 'inline') {
                 return (
-                    <label className="radio-inline" key={key}>
+                    <label className={className} key={key}>
                         <input
+                            name={_this.props.name}
                             checked={checked}
                             type="radio"
                             value={radio.value}
@@ -54,6 +61,7 @@ var RadioGroup = React.createClass({
                 <div className={className} key={key}>
                     <label>
                         <input
+                            name={_this.props.name}
                             checked={checked}
                             type="radio"
                             value={radio.value}
