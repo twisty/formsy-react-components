@@ -41,6 +41,7 @@ var RadioGroup = React.createClass({
                 return (
                     <label className="radio-inline" key={key}>
                         <input
+                            name={_this.props.name}
                             checked={checked}
                             type="radio"
                             value={radio.value}
@@ -54,6 +55,7 @@ var RadioGroup = React.createClass({
                 <div className={className} key={key}>
                     <label>
                         <input
+                            name={_this.props.name}
                             checked={checked}
                             type="radio"
                             value={radio.value}
