@@ -120,7 +120,7 @@ var Input = React.createClass({
 
     renderAddon: function(addon) {
         if(!addon) {
-            return '';
+            return false;
         } else {
             return <span className="input-group-addon">{addon}</span>;
         }
