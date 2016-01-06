@@ -95,7 +95,7 @@ var Input = React.createClass({
 
     renderAddon: function renderAddon(addon) {
         if (!addon) {
-            return '';
+            return false;
         } else {
             return React.createElement(
                 'span',
