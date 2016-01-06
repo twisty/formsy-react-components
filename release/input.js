@@ -96,13 +96,12 @@ var Input = React.createClass({
     renderAddon: function renderAddon(addon) {
         if (!addon) {
             return false;
-        } else {
-            return React.createElement(
-                'span',
-                { className: 'input-group-addon' },
-                addon
-            );
         }
+        return React.createElement(
+            'span',
+            { className: 'input-group-addon' },
+            addon
+        );
     }
 
 });
