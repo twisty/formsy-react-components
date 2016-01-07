@@ -18,14 +18,18 @@ var Input = React.createClass({
     propTypes: {
         type: React.PropTypes.oneOf(['color', 'date', 'datetime', 'datetime-local', 'email', 'hidden', 'month', 'number', 'password', 'range', 'search', 'tel', 'text', 'time', 'url', 'week']),
         addonBefore: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.node]),
-        addonAfter: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.node])
+        addonAfter: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.node]),
+        buttonBefore: React.PropTypes.node,
+        buttonAfter: React.PropTypes.node
     },
 
     getDefaultProps: function getDefaultProps() {
         return {
             type: 'text',
             addonBefore: null,
-            addonAfter: null
+            addonAfter: null,
+            buttonBefore: null,
+            buttonAfter: null
         };
     },
 
@@ -42,7 +46,7 @@ var Input = React.createClass({
             return element;
         }
 
-        if (this.props.addonBefore || this.props.addonAfter) {
+        if (this.props.addonBefore || this.props.addonAfter || this.props.buttonBefore || this.props.buttonAfter) {
             element = this.renderInputGroup(element);
         }
 
@@ -88,8 +92,10 @@ var Input = React.createClass({
             'div',
             { className: 'input-group' },
             this.renderAddon(this.props.addonBefore),
+            this.renderButton(this.props.buttonBefore),
             element,
-            this.renderAddon(this.props.addonAfter)
+            this.renderAddon(this.props.addonAfter),
+            this.renderButton(this.props.buttonAfter)
         );
     },
 
@@ -101,6 +107,17 @@ var Input = React.createClass({
             'span',
             { className: 'input-group-addon' },
             addon
+        );
+    },
+
+    renderButton: function renderButton(button) {
+        if (!button) {
+            return false;
+        }
+        return React.createElement(
+            'span',
+            { className: 'input-group-btn' },
+            button
         );
     }
 
