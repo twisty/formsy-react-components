@@ -1,12 +1,8 @@
 'use strict';
 
-import React from 'react';
+var React = require('react');
 
 module.exports = {
-
-    componentWillMount: function() {
-        this._ids = {};
-    },
 
     propTypes: {
         layout: React.PropTypes.string,
