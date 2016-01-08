@@ -95,7 +95,8 @@ module.exports = {
         if (this.props.id) {
             return this.props.id;
         }
-        return ['frc', this.props.name.split('[').join('_').replace(']', ''), this.hashString(JSON.stringify(this.props.label))].join('-');
+        var label = typeof this.props.label === 'undefined' ? '' : this.props.label;
+        return ['frc', this.props.name.split('[').join('_').replace(']', ''), this.hashString(JSON.stringify(label))].join('-');
     },
 
     renderHelp: function renderHelp() {
