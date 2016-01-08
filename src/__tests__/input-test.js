@@ -72,6 +72,10 @@ describe('Input', function() {
         expect(changeHandler).toBeCalled();
     });
 
+    it('generates a default id attribute', function() {
+        expect(inputDOMNode.getAttribute('id')).toEqual(labelDOMNode.getAttribute('for'));
+    });
+
     xit('displays placeholder text', function() {});
     xit('displays help text');
     xit('indicates required content');

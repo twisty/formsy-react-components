@@ -1,8 +1,12 @@
 'use strict';
 
-var React = require('react');
+import React from 'react';
 
 module.exports = {
+
+    componentWillMount: function() {
+        this._ids = {};
+    },
 
     propTypes: {
         layout: React.PropTypes.string,
@@ -113,10 +117,17 @@ module.exports = {
      * associating the label element with the form control.
      *
      * If we don't explicitly pass an `id` prop, we generate one based on the
-     * `name` property and a hash of the component props.
+     * `name` and `label` properties.
      */
     getId: function() {
-        return this.props.id || this.props.name.split('[').join('_').replace(']', '') + this.hashString(JSON.stringify(this.props));
+        if (this.props.id) {
+            return this.props.id;
+        }
+        return [
+            'frc',
+            this.props.name.split('[').join('_').replace(']', ''),
+            this.hashString(JSON.stringify(this.props.label))
+        ].join('-');
     },
 
     renderHelp: function() {
