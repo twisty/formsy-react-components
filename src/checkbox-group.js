@@ -25,12 +25,12 @@ var CheckboxGroup = React.createClass({
 
     changeCheckbox: function() {
         var value = [];
-        this.props.options.forEach(function(option, key) {
+        this.props.options.forEach((function(option, key) {
             if (this.refs[key].checked) {
                 value.push(option.value);
             }
 
-        }.bind(this));
+        }).bind(this));
         this.setValue(value);
         this.props.onChange(this.props.name, value);
     },
