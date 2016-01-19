@@ -11,6 +11,29 @@ var Select = React.createClass({
 
     mixins: [Formsy.Mixin, ComponentMixin],
 
+    propTypes: {
+        addonBefore: React.PropTypes.oneOfType([
+            React.PropTypes.string,
+            React.PropTypes.node
+        ]),
+        addonAfter: React.PropTypes.oneOfType([
+            React.PropTypes.string,
+            React.PropTypes.node
+        ]),
+        buttonBefore: React.PropTypes.node,
+        buttonAfter: React.PropTypes.node
+    },
+
+    getDefaultProps: function() {
+        return {
+            addonBefore: null,
+            addonAfter: null,
+            buttonBefore: null,
+            buttonAfter: null
+        };
+    },
+
+
     changeValue: function(event) {
         var target = event.currentTarget;
         var value;
@@ -30,17 +53,19 @@ var Select = React.createClass({
     },
 
     render: function() {
-
+        var element = this.renderElement();
         if (this.getLayout() === 'elementOnly') {
-            return this.renderElement();
+            return element;
         }
-
+        if (this.props.addonBefore || this.props.addonAfter || this.props.buttonBefore || this.props.buttonAfter) {
+            element = this.renderInputGroup(element);
+        }
         return (
             <Row
                 {...this.getRowProperties()}
                 htmlFor={this.getId()}
             >
-                {this.renderElement()}
+                {element}
                 {this.renderHelp()}
                 {this.renderErrorMessage()}
             </Row>
@@ -65,7 +90,39 @@ var Select = React.createClass({
                 {optionNodes}
             </select>
         );
+    },
+
+    renderInputGroup: function(element) {
+        return (
+            <div className="input-group">
+                {this.renderAddon(this.props.addonBefore)}
+                {this.renderButton(this.props.buttonBefore)}
+                {element}
+                {this.renderAddon(this.props.addonAfter)}
+                {this.renderButton(this.props.buttonAfter)}
+            </div>
+        );
+    },
+
+    renderAddon: function(addon) {
+        if (!addon) {
+            return false;
+        }
+        return (
+            <span className="input-group-addon">{addon}</span>
+        );
+    },
+
+    renderButton: function(button) {
+        if (!button) {
+            return false;
+        }
+        return (
+            <span className="input-group-btn">{button}</span>
+        );
     }
+
+
 });
 
 module.exports = Select;
