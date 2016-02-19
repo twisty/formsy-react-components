@@ -21,6 +21,7 @@ var Textarea = FRC.Textarea;
 var Playground = React.createClass({
     displayName: 'Playground',
 
+
     getInitialState: function getInitialState() {
         return {
             layout: 'horizontal',
@@ -141,7 +142,11 @@ var Playground = React.createClass({
                         autoComplete: 'off',
                         placeholder: 'This is an email input.',
                         help: 'This email field should not autocomplete.',
-                        required: 'isEmail'
+                        validations: 'isEmail',
+                        validationErrors: {
+                            isEmail: 'This doesn’t look like a valid email address.'
+                        },
+                        required: true
                     })),
                     React.createElement(Input, _extends({}, sharedProps, {
                         name: 'password1',
@@ -331,6 +336,7 @@ var RadioGroup = FRC.RadioGroup;
 
 var PlaygroundOptions = React.createClass({
     displayName: 'PlaygroundOptions',
+
 
     mixins: [FRC.ParentContextMixin],
 

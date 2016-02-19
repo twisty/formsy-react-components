@@ -13,10 +13,7 @@ var dependencies = [
     'react',
     'react-dom',
     'formsy-react',
-    'formsy-react-components',
-    'codemirror',
-    'codemirror/mode/xml/xml',
-    'js-beautify'
+    'formsy-react-components'
 ];
 
 var production = process.env.NODE_ENV === 'production';
@@ -66,28 +63,17 @@ gulp.task('vendor', function() {
     }
     bundler
         .bundle()
-        .pipe(source('bundle.js'))
-        .pipe(gulp.dest('vendor'));
+        .pipe(source('vendor-bundle.js'))
+        .pipe(gulp.dest('playground'));
 });
 
 gulp.task('playground', function() {
     browserifyTask({
         development: !production,
-        bundle: 'bundle.js',
+        bundle: 'app-bundle.js',
         src: './playground/app.js',
         dest: './playground'
     });
 });
 
-gulp.task('docs', function() {
-    browserifyTask({
-        development: !production,
-        bundle: 'bundle.js',
-        src: './examples/app.js',
-        dest: './examples'
-    });
-});
-
-gulp.task('dev-docs', ['vendor', 'docs']);
-gulp.task('dev-playground', ['vendor', 'playground']);
-gulp.task('release', ['vendor', 'playground', 'docs']);
+gulp.task('default', ['vendor', 'playground']);

@@ -4,15 +4,11 @@
         "browser": true,
         "node": true
     },
-    "ecmaFeatures": {
-        "jsx": true
-    },
     "plugins": [
         "react"
     ],
+    "extends": "plugin:react/recommended",
     "rules": {
-        "react/jsx-uses-react": 1,
-        "react/jsx-no-undef": 1,
         "strict": [2, "global"],
         "quotes": [2, "single"],
         "no-dupe-keys": 2,
