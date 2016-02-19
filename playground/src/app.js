@@ -1,47 +1,64 @@
-var React = require('react');
-var ReactDOM = require('react-dom');
-var Formsy = require('formsy-react');
-var FRC = require('formsy-react-components');
-var PlaygroundOptions = require('./playground-options');
+import React from 'react';
+import ReactDOM from 'react-dom';
+import Formsy from 'formsy-react';
+import FRC from 'formsy-react-components';
+import Options from './options';
 
-var Checkbox = FRC.Checkbox;
-var CheckboxGroup = FRC.CheckboxGroup;
-var Input = FRC.Input;
-var RadioGroup = FRC.RadioGroup;
-var Row = FRC.Row;
-var Select = FRC.Select;
-var File = FRC.File;
-var Textarea = FRC.Textarea;
+const {Checkbox, CheckboxGroup, Input, RadioGroup, Row, Select, File, Textarea} = FRC;
 
-var Playground = React.createClass({
+const MyForm = React.createClass({
 
-    getInitialState: function() {
-        return {
+    mixins: [FRC.ParentContextMixin],
+
+    render() {
+        return (
+            <Formsy.Form
+                className={this.getLayoutClassName()}
+                {...this.props}
+                ref="formsy"
+            >
+                {this.props.children}
+            </Formsy.Form>
+        );
+    }
+
+});
+
+class Playground extends React.Component {
+
+    constructor(props) {
+        super(props);
+
+        // Default state
+        this.state = {
             layout: 'horizontal',
             validatePristine: false,
             disabled: false
         };
-    },
 
-    resetForm: function() {
-        this.refs.form.reset();
-    },
+        // Bind this
+        this.changeOption = this.changeOption.bind(this);
+        this.submitForm = this.submitForm.bind(this);
+        this.resetForm = this.resetForm.bind(this);
+    }
 
-    submitForm: function(data) {
-        console.log(data);
-    },
+    resetForm() {
+        // This is nasty
+        const formsy = this.refs.myform.refs.formsy;
+        formsy.reset();
+    }
 
-    changeLayout: function(layout) {
-        this.setState({layout: layout});
-    },
+    submitForm(data) {
+        console.log(this, data);
+    }
 
-    changeOption: function(name, value) {
+    changeOption(name, value) {
         var newState = {};
         newState[name] = value;
         this.setState(newState);
-    },
+    }
 
-    render: function() {
+    render() {
 
         var radioOptions = [
             {value: 'a', label: 'Option A'},
@@ -55,19 +72,23 @@ var Playground = React.createClass({
             {value: 'c', label: 'Option C'}
         ];
 
-        var selectOptions = radioOptions.slice(0);
-        selectOptions.unshift({value: '', label: 'Please select…'});
-
-        var formClassName = '';
-        if (this.state.layout === 'horizontal') {
-            formClassName = 'form-horizontal';
-        }
-
-        var sharedProps = {
-            layout: this.state.layout,
-            validatePristine: this.state.validatePristine,
-            disabled: this.state.disabled
+        var optionY = {
+            value: 'y',
+            label: 'Option Y (yellow css class)',
+            className: 'yellow'
         };
+        optionY['data-note'] = 'This is a data attribute.';
+        var selectOptions = [
+            {value: 'a', label: 'Option A'},
+            {value: 'a', label: 'Option A (again)'},
+            {value: 'b', label: 'Option B'},
+            {value: 'c', label: 'Option C'},
+            {value: 'd', label: 'Option D', disabled: true},
+            optionY
+        ];
+
+        var singleSelectOptions = selectOptions.slice(0);
+        singleSelectOptions.unshift({value: '', label: 'Please select…'});
 
         return (
             <div className="row">
@@ -75,7 +96,7 @@ var Playground = React.createClass({
                     <h1>Form Playground</h1>
                 </div>
                 <h3>Options…</h3>
-                <PlaygroundOptions
+                <Options
                     layoutChoice={this.state.layout}
                     validatePristineChoice={this.state.validatePristine}
                     disabledChoice={this.state.disabled}
@@ -84,11 +105,21 @@ var Playground = React.createClass({
                 <div className="page-header">
                     <h2>Layout: <code>{this.state.layout}</code></h2>
                 </div>
-                <Formsy.Form className={formClassName} onSubmit={this.submitForm} ref="form">
+                <MyForm
+                    onSubmit={this.submitForm}
+                    layout={this.state.layout}
+                    validatePristine={this.state.validatePristine}
+                    disabled={this.state.disabled}
+                    ref="myform"
+                >
                     <fieldset>
                         <legend>Input types</legend>
                         <Input
-                            {...sharedProps}
+                            name="secret"
+                            value="I'm hidden!"
+                            type="hidden"
+                        />
+                        <Input
                             name="text1"
                             id="artisanCraftedBespokeId"
                             value=""
@@ -99,7 +130,6 @@ var Playground = React.createClass({
                             required
                         />
                         <Input
-                            {...sharedProps}
                             name="date[0]"
                             value=""
                             label="Date"
@@ -108,7 +138,6 @@ var Playground = React.createClass({
                             required
                         />
                         <Input
-                            {...sharedProps}
                             name="email"
                             value=""
                             label="Email"
@@ -123,7 +152,6 @@ var Playground = React.createClass({
                             required
                         />
                         <Input
-                            {...sharedProps}
                             name="password1"
                             value=""
                             label="Password"
@@ -133,7 +161,6 @@ var Playground = React.createClass({
                             placeholder="Choose a password"
                         />
                         <Input
-                            {...sharedProps}
                             name="password2"
                             value=""
                             label="Confirm password"
@@ -145,7 +172,6 @@ var Playground = React.createClass({
                             placeholder="Retype password"
                         />
                         <Input
-                            {...sharedProps}
                             type="color"
                             name="colour1"
                             label="Colour input"
@@ -154,7 +180,6 @@ var Playground = React.createClass({
                             validationError="You can have any color, as long as it's black."
                         />
                         <Input
-                            {...sharedProps}
                             type="range"
                             name="range1"
                             label="Range input"
@@ -163,7 +188,6 @@ var Playground = React.createClass({
                             step={2}
                         />
                         <File
-                            {...sharedProps}
                             name="file1"
                             label="File picker"
                             help="Warning: this returns a FileList that will need custom coding to be useful."
@@ -173,7 +197,6 @@ var Playground = React.createClass({
                     <fieldset>
                         <legend>Textarea</legend>
                         <Textarea
-                            {...sharedProps}
                             rows={3}
                             cols={40}
                             name="txtArea1"
@@ -189,46 +212,40 @@ var Playground = React.createClass({
                     <fieldset>
                         <legend>Select</legend>
                         <Select
-                            {...sharedProps}
                             name="select1"
                             label="Select"
                             help="This is a required select element."
-                            options={selectOptions}
+                            options={singleSelectOptions}
                             required
                         />
                         <Select
-                            {...sharedProps}
                             name="select2"
                             value={['a', 'c']}
                             label="Select (multiple)"
                             help="Here, “Option A” and “Option C” are initially selected."
-                            options={radioOptions}
+                            options={selectOptions}
                             multiple
                         />
                     </fieldset>
                     <fieldset>
                         <legend>Checkboxes</legend>
                         <Checkbox
-                            {...sharedProps}
                             name="checkbox1"
                             value={true}
                             label="Check me out"
                             rowLabel="Checkbox (single)"
                         />
                         <CheckboxGroup
-                            {...sharedProps}
                             name="checkboxGrp1"
                             value={['a', 'c']}
                             label="Checkbox group (stacked)"
                             help="Here, “Option A” and “Option C” are initially selected."
                             options={radioOptions}
-                            multiple
                         />
                     </fieldset>
                     <fieldset>
                         <legend>Radio group</legend>
                         <RadioGroup
-                            {...sharedProps}
                             name="radioGrp1"
                             value="b"
                             label="Radio group (stacked)"
@@ -236,7 +253,6 @@ var Playground = React.createClass({
                             options={radioOptions}
                         />
                         <RadioGroup
-                            {...sharedProps}
                             name="radioGrp2"
                             type="inline"
                             label="Radio group (inline)"
@@ -245,7 +261,6 @@ var Playground = React.createClass({
                             required
                         />
                         <RadioGroup
-                            {...sharedProps}
                             name="radioGrp3"
                             type="inline"
                             label="Radio group (disabled)"
@@ -256,28 +271,79 @@ var Playground = React.createClass({
                     <fieldset>
                         <legend>Layout tweaks</legend>
                         <Input
-                            {...sharedProps}
-                            name="cssTweaks"
+                            name="cssRowTweak"
                             value=""
                             label="This row is yellow"
                             type="text"
-                            placeholder="Label is col-sm-5, element-wrapper is col-sm-7"
+                            placeholder="the rowClassName property is ‘yellow’"
                             rowClassName="yellow"
+                            help="You can modify the class name for the row."
+                        />
+                        <Input
+                            name="cssWrapperTweaks"
+                            value=""
+                            label="Label and element wrapper"
+                            type="text"
+                            placeholder="Label is ‘col-sm-5’, element-wrapper is ‘col-sm-7’"
                             labelClassName={[{'col-sm-3': false}, 'col-sm-5']}
                             elementWrapperClassName={[{'col-sm-9': false}, 'col-sm-7']}
-                            help="You can set the row, label, and element-wrapper CSS classes."
+                            help="The label and element-wrapper classes can be changed."
                         />
                     </fieldset>
-                    <Row layout={this.state.layout}>
-                        <input className="btn btn-default" onClick={this.resetForm} type="reset" defaultValue="Reset" />
-                        {' '}
-                        <input className="btn btn-primary" formNoValidate={true} type="submit" defaultValue="Submit" />
-                    </Row>
-                </Formsy.Form>
+                    <fieldset>
+                        <legend>Disabled</legend>
+                        <Input
+                            name="disabled"
+                            value="This field is always disabled."
+                            label="Disabled"
+                            type="text"
+                            disabled={true}
+                            help="The disabled prop on this component is set to true."
+                        />
+                    </fieldset>
+                    <fieldset>
+                        <legend>Input groups</legend>
+                        <Input
+                            name="addon-before"
+                            value=""
+                            label="Add-on before"
+                            type="text"
+                            addonBefore={<span className="glyphicon glyphicon-search"></span>}
+                        />
+                        <Input
+                            name="addon-after"
+                            value=""
+                            label="Add-on after"
+                            type="text"
+                            addonAfter={<span className="glyphicon glyphicon-search"></span>}
+                        />
+                        <Input
+                            name="button-before"
+                            value=""
+                            label="Button before"
+                            type="text"
+                            buttonBefore={<button className="btn btn-default" type="button">Go!</button>}
+                        />
+                        <Input
+                            name="button-after"
+                            value=""
+                            label="Button after"
+                            type="text"
+                            buttonAfter={<button className="btn btn-default" type="button">Go!</button>}
+                        />
+                    </fieldset>
+                    <fieldset>
+                        <Row layout={this.state.layout}>
+                            <input className="btn btn-default" onClick={this.resetForm} type="reset" defaultValue="Reset" />
+                            {' '}
+                            <input className="btn btn-primary" formNoValidate={true} type="submit" defaultValue="Submit" />
+                        </Row>
+                    </fieldset>
+                </MyForm>
             </div>
         );
     }
-});
+}
 
 ReactDOM.render(
     <Playground />,

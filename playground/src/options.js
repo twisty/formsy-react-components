@@ -1,17 +1,14 @@
-'use strict';
+import React from 'react';
+import Formsy from 'formsy-react';
+import FRC from 'formsy-react-components';
 
-var React = require('react');
-var Formsy = require('formsy-react');
-var FRC = require('formsy-react-components');
+const {Checkbox, RadioGroup, ParentContextMixin} = FRC;
 
-var Checkbox = FRC.Checkbox;
-var RadioGroup = FRC.RadioGroup;
+const Options = React.createClass({
 
-var PlaygroundOptions = React.createClass({
+    mixins: [ParentContextMixin],
 
-    mixins: [FRC.ParentContextMixin],
-
-    render: function() {
+    render() {
         return (
             <div className="well">
                 <Formsy.Form className={this.getLayoutClassName()}>
@@ -47,4 +44,4 @@ var PlaygroundOptions = React.createClass({
     }
 });
 
-module.exports = PlaygroundOptions;
+module.exports = Options;

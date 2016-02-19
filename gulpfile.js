@@ -63,16 +63,16 @@ gulp.task('vendor', function() {
     }
     bundler
         .bundle()
-        .pipe(source('vendor-bundle.js'))
-        .pipe(gulp.dest('playground'));
+        .pipe(source('vendor.js'))
+        .pipe(gulp.dest('playground/dist'));
 });
 
 gulp.task('playground', function() {
     browserifyTask({
         development: !production,
-        bundle: 'app-bundle.js',
-        src: './playground/app.js',
-        dest: './playground'
+        bundle: 'app.js',
+        src: 'playground/src/app.js',
+        dest: 'playground/dist'
     });
 });
 

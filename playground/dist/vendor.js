@@ -521,7 +521,7 @@ module.exports=function(t){return Object.keys(t).reduce(function(e,n){var r=n.ma
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 },{"./Decorator.js":39,"./HOC.js":40,"./Mixin.js":41,"./utils.js":42,"./validationRules.js":43,"form-data-to-object":27,"react":"react"}],"react-dom":[function(require,module,exports){
 "use strict";module.exports=require("react/lib/ReactDOM");
+
 },{"react/lib/ReactDOM":78}],"react":[function(require,module,exports){
 "use strict";module.exports=require("./lib/React");
-
 },{"./lib/React":67}]},{},[]);
