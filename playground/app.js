@@ -118,7 +118,11 @@ var Playground = React.createClass({
                             autoComplete="off"
                             placeholder="This is an email input."
                             help="This email field should not autocomplete."
-                            required="isEmail"
+                            validations="isEmail"
+                            validationErrors={{
+                                isEmail: 'This doesn’t look like a valid email address.'
+                            }}
+                            required
                         />
                         <Input
                             {...sharedProps}
