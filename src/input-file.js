@@ -6,7 +6,6 @@ var React = require('react');
 var Formsy = require('formsy-react');
 var ComponentMixin = require('./mixins/component');
 var Row = require('./row');
-var Icon = require('./icon');
 
 var File = React.createClass({
 
@@ -33,20 +32,12 @@ var File = React.createClass({
             return element;
         }
 
-        var warningIcon = null;
-        if (this.showErrors()) {
-            warningIcon = (
-                <Icon symbol="remove" className="form-control-feedback" />
-            );
-        }
-
         return (
             <Row
                 {...this.getRowProperties()}
                 htmlFor={this.getId()}
             >
                 {element}
-                {warningIcon}
                 {this.renderHelp()}
                 {this.renderErrorMessage()}
             </Row>
