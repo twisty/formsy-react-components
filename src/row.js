@@ -45,7 +45,8 @@ var Row = React.createClass({
 
     renderLabel: function() {
 
-        if (this.props.layout === 'elementOnly') {
+        if (this.props.layout === 'elementOnly'
+            || !this.props.label) {
             return '';
         }
 
@@ -110,6 +111,10 @@ var Row = React.createClass({
                     {this.props.children}
                 </div>
             );
+        }
+
+        if (!this.props.label) {
+            return element;
         }
 
         cssClasses.row.push(this.props.rowClassName);
