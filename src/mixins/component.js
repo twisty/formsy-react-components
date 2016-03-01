@@ -129,7 +129,7 @@ module.exports = {
 
     renderHelp: function() {
         if (!this.props.help) {
-            return '';
+            return null;
         }
         return (
             <span className="help-block">{this.props.help}</span>
@@ -138,7 +138,7 @@ module.exports = {
 
     renderErrorMessage: function() {
         if (!this.showErrors()) {
-            return '';
+            return null;
         }
         var errorMessages = this.getErrorMessages() || [];
         return errorMessages.map((message, key) => {
