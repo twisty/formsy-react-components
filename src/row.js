@@ -113,6 +113,10 @@ var Row = React.createClass({
             );
         }
 
+        if (!this.props.label) {
+            return element;
+        }
+
         cssClasses.row.push(this.props.rowClassName);
         return (
             <div className={classNames(cssClasses.row)}>
