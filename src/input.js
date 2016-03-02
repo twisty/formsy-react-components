@@ -6,7 +6,6 @@ var React = require('react');
 var Formsy = require('formsy-react');
 var ComponentMixin = require('./mixins/component');
 var Row = require('./row');
-var Icon = require('./icon');
 
 var Input = React.createClass({
 
@@ -95,7 +94,10 @@ var Input = React.createClass({
     },
 
     renderElement: function() {
-        var className = 'form-control';
+        var className = 'form-control'
+        if (this.showErrors()) {
+            className = 'form-control-danger form-control'
+        }
         if (['range'].indexOf(this.props.type) !== -1) {
             className = null;
         }
