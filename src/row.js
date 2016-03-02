@@ -33,7 +33,7 @@ var Row = React.createClass({
 
     getDefaultProps: function() {
         return {
-            label: '',
+            label: false,
             rowClassName: '',
             labelClassName: '',
             elementWrapperClassName: '',
