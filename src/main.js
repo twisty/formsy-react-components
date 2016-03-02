@@ -3,7 +3,6 @@
 module.exports = {
     Checkbox: require('./checkbox'),
     CheckboxGroup: require('./checkbox-group'),
-    Icon: require('./icon'),
     Input: require('./input'),
     File: require('./input-file'),
     RadioGroup: require('./radio-group'),
