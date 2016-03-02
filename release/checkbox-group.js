@@ -12,6 +12,7 @@ var Row = require('./row');
 var CheckboxGroup = React.createClass({
     displayName: 'CheckboxGroup',
 
+
     mixins: [Formsy.Mixin, ComponentMixin],
 
     propTypes: {

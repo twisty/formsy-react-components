@@ -12,6 +12,7 @@ var Row = require('./row');
 var Checkbox = React.createClass({
     displayName: 'Checkbox',
 
+
     mixins: [Formsy.Mixin, ComponentMixin],
 
     getDefaultProps: function getDefaultProps() {

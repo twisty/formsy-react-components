@@ -12,6 +12,7 @@ var Row = require('./row');
 var Select = React.createClass({
     displayName: 'Select',
 
+
     mixins: [Formsy.Mixin, ComponentMixin],
 
     changeValue: function changeValue(event) {

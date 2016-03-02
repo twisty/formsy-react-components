@@ -13,6 +13,7 @@ var Icon = require('./icon');
 var File = React.createClass({
     displayName: 'File',
 
+
     mixins: [Formsy.Mixin, ComponentMixin],
 
     getInitialState: function getInitialState() {
