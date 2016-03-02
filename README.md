@@ -1,4 +1,4 @@
-# formsy-react-components
+# formsy-react-components (Bootstrap v4)
 
 [![Dependency status](https://david-dm.org/twisty/formsy-react-components.svg)](https://david-dm.org/twisty/formsy-react-components)
 [![devDependency status](https://david-dm.org/twisty/formsy-react-components/dev-status.svg)](https://david-dm.org/twisty/formsy-react-components#info=devDependencies)
