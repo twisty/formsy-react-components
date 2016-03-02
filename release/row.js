@@ -39,7 +39,7 @@ var Row = React.createClass({
         }
 
         var labelClassNames = [];
-        labelClassNames.push('control-label');
+        labelClassNames.push('form-control-label');
 
         if (this.props.layout === 'horizontal') {
             labelClassNames.push('col-sm-3');
@@ -58,13 +58,14 @@ var Row = React.createClass({
                     this.props.required ? ' *' : null
                 )
             );
+        } else if (this.props.label) {
+            return React.createElement(
+                'label',
+                { className: classNames(labelClassNames), htmlFor: this.props.htmlFor },
+                this.props.label,
+                this.props.required ? ' *' : null
+            );
         }
-        return React.createElement(
-            'label',
-            { className: classNames(labelClassNames), htmlFor: this.props.htmlFor },
-            this.props.label,
-            this.props.required ? ' *' : null
-        );
     },
 
     render: function render() {
@@ -83,7 +84,7 @@ var Row = React.createClass({
         };
 
         if (this.props.hasErrors) {
-            cssClasses.row.push('has-error');
+            cssClasses.row.push('has-danger');
             cssClasses.row.push('has-feedback');
         }
 

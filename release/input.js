@@ -8,7 +8,6 @@ var React = require('react');
 var Formsy = require('formsy-react');
 var ComponentMixin = require('./mixins/component');
 var Row = require('./row');
-var Icon = require('./icon');
 
 var Input = React.createClass({
     displayName: 'Input',
@@ -54,18 +53,12 @@ var Input = React.createClass({
             return element;
         }
 
-        var warningIcon = '';
-        if (this.showErrors()) {
-            warningIcon = React.createElement(Icon, { symbol: 'remove', className: 'form-control-feedback' });
-        }
-
         return React.createElement(
             Row,
             _extends({}, this.getRowProperties(), {
                 htmlFor: this.getId()
             }),
             element,
-            warningIcon,
             this.renderHelp(),
             this.renderErrorMessage()
         );
@@ -73,6 +66,10 @@ var Input = React.createClass({
 
     renderElement: function renderElement() {
         var className = 'form-control';
+        if (this.showErrors()) {
+            className = 'form-control-danger form-control';
+        }
+
         if (['range'].indexOf(this.props.type) !== -1) {
             className = null;
         }
