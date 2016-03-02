@@ -5,6 +5,7 @@ var React = require('react');
 var Icon = React.createClass({
     displayName: 'Icon',
 
+
     requiredProps: {
         symbol: React.PropTypes.string.isRequired,
         className: React.PropTypes.string

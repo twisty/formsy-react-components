@@ -12,6 +12,7 @@ var Row = require('./row');
 var Input = React.createClass({
     displayName: 'Input',
 
+
     mixins: [Formsy.Mixin, ComponentMixin],
 
     propTypes: {
