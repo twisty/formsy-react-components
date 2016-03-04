@@ -58,6 +58,10 @@ var Input = React.createClass({
         this.props.onChange(this.props.name, value);
     },
 
+    changeValueOnBlur: function(event) {
+        this.props.onBlur(this.props.name, this.getValue);
+    },
+
     render: function() {
         var element = this.renderElement();
 
@@ -102,7 +106,7 @@ var Input = React.createClass({
                 label={null}
                 value={this.getValue()}
                 onChange={this.changeValue}
-                onBlur={this.changeValue}
+                onBlur={this.changeValueOnBlur}
                 disabled={this.isFormDisabled() || this.props.disabled}
             />
         );
