@@ -40,7 +40,7 @@ var Input = React.createClass({
     },
 
     changeValueOnBlur: function changeValueOnBlur(event) {
-        this.props.onBlur(this.props.name, this.getValue);
+        this.props.onBlur(this.props.name, this.getValue());
     },
 
     render: function render() {

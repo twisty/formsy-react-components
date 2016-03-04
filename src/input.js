@@ -59,7 +59,7 @@ var Input = React.createClass({
     },
 
     changeValueOnBlur: function(event) {
-        this.props.onBlur(this.props.name, this.getValue);
+        this.props.onBlur(this.props.name, this.getValue());
     },
 
     render: function() {
