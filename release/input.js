@@ -81,6 +81,7 @@ var Input = React.createClass({
             label: null,
             value: this.getValue(),
             onChange: this.changeValue,
+            onBlur: this.changeValue,
             disabled: this.isFormDisabled() || this.props.disabled
         }));
     },
