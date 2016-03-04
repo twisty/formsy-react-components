@@ -33,7 +33,7 @@ var Row = React.createClass({
 
     getDefaultProps: function() {
         return {
-            label: '',
+            label: false,
             rowClassName: '',
             labelClassName: '',
             elementWrapperClassName: '',
@@ -50,7 +50,7 @@ var Row = React.createClass({
         }
 
         var labelClassNames = [];
-        labelClassNames.push('control-label');
+        labelClassNames.push('form-control-label');
 
         if (this.props.layout === 'horizontal') {
             labelClassNames.push('col-sm-3');
@@ -67,13 +67,14 @@ var Row = React.createClass({
                     </strong>
                 </div>
             );
+        } else if (this.props.label) {
+            return (
+                <label className={classNames(labelClassNames)} htmlFor={this.props.htmlFor}>
+                    {this.props.label}
+                    {this.props.required ? ' *' : null}
+                </label>
+            );
         }
-        return (
-            <label className={classNames(labelClassNames)} htmlFor={this.props.htmlFor}>
-                {this.props.label}
-                {this.props.required ? ' *' : null}
-            </label>
-        );
     },
 
     render: function() {
@@ -92,7 +93,7 @@ var Row = React.createClass({
         };
 
         if (this.props.hasErrors) {
-            cssClasses.row.push('has-error');
+            cssClasses.row.push('has-danger');
             cssClasses.row.push('has-feedback');
         }
 

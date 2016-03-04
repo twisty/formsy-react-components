@@ -105,7 +105,7 @@ module.exports = {
         }
         return React.createElement(
             'span',
-            { className: 'help-block' },
+            { className: 'text-help' },
             this.props.help
         );
     },
@@ -118,7 +118,7 @@ module.exports = {
         return errorMessages.map(function (message, key) {
             return React.createElement(
                 'span',
-                { key: key, className: 'help-block validation-message' },
+                { key: key, className: 'text-help validation-message' },
                 message
             );
         });
