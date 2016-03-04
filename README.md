@@ -6,7 +6,7 @@
 
 This package provides a selection of components that render form elements for use within a [formsy-react](https://github.com/christianalfoni/formsy-react) form.
 
-By default, elements are wrapped with the required tags to be included in a [Bootstrap form](hhttp://v4-alpha.getbootstrap.com/components/forms/). This includes a `<label>`, [help text](http://v4-alpha.getbootstrap.com/components/forms/#help-text), and some [validation styling](http://v4-alpha.getbootstrap.com/components/forms/#validation) tied to formsy’s validation state and validation messages.
+By default, elements are wrapped with the required tags to be included in a [Bootstrap form](http://v4-alpha.getbootstrap.com/components/forms/). This includes a `<label>`, [help text](http://v4-alpha.getbootstrap.com/components/forms/#help-text), and some [validation styling](http://v4-alpha.getbootstrap.com/components/forms/#validation) tied to formsy’s validation state and validation messages.
 
 ## Documentation
 
