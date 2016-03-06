@@ -8,10 +8,10 @@ var React = require('react');
 var Formsy = require('formsy-react');
 var ComponentMixin = require('./mixins/component');
 var Row = require('./row');
-var Icon = require('./icon');
 
 var File = React.createClass({
     displayName: 'File',
+
 
     mixins: [Formsy.Mixin, ComponentMixin],
 
@@ -36,18 +36,12 @@ var File = React.createClass({
             return element;
         }
 
-        var warningIcon = '';
-        if (this.showErrors()) {
-            warningIcon = React.createElement(Icon, { symbol: 'remove', className: 'form-control-feedback' });
-        }
-
         return React.createElement(
             Row,
             _extends({}, this.getRowProperties(), {
                 htmlFor: this.getId()
             }),
             element,
-            warningIcon,
             this.renderHelp(),
             this.renderErrorMessage()
         );
