@@ -45,6 +45,10 @@ var Row = React.createClass({
             labelClassNames.push('col-sm-3');
         }
 
+        if (this.props.hasErrors) {
+            labelClassNames.row.push('form-control-label');
+        }
+
         labelClassNames.push(this.props.labelClassName);
 
         if (this.props.fakeLabel) {
