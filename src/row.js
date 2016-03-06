@@ -50,7 +50,6 @@ var Row = React.createClass({
         }
 
         var labelClassNames = [];
-        labelClassNames.push('form-control-label');
 
         if (this.props.layout === 'horizontal') {
             labelClassNames.push('col-sm-3');
