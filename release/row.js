@@ -46,7 +46,7 @@ var Row = React.createClass({
         }
 
         if (this.props.hasErrors) {
-            labelClassNames.row.push('form-control-label');
+            labelClassNames.push('form-control-label');
         }
 
         labelClassNames.push(this.props.labelClassName);
