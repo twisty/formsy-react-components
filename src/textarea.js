@@ -29,6 +29,10 @@ var Textarea = React.createClass({
         this.props.onChange(this.props.name, value);
     },
 
+    changeValueOnBlur: function(event) {
+        this.props.onBlur(this.props.name, this.getValue());
+    },
+
     renderElement: function() {
         return (
             <textarea
@@ -37,6 +41,7 @@ var Textarea = React.createClass({
                 id={this.getId()}
                 value={this.getValue()}
                 onChange={this.changeValue}
+                onBlur={this.changeValueOnBlur}
                 disabled={this.isFormDisabled() || this.props.disabled}
             ></textarea>
         );
