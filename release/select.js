@@ -60,6 +60,7 @@ var Select = React.createClass({
         return React.createElement(
             'select',
             _extends({
+                ref: 'element',
                 className: 'form-control'
             }, this.props, {
                 id: this.getId(),

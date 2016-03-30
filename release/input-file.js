@@ -54,7 +54,9 @@ var File = React.createClass({
     },
 
     renderElement: function renderElement() {
-        return React.createElement('input', _extends({}, this.props, {
+        return React.createElement('input', _extends({
+            ref: 'element'
+        }, this.props, {
             id: this.getId(),
             type: 'file',
             label: null,

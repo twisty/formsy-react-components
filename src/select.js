@@ -55,6 +55,7 @@ var Select = React.createClass({
         });
         return (
             <select
+                ref="element"
                 className="form-control"
                 {...this.props}
                 id={this.getId()}

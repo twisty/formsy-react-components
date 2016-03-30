@@ -56,6 +56,7 @@ var File = React.createClass({
     renderElement: function() {
         return (
             <input
+                ref="element"
                 {...this.props}
                 id={this.getId()}
                 type="file"

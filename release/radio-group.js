@@ -45,6 +45,7 @@ var RadioGroup = React.createClass({
                     'label',
                     { className: 'radio-inline', key: key },
                     React.createElement('input', {
+                        ref: 'element-' + key,
                         checked: checked,
                         type: 'radio',
                         value: radio.value,
@@ -62,6 +63,7 @@ var RadioGroup = React.createClass({
                     'label',
                     null,
                     React.createElement('input', {
+                        ref: 'element-' + key,
                         checked: checked,
                         type: 'radio',
                         value: radio.value,

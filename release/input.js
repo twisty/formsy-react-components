@@ -77,6 +77,7 @@ var Input = React.createClass({
             className = null;
         }
         return React.createElement('input', _extends({
+            ref: 'element',
             className: className
         }, this.props, {
             id: this.getId(),
