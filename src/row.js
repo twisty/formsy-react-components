@@ -43,6 +43,15 @@ var Row = React.createClass({
         };
     },
 
+    renderRequiredSymbol: function() {
+        if (this.props.required === false) {
+            return '';
+        };
+        return (
+            <span className="required"> *</span>
+        );
+    },
+
     renderLabel: function() {
 
         if (this.props.layout === 'elementOnly') {
@@ -63,15 +72,16 @@ var Row = React.createClass({
                 <div className={classNames(labelClassNames)}>
                     <strong>
                         {this.props.label}
-                        {this.props.required ? ' *' : null}
+                        {this.renderRequiredSymbol()}
                     </strong>
                 </div>
             );
         }
+
         return (
             <label className={classNames(labelClassNames)} htmlFor={this.props.htmlFor}>
                 {this.props.label}
-                {this.props.required ? ' *' : null}
+                {this.renderRequiredSymbol()}
             </label>
         );
     },
