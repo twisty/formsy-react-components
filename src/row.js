@@ -69,7 +69,10 @@ var Row = React.createClass({
 
         if (this.props.fakeLabel) {
             return (
-                <div className={classNames(labelClassNames)}>
+                <div
+                    className={classNames(labelClassNames)}
+                    data-required={this.props.required}
+                >
                     <strong>
                         {this.props.label}
                         {this.renderRequiredSymbol()}
@@ -79,7 +82,11 @@ var Row = React.createClass({
         }
 
         return (
-            <label className={classNames(labelClassNames)} htmlFor={this.props.htmlFor}>
+            <label
+                className={classNames(labelClassNames)}
+                data-required={this.props.required}
+                htmlFor={this.props.htmlFor}
+            >
                 {this.props.label}
                 {this.renderRequiredSymbol()}
             </label>
