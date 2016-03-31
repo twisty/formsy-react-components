@@ -38,7 +38,7 @@ var Row = React.createClass({
         };
         return React.createElement(
             'span',
-            { className: 'required' },
+            { className: 'required-symbol' },
             ' *'
         );
     },
@@ -61,7 +61,10 @@ var Row = React.createClass({
         if (this.props.fakeLabel) {
             return React.createElement(
                 'div',
-                { className: classNames(labelClassNames) },
+                {
+                    className: classNames(labelClassNames),
+                    'data-required': this.props.required
+                },
                 React.createElement(
                     'strong',
                     null,
@@ -73,7 +76,11 @@ var Row = React.createClass({
 
         return React.createElement(
             'label',
-            { className: classNames(labelClassNames), htmlFor: this.props.htmlFor },
+            {
+                className: classNames(labelClassNames),
+                'data-required': this.props.required,
+                htmlFor: this.props.htmlFor
+            },
             this.props.label,
             this.renderRequiredSymbol()
         );
