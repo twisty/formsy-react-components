@@ -48,7 +48,7 @@ var Row = React.createClass({
             return null;
         };
         return (
-            <span className="required"> *</span>
+            <span className="required-symbol"> *</span>
         );
     },
 
