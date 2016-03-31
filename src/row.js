@@ -45,7 +45,7 @@ var Row = React.createClass({
 
     renderRequiredSymbol: function() {
         if (this.props.required === false) {
-            return '';
+            return null;
         };
         return (
             <span className="required"> *</span>
@@ -55,7 +55,7 @@ var Row = React.createClass({
     renderLabel: function() {
 
         if (this.props.layout === 'elementOnly') {
-            return '';
+            return null;
         }
 
         var labelClassNames = [];
