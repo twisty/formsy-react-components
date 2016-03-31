@@ -1,24 +1,22 @@
 'use strict';
 
-var React = require('react');
+var _react = require('react');
 
-var Icon = React.createClass({
-    displayName: 'Icon',
+var _react2 = _interopRequireDefault(_react);
 
-    requiredProps: {
-        symbol: React.PropTypes.string.isRequired,
-        className: React.PropTypes.string
-    },
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-    defaultProps: {
-        className: ''
-    },
+var Icon = function Icon(props) {
+    var classNames = ['glyphicon', 'glyphicon-' + props.symbol];
+    if (props.className) {
+        classNames.push(props.className);
+    };
+    return _react2.default.createElement('span', { className: classNames.join(' '), 'aria-hidden': 'true' });
+};
 
-    render: function render() {
-        var className = 'glyphicon glyphicon-' + this.props.symbol + ' ' + this.props.className;
-        return React.createElement('span', { className: className, 'aria-hidden': 'true' });
-    }
-
-});
+Icon.propTypes = {
+    symbol: _react.PropTypes.string.isRequired,
+    className: _react.PropTypes.string
+};
 
 module.exports = Icon;

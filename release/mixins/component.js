@@ -101,7 +101,7 @@ module.exports = {
 
     renderHelp: function renderHelp() {
         if (!this.props.help) {
-            return '';
+            return null;
         }
         return React.createElement(
             'span',
@@ -112,7 +112,7 @@ module.exports = {
 
     renderErrorMessage: function renderErrorMessage() {
         if (!this.showErrors()) {
-            return '';
+            return null;
         }
         var errorMessages = this.getErrorMessages() || [];
         return errorMessages.map(function (message, key) {
