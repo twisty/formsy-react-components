@@ -39,6 +39,7 @@ var CheckboxGroup = React.createClass({
 
     renderElement: function renderElement() {
         var _this = this;
+
         var controls = this.props.options.map(function (checkbox, key) {
             var checked = _this.getValue().indexOf(checkbox.value) !== -1;
             var disabled = _this.isFormDisabled() || checkbox.disabled || _this.props.disabled;

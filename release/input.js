@@ -54,7 +54,7 @@ var Input = React.createClass({
             return element;
         }
 
-        var warningIcon = '';
+        var warningIcon = null;
         if (this.showErrors()) {
             warningIcon = React.createElement(Icon, { symbol: 'remove', className: 'form-control-feedback' });
         }
