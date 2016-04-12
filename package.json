@@ -23,6 +23,13 @@
   "bugs": {
     "url": "https://github.com/twisty/formsy-react-components/issues"
   },
+  "jest": {
+    "unmockedModulePathPatterns": [
+      "<rootDir>/node_modules/react",
+      "<rootDir>/node_modules/react-dom",
+      "<rootDir>/node_modules/react-addons-test-utils"
+    ]
+  },
   "peerDependencies": {
     "formsy-react": ">=0.17.0 <1"
   },
