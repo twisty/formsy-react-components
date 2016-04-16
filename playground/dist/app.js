@@ -49,6 +49,10 @@ var MyForm = _react2.default.createClass({
 
     mixins: [_formsyReactComponents2.default.ParentContextMixin],
 
+    propTypes: {
+        children: _react2.default.PropTypes.node
+    },
+
     render: function render() {
         return _react2.default.createElement(
             _formsyReact2.default.Form,
@@ -72,39 +76,31 @@ var Playground = function (_React$Component) {
 
         var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Playground).call(this, props));
 
+        _this.resetForm = function () {
+            // This is nasty
+            var formsy = _this.refs.myform.refs.formsy;
+            formsy.reset();
+        };
+
+        _this.submitForm = function (data) {
+            console.log(data);
+        };
+
+        _this.changeOption = function (name, value) {
+            var newState = {};
+            newState[name] = value;
+            _this.setState(newState);
+        };
+
         _this.state = {
             layout: 'horizontal',
             validatePristine: false,
             disabled: false
         };
-
-        // Bind this
-        _this.changeOption = _this.changeOption.bind(_this);
-        _this.submitForm = _this.submitForm.bind(_this);
-        _this.resetForm = _this.resetForm.bind(_this);
         return _this;
     }
 
     _createClass(Playground, [{
-        key: 'resetForm',
-        value: function resetForm() {
-            // This is nasty
-            var formsy = this.refs.myform.refs.formsy;
-            formsy.reset();
-        }
-    }, {
-        key: 'submitForm',
-        value: function submitForm(data) {
-            console.log(this, data);
-        }
-    }, {
-        key: 'changeOption',
-        value: function changeOption(name, value) {
-            var newState = {};
-            newState[name] = value;
-            this.setState(newState);
-        }
-    }, {
         key: 'render',
         value: function render() {
 
