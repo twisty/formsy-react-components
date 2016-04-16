@@ -4,11 +4,15 @@ import Formsy from 'formsy-react';
 import FRC from 'formsy-react-components';
 import Options from './options';
 
-const {Checkbox, CheckboxGroup, Input, RadioGroup, Row, Select, File, Textarea} = FRC;
+const { Checkbox, CheckboxGroup, Input, RadioGroup, Row, Select, File, Textarea } = FRC;
 
 const MyForm = React.createClass({
 
     mixins: [FRC.ParentContextMixin],
+
+    propTypes: {
+        children: React.PropTypes.node
+    },
 
     render() {
         return (
@@ -35,24 +39,19 @@ class Playground extends React.Component {
             validatePristine: false,
             disabled: false
         };
-
-        // Bind this
-        this.changeOption = this.changeOption.bind(this);
-        this.submitForm = this.submitForm.bind(this);
-        this.resetForm = this.resetForm.bind(this);
     }
 
-    resetForm() {
+    resetForm = () => {
         // This is nasty
         const formsy = this.refs.myform.refs.formsy;
         formsy.reset();
     }
 
-    submitForm(data) {
-        console.log(this, data);
+    submitForm = (data) => {
+        console.log(data);
     }
 
-    changeOption(name, value) {
+    changeOption = (name, value) => {
         var newState = {};
         newState[name] = value;
         this.setState(newState);
