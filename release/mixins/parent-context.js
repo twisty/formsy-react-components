@@ -1,15 +1,19 @@
 'use strict';
 
-var React = require('react');
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
 
-module.exports = {
+var _react = require('react');
+
+var ParentContextMixin = {
 
     childContextTypes: {
-        layout: React.PropTypes.string.isRequired,
-        validatePristine: React.PropTypes.bool.isRequired,
-        rowClassName: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.array, React.PropTypes.object]),
-        labelClassName: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.array, React.PropTypes.object]),
-        elementWrapperClassName: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.array, React.PropTypes.object])
+        layout: _react.PropTypes.string.isRequired,
+        validatePristine: _react.PropTypes.bool.isRequired,
+        rowClassName: _react.PropTypes.oneOfType([_react.PropTypes.string, _react.PropTypes.array, _react.PropTypes.object]),
+        labelClassName: _react.PropTypes.oneOfType([_react.PropTypes.string, _react.PropTypes.array, _react.PropTypes.object]),
+        elementWrapperClassName: _react.PropTypes.oneOfType([_react.PropTypes.string, _react.PropTypes.array, _react.PropTypes.object])
     },
 
     getChildContext: function getChildContext() {
@@ -27,3 +31,5 @@ module.exports = {
     }
 
 };
+
+exports.default = ParentContextMixin;

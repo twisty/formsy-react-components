@@ -5,7 +5,10 @@
   "scripts": {
     "test": "jest --coverage --noHighlight --verbose",
     "lint": "eslint src",
-    "release": "NODE_ENV=production gulp release"
+    "release": "NODE_ENV=production babel src -d release --ignore __tests__",
+    "dev": "babel src --watch -d release --source-maps --ignore __tests__",
+    "examples": "webpack-dev-server --config examples/webpack.config --port 3000 --content-base examples",
+    "gh-pages": "NODE_ENV=production webpack -p --config examples/webpack.config"
   },
   "main": "./release/main.js",
   "repository": {
@@ -25,6 +28,7 @@
   },
   "jest": {
     "unmockedModulePathPatterns": [
+      "<rootDir>/node_modules/formsy-react",
       "<rootDir>/node_modules/react",
       "<rootDir>/node_modules/react-dom",
       "<rootDir>/node_modules/react-addons-test-utils"
@@ -35,23 +39,27 @@
     "react": "^0.14.0 || ^15.0.0"
   },
   "dependencies": {
-    "classnames": "^2.1.3"
+    "classnames": "^2.2.4"
   },
   "devDependencies": {
-    "babel-eslint": "^6.0.2",
-    "babel-jest": "^11.0.1",
+    "babel-cli": "^6.7.7",
+    "babel-core": "^6.7.7",
+    "babel-eslint": "^6.0.4",
+    "babel-jest": "^11.0.2",
+    "babel-loader": "^6.2.4",
     "babel-plugin-transform-react-display-name": "^6.0.14",
     "babel-polyfill": "^6.7.4",
     "babel-preset-es2015": "^6.0.12",
     "babel-preset-react": "^6.0.12",
+    "babel-preset-stage-0": "^6.5.0",
     "eslint": "^2.8.0",
-    "eslint-plugin-react": "^4.2.3",
-    "formsy-react": "^0.17.0",
-    "gulp": "^3.9.0",
-    "gulp-babel": "^6.0.0",
-    "jest-cli": "^11.0.1",
-    "react": "^0.14.0",
-    "react-addons-test-utils": "^0.14.0",
-    "react-dom": "^0.14.0"
+    "eslint-plugin-react": "^5.0.1",
+    "formsy-react": "^0.18.0",
+    "jest-cli": "^11.0.2",
+    "react": "^15.0.1",
+    "react-addons-test-utils": "^15.0.1",
+    "react-dom": "^15.0.1",
+    "webpack": "^1.12.14",
+    "webpack-dev-server": "^1.14.1"
   }
 }

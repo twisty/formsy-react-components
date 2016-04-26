@@ -7,7 +7,7 @@ const Icon = (props) => {
     ];
     if (props.className) {
         classNames.push(props.className);
-    };
+    }
     return (
         <span className={classNames.join(' ')} aria-hidden="true"></span>
     );
@@ -18,4 +18,4 @@ Icon.propTypes = {
     className: PropTypes.string
 };
 
-module.exports = Icon;
+export default Icon;

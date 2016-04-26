@@ -1,27 +1,32 @@
 /* globals require, jest, describe, it, xit, expect, beforeEach */
 
-'use strict';
-
 jest.autoMockOff();
+jest.unmock('../../main');
 
-var React = require('react');
-var ReactDOM = require('react-dom');
-var Formsy = require('formsy-react');
-var Input = require('../input.js');
-var TestUtils = require('react-addons-test-utils');
+import React from 'react';
+import ReactDOM from 'react-dom';
+import TestUtils from 'react-addons-test-utils';
+import Formsy from 'formsy-react';
+
+// Imports are hoisted, so using require to prevent this from getting mocked.
+// should try npm install babel-plugin-jest-unmock
+// https://github.com/facebook/jest/issues/796
+
+//import Input from '../input';
+const { Input } = require('../../main').default;
 
 describe('Input', function() {
 
-    var changeHandler;
-    var component;
-    var labelDOMNode;
-    var inputDOMNode;
+    let changeHandler;
+    let component;
+    let labelDOMNode;
+    let inputDOMNode;
 
-    beforeEach(function() {
+    beforeEach(() => {
 
         changeHandler = jest.genMockFunction();
 
-        var form = TestUtils.renderIntoDocument(
+        const form = TestUtils.renderIntoDocument(
             <Formsy.Form>
                 <Input
                     name="myTestInput"
@@ -43,7 +48,7 @@ describe('Input', function() {
 
     });
 
-    it('renders a label', function() {
+    it('renders a label', () => {
         expect(labelDOMNode.textContent).toEqual('My Label');
     });
 

@@ -1,23 +1,46 @@
 'use strict';
 
-var React = require('react');
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
 
-module.exports = {
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// These are the types of props that we can convert to a HTML 'class' attribute value.
+// See: https://github.com/JedWatson/classnames
+var classNameType = _react.PropTypes.oneOfType([_react.PropTypes.string, _react.PropTypes.array, _react.PropTypes.object]);
+
+// Component Mixin
+// ---------------
+//
+// This mixin provides shared code for our form components.
+//
+// We also use this to merge props set using the ParentContextMixin, so that
+// commonly used props can be set on an enclosing component.
+//
+// This allows us to set these properties 'as a whole' for each component in the
+// the form, while retaining the ability to override the prop on a per-component
+// basis.
+var ComponentMixin = {
 
     propTypes: {
-        layout: React.PropTypes.string,
-        validatePristine: React.PropTypes.bool,
-        rowClassName: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.array, React.PropTypes.object]),
-        labelClassName: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.array, React.PropTypes.object]),
-        elementWrapperClassName: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.array, React.PropTypes.object])
+        elementWrapperClassName: classNameType,
+        labelClassName: classNameType,
+        layout: _react.PropTypes.string,
+        rowClassName: classNameType,
+        validatePristine: _react.PropTypes.bool
     },
 
     contextTypes: {
-        layout: React.PropTypes.string,
-        validatePristine: React.PropTypes.bool,
-        rowClassName: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.array, React.PropTypes.object]),
-        labelClassName: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.array, React.PropTypes.object]),
-        elementWrapperClassName: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.array, React.PropTypes.object])
+        layout: _react.PropTypes.string,
+        validatePristine: _react.PropTypes.bool,
+        rowClassName: classNameType,
+        labelClassName: classNameType,
+        elementWrapperClassName: classNameType
     },
 
     getDefaultProps: function getDefaultProps() {
@@ -30,16 +53,8 @@ module.exports = {
         };
     },
 
-    /**
-     * Accessors for "special" properties.
-     *
-     * The following methods are used to merge master default properties that
-     * are optionally set on the parent form. This to to allow customising these
-     * properties 'as a whole' for the form, while retaining the ability to
-     * override the properties on a component basis.
-     *
-     * Also see the parent-context mixin.
-     */
+    // The following methods are used to merge master default properties that
+    // are optionally set on the parent form using the ParentContextMixin.
     getLayout: function getLayout() {
         var defaultProperty = this.context.layout || 'horizontal';
         return this.props.layout ? this.props.layout : defaultProperty;
@@ -74,23 +89,14 @@ module.exports = {
         };
     },
 
-    hashString: function hashString(string) {
-        var hash = 0;
-        for (var i = 0; i < string.length; i++) {
-            hash = (hash << 5) - hash + string.charCodeAt(i) & 0xFFFFFFFF;
-        }
-        return hash;
-    },
-
-    /**
-     * getId
-     *
-     * The ID is used as an attribute on the form control, and is used to allow
-     * associating the label element with the form control.
-     *
-     * If we don't explicitly pass an `id` prop, we generate one based on the
-     * `name` and `label` properties.
-     */
+    // getId
+    // -----
+    //
+    // The ID is used as an attribute on the form control, and is used to allow
+    // associating the label element with the form control.
+    //
+    // If we don't explicitly pass an `id` prop, we generate one based on the
+    // `name` and `label` properties.
     getId: function getId() {
         if (this.props.id) {
             return this.props.id;
@@ -99,24 +105,33 @@ module.exports = {
         return ['frc', this.props.name.split('[').join('_').replace(']', ''), this.hashString(JSON.stringify(label))].join('-');
     },
 
+    hashString: function hashString(string) {
+        var hash = 0;
+        for (var i = 0; i < string.length; i++) {
+            hash = (hash << 5) - hash + string.charCodeAt(i) & 0xFFFFFFFF;
+        }
+        return hash;
+    },
+
     renderHelp: function renderHelp() {
         if (!this.props.help) {
             return null;
         }
-        return React.createElement(
+        return _react2.default.createElement(
             'span',
             { className: 'help-block' },
             this.props.help
         );
     },
 
+    // TODO this ought to be called renderErrorMessages.
     renderErrorMessage: function renderErrorMessage() {
         if (!this.showErrors()) {
             return null;
         }
         var errorMessages = this.getErrorMessages() || [];
         return errorMessages.map(function (message, key) {
-            return React.createElement(
+            return _react2.default.createElement(
                 'span',
                 { key: key, className: 'help-block validation-message' },
                 message
@@ -124,6 +139,8 @@ module.exports = {
         });
     },
 
+    // Determine whether to show errors, or not.
+    // TODO this ought to be called shouldShowErrors?
     showErrors: function showErrors() {
         if (this.isPristine() === true) {
             if (this.getValidatePristine() === false) {
@@ -133,3 +150,5 @@ module.exports = {
         return this.isValid() === false;
     }
 };
+
+exports.default = ComponentMixin;

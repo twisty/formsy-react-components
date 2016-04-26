@@ -1,15 +1,17 @@
 {
   "parser": "babel-eslint",
-  "parserOptions": {
-    "ecmaFeatures": {
-      "jsx": true
-    }
-  },
-  "env": {
-    "node": true
-  },
   "plugins": [
     "react"
   ],
-  "extends": ["eslint:recommended", "plugin:react/recommended"]
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended"
+  ],
+  "rules": {
+    "react/sort-prop-types": [2, {
+      "callbacksLast": true,
+      "requiredFirst": true
+    }],
+    "react/prefer-stateless-function": "warn"
+  }
 }

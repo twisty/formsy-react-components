@@ -1,40 +1,21 @@
-/*jshint node:true */
+import React, { Component, PropTypes } from 'react';
+import { commonProps } from './utils';
+import ErrorMessages from './error-messages';
+import Help from './help';
+import Row from './row';
 
-'use strict';
+class RadioGroup extends Component {
 
-var React = require('react');
-var Formsy = require('formsy-react');
-var ComponentMixin = require('./mixins/component');
-var Row = require('./row');
-
-var RadioGroup = React.createClass({
-
-    mixins: [Formsy.Mixin, ComponentMixin],
-
-    propTypes: {
-        name: React.PropTypes.string.isRequired,
-        type: React.PropTypes.oneOf(['inline', 'stacked']),
-        options: React.PropTypes.array.isRequired
-    },
-
-    getDefaultProps: function() {
-        return {
-            type: 'stacked',
-            label: '',
-            help: null
-        };
-    },
-
-    changeRadio: function(event) {
+    handleChange = (event) => {
         var value = event.currentTarget.value;
-        this.setValue(value);
+        this.props.onSetValue(value);
         this.props.onChange(this.props.name, value);
-    },
+    }
 
-    renderElement: function() {
+    renderElement = () => {
         const controls = this.props.options.map((radio, key) => {
-            let checked = (this.getValue() === radio.value);
-            let disabled = this.isFormDisabled() || radio.disabled || this.props.disabled;
+            let checked = (this.props.value === radio.value);
+            let disabled = radio.disabled || this.props.disabled;
             let className = 'radio' + (disabled ? ' disabled' : '');
             if (this.props.type === 'inline') {
                 return (
@@ -44,7 +25,7 @@ var RadioGroup = React.createClass({
                             checked={checked}
                             type="radio"
                             value={radio.value}
-                            onChange={this.changeRadio}
+                            onChange={this.handleChange}
                             disabled={disabled}
                         /> {radio.label}
                     </label>
@@ -58,7 +39,7 @@ var RadioGroup = React.createClass({
                             checked={checked}
                             type="radio"
                             value={radio.value}
-                            onChange={this.changeRadio}
+                            onChange={this.handleChange}
                             disabled={disabled}
                         /> {radio.label}
                     </label>
@@ -66,27 +47,41 @@ var RadioGroup = React.createClass({
             );
         });
         return controls;
-    },
+    }
 
-    render: function() {
+    render() {
 
-        if (this.getLayout() === 'elementOnly') {
+        let element = this.renderElement();
+
+        if (this.props.layout === 'elementOnly') {
             return (
-                <div>{this.renderElement()}</div>
+                <div>{element}</div>
             );
         }
 
         return (
             <Row
-                {...this.getRowProperties()}
+                {...this.props}
                 fakeLabel={true}
             >
-                {this.renderElement()}
-                {this.renderHelp()}
-                {this.renderErrorMessage()}
+                {element}
+                {this.props.help ? <Help help={this.props.help} /> : null}
+                {this.props.showErrors ? <ErrorMessages messages={this.props.errorMessages} /> : null}
             </Row>
         );
     }
-});
+}
 
-module.exports = RadioGroup;
+RadioGroup.propTypes = {
+    ...commonProps,
+    options: PropTypes.array.isRequired,
+    type: PropTypes.oneOf(['inline', 'stacked'])
+};
+
+RadioGroup.defaultProps = {
+    type: 'stacked',
+    label: '',
+    help: null
+};
+
+export default RadioGroup;

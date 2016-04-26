@@ -1,26 +1,24 @@
-'use strict';
+import { PropTypes } from 'react';
 
-var React = require('react');
-
-module.exports = {
+const ParentContextMixin = {
 
     childContextTypes: {
-        layout: React.PropTypes.string.isRequired,
-        validatePristine: React.PropTypes.bool.isRequired,
-        rowClassName: React.PropTypes.oneOfType([
-            React.PropTypes.string,
-            React.PropTypes.array,
-            React.PropTypes.object
+        layout: PropTypes.string.isRequired,
+        validatePristine: PropTypes.bool.isRequired,
+        rowClassName: PropTypes.oneOfType([
+            PropTypes.string,
+            PropTypes.array,
+            PropTypes.object
         ]),
-        labelClassName: React.PropTypes.oneOfType([
-            React.PropTypes.string,
-            React.PropTypes.array,
-            React.PropTypes.object
+        labelClassName: PropTypes.oneOfType([
+            PropTypes.string,
+            PropTypes.array,
+            PropTypes.object
         ]),
-        elementWrapperClassName: React.PropTypes.oneOfType([
-            React.PropTypes.string,
-            React.PropTypes.array,
-            React.PropTypes.object
+        elementWrapperClassName: PropTypes.oneOfType([
+            PropTypes.string,
+            PropTypes.array,
+            PropTypes.object
         ])
     },
 
@@ -39,3 +37,5 @@ module.exports = {
     }
 
 };
+
+export default ParentContextMixin;
