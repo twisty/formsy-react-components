@@ -7,7 +7,7 @@ import Row from './row';
 class RadioGroup extends Component {
 
     handleChange = (event) => {
-        var value = event.currentTarget.value;
+        let value = event.currentTarget.value;
         this.props.onSetValue(value);
         this.props.onChange(this.props.name, value);
     }

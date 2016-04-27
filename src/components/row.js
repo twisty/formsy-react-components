@@ -20,7 +20,7 @@ class Row extends Component
             return null;
         }
 
-        var labelClassNames = [];
+        let labelClassNames = [];
         labelClassNames.push('control-label');
 
         if (layout === 'horizontal') {
@@ -69,7 +69,7 @@ class Row extends Component
             );
         }
 
-        var cssClasses = {
+        let cssClasses = {
             row: ['form-group'],
             elementWrapper: []
         };

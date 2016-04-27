@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { HOC as FormsyHOC } from 'formsy-react';
 import { styleClassname } from '../components/prop-types';
-console.log(styleClassname);
 
 // Component HOC
 // -------------
