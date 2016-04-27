@@ -1,84 +1,81 @@
-/* globals require, jest, describe, it, xit, expect, beforeEach */
+/* globals jest, describe, it, xit, expect, beforeEach */
 
-jest.autoMockOff();
-jest.unmock('../../main');
+jest.disableAutomock();
+jest.unmock('../input');
 
 import React from 'react';
-import ReactDOM from 'react-dom';
-import TestUtils from 'react-addons-test-utils';
-import Formsy from 'formsy-react';
-
-// Imports are hoisted, so using require to prevent this from getting mocked.
-// should try npm install babel-plugin-jest-unmock
-// https://github.com/facebook/jest/issues/796
-
-//import Input from '../input';
-const { Input } = require('../../main').default;
+import { mount } from 'enzyme';
+import Input from '../input';
 
 describe('Input', function() {
 
-    let changeHandler;
-    let component;
-    let labelDOMNode;
-    let inputDOMNode;
+    let handleChange;
+    let handleSetValue;
+    let wrapper;
+    let inputNode;
+    let labelNode;
 
     beforeEach(() => {
 
-        changeHandler = jest.genMockFunction();
+        handleChange = jest.genMockFunction();
+        handleSetValue = jest.genMockFunction();
 
-        const form = TestUtils.renderIntoDocument(
-            <Formsy.Form>
-                <Input
-                    name="myTestInput"
-                    label="My Label"
-                    value="Initial value"
-                    onChange={changeHandler}
-                />
-            </Formsy.Form>
+        wrapper = mount(
+            <Input
+                name="myTestInput"
+                id="myId"
+                label="My Label"
+                value="Initial value"
+                onChange={handleChange}
+                onSetValue={handleSetValue}
+            />
         );
 
-        // Get the React Component.
-        component = TestUtils.findRenderedComponentWithType(form, Input);
-
-        // Get the label DOM node.
-        labelDOMNode = ReactDOM.findDOMNode(component).querySelector('label');
-
-        // Get the input DOM node.
-        inputDOMNode = ReactDOM.findDOMNode(component).querySelector('input');
+        inputNode = wrapper.find('input');
+        labelNode = wrapper.find('label');
 
     });
 
     it('renders a label', () => {
-        expect(labelDOMNode.textContent).toEqual('My Label');
+        expect(wrapper.find('label').length).toBe(1);
+        expect(wrapper.find('label').text()).toEqual('My Label');
     });
 
-    it('displays an initial value', function() {
-        expect(inputDOMNode.value).toEqual('Initial value');
+    it('displays an initial value', () => {
+        expect(wrapper.find('input').prop('value')).toEqual('Initial value');
     });
 
-    it('sets a value when changed', function() {
+    // Test that this is a controlled component.
+    it('updates the input value from props', () => {
+        wrapper.setProps({value: 'Changed value'});
+        expect(inputNode.prop('value')).toEqual('Changed value');
+    });
+
+    it('executes a props.onChange callback', () => {
         /*
          * The following doesn't work, we have to set the node's value directly:
          *
-         * TestUtils.Simulate.change(node, {target: {value: 'Changed value'}});
+         * TestUtils.Simulate.change(node, {currentTarget: {value: 'Changed value'}});
          *
          * @see https://github.com/facebook/react/issues/3151#issuecomment-74943529
          */
-        inputDOMNode.value = 'Changed value';
-        TestUtils.Simulate.change(inputDOMNode);
-        expect(inputDOMNode.value).toEqual('Changed value');
-        expect(component.getValue()).toEqual('Changed value');
+        expect(handleChange).not.toBeCalled();
+        let event = {currentTarget: {value: 'Changed value'}};
+        inputNode.simulate('change', event);
+        expect(handleChange).toBeCalled();
+        //expect(inputNode.prop('value')).toEqual('Changed value');
     });
 
-    it('executes a props.onChange callback', function() {
-        expect(changeHandler).not.toBeCalled();
-        inputDOMNode.value = 'Changed value';
-        TestUtils.Simulate.change(inputDOMNode);
-        expect(changeHandler).toBeCalled();
+    it('executes a props.onSetValue callback', () => {
+        expect(handleSetValue).not.toBeCalled();
+        inputNode.simulate('change');
+        expect(handleSetValue).toBeCalled();
     });
 
-    it('generates a default id attribute', function() {
-        expect(inputDOMNode.getAttribute('id')).toEqual(labelDOMNode.getAttribute('for'));
+    it('renders a htmlFor attribute on the label', () => {
+        let id = inputNode.prop('id');
+        let htmlFor = labelNode.prop('htmlFor');
+        expect(htmlFor).toEqual(id);
     });
 
     xit('displays placeholder text', function() {});
