@@ -5,7 +5,9 @@
   "scripts": {
     "test": "jest --coverage --noHighlight --verbose",
     "lint": "eslint src",
-    "release": "NODE_ENV=production babel src -d release --ignore __tests__",
+    "release": "npm run release-clean & npm run release-transpile",
+    "release-clean": "rm -f release/**/*.map",
+    "release-transpile": "NODE_ENV=production babel src -d release --ignore __tests__",
     "dev": "babel src --watch -d release --source-maps --ignore __tests__",
     "examples": "webpack-dev-server --config examples/webpack.config --port 3000 --content-base examples",
     "gh-pages": "NODE_ENV=production webpack -p --config examples/webpack.config"
