@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { commonProps } from './utils';
+import { commonProps } from './prop-types';
 import ErrorMessages from './error-messages';
 import Help from './help';
 import Icon from './icon';

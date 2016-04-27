@@ -1,13 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { HOC as FormsyHOC } from 'formsy-react';
-
-// These are the types of props that we can convert to a HTML 'class' attribute value.
-// See: https://github.com/JedWatson/classnames
-const classNameType = PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.array,
-    PropTypes.object
-]);
+import { styleClassname } from '../components/prop-types';
+console.log(styleClassname);
 
 // Component HOC
 // -------------
@@ -23,43 +17,48 @@ const classNameType = PropTypes.oneOfType([
 export var FormsyReactComponent = (ComposedComponent) => {
     class ComponentHOC extends Component {
 
-        // The following methods are used to merge master default properties that
-        // are optionally set on the parent form using the ParentContextMixin.
-        getLayout = () => {
-            var defaultProperty = this.context.layout || 'horizontal';
-            return this.props.layout ? this.props.layout : defaultProperty;
+        // Use the following value for layout:
+        // 1. layout prop (if supplied)
+        // 2. [else] layout context (if defined)
+        // 3. [else] 'horizontal' (default value)
+        mergeLayoutContext = () => {
+            return this.props.layout || (this.context.layout || 'horizontal');
         }
 
-        getValidatePristine = () => {
-            var defaultProperty = this.context.validatePristine || false;
-            return this.props.validatePristine ? this.props.validatePristine : defaultProperty;
+        // Use the following value for layout:
+        // 1. validatePristine prop (if supplied)
+        // 2. [else] validatePristine context (if defined)
+        // 3. [else] false (default value)
+        mergeValidatePristineContext = () => {
+            if (typeof this.props.validatePristine === 'boolean') {
+                return this.props.validatePristine;
+            }
+            return this.context.validatePristine || false;
         }
 
-        getRowClassName = () => {
-            return [this.context.rowClassName, this.props.rowClassName];
+        // Combine the parent context value with the component prop value.
+        // This is used for CSS classnames, where the value is passed to `JedWatson/classnames`.
+        combineContextWithProp(key) {
+            return [this.context[key], this.props[key]];
         }
 
-        getLabelClassName = () => {
-            return [this.context.labelClassName, this.props.labelClassName];
-        }
-
-        getElementWrapperClassName = () => {
-            return [this.context.elementWrapperClassName, this.props.elementWrapperClassName];
+        mergeElementWrapperClassNameContext = () => {
+            return this.mergeContext('elementWrapperClassName');
         }
 
         getComponentProps = () => {
             return {
-                disabled: (this.props.isFormDisabled() || this.props.disabled),
-                elementWrapperClassName: this.getElementWrapperClassName(),
-                errorMessages: this.props.getErrorMessages(),
-                id: this.getId(),
-                labelClassName: this.getLabelClassName(),
-                layout: this.getLayout(),
-                required: this.props.isRequired(),
-                rowClassName: this.getRowClassName(),
-                showErrors: this.shouldShowErrors(),
-                value: this.props.getValue(),
-                onSetValue: this.props.setValue
+                disabled:                this.props.isFormDisabled() || this.props.disabled,
+                elementWrapperClassName: this.combineContextWithProp('elementWrapperClassName'),
+                errorMessages:           this.props.getErrorMessages(),
+                id:                      this.getId(),
+                labelClassName:          this.combineContextWithProp('labelClassName'),
+                layout:                  this.mergeLayoutContext(),
+                required:                this.props.isRequired(),
+                rowClassName:            this.combineContextWithProp('rowClassName'),
+                showErrors:              this.shouldShowErrors(),
+                value:                   this.props.getValue(),
+                onSetValue:              this.props.setValue
             };
         }
 
@@ -94,7 +93,7 @@ export var FormsyReactComponent = (ComposedComponent) => {
         // Determine whether to show errors, or not.
         shouldShowErrors = () => {
             if (this.props.isPristine() === true) {
-                if (this.getValidatePristine() === false) {
+                if (this.mergeValidatePristineContext() === false) {
                     return false;
                 }
             }
@@ -131,16 +130,16 @@ export var FormsyReactComponent = (ComposedComponent) => {
 
         name: PropTypes.string.isRequired,
         disabled: PropTypes.bool,
-        elementWrapperClassName: classNameType,
+        elementWrapperClassName: styleClassname,
 
         // Not used here, but composed components expect this to be a string.
         help: PropTypes.string,
 
         id: PropTypes.string,
         label: PropTypes.string,
-        labelClassName: classNameType,
+        labelClassName: styleClassname,
         layout: PropTypes.string,
-        rowClassName: classNameType,
+        rowClassName: styleClassname,
         validatePristine: PropTypes.bool,
 
         // TODO: Not sure having these here this is a good idea.
@@ -154,21 +153,23 @@ export var FormsyReactComponent = (ComposedComponent) => {
     ComponentHOC.contextTypes = {
         layout: PropTypes.string,
         validatePristine: PropTypes.bool,
-        rowClassName: classNameType,
-        labelClassName: classNameType,
-        elementWrapperClassName: classNameType
+        rowClassName: styleClassname,
+        labelClassName: styleClassname,
+        elementWrapperClassName: styleClassname
     };
 
-    // TODO: Should probably add default props for:
+    // TODO: Should we add default props for the following?:
     // * elementWrapperClassName
     // * labelClassName
     // * rowClassName
-    // * layout
+
+    // The following props get their default values by first looking for props in the parent context.
+    // * layout (See mergeLayoutContext, defaults to 'horizontal')
+    // * validatePristine: (See mergeValidatePristineContext, defaults to 'false'),
     ComponentHOC.defaultProps = {
         disabled: false,
         id: '',
         label: '',
-        validatePristine: false,
         onBlur: function() {},
         onChange: function() {},
         onFocus: function() {}
