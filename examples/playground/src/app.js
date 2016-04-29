@@ -93,7 +93,7 @@ class Playground extends React.Component {
         ];
 
         return (
-            <div className="row">
+            <div>
                 <div className="page-header">
                     <h1>Form Playground</h1>
                 </div>

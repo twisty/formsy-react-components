@@ -15,7 +15,7 @@ class Input extends Component {
 
     renderElement = function() {
         let className = 'form-control';
-        if (['range'].indexOf(this.props.type) !== -1) {
+        if (['hidden', 'range'].indexOf(this.props.type) !== -1) {
             className = null;
         }
         return (
