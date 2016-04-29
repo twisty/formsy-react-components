@@ -1,17 +1,6 @@
 import React, { PropTypes } from 'react';
 import classNames from 'classnames/dedupe';
-
-const RequiredSymbol = (props) => {
-    if (props.required === false) {
-        return null;
-    }
-    return (
-        <span className="required-symbol"> *</span>
-    );
-}
-RequiredSymbol.propTypes = {
-    required: PropTypes.bool.isRequired
-};
+import RequiredSymbol from './required-symbol';
 
 const Label = (props) => {
 
@@ -26,9 +15,6 @@ const Label = (props) => {
         (layout === 'horizontal') ? 'col-sm-3' : '',
         labelClassName
     ]);
-
-    // TODO: Check for label content here and required symbol
-    // If no content return null.
 
     if (fakeLabel) {
         return (
