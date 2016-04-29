@@ -4,7 +4,7 @@ import Label from './label';
 
 const Row = (props) => {
 
-    const { elementWrapperClassName, rowClassName, showErrors, layout } = props;
+    const { elementWrapperClassName, required, rowClassName, showErrors, layout, label } = props;
 
     let element = props.children;
 
@@ -26,10 +26,18 @@ const Row = (props) => {
         cssClasses.row.push('has-feedback');
     }
 
+    // We should render the label if there is label text defined, or if the
+    // component is required (so a required symbol is displayed in the label tag)
+    const shouldRenderLabel = ((label !== null) || required);
+
     if (layout === 'horizontal') {
 
         // Horizontal layout needs a 'row' class for Bootstrap 4
         cssClasses.row.push('row');
+
+        if (!shouldRenderLabel) {
+            cssClasses.elementWrapper.push('col-sm-offset-3');
+        }
 
         cssClasses.elementWrapper.push('col-sm-9');
         cssClasses.elementWrapper.push(elementWrapperClassName);
@@ -42,9 +50,10 @@ const Row = (props) => {
     }
 
     cssClasses.row.push(rowClassName);
+
     return (
         <div className={classNames(cssClasses.row)}>
-            <Label {...props} />
+            {(shouldRenderLabel) ? <Label {...props} /> : null}
             {element}
         </div>
     );
@@ -76,7 +85,7 @@ Row.propTypes = {
 };
 
 Row.defaultProps = {
-    label: '',
+    label: null,
     rowClassName: '',
     labelClassName: '',
     elementWrapperClassName: '',
