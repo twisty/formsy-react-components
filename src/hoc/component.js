@@ -41,10 +41,6 @@ export var FormsyReactComponent = (ComposedComponent) => {
             return [this.context[key], this.props[key]];
         }
 
-        mergeElementWrapperClassNameContext = () => {
-            return this.mergeContext('elementWrapperClassName');
-        }
-
         getComponentProps = () => {
             return {
                 disabled:                this.props.isFormDisabled() || this.props.disabled,
@@ -102,10 +98,37 @@ export var FormsyReactComponent = (ComposedComponent) => {
         // We pass through all props, but some are overwritten with `massaged`
         // versions to give our components what they expect.
         render() {
+
+            let props = {
+                ...this.props,
+                ...this.getComponentProps()
+            };
+
+            // Formsy HOC props we don't use.
+            delete props.getErrorMessage;
+            delete props.getErrorMessages;
+            delete props.getValue;
+            delete props.hasValue;
+            delete props.isFormDisabled;
+            delete props.isFormSubmitted;
+            delete props.isPristine;
+            delete props.isRequired;
+            delete props.isValid;
+            delete props.isValidValue;
+            delete props.resetValue;
+            delete props.setValidations;
+            delete props.setValue;
+            delete props.showError;
+            delete props.showRequired;
+
+            // Formsy props we don't use
+            delete props.validationError;
+            delete props.validationErrors;
+            delete props.validations;
+
             return (
                 <ComposedComponent
-                    {...this.props}
-                    {...this.getComponentProps()}
+                    {...props}
                 />
             );
         }
@@ -139,6 +162,11 @@ export var FormsyReactComponent = (ComposedComponent) => {
         labelClassName: styleClassname,
         layout: PropTypes.string,
         rowClassName: styleClassname,
+
+        // Whether to show validation errors on pristine (untouched) components.
+        // Note: this doesn't stop the validation from running, it's just a flag
+        // to determine whether the error messages should be shown on components
+        // in their 'pristine' state.
         validatePristine: PropTypes.bool,
 
         // TODO: Not sure having these here this is a good idea.
