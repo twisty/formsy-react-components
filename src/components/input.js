@@ -1,8 +1,10 @@
 import React, { Component, PropTypes } from 'react';
-import { commonProps } from './prop-types';
+import { commonProps, commonDefaults } from './prop-types';
 import ErrorMessages from './error-messages';
 import Help from './help';
 import Icon from './icon';
+import InputControl from './controls/input';
+import InputGroup from './input-group';
 import Row from './row';
 
 class Input extends Component {
@@ -13,75 +15,29 @@ class Input extends Component {
         this.props.onChange(this.props.name, value);
     }
 
-    renderElement = function() {
-        let className = 'form-control';
-        if (['hidden', 'range'].indexOf(this.props.type) !== -1) {
-            className = null;
-        }
-        return (
-            <input
-                ref="element"
-                className={className}
+    render = function() {
+
+        let control = (
+            <InputControl
                 {...this.props}
-                id={this.props.id}
-                label={null}
-                value={this.props.value}
                 onChange={this.handleChange}
             />
         );
-    }
-
-    // TODO: split input group rendering out into another component
-    renderInputGroup = function(element) {
-        return (
-            <div className="input-group">
-                {this.renderAddon(this.props.addonBefore)}
-                {this.renderButton(this.props.buttonBefore)}
-                {element}
-                {this.renderAddon(this.props.addonAfter)}
-                {this.renderButton(this.props.buttonAfter)}
-            </div>
-        );
-    }
-
-    renderAddon = function(addon) {
-        if (!addon) {
-            return false;
-        }
-        return (
-            <span className="input-group-addon">{addon}</span>
-        );
-    }
-
-    renderButton = function(button) {
-        if (!button) {
-            return false;
-        }
-        return (
-            <span className="input-group-btn">{button}</span>
-        );
-    }
-
-    render = function() {
-        let element = this.renderElement();
 
         if (this.props.type === 'hidden') {
-            return element;
+            return control;
         }
 
         if (this.props.addonBefore || this.props.addonAfter || this.props.buttonBefore || this.props.buttonAfter) {
-            element = this.renderInputGroup(element);
+            control = (
+                <InputGroup {...this.props}>
+                    {control}
+                </InputGroup>
+            );
         }
 
         if (this.props.layout === 'elementOnly') {
-            return element;
-        }
-
-        let warningIcon = null;
-        if (this.props.showErrors) {
-            warningIcon = (
-                <Icon symbol="remove" className="form-control-feedback" />
-            );
+            return control;
         }
 
         return (
@@ -89,8 +45,8 @@ class Input extends Component {
                 {...this.props}
                 htmlFor={this.props.id}
             >
-                {element}
-                {warningIcon}
+                {control}
+                {this.props.showErrors ? <Icon symbol="remove" className="form-control-feedback" /> : null}
                 {this.props.help ? <Help help={this.props.help} /> : null}
                 {this.props.showErrors ? <ErrorMessages messages={this.props.errorMessages} /> : null}
             </Row>
@@ -133,6 +89,7 @@ Input.propTypes = {
 };
 
 Input.defaultProps = {
+    ...commonDefaults,
     type: 'text',
     value: '',
     addonBefore: null,
