@@ -1,54 +1,39 @@
-import React, { Component } from 'react';
-import { commonProps } from './prop-types';
+import React, { Component, PropTypes } from 'react';
+import { commonProps, commonDefaults } from './prop-types';
 import ErrorMessages from './error-messages';
 import Help from './help';
 import Row from './row';
 import Icon from './icon';
+import FileControl from './controls/input-file';
 
 class File extends Component {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            fileList: []
-        }
-    }
-
     handleChange = (event) => {
-        var target = event.currentTarget;
-        var value = target.value;
-        this.setState({fileList: target.files});
+        let target = event.currentTarget;
+        let value = target.value;
         this.props.onSetValue(target.files);
-        this.props.onChange(this.props.name, target.files, value);
-    }
 
-    renderElement = () => {
-        return (
-            <input
-                ref="element"
-                {...this.props}
-                id={this.props.id}
-                type="file"
-                label={null}
-                onChange={this.handleChange}
-                disabled={this.props.disabled}
-            />
-        );
+        // We're passing an additional argument to the onChange handler here,
+        // the 'value' of the field. This value is actually pretty useless,
+        // and we're only including here for completeness.
+        // An example value would be: "C:\fakepath\name-of-file.txt". Note that
+        // if we select multiple files, it only returns a "fakepath" string for
+        // the first file.
+        // A web search for "C:\fakepath\" gives more details.
+        this.props.onChange(this.props.name, target.files, value);
     }
 
     render() {
 
-        let element = this.renderElement();
+        let control = (
+            <FileControl
+                {...this.props}
+                onChange={this.handleChange}
+            />
+        );
 
         if (this.props.layout === 'elementOnly') {
-            return element;
-        }
-
-        let warningIcon = null;
-        if (this.props.showErrors) {
-            warningIcon = (
-                <Icon symbol="remove" className="form-control-feedback" />
-            );
+            return control;
         }
 
         return (
@@ -56,8 +41,8 @@ class File extends Component {
                 {...this.props}
                 htmlFor={this.props.id}
             >
-                {element}
-                {warningIcon}
+                {control}
+                {this.props.showErrors ? <Icon symbol="remove" className="form-control-feedback" /> : null}
                 {this.props.help ? <Help help={this.props.help} /> : null}
                 {this.props.showErrors ? <ErrorMessages messages={this.props.errorMessages} /> : null}
             </Row>
@@ -67,7 +52,13 @@ class File extends Component {
 }
 
 File.propTypes = {
-    ...commonProps
+    ...commonProps,
+    value: PropTypes.object
+};
+
+File.defaultProps = {
+    ...commonDefaults,
+    value: {}
 };
 
 export default File;

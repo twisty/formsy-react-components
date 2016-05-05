@@ -3,6 +3,7 @@ import { commonProps } from './prop-types';
 import ErrorMessages from './error-messages';
 import Help from './help';
 import Row from './row';
+import SelectControl from './controls/select';
 
 class Select extends Component {
 
@@ -24,33 +25,17 @@ class Select extends Component {
         this.props.onChange(this.props.name, value);
     }
 
-    renderElement = () => {
-        var optionNodes = this.props.options.map(function(item, index) {
-            return (
-                <option key={index} {...item} label={null}>{item.label}</option>
-            );
-        });
-        return (
-            <select
-                ref="element"
-                className="form-control"
-                {...this.props}
-                id={this.props.id}
-                value={this.props.value}
-                onChange={this.handleChange}
-                disabled={this.props.disabled}
-            >
-                {optionNodes}
-            </select>
-        );
-    }
-
     render() {
 
-        let element = this.renderElement();
+        let control = (
+            <SelectControl
+                {...this.props}
+                onChange={this.handleChange}
+            />
+        )
 
         if (this.props.layout === 'elementOnly') {
-            return element;
+            return control;
         }
 
         return (
@@ -58,7 +43,7 @@ class Select extends Component {
                 {...this.props}
                 htmlFor={this.props.id}
             >
-                {element}
+                {control}
                 {this.props.help ? <Help help={this.props.help} /> : null}
                 {this.props.showErrors ? <ErrorMessages messages={this.props.errorMessages} /> : null}
             </Row>
@@ -73,8 +58,12 @@ Select.propTypes = {
             value: PropTypes.string,
             label: PropTypes.string
         })
-    ).isRequired,
+    ),
     multiple: PropTypes.bool
 };
+
+Select.defaultProps = {
+    options: []
+}
 
 export default Select;

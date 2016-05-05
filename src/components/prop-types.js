@@ -11,15 +11,20 @@ export const styleClassname = PropTypes.oneOfType([
     PropTypes.object
 ]);
 
-export const commonComponentProps = {
+export const commonProps = {
+    id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
-    onSetValue: PropTypes.func.isRequired,
     disabled: PropTypes.bool,
     errorMessages: PropTypes.array,
     help: PropTypes.string,
-    id: PropTypes.string,
     label: PropTypes.string,
     layout: PropTypes.oneOf(['horizontal', 'vertical', 'elementOnly']),
     showErrors: PropTypes.bool,
-    onChange: PropTypes.func
+    onChange: PropTypes.func,
+    onSetValue: PropTypes.func
+};
+
+export const commonDefaults = {
+    onSetValue: () => {},
+    onChange: () => {}
 };

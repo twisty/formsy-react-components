@@ -1,8 +1,9 @@
 import React, { Component, PropTypes } from 'react';
-import { commonProps } from './prop-types';
+import { commonProps, commonDefaults } from './prop-types';
 import ErrorMessages from './error-messages';
 import Help from './help';
 import Row from './row';
+import TextareaControl from './controls/textarea';
 
 class Textarea extends Component {
 
@@ -12,23 +13,11 @@ class Textarea extends Component {
         this.props.onChange(this.props.name, value);
     }
 
-    renderElement = () => {
-        return (
-            <textarea
-                ref="element"
-                className="form-control"
-                {...this.props}
-                id={this.props.id}
-                value={this.props.value}
-                onChange={this.handleChange}
-                disabled={this.props.disabled}
-            ></textarea>
-        );
-    }
-
     render() {
 
-        let element = this.renderElement();
+        let element = (
+            <TextareaControl {...this.props} />
+        );
 
         if (this.props.layout === 'elementOnly') {
             return element;
@@ -55,6 +44,7 @@ Textarea.propTypes = {
 };
 
 Textarea.defaultProps = {
+    ...commonDefaults,
     cols: 0, // React doesn't render the cols attribute if it is zero
     rows: 3
 };
