@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { commonProps } from './prop-types';
+import { commonProps, commonDefaults } from './prop-types';
 import ErrorMessages from './error-messages';
 import Help from './help';
 import Row from './row';
@@ -17,14 +17,12 @@ class Checkbox extends Component {
             <div className="checkbox">
                 <label>
                     <input
-                        ref="element"
                         {...this.props}
-                        id={this.id}
                         type="checkbox"
+                        label={undefined}
                         checked={this.props.value === true}
                         onChange={this.handleChange}
-                        disabled={this.props.disabled}
-                    /> {this.props.label}
+                    /> {this.props.valueLabel}
                 </label>
             </div>
         );
@@ -41,8 +39,8 @@ class Checkbox extends Component {
         return (
             <Row
                 {...this.props}
-                label={this.props.rowLabel}
-                htmlFor={this.id}
+                fakeLabel={true}
+                htmlFor={this.props.id}
             >
                 {element}
                 {this.props.help ? <Help help={this.props.help} /> : null}
@@ -52,16 +50,41 @@ class Checkbox extends Component {
     }
 }
 
+/*
+ * TODO Document this API change.
+ *
+ * The expected props for this component have been changed for consistency with
+ * the other components.
+ *
+ * Should warn and depricate this on the master branch.
+ *
+ * if rowLabel and label passed:
+ * - show deprication warning.
+ * - behind the scenes:
+ *   - map 'label' to 'valueLabel'
+ *   - map 'rowLabel' to 'label'
+ *
+ * if valueLabel and label passed:
+ * - no warning, new API being used
+ *
+ * Old was:
+ *
+ * Checkbox.propTypes = {
+ *     ...commonProps,
+ *     rowLabel: PropTypes.string,
+ *     value: PropTypes.bool
+ * };
+ */
 Checkbox.propTypes = {
     ...commonProps,
-    rowLabel: PropTypes.string,
-    value: PropTypes.bool
+    value: PropTypes.bool,
+    valueLabel: PropTypes.string
 };
 
 Checkbox.defaultProps = {
-    label: '',
-    rowLabel: '',
-    value: false
+    ...commonDefaults,
+    value: false,
+    valueLabel: ''
 };
 
 export default Checkbox;
