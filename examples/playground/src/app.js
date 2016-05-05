@@ -192,7 +192,7 @@ class Playground extends React.Component {
                         <File
                             name="file1"
                             label="File picker"
-                            help="Warning: this returns a FileList that will need custom coding to be useful."
+                            help="This returns a HTML5 FileList."
                             multiple
                         />
                     </fieldset>
@@ -234,8 +234,8 @@ class Playground extends React.Component {
                         <Checkbox
                             name="checkbox1"
                             value={true}
-                            label="Check me out"
-                            rowLabel="Checkbox (single)"
+                            label="Checkbox (single)"
+                            valueLabel="Check me out"
                         />
                         <CheckboxGroup
                             name="checkboxGrp1"

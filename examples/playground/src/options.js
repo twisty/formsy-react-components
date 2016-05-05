@@ -35,15 +35,15 @@ const Options = React.createClass({
                     <Checkbox
                         name="validatePristine"
                         value={validatePristineChoice}
-                        label="Yes"
-                        rowLabel="validatePristine"
+                        valueLabel="Yes"
+                        label="validatePristine"
                         onChange={onChangeOption}
                     />
                     <Checkbox
                         name="disabled"
                         value={disabledChoice}
-                        label="Yes"
-                        rowLabel="disabled"
+                        valueLabel="Yes"
+                        label="disabled"
                         onChange={onChangeOption}
                     />
                 </Formsy.Form>
