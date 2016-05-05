@@ -74,13 +74,20 @@ class RadioGroup extends Component {
 
 RadioGroup.propTypes = {
     ...commonProps,
-    options: PropTypes.array.isRequired,
+    options: PropTypes.arrayOf(
+        PropTypes.shape({
+            disabled: PropTypes.bool,
+            value: PropTypes.string,
+            label: PropTypes.string
+        })
+    ),
     type: PropTypes.oneOf(['inline', 'stacked'])
 };
 
 RadioGroup.defaultProps = {
     type: 'stacked',
     label: '',
+    options: [],
     help: null
 };
 

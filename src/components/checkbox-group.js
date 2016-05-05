@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { commonProps } from './prop-types';
+import { commonProps, commonDefaults } from './prop-types';
 import ErrorMessages from './error-messages';
 import Help from './help';
 import Row from './row';
@@ -44,6 +44,7 @@ class CheckboxGroup extends Component {
     render() {
 
         let element = this.renderElement();
+
         if (this.props.layout === 'elementOnly') {
             return (
                 <div>{element}</div>
@@ -65,12 +66,20 @@ class CheckboxGroup extends Component {
 
 CheckboxGroup.propTypes = {
     ...commonProps,
-    options: PropTypes.array.isRequired,
+    options: PropTypes.arrayOf(
+        PropTypes.shape({
+            disabled: PropTypes.bool,
+            value: PropTypes.string,
+            label: PropTypes.string
+        })
+    ),
     value: PropTypes.array
 };
 
 CheckboxGroup.defaultProps = {
+    ...commonDefaults,
     label: '',
+    options: [],
     value: [],
     help: null
 };
