@@ -1,4 +1,4 @@
-/* globals jest, describe, it, xit, expect, beforeEach */
+/* globals jest, describe, it, expect, beforeEach */
 
 jest.disableAutomock();
 jest.unmock('../input');
@@ -6,80 +6,166 @@ jest.unmock('../input');
 import React from 'react';
 import { mount } from 'enzyme';
 import Input from '../input';
+import componentTest from './component';
 
-describe('Input', function() {
+describe('The <Input /> component', () => {
 
-    let handleChange;
-    let handleSetValue;
-    let wrapper;
-    let inputNode;
-    let labelNode;
+    componentTest(Input);
 
-    beforeEach(() => {
+    describe('the initial render of the form control', () => {
 
-        handleChange = jest.genMockFunction();
-        handleSetValue = jest.genMockFunction();
+        it('is `type="text"` by default', () => {
+            let wrapper = mount(
+                <Input
+                    name="myTestInput"
+                />
+            );
+            expect(wrapper.find('input').prop('type')).toEqual('text');
+        });
 
-        wrapper = mount(
-            <Input
-                name="myTestInput"
-                id="myId"
-                label="My Label"
-                value="Initial value"
-                onChange={handleChange}
-                onSetValue={handleSetValue}
-            />
-        );
+        it('has an initial value passed by prop', () => {
+            let wrapper = mount(
+                <Input
+                    name="myTestInput"
+                    value="Initial value"
+                />
+            );
+            expect(wrapper.find('input').prop('value')).toEqual('Initial value');
+        });
 
-        inputNode = wrapper.find('input');
-        labelNode = wrapper.find('label');
+        it('has a placeholder value passed by prop', () => {
+            let wrapper = mount(
+                <Input
+                    name="myTestInput"
+                    value=""
+                    placeholder="My placeholder"
+                />
+            );
+            expect(wrapper.find('input').prop('placeholder')).toEqual('My placeholder');
+        });
 
     });
 
-    it('renders a label', () => {
-        expect(wrapper.find('label').length).toBe(1);
-        expect(wrapper.find('label').text()).toEqual('My Label');
-    });
+    describe('has basic accessibility features', () => {
 
-    it('displays an initial value', () => {
-        expect(wrapper.find('input').prop('value')).toEqual('Initial value');
-    });
+        let wrapper;
 
-    // Test that this is a controlled component.
-    it('updates the input value from props', () => {
-        wrapper.setProps({value: 'Changed value'});
-        expect(inputNode.prop('value')).toEqual('Changed value');
-    });
+        beforeEach(() => {
+            wrapper = mount(
+                <Input
+                    name="myTestInput"
+                    id="myId"
+                    label="My Label"
+                    value="Initial value"
+                />
+            );
+        });
 
-    it('executes a props.onChange callback', () => {
+        it('has an `id` attribute on the form control', () => {
+            expect(wrapper.find('input').prop('id')).toEqual('myId');
+        });
+
+        it('has a matching `htmlFor` attribute on the label', () => {
+            let id = wrapper.find('input').prop('id');
+            let htmlFor = wrapper.find('label').prop('htmlFor');
+            expect(htmlFor).toEqual(id);
+        });
+
+        // http://getbootstrap.com/css/#forms-help-text
+        it('has an `aria-describedby` prop on the form control when help text is present');
+
+        it('has an `aria-invalid="true"` prop on the form control when validation has failed');
+
+        it('has an `aria-required="true"` prop on the form control when validation is required');
+
         /*
-         * The following doesn't work, we have to set the node's value directly:
+         * aria-hidden="true" on status glyphicons
          *
-         * TestUtils.Simulate.change(node, {currentTarget: {value: 'Changed value'}});
+         * add sr-only feedback and aria-describedby in addidition to glyphicons.
          *
-         * @see https://github.com/facebook/react/issues/3151#issuecomment-74943529
+         * <div class="form-group has-success has-feedback">
+         *   <label class="control-label" for="inputSuccess2">Input with success</label>
+         *   <input type="text" class="form-control" id="inputSuccess2" aria-describedby="inputSuccess2Status">
+         *   <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
+         *   <span id="inputSuccess2Status" class="sr-only">(success)</span>
+         * </div>
          */
-        expect(handleChange).not.toBeCalled();
-        let event = {currentTarget: {value: 'Changed value'}};
-        inputNode.simulate('change', event);
-        expect(handleChange).toBeCalled();
-        //expect(inputNode.prop('value')).toEqual('Changed value');
+
     });
 
-    it('executes a props.onSetValue callback', () => {
-        expect(handleSetValue).not.toBeCalled();
-        inputNode.simulate('change');
-        expect(handleSetValue).toBeCalled();
+    describe('Input components do this', () => {
+
+        let handleChange;
+        let handleSetValue;
+        let wrapper;
+        let inputNode;
+
+        beforeEach(() => {
+
+            handleChange = jest.genMockFunction();
+            handleSetValue = jest.genMockFunction();
+
+            wrapper = mount(
+                <Input
+                    name="myTestInput"
+                    id="myId"
+                    label="My Label"
+                    value="Initial value"
+                    onChange={handleChange}
+                    onSetValue={handleSetValue}
+                />
+            );
+
+            inputNode = wrapper.find('input');
+
+        });
+
+        // Test that this is a controlled component.
+        it('updates the input value from props', () => {
+            wrapper.setProps({value: 'Changed value'});
+            expect(inputNode.prop('value')).toEqual('Changed value');
+        });
+
+        it('executes a props.onChange callback', () => {
+            /*
+             * The following doesn't work, we have to set the node's value directly:
+             *
+             * TestUtils.Simulate.change(node, {currentTarget: {value: 'Changed value'}});
+             *
+             * @see https://github.com/facebook/react/issues/3151#issuecomment-74943529
+             */
+            expect(handleChange).not.toBeCalled();
+            let event = {currentTarget: {value: 'Changed value'}};
+            inputNode.simulate('change', event);
+            expect(handleChange).toBeCalled();
+            //expect(inputNode.prop('value')).toEqual('Changed value');
+        });
+
+        it('executes a props.onSetValue callback', () => {
+            expect(handleSetValue).not.toBeCalled();
+            inputNode.simulate('change');
+            expect(handleSetValue).toBeCalled();
+        });
     });
 
-    it('renders a htmlFor attribute on the label', () => {
-        let id = inputNode.prop('id');
-        let htmlFor = labelNode.prop('htmlFor');
-        expect(htmlFor).toEqual(id);
+    describe('includes an <InputGroup /> component when', () => {
+        it('is triggered by an `addonBefore` prop');
+        it('is triggered by an `addonAfter` prop');
+        it('is triggered by an `buttonBefore` prop');
+        it('is triggered by an `buttonAfter` prop');
     });
 
-    xit('displays placeholder text', function() {});
-    xit('displays help text');
-    xit('indicates required content');
-    xit('shows validation feedback');
+    describe('for "hidden" type', () => {
+        it('doesn’t render a label', () => {
+            let wrapper = mount(
+                <Input
+                    name="myTestInput"
+                    type="hidden"
+                    label="My Label"
+                />
+            );
+            expect(wrapper.find('label').length).toBe(0);
+        });
+    });
+
 });
