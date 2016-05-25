@@ -114,7 +114,7 @@ var Playground = function (_React$Component) {
                 className: 'yellow'
             };
             optionY['data-note'] = 'This is a data attribute.';
-            var selectOptions = [{ value: 'a', label: 'Option A' }, { value: 'a', label: 'Option A (again)' }, { value: 'b', label: 'Option B' }, { value: 'c', label: 'Option C' }, { value: 'd', label: 'Option D', disabled: true }, optionY];
+            var selectOptions = [{ value: 'a', label: 'Option A' }, { value: 'a', label: 'Option A (again)' }, { value: 'b', label: 'Option B' }, { value: 'c', label: 'Option C', title: 'This is a title attribute for Option C' }, { value: 'd', label: 'Option D', disabled: true }, optionY];
 
             var singleSelectOptions = selectOptions.slice(0);
             singleSelectOptions.unshift({ value: '', label: 'Please select…' });

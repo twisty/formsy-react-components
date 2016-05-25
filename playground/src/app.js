@@ -81,7 +81,7 @@ class Playground extends React.Component {
             {value: 'a', label: 'Option A'},
             {value: 'a', label: 'Option A (again)'},
             {value: 'b', label: 'Option B'},
-            {value: 'c', label: 'Option C'},
+            {value: 'c', label: 'Option C', title: 'This is a title attribute for Option C'},
             {value: 'd', label: 'Option D', disabled: true},
             optionY
         ];
