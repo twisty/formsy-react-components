@@ -11,5 +11,6 @@ module.exports = {
     Select: require('./select'),
     Textarea: require('./textarea'),
     ComponentMixin: require('./mixins/component'),
-    ParentContextMixin: require('./mixins/parent-context')
+    ParentContextMixin: require('./mixins/parent-context'),
+    Form: require('./form')
 };
