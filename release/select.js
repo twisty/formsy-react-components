@@ -73,6 +73,20 @@ var Select = React.createClass({
                 );
             });
         } else {
+			// For items without groups
+            var itemsWithoutGroup = options.filter(function (c) {
+                return !c.group || c.group == "";
+            })
+
+            itemsWithoutGroup.forEach(function (item, index) {
+                optionNodes.push(React.createElement(
+                        'option',
+                        _extends({ key: (index == 0 ? 1 * -1 : index * -1) }, item, { label: null }),
+                        item.label
+                    ));
+            });
+
+            // For grouped items			
             groups.forEach(function (group, indexGroup) {
                 var allItems = options.filter(function (c) {
                     return c.group == group;

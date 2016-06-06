@@ -67,6 +67,15 @@ var Select = React.createClass({
                 return <option value={item.value} key={index} {...item} label={null}>{item.label}</option>;
             });
         } else {
+			// For items without groups
+            var itemsWithoutGroup = options.filter(function (c) {
+                return !c.group || c.group == "";
+            })
+
+            itemsWithoutGroup.forEach(function (item, index) {
+                optionNodes.push(<option value={item.value} key={(index == 0 ? 1 * -1 : index * -1)} {...item} label={null}>{item.label}</option>);
+            });
+			
             groups.forEach(function (group, indexGroup) {
                 var allItems = options.filter(function (c) {
                     return c.group == group;
