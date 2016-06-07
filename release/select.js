@@ -50,13 +50,65 @@ var Select = React.createClass({
     },
 
     renderElement: function renderElement() {
-        var optionNodes = this.props.options.map(function (item, index) {
-            return React.createElement(
-                'option',
-                _extends({ key: index }, item, { label: null }),
-                item.label
-            );
+		var options = this.props.options;
+        var groups = [];
+
+        this.props.options.map(function (item) {
+            var exists = groups.some(function (it) {
+                return it == item.group;
+            });
+            if (item.group && item.group != "" && !exists) {
+                groups.push(item.group);
+            }
         });
+
+        var optionNodes = [];
+
+        if (groups.length == 0) {
+            optionNodes = options.map(function (item, index) {
+                return React.createElement(
+                    'option',
+                    _extends({ key: index }, item, { label: null }),
+                    item.label
+                );
+            });
+        } else {
+			// For items without groups
+            var itemsWithoutGroup = options.filter(function (c) {
+                return !c.group || c.group == "";
+            })
+
+            itemsWithoutGroup.forEach(function (item, index) {
+                optionNodes.push(React.createElement(
+                        'option',
+                        _extends({ key: (index == 0 ? 1 * -1 : index * -1) }, item, { label: null }),
+                        item.label
+                    ));
+            });
+
+            // For grouped items			
+            groups.forEach(function (group, indexGroup) {
+                var allItems = options.filter(function (c) {
+                    return c.group == group;
+                });
+
+                var itemsJsx = [];
+
+                allItems.forEach(function (item, index) {
+                    itemsJsx.push(React.createElement(
+                        'option',
+                        _extends({ key: index }, item, { label: null }),
+                        item.label
+                    ));
+                });
+
+                optionNodes.push(React.createElement(
+                    'optgroup',
+                    { key: indexGroup, label: group },
+                    itemsJsx
+                ));
+            });
+        }
         return React.createElement(
             'select',
             _extends({
