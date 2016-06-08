@@ -48,46 +48,50 @@ var Select = React.createClass({
     },
 
     renderElement: function() {
-        var options = this.props.options;
-        var groups = [];
 
-        this.props.options.map(function (item) {
-            var exists = groups.some(function (it) {
-                return it == item.group;
-            });
-            if (item.group && item.group != "" && !exists) {
-                groups.push(item.group);
-            }
+        var renderOption = function(item, key) {
+            return (
+                <option key={key} {...item} label={null}>{item.label}</option>
+            )
+        }
+
+        var options = this.props.options;
+
+        var groups = options.filter(function (item) {
+            return item.group;
+        }).map(function (item) {
+            return item.group;
         });
+        // Get the unique items in group.
+        groups = [...new Set(groups)];
 
         var optionNodes = [];
 
         if (groups.length == 0) {
             optionNodes = options.map(function (item, index) {
-                return <option value={item.value} key={index} {...item} label={null}>{item.label}</option>;
+                return renderOption(item, index);
             });
         } else {
-			// For items without groups
-            var itemsWithoutGroup = options.filter(function (c) {
-                return !c.group || c.group == "";
+            // For items without groups.
+            var itemsWithoutGroup = options.filter(function (item) {
+                return !item.group;
             })
 
             itemsWithoutGroup.forEach(function (item, index) {
-                optionNodes.push(<option value={item.value} key={(index == 0 ? 1 * -1 : index * -1)} {...item} label={null}>{item.label}</option>);
+                optionNodes.push(renderOption(item, 'no-group-' + index));
             });
-			
-            groups.forEach(function (group, indexGroup) {
-                var allItems = options.filter(function (c) {
-                    return c.group == group;
+
+            groups.forEach(function (group, groupIndex) {
+
+                var groupItems = options.filter(function (item) {
+                    return item.group === group;
                 });
 
-                var itemsJsx = [];
-
-                allItems.forEach(function (item, index) {
-                    itemsJsx.push(<option value={item.value} key={index} {...item} label={null}>{item.label}</option>);
+                var groupOptionNodes = groupItems.map(function (item, index) {
+                    return renderOption(item, groupIndex + '-' + index);
                 });
 
-                optionNodes.push(<optgroup label={group} key={indexGroup}>{itemsJsx}</optgroup>);
+                optionNodes.push(<optgroup label={group} key={groupIndex}>{groupOptionNodes}</optgroup>);
             });
         }
         return (
