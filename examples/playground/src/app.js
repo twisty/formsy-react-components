@@ -82,9 +82,11 @@ class Playground extends React.Component {
             {value: 'a', label: 'Option A'},
             {value: 'a', label: 'Option A (again)'},
             {value: 'b', label: 'Option B'},
-            {value: 'c', label: 'Option C'},
+            {value: 'c', label: 'Option C', title: 'This is a title attribute for Option C'},
             {value: 'd', label: 'Option D', disabled: true},
-            optionY
+            optionY,
+            {value: 'e1', label: 'Option E-1', group: 'Option group E'},
+            {value: 'e2', label: 'Option E-2', group: 'Option group E'}
         ];
 
         const singleSelectOptions = [
