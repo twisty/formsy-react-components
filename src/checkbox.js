@@ -30,6 +30,7 @@ var Checkbox = React.createClass({
             <div className="checkbox">
                 <label>
                     <input
+                        ref="element"
                         {...this.props}
                         id={this.getId()}
                         type="checkbox"

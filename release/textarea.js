@@ -35,6 +35,7 @@ var Textarea = React.createClass({
 
     renderElement: function renderElement() {
         return React.createElement('textarea', _extends({
+            ref: 'element',
             className: 'form-control'
         }, this.props, {
             id: this.getId(),

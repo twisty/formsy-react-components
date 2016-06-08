@@ -70,11 +70,11 @@ var Input = React.createClass({
         if (this.showErrors()) {
             className = 'form-control-danger form-control';
         }
-
         if (['range'].indexOf(this.props.type) !== -1) {
             className = null;
         }
         return React.createElement('input', _extends({
+            ref: 'element',
             className: className
         }, this.props, {
             id: this.getId(),
