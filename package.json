@@ -31,8 +31,8 @@
     ]
   },
   "peerDependencies": {
-    "formsy-react": ">=0.17.0 <1",
-    "react": "^0.14.0 || ^15.1.0"
+    "formsy-react": "^0.18.0",
+    "react": "^15.1.0"
   },
   "dependencies": {
     "classnames": "^2.1.3"
