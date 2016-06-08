@@ -53,13 +53,14 @@ class Select extends Component {
 
 Select.propTypes = {
     ...commonProps,
+    multiple: PropTypes.bool,
     options: PropTypes.arrayOf(
         PropTypes.shape({
             value: PropTypes.string,
-            label: PropTypes.string
+            label: PropTypes.string,
+            group: PropTypes.string
         })
-    ),
-    multiple: PropTypes.bool
+    )
 };
 
 Select.defaultProps = {
