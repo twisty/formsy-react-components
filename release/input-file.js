@@ -13,6 +13,7 @@ var Icon = require('./icon');
 var File = React.createClass({
     displayName: 'File',
 
+
     mixins: [Formsy.Mixin, ComponentMixin],
 
     getInitialState: function getInitialState() {
@@ -54,8 +55,12 @@ var File = React.createClass({
     },
 
     renderElement: function renderElement() {
+        var _this = this;
+
         return React.createElement('input', _extends({
-            ref: 'element'
+            ref: function ref(c) {
+                return _this.element = c;
+            }
         }, this.props, {
             id: this.getId(),
             type: 'file',

@@ -13,6 +13,7 @@ var Icon = require('./icon');
 var Input = React.createClass({
     displayName: 'Input',
 
+
     mixins: [Formsy.Mixin, ComponentMixin],
 
     propTypes: {
@@ -72,12 +73,16 @@ var Input = React.createClass({
     },
 
     renderElement: function renderElement() {
+        var _this = this;
+
         var className = 'form-control';
         if (['range'].indexOf(this.props.type) !== -1) {
             className = null;
         }
         return React.createElement('input', _extends({
-            ref: 'element',
+            ref: function ref(c) {
+                return _this.element = c;
+            },
             className: className
         }, this.props, {
             id: this.getId(),
