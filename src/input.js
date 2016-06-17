@@ -101,7 +101,7 @@ var Input = React.createClass({
         }
         return (
             <input
-                ref="element"
+                ref={(c) => this.element = c}
                 className={className}
                 {...this.props}
                 id={this.getId()}

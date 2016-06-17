@@ -12,6 +12,7 @@ var Row = require('./row');
 var CheckboxGroup = React.createClass({
     displayName: 'CheckboxGroup',
 
+
     mixins: [Formsy.Mixin, ComponentMixin],
 
     propTypes: {
@@ -28,11 +29,11 @@ var CheckboxGroup = React.createClass({
 
     changeCheckbox: function changeCheckbox() {
         var value = [];
-        this.props.options.forEach((function (option, key) {
-            if (this.refs['element-' + key].checked) {
+        this.props.options.forEach(function (option, key) {
+            if (this['element-' + key].checked) {
                 value.push(option.value);
             }
-        }).bind(this));
+        }.bind(this));
         this.setValue(value);
         this.props.onChange(this.props.name, value);
     },
@@ -50,7 +51,9 @@ var CheckboxGroup = React.createClass({
                     'label',
                     null,
                     React.createElement('input', {
-                        ref: 'element-' + key,
+                        ref: function ref(c) {
+                            return _this['element-' + key] = c;
+                        },
                         checked: checked,
                         type: 'checkbox',
                         value: checkbox.value,

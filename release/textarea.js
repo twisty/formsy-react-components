@@ -12,6 +12,7 @@ var Row = require('./row');
 var Textarea = React.createClass({
     displayName: 'Textarea',
 
+
     mixins: [Formsy.Mixin, ComponentMixin],
 
     propTypes: {
@@ -33,8 +34,12 @@ var Textarea = React.createClass({
     },
 
     renderElement: function renderElement() {
+        var _this = this;
+
         return React.createElement('textarea', _extends({
-            ref: 'element',
+            ref: function ref(c) {
+                return _this.element = c;
+            },
             className: 'form-control'
         }, this.props, {
             id: this.getId(),
