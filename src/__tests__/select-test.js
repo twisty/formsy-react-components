@@ -47,6 +47,5 @@ describe('Select', function() {
 
         // There should be 7 <option>s
         expect(elementDOMNode.getElementsByTagName('option').length).toBe(7);
-        console.log(elementDOMNode.innerHTML);
     });
 });
