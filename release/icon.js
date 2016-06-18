@@ -10,7 +10,7 @@ var Icon = function Icon(props) {
     var classNames = ['glyphicon', 'glyphicon-' + props.symbol];
     if (props.className) {
         classNames.push(props.className);
-    };
+    }
     return _react2.default.createElement('span', { className: classNames.join(' '), 'aria-hidden': 'true' });
 };
 
