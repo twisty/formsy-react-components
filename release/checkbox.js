@@ -36,7 +36,9 @@ var Checkbox = React.createClass({
             React.createElement(
                 'label',
                 null,
-                React.createElement('input', _extends({}, this.props, {
+                React.createElement('input', _extends({
+                    ref: 'element'
+                }, this.props, {
                     id: this.getId(),
                     type: 'checkbox',
                     checked: this.getValue() === true,

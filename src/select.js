@@ -48,13 +48,55 @@ var Select = React.createClass({
     },
 
     renderElement: function() {
-        var optionNodes = this.props.options.map(function(item, index) {
+
+        var renderOption = function(item, key) {
             return (
-                <option key={index} {...item} label={null}>{item.label}</option>
-            );
+                <option key={key} {...item} label={null}>{item.label}</option>
+            )
+        }
+
+        var options = this.props.options;
+
+        var groups = options.filter(function (item) {
+            return item.group;
+        }).map(function (item) {
+            return item.group;
         });
+        // Get the unique items in group.
+        groups = [...new Set(groups)];
+
+        var optionNodes = [];
+
+        if (groups.length == 0) {
+            optionNodes = options.map(function (item, index) {
+                return renderOption(item, index);
+            });
+        } else {
+            // For items without groups.
+            var itemsWithoutGroup = options.filter(function (item) {
+                return !item.group;
+            })
+
+            itemsWithoutGroup.forEach(function (item, index) {
+                optionNodes.push(renderOption(item, 'no-group-' + index));
+            });
+
+            groups.forEach(function (group, groupIndex) {
+
+                var groupItems = options.filter(function (item) {
+                    return item.group === group;
+                });
+
+                var groupOptionNodes = groupItems.map(function (item, index) {
+                    return renderOption(item, groupIndex + '-' + index);
+                });
+
+                optionNodes.push(<optgroup label={group} key={groupIndex}>{groupOptionNodes}</optgroup>);
+            });
+        }
         return (
             <select
+                ref="element"
                 className="form-control"
                 {...this.props}
                 id={this.getId()}
