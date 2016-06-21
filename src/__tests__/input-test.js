@@ -77,7 +77,7 @@ describe('Input', function() {
     });
 
     xit('displays placeholder text', function() {});
-    xit('displays help text');
-    xit('indicates required content');
-    xit('shows validation feedback');
+    xit('displays help text', function() {});
+    xit('indicates required content', function() {});
+    xit('shows validation feedback', function() {});
 });

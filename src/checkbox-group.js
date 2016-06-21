@@ -26,7 +26,7 @@ var CheckboxGroup = React.createClass({
     changeCheckbox: function() {
         var value = [];
         this.props.options.forEach(function(option, key) {
-            if (this.refs[key].checked) {
+            if (this.refs['element-' + key].checked) {
                 value.push(option.value);
             }
 
@@ -36,19 +36,18 @@ var CheckboxGroup = React.createClass({
     },
 
     renderElement: function() {
-        var _this = this;
-        var controls = this.props.options.map(function(checkbox, key) {
-            var checked = (_this.getValue().indexOf(checkbox.value) !== -1);
-            var disabled = _this.isFormDisabled() || checkbox.disabled || _this.props.disabled;
+        const controls = this.props.options.map((checkbox, key) => {
+            let checked = (this.getValue().indexOf(checkbox.value) !== -1);
+            let disabled = this.isFormDisabled() || checkbox.disabled || this.props.disabled;
             return (
                 <div className="checkbox" key={key}>
                     <label>
                         <input
-                            ref={key}
+                            ref={'element-' + key}
                             checked={checked}
                             type="checkbox"
                             value={checkbox.value}
-                            onChange={_this.changeCheckbox}
+                            onChange={this.changeCheckbox}
                             disabled={disabled}
                         /> {checkbox.label}
                     </label>
