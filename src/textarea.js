@@ -6,6 +6,7 @@ var React = require('react');
 var Formsy = require('formsy-react');
 var ComponentMixin = require('./mixins/component');
 var Row = require('./row');
+var propUtilities = require('./prop-utilities');
 
 var Textarea = React.createClass({
 
@@ -34,7 +35,7 @@ var Textarea = React.createClass({
             <textarea
                 ref={(c) => this.element = c}
                 className="form-control"
-                {...this.props}
+                {...propUtilities.cleanProps(this.props)}
                 id={this.getId()}
                 value={this.getValue()}
                 onChange={this.changeValue}
