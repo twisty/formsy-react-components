@@ -8,6 +8,7 @@ var React = require('react');
 var Formsy = require('formsy-react');
 var ComponentMixin = require('./mixins/component');
 var Row = require('./row');
+var propUtilities = require('./prop-utilities');
 
 var Checkbox = React.createClass({
     displayName: 'Checkbox',
@@ -42,7 +43,7 @@ var Checkbox = React.createClass({
                     ref: function ref(c) {
                         return _this.element = c;
                     }
-                }, this.props, {
+                }, propUtilities.cleanProps(this.props), {
                     id: this.getId(),
                     type: 'checkbox',
                     checked: this.getValue() === true,
