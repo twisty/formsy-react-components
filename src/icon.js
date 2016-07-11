@@ -7,7 +7,7 @@ const Icon = (props) => {
     ];
     if (props.className) {
         classNames.push(props.className);
-    };
+    }
     return (
         <span className={classNames.join(' ')} aria-hidden="true"></span>
     );

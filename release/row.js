@@ -8,8 +8,10 @@ var classNames = require('classnames/dedupe');
 var Row = React.createClass({
     displayName: 'Row',
 
+
     propTypes: {
         label: React.PropTypes.node,
+        children: React.PropTypes.node,
         rowClassName: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.array, React.PropTypes.object]),
         labelClassName: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.array, React.PropTypes.object]),
         elementWrapperClassName: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.array, React.PropTypes.object]),
@@ -35,7 +37,7 @@ var Row = React.createClass({
     renderRequiredSymbol: function renderRequiredSymbol() {
         if (this.props.required === false) {
             return null;
-        };
+        }
         return React.createElement(
             'span',
             { className: 'required-symbol' },

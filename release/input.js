@@ -9,9 +9,11 @@ var Formsy = require('formsy-react');
 var ComponentMixin = require('./mixins/component');
 var Row = require('./row');
 var Icon = require('./icon');
+var propUtilities = require('./prop-utilities');
 
 var Input = React.createClass({
     displayName: 'Input',
+
 
     mixins: [Formsy.Mixin, ComponentMixin],
 
@@ -72,16 +74,19 @@ var Input = React.createClass({
     },
 
     renderElement: function renderElement() {
+        var _this = this;
+
         var className = 'form-control';
         if (['range'].indexOf(this.props.type) !== -1) {
             className = null;
         }
         return React.createElement('input', _extends({
-            ref: 'element',
+            ref: function ref(c) {
+                return _this.element = c;
+            },
             className: className
-        }, this.props, {
+        }, propUtilities.cleanProps(this.props), {
             id: this.getId(),
-            label: null,
             value: this.getValue(),
             onChange: this.changeValue,
             disabled: this.isFormDisabled() || this.props.disabled
