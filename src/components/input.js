@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import debounce from 'lodash.debounce';
 import { commonProps, commonDefaults } from './prop-types';
 import ErrorMessages from './error-messages';
 import Help from './help';
@@ -9,10 +10,30 @@ import Row from './row';
 
 class Input extends Component {
 
+    constructor(props) {
+        super(props);
+        this.state = {value: props.value};
+        this.changeDebounced = debounce(props.onSetValue, props.getDebounceInterval('change'));
+        this.blurDebounced = debounce(props.onSetValue, props.getDebounceInterval('blur'));
+    }
+
     handleChange = (event) => {
         const value = event.currentTarget.value;
-        this.props.onSetValue(value);
+        this.setState({value: value});
+        if (this.props.shouldUpdateOn('change')) {
+            this.changeDebounced(value);
+        }
         this.props.onChange(this.props.name, value);
+    }
+
+    handleBlur = (event) => {
+        const value = event.currentTarget.value;
+        this.setState({value: value});
+        if (this.props.shouldUpdateOn('blur')) {
+            this.changeDebounced.cancel();
+            this.blurDebounced(value);
+        }
+        this.props.onBlur(this.props.name, value);
     }
 
     render = function() {
@@ -20,7 +41,9 @@ class Input extends Component {
         let control = (
             <InputControl
                 {...this.props}
+                value={this.state.value}
                 onChange={this.handleChange}
+                onBlur={this.handleBlur}
             />
         );
 

@@ -115,9 +115,10 @@ const ComponentMixin = {
         if (!this.props.help) {
             return null;
         }
-        return (
+        const helpBlock = (
             <span className="help-block">{this.props.help}</span>
         );
+        return helpBlock;
     },
 
     // TODO this ought to be called renderErrorMessages.
@@ -127,9 +128,10 @@ const ComponentMixin = {
         }
         var errorMessages = this.getErrorMessages() || [];
         return errorMessages.map((message, key) => {
-            return (
+            const helpBlock = (
                 <span key={key} className="help-block validation-message">{message}</span>
             );
+            return helpBlock;
         });
     },
 

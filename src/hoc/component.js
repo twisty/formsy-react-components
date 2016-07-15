@@ -53,7 +53,9 @@ export var FormsyReactComponent = (ComposedComponent) => {
                 rowClassName:            this.combineContextWithProp('rowClassName'),
                 showErrors:              this.shouldShowErrors(),
                 value:                   this.props.getValue(),
-                onSetValue:              this.props.setValue
+                onSetValue:              this.props.setValue,
+                shouldUpdateOn:          this.shouldUpdateOn,
+                getDebounceInterval:     this.getDebounceInterval
             };
         }
 
@@ -83,6 +85,21 @@ export var FormsyReactComponent = (ComposedComponent) => {
                 hash = (((hash << 5) - hash) + string.charCodeAt(i)) & 0xFFFFFFFF;
             }
             return hash;
+        }
+
+        shouldUpdateOn = (eventName) => {
+            const updateOnEventNames = this.props.updateOn.split(' ');
+            return updateOnEventNames.includes(eventName);
+        }
+
+        getDebounceInterval = (eventName) => {
+            if (this.props.debounce.hasOwnProperty(eventName)) {
+                return this.props.debounce[eventName];
+            }
+            if (this.props.debounce.hasOwnProperty('default')) {
+                return this.props.debounce['default'];
+            }
+            return 0;
         }
 
         // Determine whether to show errors, or not.
@@ -197,6 +214,12 @@ export var FormsyReactComponent = (ComposedComponent) => {
         disabled: false,
         id: '',
         label: '',
+        updateOn: 'blur change',
+        debounce: {
+            default: 0,
+            blur: 0,
+            change: 500
+        },
         onBlur: function() {},
         onChange: function() {},
         onFocus: function() {}

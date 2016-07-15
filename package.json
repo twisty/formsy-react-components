@@ -61,6 +61,7 @@
     "eslint-plugin-react": "^5.0.1",
     "formsy-react": "^0.18.0",
     "jest-cli": "^12.1.0",
+    "lodash.debounce": "^4.0.6",
     "react": "^15.1.0",
     "react-addons-test-utils": "^15.1.0",
     "react-dom": "^15.1.0",
