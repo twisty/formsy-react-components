@@ -11,14 +11,34 @@ class Textarea extends Component {
     constructor(props) {
         super(props);
         this.state = {value: props.value};
-        this.changeDebounced = debounce(props.onSetValue, props.getDebounceInterval('change'));
-        this.blurDebounced = debounce(props.onSetValue, props.getDebounceInterval('blur'));
+        this.changeDebounced = debounce(props.onSetValue, this.getDebounceInterval('change'));
+        this.blurDebounced = debounce(props.onSetValue, this.getDebounceInterval('blur'));
+    }
+
+    componentWillReceiveProps = (nextProps) => {
+        const isValueChanging = nextProps.value !== this.props.value;
+        if (isValueChanging) {
+            this.setState({value: nextProps.value});
+            this.props.onSetValue(nextProps.value);
+        }
+    }
+
+    shouldUpdateOn = (eventName) => {
+        const updateOnEventNames = this.props.updateOn.split(' ');
+        return updateOnEventNames.includes(eventName);
+    }
+
+    getDebounceInterval = (eventName) => {
+        if (this.props.debounce.hasOwnProperty(eventName)) {
+            return this.props.debounce[eventName];
+        }
+        return 0;
     }
 
     handleChange = (event) => {
         const value = event.currentTarget.value;
         this.setState({value: value});
-        if (this.props.shouldUpdateOn('change')) {
+        if (this.shouldUpdateOn('change')) {
             this.changeDebounced(value);
         }
         this.props.onChange(this.props.name, value);
@@ -65,14 +85,23 @@ class Textarea extends Component {
 Textarea.propTypes = {
     ...commonProps,
     cols: PropTypes.number,
+    debounce: PropTypes.object,
     rows: PropTypes.number,
-    value: PropTypes.string
+    updateOn: PropTypes.string,
+    value: PropTypes.string,
+    onBlur: PropTypes.func
 };
 
 Textarea.defaultProps = {
     ...commonDefaults,
     cols: 0, // React doesn't render the cols attribute if it is zero
-    rows: 3
+    rows: 3,
+    updateOn: 'blur change',
+    debounce: {
+        blur: 0,
+        change: 500
+    },
+    onBlur: () => {}
 };
 
 export default Textarea;

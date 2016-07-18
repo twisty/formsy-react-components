@@ -13,14 +13,34 @@ class Input extends Component {
     constructor(props) {
         super(props);
         this.state = {value: props.value};
-        this.changeDebounced = debounce(props.onSetValue, props.getDebounceInterval('change'));
-        this.blurDebounced = debounce(props.onSetValue, props.getDebounceInterval('blur'));
+        this.changeDebounced = debounce(props.onSetValue, this.getDebounceInterval('change'));
+        this.blurDebounced = debounce(props.onSetValue, this.getDebounceInterval('blur'));
+    }
+
+    componentWillReceiveProps = (nextProps) => {
+        const isValueChanging = nextProps.value !== this.props.value;
+        if (isValueChanging) {
+            this.setState({value: nextProps.value});
+            this.props.onSetValue(nextProps.value);
+        }
+    }
+
+    shouldUpdateOn = (eventName) => {
+        const updateOnEventNames = this.props.updateOn.split(' ');
+        return updateOnEventNames.includes(eventName);
+    }
+
+    getDebounceInterval = (eventName) => {
+        if (this.props.debounce.hasOwnProperty(eventName)) {
+            return this.props.debounce[eventName];
+        }
+        return 0;
     }
 
     handleChange = (event) => {
         const value = event.currentTarget.value;
         this.setState({value: value});
-        if (this.props.shouldUpdateOn('change')) {
+        if (this.shouldUpdateOn('change')) {
             this.changeDebounced(value);
         }
         this.props.onChange(this.props.name, value);
@@ -29,7 +49,7 @@ class Input extends Component {
     handleBlur = (event) => {
         const value = event.currentTarget.value;
         this.setState({value: value});
-        if (this.props.shouldUpdateOn('blur')) {
+        if (this.shouldUpdateOn('blur')) {
             this.changeDebounced.cancel();
             this.blurDebounced(value);
         }
@@ -90,6 +110,7 @@ Input.propTypes = {
     ]),
     buttonAfter: PropTypes.node,
     buttonBefore: PropTypes.node,
+    debounce: PropTypes.object,
     type: PropTypes.oneOf([
         'color',
         'date',
@@ -108,17 +129,25 @@ Input.propTypes = {
         'url',
         'week'
     ]),
-    value: PropTypes.string
+    updateOn: PropTypes.string,
+    value: PropTypes.string,
+    onBlur: PropTypes.func
 };
 
 Input.defaultProps = {
     ...commonDefaults,
     type: 'text',
     value: '',
+    updateOn: 'blur change',
+    debounce: {
+        blur: 0,
+        change: 500
+    },
     addonBefore: null,
     addonAfter: null,
     buttonBefore: null,
-    buttonAfter: null
+    buttonAfter: null,
+    onBlur: () => {}
 };
 
 export default Input;
