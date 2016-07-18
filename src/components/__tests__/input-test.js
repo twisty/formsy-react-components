@@ -95,6 +95,7 @@ describe('The <Input /> component', () => {
 
     describe('Input components do this', () => {
 
+        let handleBlur;
         let handleChange;
         let handleSetValue;
         let wrapper;
@@ -102,6 +103,7 @@ describe('The <Input /> component', () => {
 
         beforeEach(() => {
 
+            handleBlur = jest.genMockFunction();
             handleChange = jest.genMockFunction();
             handleSetValue = jest.genMockFunction();
 
@@ -111,6 +113,7 @@ describe('The <Input /> component', () => {
                     id="myId"
                     label="My Label"
                     value="Initial value"
+                    onBlur={handleBlur}
                     onChange={handleChange}
                     onSetValue={handleSetValue}
                 />
@@ -144,6 +147,8 @@ describe('The <Input /> component', () => {
         it('executes a props.onSetValue callback', () => {
             expect(handleSetValue).not.toBeCalled();
             inputNode.simulate('change');
+            expect(handleSetValue).not.toBeCalled();
+            jest.runAllTimers();
             expect(handleSetValue).toBeCalled();
         });
     });
