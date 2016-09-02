@@ -132,7 +132,7 @@ module.exports = {
             return null;
         }
         return (
-            <span className="text-help">{this.props.help}</span>
+            <small className="form-text text-muted">{this.props.help}</small>
         );
     },
 
@@ -143,7 +143,7 @@ module.exports = {
         var errorMessages = this.getErrorMessages() || [];
         return errorMessages.map((message, key) => {
             return (
-                <span key={key} className="text-help validation-message">{message}</span>
+                <div key={key} className="form-control-feedback">{message}</div>
             );
         });
     },
