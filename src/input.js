@@ -6,6 +6,7 @@ var React = require('react');
 var Formsy = require('formsy-react');
 var ComponentMixin = require('./mixins/component');
 var Row = require('./row');
+var propUtilities = require('./prop-utilities');
 
 var Input = React.createClass({
 
@@ -58,6 +59,10 @@ var Input = React.createClass({
         this.props.onChange(this.props.name, value);
     },
 
+    changeValueOnBlur: function(event) {
+        this.props.onBlur(this.props.name, this.getValue());
+    },
+
     render: function() {
         var element = this.renderElement();
 
@@ -97,11 +102,12 @@ var Input = React.createClass({
             <input
                 ref="element"
                 className={className}
-                {...this.props}
+                {...propUtilities.cleanProps(this.props)}
                 id={this.getId()}
                 label={null}
                 value={this.getValue()}
                 onChange={this.changeValue}
+                onBlur={this.changeValueOnBlur}
                 disabled={this.isFormDisabled() || this.props.disabled}
             />
         );

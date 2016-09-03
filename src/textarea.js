@@ -6,6 +6,7 @@ var React = require('react');
 var Formsy = require('formsy-react');
 var ComponentMixin = require('./mixins/component');
 var Row = require('./row');
+var propUtilities = require('./prop-utilities');
 
 var Textarea = React.createClass({
 
@@ -29,15 +30,20 @@ var Textarea = React.createClass({
         this.props.onChange(this.props.name, value);
     },
 
+    changeValueOnBlur: function(event) {
+        this.props.onBlur(this.props.name, this.getValue());
+    },
+
     renderElement: function() {
         return (
             <textarea
                 ref="element"
                 className="form-control"
-                {...this.props}
+                {...propUtilities.cleanProps(this.props)}
                 id={this.getId()}
                 value={this.getValue()}
                 onChange={this.changeValue}
+                onBlur={this.changeValueOnBlur}
                 disabled={this.isFormDisabled() || this.props.disabled}
             ></textarea>
         );

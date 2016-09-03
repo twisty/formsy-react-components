@@ -6,6 +6,7 @@ var React = require('react');
 var Formsy = require('formsy-react');
 var ComponentMixin = require('./mixins/component');
 var Row = require('./row');
+var propUtilities = require('./prop-utilities');
 
 var Select = React.createClass({
 
@@ -50,8 +51,9 @@ var Select = React.createClass({
     renderElement: function() {
 
         var renderOption = function(item, key) {
+            const { group, label, ...rest } = item;
             return (
-                <option key={key} {...item} label={null}>{item.label}</option>
+                <option key={key} {...rest}>{item.label}</option>
             )
         }
 
@@ -98,7 +100,7 @@ var Select = React.createClass({
             <select
                 ref="element"
                 className="form-control"
-                {...this.props}
+                {...propUtilities.cleanProps(this.props)}
                 id={this.getId()}
                 value={this.getValue()}
                 onChange={this.changeValue}

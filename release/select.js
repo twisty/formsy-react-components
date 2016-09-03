@@ -6,10 +6,13 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
 var React = require('react');
 var Formsy = require('formsy-react');
 var ComponentMixin = require('./mixins/component');
 var Row = require('./row');
+var propUtilities = require('./prop-utilities');
 
 var Select = React.createClass({
     displayName: 'Select',
@@ -55,9 +58,14 @@ var Select = React.createClass({
     renderElement: function renderElement() {
 
         var renderOption = function renderOption(item, key) {
+            var group = item.group;
+            var label = item.label;
+
+            var rest = _objectWithoutProperties(item, ['group', 'label']);
+
             return React.createElement(
                 'option',
-                _extends({ key: key }, item, { label: null }),
+                _extends({ key: key }, rest),
                 item.label
             );
         };
@@ -110,7 +118,7 @@ var Select = React.createClass({
             _extends({
                 ref: 'element',
                 className: 'form-control'
-            }, this.props, {
+            }, propUtilities.cleanProps(this.props), {
                 id: this.getId(),
                 value: this.getValue(),
                 onChange: this.changeValue,

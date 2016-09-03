@@ -8,6 +8,7 @@ var React = require('react');
 var Formsy = require('formsy-react');
 var ComponentMixin = require('./mixins/component');
 var Row = require('./row');
+var propUtilities = require('./prop-utilities');
 
 var Input = React.createClass({
     displayName: 'Input',
@@ -37,6 +38,10 @@ var Input = React.createClass({
         var value = event.currentTarget.value;
         this.setValue(value);
         this.props.onChange(this.props.name, value);
+    },
+
+    changeValueOnBlur: function changeValueOnBlur(event) {
+        this.props.onBlur(this.props.name, this.getValue());
     },
 
     render: function render() {
@@ -76,11 +81,12 @@ var Input = React.createClass({
         return React.createElement('input', _extends({
             ref: 'element',
             className: className
-        }, this.props, {
+        }, propUtilities.cleanProps(this.props), {
             id: this.getId(),
             label: null,
             value: this.getValue(),
             onChange: this.changeValue,
+            onBlur: this.changeValueOnBlur,
             disabled: this.isFormDisabled() || this.props.disabled
         }));
     },
