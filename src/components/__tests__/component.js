@@ -19,7 +19,7 @@ const componentTest = (Component) => {
                 return args[0];
             }).join('\n');
             expect(console.error).toBeCalled();
-            expect(errorMessages).toContain('Warning: Failed propType: Required prop `id` was not specified');
+            expect(errorMessages).toContain('Warning: Failed prop type: The prop `id` is marked as required in');
             console.error = error;
         });
 
