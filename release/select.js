@@ -59,10 +59,9 @@ var Select = React.createClass({
         var _this = this;
 
         var renderOption = function renderOption(item, key) {
-            var group = item.group;
-            var label = item.label;
-
-            var rest = _objectWithoutProperties(item, ['group', 'label']);
+            var group = item.group,
+                label = item.label,
+                rest = _objectWithoutProperties(item, ['group', 'label']);
 
             return React.createElement(
                 'option',
