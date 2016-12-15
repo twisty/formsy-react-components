@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { HOC as FormsyHOC } from 'formsy-react';
-import { styleClassname } from '../components/prop-types';
+import { styleClassNames } from '../components/prop-types';
 
 // Component HOC
 // -------------
@@ -149,19 +149,17 @@ export var FormsyReactComponent = (ComposedComponent) => {
     ComponentHOC.propTypes = {
 
         ...formsyPropTypes,
+        ...styleClassNames,
 
         name: PropTypes.string.isRequired,
         disabled: PropTypes.bool,
-        elementWrapperClassName: styleClassname,
 
         // Not used here, but composed components expect this to be a string.
         help: PropTypes.string,
 
         id: PropTypes.string,
         label: PropTypes.string,
-        labelClassName: styleClassname,
         layout: PropTypes.string,
-        rowClassName: styleClassname,
 
         // Whether to show validation errors on pristine (untouched) components.
         // Note: this doesn't stop the validation from running, it's just a flag
@@ -178,11 +176,9 @@ export var FormsyReactComponent = (ComposedComponent) => {
     };
 
     ComponentHOC.contextTypes = {
+        ...styleClassNames,
         layout: PropTypes.string,
-        validatePristine: PropTypes.bool,
-        rowClassName: styleClassname,
-        labelClassName: styleClassname,
-        elementWrapperClassName: styleClassname
+        validatePristine: PropTypes.bool
     };
 
     // TODO: Should we add default props for the following?:

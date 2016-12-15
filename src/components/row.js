@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import classNames from 'classnames/dedupe';
+import styleClassNames from './prop-types';
 import Label from './label';
 
 const Row = (props) => {
@@ -60,27 +61,13 @@ const Row = (props) => {
 }
 
 Row.propTypes = {
+    ...styleClassNames,
     children: PropTypes.node,
-    elementWrapperClassName: React.PropTypes.oneOfType([
-        PropTypes.string,
-        PropTypes.array,
-        PropTypes.object
-    ]),
     fakeLabel: PropTypes.bool,
     htmlFor: PropTypes.string,
     label: PropTypes.node,
-    labelClassName: React.PropTypes.oneOfType([
-        PropTypes.string,
-        PropTypes.array,
-        PropTypes.object
-    ]),
     layout: PropTypes.oneOf(['horizontal', 'vertical', 'elementOnly']),
     required: PropTypes.bool,
-    rowClassName: PropTypes.oneOfType([
-        PropTypes.string,
-        PropTypes.array,
-        PropTypes.object
-    ]),
     showErrors: PropTypes.bool
 };
 

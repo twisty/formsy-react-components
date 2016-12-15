@@ -9,9 +9,9 @@ describe('The component HOC', () => {
 
     describe('css classes', () => {
         /*
-        elementWrapperClassName: styleClassname,
-        labelClassName: styleClassname,
-        rowClassName: styleClassname,
+        elementWrapperClassName: styleClassName,
+        labelClassName: styleClassName,
+        rowClassName: styleClassName,
         */
     });
 
