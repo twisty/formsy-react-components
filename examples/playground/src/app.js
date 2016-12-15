@@ -15,10 +15,13 @@ const MyForm = React.createClass({
     },
 
     render() {
+        let formsyProps = Object.assign({}, this.props);
+        delete formsyProps.layout;
+        delete formsyProps.validatePristine;
         return (
             <Formsy.Form
                 className={this.getLayoutClassName()}
-                {...this.props}
+                {...formsyProps}
                 ref="formsy"
             >
                 {this.props.children}
