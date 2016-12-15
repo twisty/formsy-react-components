@@ -6,31 +6,6 @@ import Options from './options';
 
 const { Checkbox, CheckboxGroup, Input, RadioGroup, Row, Select, File, Textarea } = FRC;
 
-const MyForm = React.createClass({
-
-    mixins: [FRC.ParentContextMixin],
-
-    propTypes: {
-        children: React.PropTypes.node
-    },
-
-    render() {
-        let formsyProps = Object.assign({}, this.props);
-        delete formsyProps.layout;
-        delete formsyProps.validatePristine;
-        return (
-            <Formsy.Form
-                className={this.getLayoutClassName()}
-                {...formsyProps}
-                ref="formsy"
-            >
-                {this.props.children}
-            </Formsy.Form>
-        );
-    }
-
-});
-
 class Playground extends React.Component {
 
     constructor(props) {
@@ -112,7 +87,7 @@ class Playground extends React.Component {
                 <div className="page-header">
                     <h2>Layout: <code>{this.state.layout}</code></h2>
                 </div>
-                <MyForm
+                <FRC.Form
                     onSubmit={this.submitForm}
                     layout={this.state.layout}
                     validatePristine={this.state.validatePristine}
@@ -346,7 +321,7 @@ class Playground extends React.Component {
                             <input className="btn btn-primary" formNoValidate={true} type="submit" defaultValue="Submit" />
                         </Row>
                     </fieldset>
-                </MyForm>
+                </FRC.Form>
             </div>
         );
     }
