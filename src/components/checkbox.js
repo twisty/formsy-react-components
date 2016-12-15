@@ -13,11 +13,10 @@ class Checkbox extends Component {
     }
 
     renderElement = () => {
-        const inputProps = Object.assign({}, this.props);
-        delete inputProps.errorMessages;
-        delete inputProps.help;
-        delete inputProps.onSetValue;
-        delete inputProps.showErrors;
+        let inputProps = Object.assign({}, this.props);
+        Object.keys(commonProps).forEach((key) => {
+            delete inputProps[key];
+        });
         delete inputProps.valueLabel;
         return (
             <div className="checkbox">
