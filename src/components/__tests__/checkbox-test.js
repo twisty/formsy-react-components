@@ -1,7 +1,4 @@
-/* globals jest, describe */
-
-jest.disableAutomock();
-jest.unmock('../checkbox');
+/* globals describe */
 
 import Checkbox from '../checkbox';
 import componentTest from './component';

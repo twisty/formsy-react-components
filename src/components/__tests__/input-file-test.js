@@ -1,7 +1,4 @@
-/* globals jest, describe */
-
-jest.disableAutomock();
-jest.unmock('../input-file');
+/* globals describe */
 
 import File from '../input-file';
 import componentTest from './component';

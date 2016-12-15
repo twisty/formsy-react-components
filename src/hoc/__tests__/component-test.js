@@ -1,8 +1,5 @@
 /* globals jest, describe, expect, it */
 
-jest.disableAutomock();
-jest.unmock('../component');
-
 import React from 'react';
 import Formsy from 'formsy-react';
 import { mount } from 'enzyme';
@@ -21,8 +18,13 @@ describe('The component HOC', () => {
     describe('props passed to the HOC', () => {
 
         let TestComponent = (props) => {
+            const InnerComponent = (innerProps) => {
+                return (
+                    <div />
+                );
+            };
             return (
-                <div {...props} />
+                <InnerComponent {...props} />
             )
         };
         let FRC = FormsyReactComponent(TestComponent);

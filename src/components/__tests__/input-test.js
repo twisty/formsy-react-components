@@ -1,7 +1,6 @@
 /* globals jest, describe, it, expect, beforeEach */
 
-jest.disableAutomock();
-jest.unmock('../input');
+jest.useFakeTimers();
 
 import React from 'react';
 import { mount } from 'enzyme';

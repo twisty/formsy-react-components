@@ -1,7 +1,4 @@
-/* globals jest, describe, it, expect */
-
-jest.disableAutomock();
-jest.unmock('../select');
+/* globals describe, it, expect */
 
 import React from 'react';
 import { mount } from 'enzyme';

@@ -30,13 +30,7 @@
     "url": "https://github.com/twisty/formsy-react-components/issues"
   },
   "jest": {
-    "unmockedModulePathPatterns": [
-      "<rootDir>/node_modules/enzyme",
-      "<rootDir>/node_modules/formsy-react",
-      "<rootDir>/node_modules/react",
-      "<rootDir>/node_modules/react-dom",
-      "<rootDir>/node_modules/react-addons-test-utils"
-    ]
+      "testRegex": "/__tests__/.*\\-test\\.js$"
   },
   "peerDependencies": {
     "formsy-react": "^0.19.0",

@@ -1,7 +1,4 @@
-/* globals jest, describe */
-
-jest.disableAutomock();
-jest.unmock('../textarea');
+/* globals describe */
 
 import Textarea from '../textarea';
 import componentTest from './component';
