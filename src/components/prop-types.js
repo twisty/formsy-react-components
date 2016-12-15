@@ -11,10 +11,13 @@ export const styleClassname = PropTypes.oneOfType([
     PropTypes.object
 ]);
 
-export const commonProps = {
+export const controlProps = {
     id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     disabled: PropTypes.bool,
+};
+
+export const commonProps = {
     errorMessages: PropTypes.array,
     help: PropTypes.string,
     label: PropTypes.string,

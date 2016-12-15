@@ -3,8 +3,11 @@ import React, { PropTypes } from 'react';
 const SelectControl = (props) => {
 
     const renderOption = (item, key) => {
+        let optionProps = Object.assign({}, item);
+        delete optionProps.label;
+        delete optionProps.group;
         return (
-            <option key={key} {...item} label={null}>{item.label}</option>
+            <option key={key} {...optionProps}>{item.label}</option>
         )
     }
 
@@ -47,10 +50,14 @@ const SelectControl = (props) => {
             optionNodes.push(<optgroup label={group} key={groupIndex}>{groupOptionNodes}</optgroup>);
         });
     }
+
+    let selectProps = Object.assign({}, props);
+    delete selectProps.options;
+
     return (
         <select
             className="form-control"
-            {...props}
+            {...selectProps}
         >
             {optionNodes}
         </select>

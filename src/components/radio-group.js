@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { commonProps } from './prop-types';
+import { controlProps, commonProps } from './prop-types';
 import ErrorMessages from './error-messages';
 import Help from './help';
 import Row from './row';
@@ -73,6 +73,7 @@ class RadioGroup extends Component {
 }
 
 RadioGroup.propTypes = {
+    ...controlProps,
     ...commonProps,
     options: PropTypes.arrayOf(
         PropTypes.shape({

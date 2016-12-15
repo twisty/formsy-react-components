@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import debounce from 'lodash.debounce';
-import { commonProps, commonDefaults } from './prop-types';
+import { controlProps, commonProps, commonDefaults } from './prop-types';
 import ErrorMessages from './error-messages';
 import Help from './help';
 import Icon from './icon';
@@ -58,9 +58,22 @@ class Input extends Component {
 
     render = function() {
 
+        let inputProps = Object.assign({}, this.props);
+        Object.keys(commonProps).forEach((key) => {
+            delete inputProps[key];
+        });
+        delete inputProps.addonAfter;
+        delete inputProps.addonBefore;
+        delete inputProps.buttonAfter;
+        delete inputProps.buttonBefore;
+        delete inputProps.debounce;
+        delete inputProps.updateOn;
+        delete inputProps.value;
+        delete inputProps.onBlur;
+
         let control = (
             <InputControl
-                {...this.props}
+                {...inputProps}
                 value={this.state.value}
                 onChange={this.handleChange}
                 onBlur={this.handleBlur}
@@ -99,6 +112,7 @@ class Input extends Component {
 }
 
 Input.propTypes = {
+    ...controlProps,
     ...commonProps,
     addonAfter: PropTypes.oneOfType([
         PropTypes.string,

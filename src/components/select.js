@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { commonProps } from './prop-types';
+import { controlProps, commonProps } from './prop-types';
 import ErrorMessages from './error-messages';
 import Help from './help';
 import Row from './row';
@@ -27,9 +27,14 @@ class Select extends Component {
 
     render() {
 
+        let inputProps = Object.assign({}, this.props);
+        Object.keys(commonProps).forEach((key) => {
+            delete inputProps[key];
+        });
+
         let control = (
             <SelectControl
-                {...this.props}
+                {...inputProps}
                 onChange={this.handleChange}
             />
         )
@@ -52,6 +57,7 @@ class Select extends Component {
 }
 
 Select.propTypes = {
+    ...controlProps,
     ...commonProps,
     multiple: PropTypes.bool,
     options: PropTypes.arrayOf(

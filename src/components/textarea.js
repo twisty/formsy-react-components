@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import debounce from 'lodash.debounce';
-import { commonProps, commonDefaults } from './prop-types';
+import { controlProps, commonProps, commonDefaults } from './prop-types';
 import ErrorMessages from './error-messages';
 import Help from './help';
 import Row from './row';
@@ -56,9 +56,25 @@ class Textarea extends Component {
 
     render() {
 
+
+        let inputProps = Object.assign({}, this.props);
+        Object.keys(commonProps).forEach((key) => {
+            delete inputProps[key];
+        });
+
+        /*
+        delete inputProps.debounce;
+        delete inputProps.errorMessages;
+        delete inputProps.help;
+        delete inputProps.onSetValue;
+        delete inputProps.showErrors;
+        delete inputProps.updateOn;
+        delete inputProps.valueLabel;
+        */
+
         let element = (
             <TextareaControl
-                {...this.props}
+                {...this.inputProps}
                 value={this.state.value}
                 onChange={this.handleChange}
                 onBlur={this.handleBlur}
@@ -83,6 +99,7 @@ class Textarea extends Component {
 }
 
 Textarea.propTypes = {
+    ...controlProps,
     ...commonProps,
     cols: PropTypes.number,
     debounce: PropTypes.object,
