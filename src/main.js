@@ -3,7 +3,7 @@ import CheckboxGroup from './components/checkbox-group';
 import Icon from './components/icon';
 import Input from './components/input';
 import File from './components/input-file';
-import Form from './components/form';
+import Form from './form';
 import RadioGroup from './components/radio-group';
 import Row from './components/row';
 import Select from './components/select';
