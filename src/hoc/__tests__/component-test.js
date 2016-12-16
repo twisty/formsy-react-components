@@ -1,4 +1,4 @@
-/* globals jest, describe, expect, it */
+/* globals describe, expect, it */
 
 import React from 'react';
 import Formsy from 'formsy-react';
@@ -18,7 +18,7 @@ describe('The component HOC', () => {
     describe('props passed to the HOC', () => {
 
         let TestComponent = (props) => {
-            const InnerComponent = (innerProps) => {
+            const InnerComponent = () => {
                 return (
                     <div />
                 );

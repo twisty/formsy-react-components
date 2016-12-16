@@ -8,19 +8,23 @@ const componentTest = (Component) => {
     return describe('acts like a formsy-react-component', () => {
 
         it('warns when no `id` prop is provided', () => {
+            /* eslint-disable no-console */
             const error = console.error;
             console.error = jest.fn();
+            /* eslint-disable no-unused-vars */
             let wrapper = shallow(
                 <Component
                     name="myName"
                 />
             );
+            /* eslint-enable no-unused-vars */
             const errorMessages = console.error.mock.calls.map((args) => {
                 return args[0];
             }).join('\n');
             expect(console.error).toBeCalled();
             expect(errorMessages).toContain('Warning: Failed prop type: The prop `id` is marked as required in');
             console.error = error;
+            /* eslint-enable no-console */
         });
 
         it('renders a row label (when label prop is provided)', () => {
