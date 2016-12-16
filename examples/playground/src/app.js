@@ -1,3 +1,5 @@
+/* eslint-env node, browser */
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import FRC from 'formsy-react-components';
@@ -25,7 +27,7 @@ class Playground extends React.Component {
     }
 
     submitForm = (data) => {
-        console.log(data);
+        console.log(data); // eslint-disable-line no-console
     }
 
     handleChangeOption = (name, value) => {
