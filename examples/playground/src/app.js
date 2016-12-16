@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Formsy from 'formsy-react';
 import FRC from 'formsy-react-components';
 import Options from './options';
 
