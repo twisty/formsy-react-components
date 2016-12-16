@@ -1,30 +1,40 @@
-import React from 'react';
+import React, { Component, PropTypes } from 'react';
 import Formsy from 'formsy-react';
-import ParentContextMixin from './mixins/parent-context';
+import OptionsProvider from './hoc/options-provider';
 
-const Form = React.createClass({
-
-    mixins: [ParentContextMixin],
-
-    propTypes: {
-        children: React.PropTypes.node
-    },
+class Form extends Component {
 
     render() {
         let formsyProps = Object.assign({}, this.props);
+        delete formsyProps.elementWrapperClassName;
+        delete formsyProps.labelClassName;
         delete formsyProps.layout;
+        delete formsyProps.rowClassName;
         delete formsyProps.validatePristine;
+
         return (
-            <Formsy.Form
-                className={this.getLayoutClassName()}
-                {...formsyProps}
-                ref="formsy"
+            <OptionsProvider
+                {...this.props}
             >
-                {this.props.children}
-            </Formsy.Form>
+                <Formsy.Form
+                    {...formsyProps}
+                    className={'form-' + this.props.layout}
+                    ref="formsy"
+                >
+                    {this.props.children}
+                </Formsy.Form>
+            </OptionsProvider>
         );
     }
+}
 
-});
+Form.propTypes = {
+    layout: PropTypes.oneOf(['horizontal', 'vertical', 'elementOnly']).isRequired,
+    children: PropTypes.node
+}
+
+Form.defaultProps = {
+    layout: 'horizontal'
+}
 
 export default Form;

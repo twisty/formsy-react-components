@@ -8,9 +8,8 @@ import RadioGroup from './components/radio-group';
 import Row from './components/row';
 import Select from './components/select';
 import Textarea from './components/textarea';
-import ComponentMixin from './mixins/component';
-import ParentContextMixin from './mixins/parent-context';
-import { FormsyReactComponent } from './hoc/component';
+import OptionsProvider from './hoc/options-provider';
+import FormsyReactComponent from './hoc/component';
 
 const FRC = {
     Checkbox:           FormsyReactComponent(Checkbox),
@@ -20,11 +19,10 @@ const FRC = {
     RadioGroup:         FormsyReactComponent(RadioGroup),
     Select:             FormsyReactComponent(Select),
     Textarea:           FormsyReactComponent(Textarea),
-    Icon:               Icon,
     Form:               Form,
-    Row:                Row,
-    ComponentMixin:     ComponentMixin,
-    ParentContextMixin: ParentContextMixin
+    Icon:               Icon,
+    OptionsProvider:    OptionsProvider,
+    Row:                Row
 };
 
 export default FRC;

@@ -5,56 +5,40 @@ import { styleClassNames } from '../components/prop-types';
 // Component HOC
 // -------------
 //
-// This mixin provides shared code for our form components.
+// This HOC provides shared code for our form components.
 //
-// We also use this to merge props set using the ParentContextMixin, so that
-// commonly used props can be set on an enclosing component.
+// We use this to merge props set using our OptionsProvider, so that
+// we can set commonly used props on an enclosing component.
 //
 // This allows us to set these properties 'as a whole' for each component in the
 // the form, while retaining the ability to override the prop on a per-component
 // basis.
-export var FormsyReactComponent = (ComposedComponent) => {
+const FormsyReactComponent = (ComposedComponent) => {
     class ComponentHOC extends Component {
 
         // Use the following value for layout:
         // 1. layout prop (if supplied)
         // 2. [else] layout context (if defined)
         // 3. [else] 'horizontal' (default value)
-        mergeLayoutContext = () => {
+        getLayout = () => {
             return this.props.layout || (this.context.layout || 'horizontal');
         }
 
-        // Use the following value for layout:
+        // Use the following value for validatePristine:
         // 1. validatePristine prop (if supplied)
         // 2. [else] validatePristine context (if defined)
         // 3. [else] false (default value)
-        mergeValidatePristineContext = () => {
+        getValidatePristine = () => {
             if (typeof this.props.validatePristine === 'boolean') {
                 return this.props.validatePristine;
             }
             return this.context.validatePristine || false;
         }
 
-        // Combine the parent context value with the component prop value.
+        // Combine a parent context value with a component prop value.
         // This is used for CSS classnames, where the value is passed to `JedWatson/classnames`.
-        combineContextWithProp(key) {
+        combineContextWithProp = (key) => {
             return [this.context[key], this.props[key]];
-        }
-
-        getComponentProps = () => {
-            return {
-                disabled:                this.props.isFormDisabled() || this.props.disabled,
-                elementWrapperClassName: this.combineContextWithProp('elementWrapperClassName'),
-                errorMessages:           this.props.getErrorMessages(),
-                id:                      this.getId(),
-                labelClassName:          this.combineContextWithProp('labelClassName'),
-                layout:                  this.mergeLayoutContext(),
-                required:                this.props.isRequired(),
-                rowClassName:            this.combineContextWithProp('rowClassName'),
-                showErrors:              this.shouldShowErrors(),
-                value:                   this.props.getValue(),
-                onSetValue:              this.props.setValue
-            };
         }
 
         // getId
@@ -88,20 +72,29 @@ export var FormsyReactComponent = (ComposedComponent) => {
         // Determine whether to show errors, or not.
         shouldShowErrors = () => {
             if (this.props.isPristine() === true) {
-                if (this.mergeValidatePristineContext() === false) {
+                if (this.getValidatePristine() === false) {
                     return false;
                 }
             }
             return (this.props.isValid() === false);
         }
 
-        // We pass through all props, but some are overwritten with `massaged`
-        // versions to give our components what they expect.
+        // We pass through all unknown props, but delete some formsy HOC props that we know we don't need.
         render() {
 
             let props = {
                 ...this.props,
-                ...this.getComponentProps()
+                disabled:                this.props.isFormDisabled() || this.props.disabled,
+                elementWrapperClassName: this.combineContextWithProp('elementWrapperClassName'),
+                errorMessages:           this.props.getErrorMessages(),
+                id:                      this.getId(),
+                labelClassName:          this.combineContextWithProp('labelClassName'),
+                layout:                  this.getLayout(),
+                required:                this.props.isRequired(),
+                rowClassName:            this.combineContextWithProp('rowClassName'),
+                showErrors:              this.shouldShowErrors(),
+                value:                   this.props.getValue(),
+                onSetValue:              this.props.setValue
             };
 
             // Formsy HOC props we don't use.
@@ -187,8 +180,8 @@ export var FormsyReactComponent = (ComposedComponent) => {
     // * rowClassName
 
     // The following props get their default values by first looking for props in the parent context.
-    // * layout (See mergeLayoutContext, defaults to 'horizontal')
-    // * validatePristine: (See mergeValidatePristineContext, defaults to 'false'),
+    // * layout (See getLayout, defaults to 'horizontal')
+    // * validatePristine: (See getValidatePristine, defaults to 'false'),
     ComponentHOC.defaultProps = {
         disabled: false,
         id: '',
@@ -201,3 +194,5 @@ export var FormsyReactComponent = (ComposedComponent) => {
     return FormsyHOC(ComponentHOC);
 
 };
+
+export default FormsyReactComponent;

@@ -3,7 +3,7 @@
 import React from 'react';
 import Formsy from 'formsy-react';
 import { mount } from 'enzyme';
-import { FormsyReactComponent } from '../component';
+import FormsyReactComponent from '../component';
 
 describe('The component HOC', () => {
 
