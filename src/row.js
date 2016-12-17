@@ -9,6 +9,7 @@ var Row = React.createClass({
 
     propTypes: {
         label: React.PropTypes.node,
+        children: React.PropTypes.node,
         rowClassName: React.PropTypes.oneOfType([
             React.PropTypes.string,
             React.PropTypes.array,
@@ -46,7 +47,7 @@ var Row = React.createClass({
     renderRequiredSymbol: function() {
         if (this.props.required === false) {
             return null;
-        };
+        }
         return (
             <span className="required-symbol"> *</span>
         );

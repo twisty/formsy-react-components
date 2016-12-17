@@ -104,8 +104,8 @@ module.exports = {
             return null;
         }
         return React.createElement(
-            'span',
-            { className: 'text-help' },
+            'small',
+            { className: 'form-text text-muted' },
             this.props.help
         );
     },
@@ -117,8 +117,8 @@ module.exports = {
         var errorMessages = this.getErrorMessages() || [];
         return errorMessages.map(function (message, key) {
             return React.createElement(
-                'span',
-                { key: key, className: 'text-help validation-message' },
+                'div',
+                { key: key, className: 'form-control-feedback' },
                 message
             );
         });

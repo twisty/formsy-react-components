@@ -8,6 +8,7 @@ var React = require('react');
 var Formsy = require('formsy-react');
 var ComponentMixin = require('./mixins/component');
 var Row = require('./row');
+var propUtilities = require('./prop-utilities');
 
 var Input = React.createClass({
     displayName: 'Input',
@@ -66,6 +67,8 @@ var Input = React.createClass({
     },
 
     renderElement: function renderElement() {
+        var _this = this;
+
         var className = 'form-control';
         if (this.showErrors()) {
             className = 'form-control-danger form-control';
@@ -74,11 +77,12 @@ var Input = React.createClass({
             className = null;
         }
         return React.createElement('input', _extends({
-            ref: 'element',
+            ref: function ref(c) {
+                return _this.element = c;
+            },
             className: className
-        }, this.props, {
+        }, propUtilities.cleanProps(this.props), {
             id: this.getId(),
-            label: null,
             value: this.getValue(),
             onChange: this.changeValue,
             disabled: this.isFormDisabled() || this.props.disabled

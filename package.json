@@ -1,6 +1,6 @@
 {
   "name": "formsy-react-components",
-  "version": "0.7.1",
+  "version": "0.9.0",
   "description": "A set of React JS components for use in a formsy-react form. Markup adheres to Bootstrap structure.",
   "scripts": {
     "test": "jest --coverage --noHighlight --verbose",
@@ -31,7 +31,7 @@
     ]
   },
   "peerDependencies": {
-    "formsy-react": "^0.18.0",
+    "formsy-react": "0.18 - 0.19",
     "react": "^15.1.0"
   },
   "dependencies": {
@@ -44,9 +44,10 @@
     "babel-polyfill": "^6.7.4",
     "babel-preset-es2015": "^6.0.12",
     "babel-preset-react": "^6.0.12",
-    "eslint": "^2.8.0",
-    "eslint-plugin-react": "^4.2.3",
-    "formsy-react": "^0.18.0",
+    "babel-preset-stage-0": "^6.5.0",
+    "eslint": "^3.0.1",
+    "eslint-plugin-react": "^5.2.2",
+    "formsy-react": "0.18 - 0.19",
     "gulp": "^3.9.0",
     "gulp-babel": "^6.0.0",
     "jest-cli": "^12.1.0",
