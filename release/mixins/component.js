@@ -7,6 +7,7 @@ module.exports = {
     propTypes: {
         layout: React.PropTypes.string,
         validatePristine: React.PropTypes.bool,
+        validateOnSubmit: React.PropTypes.bool,
         rowClassName: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.array, React.PropTypes.object]),
         labelClassName: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.array, React.PropTypes.object]),
         elementWrapperClassName: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.array, React.PropTypes.object])
@@ -15,6 +16,7 @@ module.exports = {
     contextTypes: {
         layout: React.PropTypes.string,
         validatePristine: React.PropTypes.bool,
+        validateOnSubmit: React.PropTypes.bool,
         rowClassName: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.array, React.PropTypes.object]),
         labelClassName: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.array, React.PropTypes.object]),
         elementWrapperClassName: React.PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.array, React.PropTypes.object])
@@ -24,6 +26,7 @@ module.exports = {
         return {
             disabled: false,
             validatePristine: false,
+            validateOnSubmit: false,
             onChange: function onChange() {},
             onFocus: function onFocus() {},
             onBlur: function onBlur() {}
@@ -48,6 +51,11 @@ module.exports = {
     getValidatePristine: function getValidatePristine() {
         var defaultProperty = this.context.validatePristine || false;
         return this.props.validatePristine ? this.props.validatePristine : defaultProperty;
+    },
+
+    getValidateOnSubmit: function getValidateOnSubmit() {
+        var defaultProperty = this.context.validateOnSubmit || false;
+        return this.props.validateOnSubmit ? this.props.validateOnSubmit : defaultProperty;
     },
 
     getRowClassName: function getRowClassName() {
@@ -125,11 +133,12 @@ module.exports = {
     },
 
     showErrors: function showErrors() {
-        if (this.isPristine() === true) {
-            if (this.getValidatePristine() === false) {
-                return false;
-            }
+        if (this.isPristine() && !this.getValidatePristine()) {
+            return false;
         }
-        return this.isValid() === false;
+        if (this.validateOnSubmit() && !this.isFormSubmitted()) {
+            return false;
+        }
+        return !this.isValid();
     }
 };

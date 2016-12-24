@@ -7,6 +7,7 @@ module.exports = {
     propTypes: {
         layout: React.PropTypes.string,
         validatePristine: React.PropTypes.bool,
+        validateOnSubmit: React.PropTypes.bool,
         rowClassName: React.PropTypes.oneOfType([
             React.PropTypes.string,
             React.PropTypes.array,
@@ -27,6 +28,7 @@ module.exports = {
     contextTypes: {
         layout: React.PropTypes.string,
         validatePristine: React.PropTypes.bool,
+        validateOnSubmit: React.PropTypes.bool,
         rowClassName: React.PropTypes.oneOfType([
             React.PropTypes.string,
             React.PropTypes.array,
@@ -48,6 +50,7 @@ module.exports = {
         return {
             disabled: false,
             validatePristine: false,
+            validateOnSubmit: false,
             onChange: function() {},
             onFocus: function() {},
             onBlur: function() {}
@@ -72,6 +75,11 @@ module.exports = {
     getValidatePristine: function() {
         var defaultProperty = this.context.validatePristine || false;
         return this.props.validatePristine ? this.props.validatePristine : defaultProperty;
+    },
+
+    getValidateOnSubmit: function() {
+        var defaultProperty = this.context.validateOnSubmit || false;
+        return this.props.validateOnSubmit ? this.props.validateOnSubmit : defaultProperty;
     },
 
     getRowClassName: function() {
@@ -149,11 +157,12 @@ module.exports = {
     },
 
     showErrors: function() {
-        if (this.isPristine() === true) {
-            if (this.getValidatePristine() === false) {
-                return false;
-            }
+        if (this.isPristine() && !this.getValidatePristine()) {
+            return false;
         }
-        return (this.isValid() === false);
+        if (this.validateOnSubmit() && !this.isFormSubmitted()) {
+            return false;
+        }
+        return !this.isValid();
     }
 };
