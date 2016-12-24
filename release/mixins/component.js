@@ -136,7 +136,7 @@ module.exports = {
         if (this.isPristine() && !this.getValidatePristine()) {
             return false;
         }
-        if (this.validateOnSubmit() && !this.isFormSubmitted()) {
+        if (this.getValidateOnSubmit() && !this.isFormSubmitted()) {
             return false;
         }
         return !this.isValid();
