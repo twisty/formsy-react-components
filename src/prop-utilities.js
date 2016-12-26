@@ -36,6 +36,7 @@ const cleanProps = (props) => {
         rowClassName,
         rowLabel,
         validatePristine,
+        validateOnSubmit,
 
         ...rest
     } = props;
