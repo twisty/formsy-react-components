@@ -35,7 +35,8 @@ var cleanProps = function cleanProps(props) {
         rowClassName = props.rowClassName,
         rowLabel = props.rowLabel,
         validatePristine = props.validatePristine,
-        rest = _objectWithoutProperties(props, ["mapping", "validationErrors", "onSubmit", "onValid", "onValidSubmit", "onInvalid", "onInvalidSubmit", "onChange", "reset", "preventExternalInvalidation", "onSuccess", "onError", "validationError", "validations", "addonAfter", "addonBefore", "buttonAfter", "buttonBefore", "elementWrapperClassName", "help", "label", "options", "labelClassName", "layout", "rowClassName", "rowLabel", "validatePristine"]);
+        validateOnSubmit = props.validateOnSubmit,
+        rest = _objectWithoutProperties(props, ["mapping", "validationErrors", "onSubmit", "onValid", "onValidSubmit", "onInvalid", "onInvalidSubmit", "onChange", "reset", "preventExternalInvalidation", "onSuccess", "onError", "validationError", "validations", "addonAfter", "addonBefore", "buttonAfter", "buttonBefore", "elementWrapperClassName", "help", "label", "options", "labelClassName", "layout", "rowClassName", "rowLabel", "validatePristine", "validateOnSubmit"]);
 
     return rest;
 };
