@@ -1,4 +1,4 @@
-/* globals jest, describe, it, expect, beforeEach, setTimeout */
+/* globals jest, describe, it, expect, beforeEach */
 
 jest.useFakeTimers();
 
