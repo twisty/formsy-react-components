@@ -1,4 +1,4 @@
-node_modules
-coverage
-release
+node_modules/
+coverage/
+release/
 npm-debug.log

@@ -3,5 +3,11 @@
     "es2015",
     "stage-0",
     "react"
+  ],
+  "plugins": [
+    "transform-react-display-name"
+  ],
+  "ignore": [
+    "__tests__"
   ]
 }
