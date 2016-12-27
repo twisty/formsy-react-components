@@ -81,6 +81,12 @@ describe('The component HOC', () => {
             it('is not passed through to the composed component');
         });
 
+        describe('`validateOnSubmit`', () => {
+            it('determines whether to hide errors until an attempt to submit the form is made');
+            it('is merged with a master value set in a parent context');
+            it('is not passed through to the composed component');
+        });
+
         describe('other props', () => {
             it('are passed through to the composed component');
         });
