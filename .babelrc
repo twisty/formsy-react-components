@@ -6,8 +6,5 @@
   ],
   "plugins": [
     "transform-react-display-name"
-  ],
-  "ignore": [
-    "__tests__"
   ]
 }
