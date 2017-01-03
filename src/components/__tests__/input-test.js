@@ -128,7 +128,7 @@ describe('The <Input /> component', () => {
             expect(inputNode.prop('value')).toEqual('Changed value');
         });
 
-        it('executes a props.onChange callback', () => {
+        it('executes a `props.onChange` callback', () => {
             /*
              * The following doesn't work, we have to set the node's value directly:
              *
@@ -137,28 +137,29 @@ describe('The <Input /> component', () => {
              * @see https://github.com/facebook/react/issues/3151#issuecomment-74943529
              */
             expect(handleChange).not.toBeCalled();
-            let event = {currentTarget: {value: 'Changed value'}};
-            inputNode.simulate('change', event);
+            inputNode.getDOMNode().value = 'Changed value';
+            inputNode.simulate('change');
             expect(handleChange).toBeCalled();
-            //expect(inputNode.prop('value')).toEqual('Changed value');
+            expect(inputNode.prop('value')).toEqual('Changed value');
         });
 
-        /*
-         * TODO: Help needed! Having trouble writing a test for this.
-         */
-        it.skip('executes a props.onSetValue callback', () => {
+        it('executes a debounced `props.onSetValue` callback', () => {
+            expect(handleChange).not.toBeCalled();
             expect(handleSetValue).not.toBeCalled();
-            let event = {currentTarget: {value: 'Changed value'}};
-            inputNode.simulate('change', event);
+            inputNode.getDOMNode().value = 'Changed value';
+            inputNode.simulate('change');
+            expect(handleChange).toBeCalled();
             expect(handleSetValue).not.toBeCalled();
-            jest.runPendingTimers();
-            // The `handleSetValue` function should be called after a period of
-            // 500ms (it is debounced for change events).
+            /*
+             * The `handleSetValue` function should be called after a period of
+             * 500ms (it is debounced for change events).
+             */
+            jest.runAllTimers();
             expect(handleSetValue).toBeCalled();
         });
     });
 
-    describe('includes an <InputGroup /> component when', () => {
+    describe('includes an `<InputGroup />` component when', () => {
         it('is triggered by an `addonBefore` prop');
         it('is triggered by an `addonAfter` prop');
         it('is triggered by an `buttonBefore` prop');
