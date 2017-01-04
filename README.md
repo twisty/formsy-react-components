@@ -2,6 +2,8 @@
 
 [![Build Status](https://travis-ci.org/twisty/formsy-react-components.svg?branch=master)](https://travis-ci.org/twisty/formsy-react-components)
 [![npm version](https://badge.fury.io/js/formsy-react-components.svg)](https://badge.fury.io/js/formsy-react-components)
+[![GitHub release](https://img.shields.io/github/release/twisty/formsy-react-components.svg)](https://github.com/twisty/formsy-react-components/releases)
+[![GitHub contributors](https://img.shields.io/github/contributors/twisty/formsy-react-components.svg)](https://github.com/twisty/formsy-react-components/contributors)
 
 This package provides a selection of components that render form elements for use within a [formsy-react](https://github.com/christianalfoni/formsy-react) form.
 
