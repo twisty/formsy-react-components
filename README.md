@@ -1,5 +1,9 @@
-# twisty.github.io/formsy-react-components
+formsy-react-components Examples
+================================
 
-![Dependencies](https://david-dm.org/twisty/formsy-react-components/gh-pages.svg)
+To run the examples in your development environment:
 
-See the [Playground](http://twisty.github.io/formsy-react-components/playground/) for a live example, or the [master branch of the Github project](https://github.com/twisty/formsy-react-components) for everything else.
+1. Clone this repo
+2. Run `npm install`
+3. Start the development server with `npm run examples`
+4. Point your browser to http://localhost:3000

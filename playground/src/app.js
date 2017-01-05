@@ -1,32 +1,11 @@
+/* eslint-env node, browser */
+
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Formsy from 'formsy-react';
 import FRC from 'formsy-react-components';
 import Options from './options';
 
 const { Checkbox, CheckboxGroup, Input, RadioGroup, Row, Select, File, Textarea } = FRC;
-
-const MyForm = React.createClass({
-
-    mixins: [FRC.ParentContextMixin],
-
-    propTypes: {
-        children: React.PropTypes.node
-    },
-
-    render() {
-        return (
-            <Formsy.Form
-                className={this.getLayoutClassName()}
-                {...this.props}
-                ref="formsy"
-            >
-                {this.props.children}
-            </Formsy.Form>
-        );
-    }
-
-});
 
 class Playground extends React.Component {
 
@@ -42,16 +21,16 @@ class Playground extends React.Component {
     }
 
     resetForm = () => {
-        // This is nasty
+        // XXX This is nasty
         const formsy = this.refs.myform.refs.formsy;
         formsy.reset();
     }
 
     submitForm = (data) => {
-        console.log(data);
+        console.log(data); // eslint-disable-line no-console
     }
 
-    changeOption = (name, value) => {
+    handleChangeOption = (name, value) => {
         var newState = {};
         newState[name] = value;
         this.setState(newState);
@@ -59,38 +38,43 @@ class Playground extends React.Component {
 
     render() {
 
-        var radioOptions = [
+        const radioOptions = [
             {value: 'a', label: 'Option A'},
             {value: 'b', label: 'Option B'},
             {value: 'c', label: 'Option C'}
         ];
 
-        var radioOptionsDisabled = [
+        const radioOptionsDisabled = [
             {value: 'a', label: 'Option A'},
             {value: 'b', label: 'Option B', disabled: true},
             {value: 'c', label: 'Option C'}
         ];
 
-        var optionY = {
+        let optionY = {
             value: 'y',
             label: 'Option Y (yellow css class)',
             className: 'yellow'
         };
         optionY['data-note'] = 'This is a data attribute.';
-        var selectOptions = [
+
+        const selectOptions = [
             {value: 'a', label: 'Option A'},
             {value: 'a', label: 'Option A (again)'},
             {value: 'b', label: 'Option B'},
             {value: 'c', label: 'Option C', title: 'This is a title attribute for Option C'},
             {value: 'd', label: 'Option D', disabled: true},
-            optionY
+            optionY,
+            {value: 'e1', label: 'Option E-1', group: 'Option group E'},
+            {value: 'e2', label: 'Option E-2', group: 'Option group E'}
         ];
 
-        var singleSelectOptions = selectOptions.slice(0);
-        singleSelectOptions.unshift({value: '', label: 'Please select…'});
+        const singleSelectOptions = [
+            {value: '', label: 'Please select…'},
+            ...selectOptions
+        ];
 
         return (
-            <div className="row">
+            <div>
                 <div className="page-header">
                     <h1>Form Playground</h1>
                 </div>
@@ -99,12 +83,12 @@ class Playground extends React.Component {
                     layoutChoice={this.state.layout}
                     validatePristineChoice={this.state.validatePristine}
                     disabledChoice={this.state.disabled}
-                    changeOption={this.changeOption}
+                    onChangeOption={this.handleChangeOption}
                 />
                 <div className="page-header">
                     <h2>Layout: <code>{this.state.layout}</code></h2>
                 </div>
-                <MyForm
+                <FRC.Form
                     onSubmit={this.submitForm}
                     layout={this.state.layout}
                     validatePristine={this.state.validatePristine}
@@ -189,7 +173,7 @@ class Playground extends React.Component {
                         <File
                             name="file1"
                             label="File picker"
-                            help="Warning: this returns a FileList that will need custom coding to be useful."
+                            help="This returns a HTML5 FileList."
                             multiple
                         />
                     </fieldset>
@@ -231,8 +215,8 @@ class Playground extends React.Component {
                         <Checkbox
                             name="checkbox1"
                             value={true}
-                            label="Check me out"
-                            rowLabel="Checkbox (single)"
+                            label="Checkbox (single)"
+                            valueLabel="Check me out"
                         />
                         <CheckboxGroup
                             name="checkboxGrp1"
@@ -338,7 +322,7 @@ class Playground extends React.Component {
                             <input className="btn btn-primary" formNoValidate={true} type="submit" defaultValue="Submit" />
                         </Row>
                     </fieldset>
-                </MyForm>
+                </FRC.Form>
             </div>
         );
     }
