@@ -11,4 +11,7 @@ By default, elements are wrapped with the required tags to be included in a [Boo
 
 ## Documentation
 
-None yet! Best bet for now is to examine the [source](https://github.com/twisty/formsy-react-components/blob/gh-pages/playground/src/app.js) for the [Playground](http://twisty.github.io/formsy-react-components/playground/).
+Documentation is a work in progress!
+
+* For a working code example, visit the [Playground](http://twisty.github.io/formsy-react-components/playground/), then examine the [source](https://github.com/twisty/formsy-react-components/tree/19c0577ecda7e6b3452c85aa31a7170b34b87709/playground).
+* There is some information in the [Wiki](https://github.com/twisty/formsy-react-components/wiki).
