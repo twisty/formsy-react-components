@@ -1,4 +1,6 @@
 node_modules/
 coverage/
 release/
+built.js
+built.js.map
 npm-debug.log
