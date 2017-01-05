@@ -56,6 +56,9 @@ var Input = React.createClass({
 
     changeValue: function(event) {
         var value = event.currentTarget.value;
+        if(this.props.type == 'number') {
+          value = parseInt(value, 10);
+        }
         this.setValue(value);
         this.props.onChange(this.props.name, value);
     },
