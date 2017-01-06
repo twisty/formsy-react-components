@@ -6,12 +6,14 @@ module.exports = {
 
     devtool: 'source-map',
 
-    entry: path.resolve(__dirname, 'playground/src', 'app.js'),
+    entry: {
+        playground: path.resolve(__dirname, './playground/src/index.js')
+    },
 
     output: {
-        filename: 'built.js',
-        path: path.resolve(__dirname, './playground'),
-        publicPath: '/playground'
+        filename: '[name].js',
+        path: path.resolve(__dirname, 'build'),
+        publicPath: '/build'
     },
 
     module: {

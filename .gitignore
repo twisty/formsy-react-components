@@ -1,6 +1,5 @@
 node_modules/
 coverage/
 release/
-built.js
-built.js.map
+examples/build
 npm-debug.log

@@ -1,3 +1,5 @@
+/* eslint-env node, browser */
+
 import React, { PropTypes } from 'react';
 import FRC from 'formsy-react-components';
 
@@ -5,7 +7,8 @@ const { Checkbox, RadioGroup } = FRC;
 
 const Options = (props) => {
 
-    let { disabledChoice, layoutChoice, validatePristineChoice, onChangeOption } = props;
+    const { disabledChoice, layoutChoice, validatePristineChoice, onChangeOption } = props;
+
     return (
         <div className="well">
             <FRC.Form>
@@ -41,10 +44,10 @@ const Options = (props) => {
 }
 
 Options.propTypes = {
-    onChangeOption: PropTypes.func.isRequired,
-    disabledChoice: PropTypes.bool,
-    layoutChoice: PropTypes.oneOf(['horizontal', 'vertical', 'elementOnly']),
-    validatePristineChoice: PropTypes.bool
+    disabledChoice: PropTypes.bool.isRequired,
+    layoutChoice: PropTypes.oneOf(['horizontal', 'vertical', 'elementOnly']).isRequired,
+    validatePristineChoice: PropTypes.bool.isRequired,
+    onChangeOption: PropTypes.func.isRequired
 };
 
 export default Options;
