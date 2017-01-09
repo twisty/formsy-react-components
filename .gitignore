@@ -1,4 +1,5 @@
 node_modules/
 coverage/
 release/
+examples/build
 npm-debug.log

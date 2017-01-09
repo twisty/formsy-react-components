@@ -18,4 +18,4 @@ Icon.propTypes = {
     className: PropTypes.string
 };
 
-module.exports = Icon;
+export default Icon;
