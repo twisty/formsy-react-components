@@ -3,9 +3,10 @@
   "version": "0.9.0",
   "description": "A set of React JS components for use in a formsy-react form. Markup adheres to Bootstrap structure.",
   "scripts": {
-    "test": "jest --coverage --noHighlight --verbose",
+    "test": "jest",
     "lint": "eslint src",
-    "release": "NODE_ENV=production gulp release"
+    "transpile": "babel src -d release --ignore __tests__",
+    "prepublish": "NODE_ENV=production npm run transpile"
   },
   "main": "./release/main.js",
   "repository": {
@@ -38,6 +39,7 @@
     "classnames": "^2.1.3"
   },
   "devDependencies": {
+    "babel-cli": "^6.18.0",
     "babel-eslint": "^6.0.2",
     "babel-jest": "^12.1.0",
     "babel-plugin-transform-react-display-name": "^6.0.14",
@@ -48,8 +50,6 @@
     "eslint": "^3.0.1",
     "eslint-plugin-react": "^5.2.2",
     "formsy-react": "0.18 - 0.19",
-    "gulp": "^3.9.0",
-    "gulp-babel": "^6.0.0",
     "jest-cli": "^12.1.0",
     "react": "^15.1.0",
     "react-addons-test-utils": "^15.1.0",
