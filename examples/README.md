@@ -3,7 +3,7 @@ formsy-react-components Examples
 
 You can try-out the following examples:
 
-1. [Playground](https://github.com/twisty/formsy-react-components/tree/dev/examples/playground) ([source](https://github.com/twisty/formsy-react-components/tree/dev/examples/playground))
+1. [Playground](https://twisty.github.io/formsy-react-components/playground/) ([source](https://github.com/twisty/formsy-react-components/tree/dev/examples/playground))
 
 ---
 
