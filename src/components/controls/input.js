@@ -1,21 +1,24 @@
-import React, { PropTypes } from 'react';
+import React, { Component, PropTypes } from 'react';
 
-const InputControl = (props) => {
-    let { className } = props;
-    if (['hidden', 'range'].indexOf(props.type) !== -1) {
-        className = null;
+class InputControl extends Component {
+
+    initElementRef = (element) => {
+        this.element = element;
     }
-    // TODO: We've lost our ref in SFC.
-    return (
-        <input
-            //ref="element"
-            {...props}
-            className={className}
-            //id={props.id}
-            //value={props.value}
-            //onChange={props.onChange}
-        />
-    );
+
+    render() {
+        let { className } = this.props;
+        if (['hidden', 'range'].indexOf(this.props.type) !== -1) {
+            className = null;
+        }
+        return (
+            <input
+                {...this.props}
+                className={className}
+                ref={this.initElementRef}
+            />
+        );
+    }
 }
 
 InputControl.propTypes = {

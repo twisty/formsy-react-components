@@ -12,6 +12,10 @@ class Checkbox extends Component {
         this.props.onChange(this.props.name, value);
     }
 
+    initElementRef = (element) => {
+        this.element = element;
+    }
+
     renderElement = () => {
         let inputProps = Object.assign({}, this.props);
         Object.keys(commonProps).forEach((key) => {
@@ -27,6 +31,7 @@ class Checkbox extends Component {
                         label={undefined}
                         checked={this.props.value === true}
                         onChange={this.handleChange}
+                        ref={this.initElementRef}
                     /> {this.props.valueLabel}
                 </label>
             </div>

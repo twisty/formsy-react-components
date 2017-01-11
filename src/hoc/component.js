@@ -90,6 +90,7 @@ const FormsyReactComponent = (ComposedComponent) => {
                 id:                      this.getId(),
                 labelClassName:          this.combineContextWithProp('labelClassName'),
                 layout:                  this.getLayout(),
+                ref:                     this.props.componentRef,
                 required:                this.props.isRequired(),
                 rowClassName:            this.combineContextWithProp('rowClassName'),
                 showErrors:              this.shouldShowErrors(),
@@ -118,6 +119,10 @@ const FormsyReactComponent = (ComposedComponent) => {
             delete props.validationError;
             delete props.validationErrors;
             delete props.validations;
+
+            // HOC refs
+            delete props.innerRef;
+            delete props.componentRef;
 
             return (
                 <ComposedComponent

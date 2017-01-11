@@ -1,17 +1,25 @@
-import React from 'react';
+import React, { Component } from 'react';
 
 // A file control can only be set to an empty string.
 // I think we need to keep this as an uncontrolled component, so we override the
 // value.prop.
-const FileControl = (props) => {
-    return (
-        <input
-            {...props}
-            type="file"
-            label={undefined}
-            value={undefined}
-        />
-    );
+class FileControl extends Component {
+
+    initElementRef = (element) => {
+        this.element = element;
+    }
+
+    render() {
+        return (
+            <input
+                {...this.props}
+                type="file"
+                label={undefined}
+                value={undefined}
+                ref={this.initElementRef}
+            />
+        );
+    }
 }
 
 export default FileControl;

@@ -56,6 +56,10 @@ class Input extends Component {
         this.props.onBlur(this.props.name, value);
     }
 
+    initElementRef = (control) => {
+        this.element = control.element;
+    }
+
     render = function() {
 
         let inputProps = Object.assign({}, this.props);
@@ -77,6 +81,7 @@ class Input extends Component {
                 value={this.state.value}
                 onChange={this.handleChange}
                 onBlur={this.handleBlur}
+                ref={this.initElementRef}
             />
         );
 

@@ -23,6 +23,10 @@ class File extends Component {
         this.props.onChange(this.props.name, target.files, value);
     }
 
+    initElementRef = (control) => {
+        this.element = control.element;
+    }
+
     render() {
 
         let inputProps = Object.assign({}, this.props);
@@ -34,6 +38,7 @@ class File extends Component {
             <FileControl
                 {...inputProps}
                 onChange={this.handleChange}
+                ref={this.initElementRef}
             />
         );
 

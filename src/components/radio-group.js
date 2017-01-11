@@ -6,6 +6,11 @@ import Row from './row';
 
 class RadioGroup extends Component {
 
+    constructor (props) {
+        super(props);
+        this.elements = {};
+    }
+
     handleChange = (event) => {
         let value = event.currentTarget.value;
         this.props.onSetValue(value);
@@ -21,7 +26,7 @@ class RadioGroup extends Component {
                 return (
                     <label className="radio-inline" key={key}>
                         <input
-                            ref={'element-' + key}
+                            ref={(input) => { this.elements[radio.value] = input }}
                             checked={checked}
                             type="radio"
                             value={radio.value}
@@ -35,7 +40,7 @@ class RadioGroup extends Component {
                 <div className={className} key={key}>
                     <label>
                         <input
-                            ref={'element-' + key}
+                            ref={(input) => { this.elements[radio.value] = input }}
                             checked={checked}
                             type="radio"
                             value={radio.value}

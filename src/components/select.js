@@ -25,6 +25,10 @@ class Select extends Component {
         this.props.onChange(this.props.name, value);
     }
 
+    initElementRef = (control) => {
+        this.element = control.element;
+    }
+
     render() {
 
         let inputProps = Object.assign({}, this.props);
@@ -36,6 +40,7 @@ class Select extends Component {
             <SelectControl
                 {...inputProps}
                 onChange={this.handleChange}
+                ref={this.initElementRef}
             />
         )
 

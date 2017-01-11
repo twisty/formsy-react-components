@@ -7,7 +7,8 @@ module.exports = {
     devtool: 'source-map',
 
     entry: {
-        playground: path.resolve(__dirname, './playground/src/index.js')
+        playground: path.resolve(__dirname, './playground/src/index.js'),
+        refs: path.resolve(__dirname, './refs/src/index.js')
     },
 
     output: {
