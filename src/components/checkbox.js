@@ -55,31 +55,6 @@ class Checkbox extends Component {
     }
 }
 
-/*
- * TODO Document this API change.
- *
- * The expected props for this component have been changed for consistency with
- * the other components.
- *
- * Should warn and depricate this on the master branch.
- *
- * if rowLabel and label passed:
- * - show deprication warning.
- * - behind the scenes:
- *   - map 'label' to 'valueLabel'
- *   - map 'rowLabel' to 'label'
- *
- * if valueLabel and label passed:
- * - no warning, new API being used
- *
- * Old was:
- *
- * Checkbox.propTypes = {
- *     ...commonProps,
- *     rowLabel: PropTypes.string,
- *     value: PropTypes.bool
- * };
- */
 Checkbox.propTypes = {
     ...controlProps,
     ...commonProps,
