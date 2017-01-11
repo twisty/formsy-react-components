@@ -14,7 +14,7 @@ class CheckboxGroup extends Component {
     // Returns an array of the values of all checked items.
     handleChange = () => {
         let { options, name } = this.props;
-        let checkedOptions = options.filter((option, key) => {
+        let checkedOptions = options.filter((option) => {
             return this.elements[option.value].checked;
         });
         let value = checkedOptions.map(option => {

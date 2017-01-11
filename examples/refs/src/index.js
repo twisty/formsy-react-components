@@ -9,15 +9,10 @@ const { Form, Input, File, RadioGroup, Checkbox, CheckboxGroup, Select } = FRC;
 class App extends Component {
 
     componentDidMount() {
-        /*
-        console.log(this.innerRef);
-        console.log(this.componentRef);
-        console.log(this.componentRef.control);
-        console.log(this.componentRef.control.element);
-        */
 
         this.inputRef.element.focus();
 
+        /* eslint-disable no-console */
         console.info(
             this.inputRef.element,
             this.fileRef.element,
@@ -26,6 +21,7 @@ class App extends Component {
             this.checkboxesRef.elements,
             this.selectRef.element
         );
+        /* eslint-enable no-console */
     }
 
     render() {
@@ -44,7 +40,6 @@ class App extends Component {
                     <Input
                         label="Text"
                         name="input"
-                        //innerRef={(component) => { this.innerRef = component; } }
                         componentRef={(component) => { this.inputRef = component; } }
                     />
                     <File
