@@ -5,9 +5,39 @@
 [![GitHub release](https://img.shields.io/github/release/twisty/formsy-react-components.svg)](https://github.com/twisty/formsy-react-components/releases)
 [![GitHub contributors](https://img.shields.io/github/contributors/twisty/formsy-react-components.svg)](https://github.com/twisty/formsy-react-components/contributors)
 
-This package provides a selection of components that render form elements for use within a [formsy-react](https://github.com/christianalfoni/formsy-react) form.
+`formsy-react-components` is a selection of React components that render form elements for use in a [formsy-react](https://github.com/christianalfoni/formsy-react) form.
 
-By default, elements are wrapped with the required tags to be included in a [Bootstrap 3 form](http://getbootstrap.com/css/#forms). This includes a `<label>`, [help text](http://getbootstrap.com/css/#forms-help-text), and some [validation styling](http://getbootstrap.com/css/#forms-control-validation) tied to formsy’s validation state and validation messages.
+The components render markup to be quickly included in a [Bootstrap 3 form](http://getbootstrap.com/css/#forms). This includes a `<label>`, [help text](http://getbootstrap.com/css/#forms-help-text), and some [validation styling](http://getbootstrap.com/css/#forms-control-validation) tied to formsy’s validation state and validation messages.
+
+## Install
+
+To install using `npm`:
+
+```
+npm install --save formsy-react
+npm install --save formsy-react-components
+```
+
+## Usage
+
+```jsx
+import { Form, Input } 'formsy-react-components';
+
+const MyForm = (props) => {
+    return (
+        <Form onSubmit={(data) => { console.log(data) }}>
+            <Input
+                name="firstname"
+                label="What is your first name?"
+            />
+        </Form>
+    )
+}
+```
+
+## Examples
+
+* See [examples](../examples/) for a overview on usage.
 
 ## Documentation
 
