@@ -47,7 +47,7 @@ class Textarea extends Component {
     handleBlur = (event) => {
         const value = event.currentTarget.value;
         this.setState({value: value});
-        if (this.props.shouldUpdateOn('blur')) {
+        if (this.shouldUpdateOn('blur')) {
             this.changeDebounced.cancel();
             this.blurDebounced(value);
         }
