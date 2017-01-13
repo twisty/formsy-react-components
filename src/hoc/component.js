@@ -35,6 +35,17 @@ const FormsyReactComponent = (ComposedComponent) => {
             return this.context.validatePristine || false;
         }
 
+        // Use the following value for validateOnSubmit:
+        // 1. validateOnSubmit prop (if supplied)
+        // 2. [else] validateOnSubmit context (if defined)
+        // 3. [else] false (default value)
+        getValidateOnSubmit = () => {
+            if (typeof this.props.validateOnSubmit === 'boolean') {
+                return this.props.validateOnSubmit;
+            }
+            return this.context.validateOnSubmit || false;
+        }
+
         // Combine a parent context value with a component prop value.
         // This is used for CSS classnames, where the value is passed to `JedWatson/classnames`.
         combineContextWithProp = (key) => {
@@ -73,6 +84,11 @@ const FormsyReactComponent = (ComposedComponent) => {
         shouldShowErrors = () => {
             if (this.props.isPristine() === true) {
                 if (this.getValidatePristine() === false) {
+                    return false;
+                }
+            }
+            if (this.getValidateOnSubmit() === true) {
+                if (this.props.isFormSubmitted() === false) {
                     return false;
                 }
             }
@@ -159,10 +175,18 @@ const FormsyReactComponent = (ComposedComponent) => {
         label: PropTypes.string,
         layout: PropTypes.string,
 
+        // * validateOnSubmit
+        // * validatePristine
+        //
+        // Neither of these props actually stop the validations from running,
+        // they just determine whether the error messages should be shown on
+        // components or not.
+
+        // Whether to hide validation errors on components before the form is
+        // submitted.
+        validateOnSubmit: PropTypes.bool,
+
         // Whether to show validation errors on pristine (untouched) components.
-        // Note: this doesn't stop the validation from running, it's just a flag
-        // to determine whether the error messages should be shown on components
-        // in their 'pristine' state.
         validatePristine: PropTypes.bool,
 
         // TODO: Not sure having these here this is a good idea.
@@ -176,6 +200,7 @@ const FormsyReactComponent = (ComposedComponent) => {
     ComponentHOC.contextTypes = {
         ...styleClassNames,
         layout: PropTypes.string,
+        validateOnSubmit: PropTypes.bool,
         validatePristine: PropTypes.bool
     };
 
@@ -187,6 +212,7 @@ const FormsyReactComponent = (ComposedComponent) => {
     // The following props get their default values by first looking for props in the parent context.
     // * layout (See getLayout, defaults to 'horizontal')
     // * validatePristine: (See getValidatePristine, defaults to 'false'),
+    // * validateOnSubmit: (See getValidateOnSubmit, defaults to 'false'),
     ComponentHOC.defaultProps = {
         disabled: false,
         id: '',

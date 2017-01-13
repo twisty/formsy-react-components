@@ -7,7 +7,7 @@ const { Checkbox, CheckboxGroup, Input, RadioGroup, Row, Select, File, Textarea 
 
 const Playground = (props) => {
 
-    const { disabledChoice, layoutChoice, validatePristineChoice } = props;
+    const { disabledChoice, layoutChoice, validateOnSubmitChoice, validatePristineChoice } = props;
 
     let myform = null;
 
@@ -60,6 +60,7 @@ const Playground = (props) => {
         <FRC.Form
             onSubmit={submitForm}
             layout={layoutChoice}
+            validateOnSubmit={validateOnSubmitChoice}
             validatePristine={validatePristineChoice}
             disabled={disabledChoice}
             ref={(form) => { myform = form; }}
@@ -298,6 +299,7 @@ const Playground = (props) => {
 Playground.propTypes = {
     disabledChoice: PropTypes.bool.isRequired,
     layoutChoice: PropTypes.oneOf(['horizontal', 'vertical', 'elementOnly']).isRequired,
+    validateOnSubmitChoice: PropTypes.bool.isRequired,
     validatePristineChoice: PropTypes.bool.isRequired
 };
 

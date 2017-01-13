@@ -5,6 +5,7 @@ class OptionsProvider extends Component {
     getChildContext() {
         return {
             layout:                  this.props.layout,
+            validateOnSubmit:        this.props.validateOnSubmit,
             validatePristine:        this.props.validatePristine,
             rowClassName:            this.props.rowClassName,
             labelClassName:          this.props.labelClassName,
@@ -25,6 +26,7 @@ let classNamesType = PropTypes.oneOfType([
 
 let propTypes = {
     layout:                  PropTypes.string.isRequired,
+    validateOnSubmit:        PropTypes.bool.isRequired,
     validatePristine:        PropTypes.bool.isRequired,
     elementWrapperClassName: classNamesType,
     labelClassName:          classNamesType,
@@ -38,6 +40,7 @@ OptionsProvider.propTypes = {
 
 OptionsProvider.defaultProps = {
     layout: 'horizontal',
+    validateOnSubmit: false,
     validatePristine: false,
     rowClassName: '',
     labelClassName: '',

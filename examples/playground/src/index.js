@@ -13,6 +13,8 @@ class App extends Component {
         // Default state
         this.state = {
             layout: 'horizontal',
+            showingOptions: true,
+            validateOnSubmit: false,
             validatePristine: false,
             disabled: false
         };
@@ -24,24 +26,31 @@ class App extends Component {
         this.setState(newState);
     }
 
+    handleToggleOptions = () => {
+        this.setState({showingOptions: !this.state.showingOptions});
+    }
+
     render() {
         return (
             <div>
                 <div className="page-header">
                     <h1>Form Playground</h1>
                 </div>
-                <h3>Options…</h3>
                 <Options
                     layoutChoice={this.state.layout}
+                    validateOnSubmitChoice={this.state.validateOnSubmit}
                     validatePristineChoice={this.state.validatePristine}
+                    showing={this.state.showingOptions}
                     disabledChoice={this.state.disabled}
                     onChangeOption={this.handleChangeOption}
+                    onToggle={this.handleToggleOptions}
                 />
                 <div className="page-header">
                     <h2>Layout: <code>{this.state.layout}</code></h2>
                 </div>
                 <Playground
                     layoutChoice={this.state.layout}
+                    validateOnSubmitChoice={this.state.validateOnSubmit}
                     validatePristineChoice={this.state.validatePristine}
                     disabledChoice={this.state.disabled}
                 />

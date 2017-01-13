@@ -11,6 +11,7 @@ class Form extends Component {
         delete formsyProps.layout;
         delete formsyProps.rowClassName;
         delete formsyProps.validatePristine;
+        delete formsyProps.validateOnSubmit;
 
         return (
             <OptionsProvider
