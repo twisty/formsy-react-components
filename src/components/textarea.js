@@ -54,6 +54,10 @@ class Textarea extends Component {
         this.props.onBlur(this.props.name, value);
     }
 
+    initElementRef = (control) => {
+        this.element = control ? control.element: null;
+    }
+
     render() {
 
 
@@ -62,22 +66,13 @@ class Textarea extends Component {
             delete inputProps[key];
         });
 
-        /*
-        delete inputProps.debounce;
-        delete inputProps.errorMessages;
-        delete inputProps.help;
-        delete inputProps.onSetValue;
-        delete inputProps.showErrors;
-        delete inputProps.updateOn;
-        delete inputProps.valueLabel;
-        */
-
         let element = (
             <TextareaControl
                 {...this.inputProps}
                 value={this.state.value}
                 onChange={this.handleChange}
                 onBlur={this.handleBlur}
+                ref={this.initElementRef}
             />
         );
 

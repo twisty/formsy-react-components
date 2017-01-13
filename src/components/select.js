@@ -26,7 +26,7 @@ class Select extends Component {
     }
 
     initElementRef = (control) => {
-        this.element = control.element;
+        this.element = control ? control.element: null;
     }
 
     render() {
