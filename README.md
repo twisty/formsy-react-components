@@ -37,7 +37,7 @@ const MyForm = (props) => {
 
 ## Examples
 
-* See [examples](../examples/) for a overview on usage.
+* See [examples](./examples/) for a overview on usage.
 
 ## Documentation
 
