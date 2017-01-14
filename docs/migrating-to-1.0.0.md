@@ -1,4 +1,4 @@
-# Migrating to 1.0.0
+# Migrating to v1.0.0
 
 ## refs
 
