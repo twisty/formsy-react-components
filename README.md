@@ -7,6 +7,18 @@
 
 `formsy-react-components` is a selection of React components that render form elements for use in a [formsy-react](https://github.com/christianalfoni/formsy-react) form.
 
+The form components included are:
+
+* `<Checkbox>`
+* `<CheckboxGroup>`
+* `<File>`
+* `<Input>`
+* `<RadioGroup>`
+* `<Select>`
+* `<Textarea>`
+
+For convenience, we also ship a `<Form>` component that wraps `formst-react`’s `<Form>` component and allows you to define some common props that will be picked-up by child components in the form.
+
 The components render markup to be quickly included in a [Bootstrap 3 form](http://getbootstrap.com/css/#forms). This includes a `<label>`, [help text](http://getbootstrap.com/css/#forms-help-text), and some [validation styling](http://getbootstrap.com/css/#forms-control-validation) tied to formsy’s validation state and validation messages.
 
 ## Install
