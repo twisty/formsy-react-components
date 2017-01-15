@@ -20,7 +20,7 @@ class InputGroup extends Component {
         );
     }
 
-    render = () => {
+    render() {
         return (
             <div className="input-group">
                 {this.renderAddon(this.props.addonBefore)}

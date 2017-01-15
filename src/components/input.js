@@ -60,7 +60,7 @@ class Input extends Component {
         this.element = control ? control.element: null;
     }
 
-    render = function() {
+    render() {
 
         let inputProps = Object.assign({}, this.props);
         Object.keys(commonProps).forEach((key) => {
