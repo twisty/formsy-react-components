@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import ControlCommon from './control-common';
 
 class InputControl extends Component {
 
@@ -22,6 +23,7 @@ class InputControl extends Component {
 }
 
 InputControl.propTypes = {
+    ...ControlCommon.propTypes,
     type: PropTypes.string.isRequired,
     value: PropTypes.string.isRequired,
     className: PropTypes.string

@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
-import { controlProps, commonProps, commonDefaults } from './prop-types';
+import ControlCommon from './controls/control-common';
+import ComponentCommon from './component-common';
 import ErrorMessages from './error-messages';
 import Help from './help';
 import Row from './row';
@@ -18,17 +19,17 @@ class Checkbox extends Component {
 
     renderElement = () => {
         let inputProps = Object.assign({}, this.props);
-        Object.keys(commonProps).forEach((key) => {
+        Object.keys(ComponentCommon.propTypes).forEach((key) => {
             delete inputProps[key];
         });
         delete inputProps.valueLabel;
+        delete inputProps.label;
         return (
             <div className="checkbox">
                 <label>
                     <input
                         {...inputProps}
                         type="checkbox"
-                        label={undefined}
                         checked={this.props.value === true}
                         onChange={this.handleChange}
                         ref={this.initElementRef}
@@ -61,14 +62,14 @@ class Checkbox extends Component {
 }
 
 Checkbox.propTypes = {
-    ...controlProps,
-    ...commonProps,
+    ...ControlCommon.propTypes,
+    ...ComponentCommon.propTypes,
     value: PropTypes.bool,
     valueLabel: PropTypes.string
 };
 
 Checkbox.defaultProps = {
-    ...commonDefaults,
+    ...ComponentCommon.defaultProps,
     value: false,
     valueLabel: ''
 };

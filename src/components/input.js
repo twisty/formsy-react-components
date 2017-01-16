@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import debounce from 'lodash.debounce';
-import { controlProps, commonProps, commonDefaults } from './prop-types';
+import ComponentCommon from './component-common';
 import ErrorMessages from './error-messages';
 import Help from './help';
 import Icon from './icon';
@@ -63,7 +63,7 @@ class Input extends Component {
     render() {
 
         let inputProps = Object.assign({}, this.props);
-        Object.keys(commonProps).forEach((key) => {
+        Object.keys(ComponentCommon.propTypes).forEach((key) => {
             delete inputProps[key];
         });
         delete inputProps.addonAfter;
@@ -116,19 +116,13 @@ class Input extends Component {
 
 }
 
+let [ ...inputGroupPropTypes ] = InputControl.propTypes;
+delete inputGroupPropTypes.children; 
+
 Input.propTypes = {
-    ...controlProps,
-    ...commonProps,
-    addonAfter: PropTypes.oneOfType([
-        PropTypes.string,
-        PropTypes.node
-    ]),
-    addonBefore: PropTypes.oneOfType([
-        PropTypes.string,
-        PropTypes.node
-    ]),
-    buttonAfter: PropTypes.node,
-    buttonBefore: PropTypes.node,
+    ...InputControl.propTypes,
+    ...inputGroupPropTypes,
+    ...ComponentCommon.propTypes,
     debounce: PropTypes.object,
     type: PropTypes.oneOf([
         'color',
@@ -154,7 +148,8 @@ Input.propTypes = {
 };
 
 Input.defaultProps = {
-    ...commonDefaults,
+    ...ComponentCommon.defaultProps,
+    ...InputGroup.defaultProps,
     type: 'text',
     value: '',
     updateOn: 'blur change',
@@ -162,10 +157,6 @@ Input.defaultProps = {
         blur: 0,
         change: 500
     },
-    addonBefore: null,
-    addonAfter: null,
-    buttonBefore: null,
-    buttonAfter: null,
     onBlur: () => {}
 };
 

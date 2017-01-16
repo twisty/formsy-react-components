@@ -1,8 +1,11 @@
-import React, { Component, PropTypes } from 'react';
+import React, { PropTypes } from 'react';
 
-class InputGroup extends Component {
+/**
+ * Wraps an input to implement a Bootstrap [Input Group](http://getbootstrap.com/components/#input-groups)
+ */
+const InputGroup = (props) => {
 
-    renderAddon = (addon) => {
+    const renderAddon = (addon) => {
         if (!addon) {
             return null;
         }
@@ -11,7 +14,7 @@ class InputGroup extends Component {
         );
     }
 
-    renderButton = (button) => {
+    const renderButton = (button) => {
         if (!button) {
             return null;
         }
@@ -20,28 +23,20 @@ class InputGroup extends Component {
         );
     }
 
-    render() {
-        return (
-            <div className="input-group">
-                {this.renderAddon(this.props.addonBefore)}
-                {this.renderButton(this.props.buttonBefore)}
-                {this.props.children}
-                {this.renderAddon(this.props.addonAfter)}
-                {this.renderButton(this.props.buttonAfter)}
-            </div>
-        );
-    }
+    return (
+        <div className="input-group">
+            {renderAddon(props.addonBefore)}
+            {renderButton(props.buttonBefore)}
+            {props.children}
+            {renderAddon(props.addonAfter)}
+            {renderButton(props.buttonAfter)}
+        </div>
+    );
 }
 
 InputGroup.propTypes = {
-    addonAfter: PropTypes.oneOfType([
-        PropTypes.string,
-        PropTypes.node
-    ]),
-    addonBefore: PropTypes.oneOfType([
-        PropTypes.string,
-        PropTypes.node
-    ]),
+    addonAfter: PropTypes.node,
+    addonBefore: PropTypes.node,
     buttonAfter: PropTypes.node,
     buttonBefore: PropTypes.node,
     children: PropTypes.node

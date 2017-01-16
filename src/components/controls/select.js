@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import ControlCommon from './control-common';
 
 class SelectControl extends Component {
 
@@ -73,6 +74,7 @@ class SelectControl extends Component {
 }
 
 SelectControl.propTypes = {
+    ...ControlCommon.propTypes,
     options: PropTypes.arrayOf(
         PropTypes.shape({
             value: PropTypes.string,

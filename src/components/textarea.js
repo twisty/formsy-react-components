@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import debounce from 'lodash.debounce';
-import { controlProps, commonProps, commonDefaults } from './prop-types';
+import ComponentCommon from './component-common';
 import ErrorMessages from './error-messages';
 import Help from './help';
 import Row from './row';
@@ -62,13 +62,15 @@ class Textarea extends Component {
 
 
         let inputProps = Object.assign({}, this.props);
-        Object.keys(commonProps).forEach((key) => {
+        Object.keys(ComponentCommon.propTypes).forEach((key) => {
             delete inputProps[key];
         });
+        delete inputProps.debounce;
+        delete inputProps.updateOn;
 
         let element = (
             <TextareaControl
-                {...this.inputProps}
+                {...inputProps}
                 value={this.state.value}
                 onChange={this.handleChange}
                 onBlur={this.handleBlur}
@@ -94,20 +96,16 @@ class Textarea extends Component {
 }
 
 Textarea.propTypes = {
-    ...controlProps,
-    ...commonProps,
-    cols: PropTypes.number,
+    ...ComponentCommon.propTypes,
+    ...TextareaControl.propTypes,
     debounce: PropTypes.object,
-    rows: PropTypes.number,
     updateOn: PropTypes.string,
     value: PropTypes.string,
     onBlur: PropTypes.func
 };
 
 Textarea.defaultProps = {
-    ...commonDefaults,
-    cols: 0, // React doesn't render the cols attribute if it is zero
-    rows: 3,
+    ...ComponentCommon.defaultProps,
     updateOn: 'blur change',
     debounce: {
         blur: 0,

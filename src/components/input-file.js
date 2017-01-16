@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { controlProps, commonProps, commonDefaults } from './prop-types';
+import ComponentCommon from './component-common';
 import ErrorMessages from './error-messages';
 import Help from './help';
 import Row from './row';
@@ -30,7 +30,7 @@ class File extends Component {
     render() {
 
         let inputProps = Object.assign({}, this.props);
-        Object.keys(commonProps).forEach((key) => {
+        Object.keys(ComponentCommon.propTypes).forEach((key) => {
             delete inputProps[key];
         });
 
@@ -62,13 +62,13 @@ class File extends Component {
 }
 
 File.propTypes = {
-    ...controlProps,
-    ...commonProps,
+    ...FileControl.propTypes,
+    ...ComponentCommon.propTypes,
     value: PropTypes.object
 };
 
 File.defaultProps = {
-    ...commonDefaults,
+    ...ComponentCommon.defaultProps,
     value: {}
 };
 

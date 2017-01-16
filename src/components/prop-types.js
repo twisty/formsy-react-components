@@ -16,25 +16,3 @@ export const styleClassNames = {
     labelClassName: styleClassName,
     elementWrapperClassName: styleClassName
 };
-
-export const controlProps = {
-    id: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    disabled: PropTypes.bool
-};
-
-export const commonProps = {
-    ...styleClassNames,
-    errorMessages: PropTypes.array,
-    help: PropTypes.string,
-    label: PropTypes.string,
-    layout: PropTypes.oneOf(['horizontal', 'vertical', 'elementOnly']),
-    showErrors: PropTypes.bool,
-    onChange: PropTypes.func,
-    onSetValue: PropTypes.func
-};
-
-export const commonDefaults = {
-    onSetValue: () => {},
-    onChange: () => {}
-};
