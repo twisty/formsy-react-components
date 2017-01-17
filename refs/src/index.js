@@ -13,14 +13,12 @@ class App extends Component {
         this.inputRef.element.focus();
 
         /* eslint-disable no-console */
-        console.info(
-            this.inputRef.element,
-            this.fileRef.element,
-            this.radiosRef.elements,
-            this.checkboxRef.element,
-            this.checkboxesRef.elements,
-            this.selectRef.element
-        );
+        console.info(this.inputRef.element);
+        console.info(this.fileRef.element);
+        console.info(this.radiosRef.elements);
+        console.info(this.checkboxRef.element);
+        console.info(this.checkboxesRef.elements);
+        console.info(this.selectRef.element);
         /* eslint-enable no-console */
     }
 
