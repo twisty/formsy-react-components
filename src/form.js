@@ -2,7 +2,7 @@ import React from 'react';
 import Formsy from 'formsy-react';
 import ParentContextMixin from './mixins/parent-context';
 
-export default React.createClass({
+var Form = React.createClass({
 
     mixins: [ParentContextMixin],
 
@@ -23,3 +23,5 @@ export default React.createClass({
     }
 
 });
+
+module.exports = Form;
