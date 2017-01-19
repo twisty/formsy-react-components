@@ -5,9 +5,9 @@ var React = require('react');
 module.exports = {
 
     childContextTypes: {
-        validateOnSubmit: React.PropTypes.bool.isRequired,
-        layout: React.PropTypes.string.isRequired,
-        validatePristine: React.PropTypes.bool.isRequired,
+        layout: React.PropTypes.string,
+        validateOnSubmit: React.PropTypes.bool,
+        validatePristine: React.PropTypes.bool,
         rowClassName: React.PropTypes.oneOfType([
             React.PropTypes.string,
             React.PropTypes.array,
@@ -27,8 +27,8 @@ module.exports = {
 
     getChildContext: function() {
         return {
-            validateOnSubmit: this.props.validateOnSubmit || false,
             layout: this.props.layout || 'horizontal',
+            validateOnSubmit: this.props.validateOnSubmit || false,
             validatePristine: this.props.validatePristine || false,
             rowClassName: this.props.rowClassName || '',
             labelClassName: this.props.labelClassName || '',
