@@ -5,6 +5,8 @@
 [![GitHub release](https://img.shields.io/github/release/twisty/formsy-react-components.svg)](https://github.com/twisty/formsy-react-components/releases)
 [![GitHub contributors](https://img.shields.io/github/contributors/twisty/formsy-react-components.svg)](https://github.com/twisty/formsy-react-components/contributors)
 
+**NOTE! the master branch is the development branch, the [`release-0.x`](https://github.com/twisty/formsy-react-components/tree/release-0.x) branch has the source and README for the current `npm` release.**
+
 `formsy-react-components` is a selection of React components that render form elements for use in a [formsy-react](https://github.com/christianalfoni/formsy-react) form.
 
 The form components included are:
