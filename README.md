@@ -15,3 +15,7 @@ Documentation is a work in progress!
 
 * For a working code example, visit the [Playground](http://twisty.github.io/formsy-react-components/playground/), then examine the [source](https://github.com/twisty/formsy-react-components/tree/19c0577ecda7e6b3452c85aa31a7170b34b87709/playground).
 * There is some information in the [Wiki](https://github.com/twisty/formsy-react-components/wiki).
+
+---
+
+**Note:** The source for this release can be found in the [`release-0.x`](https://github.com/twisty/formsy-react-components/tree/release-0.x) branch on Github.
