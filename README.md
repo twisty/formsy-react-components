@@ -35,7 +35,7 @@ npm install --save formsy-react-components
 ## Usage
 
 ```jsx
-import { Form, Input } 'formsy-react-components';
+import { Form, Input } from 'formsy-react-components';
 
 const MyForm = (props) => {
     return (
