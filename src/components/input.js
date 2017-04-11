@@ -109,6 +109,7 @@ class Input extends Component {
                 {control}
                 {this.props.showErrors ? <Icon symbol="remove" className="form-control-feedback" /> : null}
                 {this.props.help ? <Help help={this.props.help} /> : null}
+                {this.props.showValue ? <Help help={this.props.showValue(this.state.value)} /> : null}
                 {this.props.showErrors ? <ErrorMessages messages={this.props.errorMessages} /> : null}
             </Row>
         );
@@ -144,7 +145,8 @@ Input.propTypes = {
     ]),
     updateOn: PropTypes.string,
     value: PropTypes.string,
-    onBlur: PropTypes.func
+    onBlur: PropTypes.func,
+    showValue: PropTypes.func,
 };
 
 Input.defaultProps = {
@@ -157,7 +159,8 @@ Input.defaultProps = {
         blur: 0,
         change: 500
     },
-    onBlur: () => {}
+    onBlur: () => {},
+    showValue: null,
 };
 
 export default Input;
