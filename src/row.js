@@ -79,6 +79,13 @@ var Row = React.createClass({
                     </strong>
                 </div>
             );
+        } else if (this.props.label) {
+            return (
+                <label className={classNames(labelClassNames)} htmlFor={this.props.htmlFor}>
+                    {this.props.label}
+                    {this.props.required ? ' *' : null}
+                </label>
+            );
         }
 
         return (
