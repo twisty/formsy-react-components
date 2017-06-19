@@ -19,8 +19,8 @@ ComponentCommon.propTypes = {
 }
 
 ComponentCommon.defaultProps = {
-    onSetValue: () => {},
-    onChange: () => {}
+    onChange: () => {},
+    onSetValue: () => {}
 }
 
 export default ComponentCommon;
