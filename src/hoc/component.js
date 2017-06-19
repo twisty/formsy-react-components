@@ -98,20 +98,24 @@ const FormsyReactComponent = (ComposedComponent) => {
         // We pass through all unknown props, but delete some formsy HOC props that we know we don't need.
         render() {
 
+            let cssProps = {
+                elementWrapperClassName: this.combineContextWithProp('elementWrapperClassName'),
+                labelClassName:          this.combineContextWithProp('labelClassName'),
+                rowClassName:            this.combineContextWithProp('rowClassName'),
+            };
+
             let props = {
                 ...this.props,
-                disabled:                this.props.isFormDisabled() || this.props.disabled,
-                elementWrapperClassName: this.combineContextWithProp('elementWrapperClassName'),
-                errorMessages:           this.props.getErrorMessages(),
-                id:                      this.getId(),
-                labelClassName:          this.combineContextWithProp('labelClassName'),
-                layout:                  this.getLayout(),
-                ref:                     this.props.componentRef,
-                required:                this.props.isRequired(),
-                rowClassName:            this.combineContextWithProp('rowClassName'),
-                showErrors:              this.shouldShowErrors(),
-                value:                   this.props.getValue(),
-                onSetValue:              this.props.setValue
+                ...cssProps,
+                disabled:      this.props.isFormDisabled() || this.props.disabled,
+                errorMessages: this.props.getErrorMessages(),
+                id:            this.getId(),
+                layout:        this.getLayout(),
+                ref:           this.props.componentRef,
+                required:      this.props.isRequired(),
+                showErrors:    this.shouldShowErrors(),
+                value:         this.props.getValue(),
+                onSetValue:    this.props.setValue
             };
 
             // Formsy HOC props we don't use.
@@ -188,13 +192,6 @@ const FormsyReactComponent = (ComposedComponent) => {
 
         // Whether to show validation errors on pristine (untouched) components.
         validatePristine: PropTypes.bool,
-
-        // TODO: Not sure having these here this is a good idea.
-        // These callbacks are not used here, but added because composed
-        // components expect these to be present. (See defaultProps).
-        onBlur: PropTypes.func,
-        onChange: PropTypes.func,
-        onFocus: PropTypes.func
     };
 
     ComponentHOC.contextTypes = {
@@ -216,10 +213,7 @@ const FormsyReactComponent = (ComposedComponent) => {
     ComponentHOC.defaultProps = {
         disabled: false,
         id: '',
-        label: '',
-        onBlur: function() {},
-        onChange: function() {},
-        onFocus: function() {}
+        label: ''
     };
 
     return FormsyHOC(ComponentHOC);

@@ -25,9 +25,9 @@ let classNamesType = PropTypes.oneOfType([
 ]);
 
 let propTypes = {
-    layout:                  PropTypes.string.isRequired,
-    validateOnSubmit:        PropTypes.bool.isRequired,
-    validatePristine:        PropTypes.bool.isRequired,
+    layout:                  PropTypes.string,
+    validateOnSubmit:        PropTypes.bool,
+    validatePristine:        PropTypes.bool,
     elementWrapperClassName: classNamesType,
     labelClassName:          classNamesType,
     rowClassName:            classNamesType
