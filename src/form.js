@@ -21,7 +21,7 @@ class Form extends Component {
                 <Formsy.Form
                     {...formsyProps}
                     className={'form-' + this.props.layout}
-                    ref="formsy"
+                    ref={(formsyForm) => { this.formsyForm = formsyForm }}
                 >
                     {this.props.children}
                 </Formsy.Form>
