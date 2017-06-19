@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 
 /**
  * Wraps an input to implement a Bootstrap [Input Group](http://getbootstrap.com/components/#input-groups)

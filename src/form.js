@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Formsy from 'formsy-react';
 import OptionsProvider from './hoc/options-provider';
 

@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import ComponentCommon from './component-common';
 import ControlCommon from './controls/control-common';
 import ErrorMessages from './error-messages';

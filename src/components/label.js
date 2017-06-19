@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import classNames from 'classnames/dedupe';
 import RequiredSymbol from './required-symbol';
 
@@ -46,7 +47,7 @@ Label.propTypes = {
     fakeLabel: PropTypes.bool,
     htmlFor: PropTypes.string,
     label: PropTypes.node,
-    labelClassName: React.PropTypes.oneOfType([
+    labelClassName: PropTypes.oneOfType([
         PropTypes.string,
         PropTypes.array,
         PropTypes.object
