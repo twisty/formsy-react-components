@@ -1,2 +1,4 @@
-node_modules
-coverage
+node_modules/
+coverage/
+release/
+npm-debug.log

@@ -6,6 +6,7 @@ var React = require('react');
 var Formsy = require('formsy-react');
 var ComponentMixin = require('./mixins/component');
 var Row = require('./row');
+var propUtilities = require('./prop-utilities');
 
 var File = React.createClass({
 
@@ -47,11 +48,10 @@ var File = React.createClass({
     renderElement: function() {
         return (
             <input
-                ref="element"
-                {...this.props}
+                ref={(c) => this.element = c}
+                {...propUtilities.cleanProps(this.props)}
                 id={this.getId()}
                 type="file"
-                label={null}
                 onChange={this.changeValue}
                 disabled={this.isFormDisabled() || this.props.disabled}
             />
