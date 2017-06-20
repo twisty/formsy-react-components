@@ -32,6 +32,12 @@ npm install --save formsy-react
 npm install --save formsy-react-components
 ```
 
+## Browser Support
+
+This should run on browsers where both [Bootstrap](http://getbootstrap.com/getting-started/#support) and [React](https://facebook.github.io/react/docs/react-dom.html#browser-support) are supported.
+
+* *Internet Explorer:* polyfills for [Set](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set) and [Array.from](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Array/from?v=example#Polyfill) are required.
+
 ## Usage
 
 ```jsx
