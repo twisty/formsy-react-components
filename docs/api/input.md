@@ -1,16 +1,13 @@
 # Input
 
 ## Props
-| Name                          | Type   | Default                          | Required | Description |
-| ----------------------------- | ------ | -------------------------------- | -------- | ----------- |
-| debounce                      | Object | {
-    blur: 0,
-    change: 500
-} | false    |             |
-| [type](#markdown-header-type) | Enum   | 'text'                           | false    |             |
-| updateOn                      | String | 'blur change'                    | false    |             |
-| value                         | String | ''                               | false    |             |
-| onBlur                        | Func   | () => {}                         | false    |             |
+| Name                          | Type   | Default                                   | Required | Description |
+| ----------------------------- | ------ | ----------------------------------------- | -------- | ----------- |
+| debounce                      | Object | {<br>    blur: 0,<br>    change: 500<br>} | false    |             |
+| [type](#markdown-header-type) | Enum   | 'text'                                    | false    |             |
+| updateOn                      | String | 'blur change'                             | false    |             |
+| value                         | String | ''                                        | false    |             |
+| onBlur                        | Func   | () => {}                                  | false    |             |
 
 ## Complex Props
 
