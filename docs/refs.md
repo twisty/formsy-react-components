@@ -59,3 +59,32 @@ searchInputComponent.element.focus();
 // Components with multiple controls
 termsCheckboxElement = annoyingCheckboxesComponent.elements['agree-to-terms'];
 ```
+
+## Reference to `Formsy.Form`
+
+Our `Form` component composes a [`Formsy.Form`](https://github.com/christianalfoni/formsy-react/blob/master/API.md#formsyform). To get a reference to the `Formsy.Form`, use we expose a `formsyForm` ref. This is handy if you wish to call `Formsy.Form` methods — in this example `reset()`.
+
+```jsx
+import { Form, Input } from 'formsy-react-components';
+
+class MyForm extends Component {
+
+  let frcForm = null;
+
+  const resetForm = () => {
+    const formsyForm = frcform.formsyForm; // get the ref to the formsy-react form
+    formsyForm.reset(); // call a formsy-react form method
+  }
+
+  render() {
+    return (
+      <Form
+        ref={(node) => { frcForm = node; }}
+      >
+        <Input name="query" label="Search" />
+        <button onClick={resetForm} type="reset" defaultValue="Reset" />
+      </Form>
+    );
+  }
+}
+```

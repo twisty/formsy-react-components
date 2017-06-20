@@ -14,8 +14,8 @@ const Playground = (props) => {
 
     const resetForm = () => {
         console.log('Reset called'); // eslint-disable-line no-console
-        const formsy = myform.refs.formsy;
-        formsy.reset();
+        const formsyForm = myform.formsyForm;
+        formsyForm.reset();
     }
 
     const submitForm = (data) => {
