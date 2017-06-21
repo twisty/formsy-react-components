@@ -14,4 +14,4 @@ The components included are:
 
 ---
 
-For convenience, we also ship a <Form> component that wraps formst-react’s <Form> component and allows you to define some common props that will be picked-up by child components in the form.
+For convenience, we also ship a `<Form>` component that wraps `formsy-react`’s `<Form>` component and allows you to define some common props that will be picked-up by child components in the form.
