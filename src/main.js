@@ -1,28 +1,26 @@
-import Checkbox from './components/checkbox';
-import CheckboxGroup from './components/checkbox-group';
+import CheckboxComponent from './components/checkbox';
+import CheckboxGroupComponent from './components/checkbox-group';
+import InputComponent from './components/input';
+import FileComponent from './components/input-file';
+import RadioGroupComponent from './components/radio-group';
+import SelectComponent from './components/select';
+import TextareaComponent from './components/textarea';
 import Icon from './components/icon';
-import Input from './components/input';
-import File from './components/input-file';
 import Form from './form';
-import RadioGroup from './components/radio-group';
 import Row from './components/row';
-import Select from './components/select';
-import Textarea from './components/textarea';
 import OptionsProvider from './hoc/options-provider';
 import FormsyReactComponent from './hoc/component';
 
-const FRC = {
-    Checkbox:           FormsyReactComponent(Checkbox),
-    CheckboxGroup:      FormsyReactComponent(CheckboxGroup),
-    Input:              FormsyReactComponent(Input),
-    File:               FormsyReactComponent(File),
-    RadioGroup:         FormsyReactComponent(RadioGroup),
-    Select:             FormsyReactComponent(Select),
-    Textarea:           FormsyReactComponent(Textarea),
-    Form:               Form,
-    Icon:               Icon,
-    OptionsProvider:    OptionsProvider,
-    Row:                Row
+export const Checkbox = FormsyReactComponent(CheckboxComponent);
+export const CheckboxGroup = FormsyReactComponent(CheckboxGroupComponent);
+export const Input = FormsyReactComponent(InputComponent);
+export const File = FormsyReactComponent(FileComponent);
+export const RadioGroup = FormsyReactComponent(RadioGroupComponent);
+export const Select = FormsyReactComponent(SelectComponent);
+export const Textarea = FormsyReactComponent(TextareaComponent);
+export {
+    Icon,
+    Form,
+    OptionsProvider,
+    Row
 };
-
-export default FRC;

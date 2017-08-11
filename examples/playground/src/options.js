@@ -2,16 +2,14 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import FRC from 'formsy-react-components';
-
-const { Checkbox, RadioGroup } = FRC;
+import { Checkbox, RadioGroup, Form } from 'formsy-react-components';
 
 const Options = (props) => {
 
     const { disabledChoice, layoutChoice, validateOnSubmitChoice, validatePristineChoice, onChangeOption } = props;
 
     const optionsForm = (
-        <FRC.Form>
+        <Form>
             <RadioGroup
                 name="layout"
                 type="inline"
@@ -45,7 +43,7 @@ const Options = (props) => {
                 label="disabled"
                 onChange={onChangeOption}
             />
-        </FRC.Form>
+        </Form>
     );
 
     return (

@@ -2,9 +2,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import FRC from 'formsy-react-components';
-
-const { Checkbox, CheckboxGroup, Input, RadioGroup, Row, Select, File, Textarea } = FRC;
+import { Checkbox, CheckboxGroup, Input, RadioGroup, Row, Select, File, Textarea, Form } from 'formsy-react-components';
 
 const Playground = (props) => {
 
@@ -58,7 +56,7 @@ const Playground = (props) => {
     ];
 
     return (
-        <FRC.Form
+        <Form
             onSubmit={submitForm}
             layout={layoutChoice}
             validateOnSubmit={validateOnSubmitChoice}
@@ -293,7 +291,7 @@ const Playground = (props) => {
                     <input className="btn btn-primary" formNoValidate={true} type="submit" defaultValue="Submit" />
                 </Row>
             </fieldset>
-        </FRC.Form>
+        </Form>
     );
 }
 
