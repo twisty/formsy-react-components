@@ -22,7 +22,7 @@ The horizontal layout aims to mirror the [Bootstrap horizontal form layout](http
 
 This layout requires that the enclosing form has the `form-horizontal` classname applied.
 
-The default classes are `col-sm-3` for the labels, and `col-sm-9` for the element. It is possible to modify these classes, see [Modifying CSS class names](class-names.md).
+The default classes are `col-sm-3` for the labels, and `col-sm-9` for the element. It is possible to modify these classes, see [Modifying CSS class names](css-classes.md).
 
 ## Vertical layout
 
