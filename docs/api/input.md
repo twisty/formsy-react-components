@@ -16,19 +16,21 @@ Type: _Enum_
 
 **type** should be one of the following values:
 
-* 'color'
-* 'date'
-* 'datetime'
-* 'datetime-local'
-* 'email'
-* 'hidden'
-* 'month'
-* 'number'
-* 'password'
-* 'range'
-* 'search'
-* 'tel'
-* 'text'
-* 'time'
-* 'url'
-* 'week'
+| Value          | Type   |
+| -------------- | ------ |
+| color          | String |
+| date           | String |
+| datetime       | String |
+| datetime-local | String |
+| email          | String |
+| hidden         | String |
+| month          | String |
+| number         | String |
+| password       | String |
+| range          | String |
+| search         | String |
+| tel            | String |
+| text           | String |
+| time           | String |
+| url            | String |
+| week           | String |

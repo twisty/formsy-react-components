@@ -26,5 +26,7 @@ Type: _Enum_
 
 **type** should be one of the following values:
 
-* 'inline'
-* 'stacked'
+| Value   | Type   |
+| ------- | ------ |
+| inline  | String |
+| stacked | String |

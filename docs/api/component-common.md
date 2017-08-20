@@ -18,6 +18,8 @@ Type: _Enum_
 
 **layout** should be one of the following values:
 
-* 'horizontal'
-* 'vertical'
-* 'elementOnly'
+| Value       | Type   |
+| ----------- | ------ |
+| horizontal  | String |
+| vertical    | String |
+| elementOnly | String |
