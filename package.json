@@ -32,10 +32,19 @@
     "url": "https://github.com/twisty/formsy-react-components/issues"
   },
   "jest": {
-    "testRegex": "/__tests__/.*\\-test\\.js$"
+      "roots": [
+          "./src",
+          "./examples"
+      ],
+      "testPathIgnorePatterns": [
+          "<rootDir>/src/components/__tests__/component.js"
+      ],
+      "moduleNameMapper": {
+          "formsy-react-components": "<rootDir>/src/main.js"
+      }
   },
   "peerDependencies": {
-    "formsy-react": "^0.19.5",
+    "formsy-react": "^1.0.0",
     "react": "^15.4.0"
   },
   "dependencies": {
@@ -57,7 +66,7 @@
     "enzyme": "^2.9.1",
     "eslint": "^4.5.0",
     "eslint-plugin-react": "^7.2.1",
-    "formsy-react": "^0.19.5",
+    "formsy-react": "^1.0.0",
     "gh-pages": "^1.0.0",
     "jest": "^20.0.4",
     "react": "^15.6.1",
