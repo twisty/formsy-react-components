@@ -1,7 +1,15 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { HOC as FormsyHOC } from 'formsy-react';
+import { Wrapper as FormsyHOC } from 'formsy-react';
 import { styleClassNames } from '../components/prop-types';
+
+function getDisplayName(component) {
+    return (
+        component.displayName ||
+        component.name ||
+        (typeof component === 'string' ? component : 'Component')
+    );
+}
 
 // Component HOC
 // -------------
@@ -216,6 +224,8 @@ const FormsyReactComponent = (ComposedComponent) => {
         id: '',
         label: ''
     };
+
+    ComponentHOC.displayName = `FRC(${getDisplayName(ComposedComponent)})`;
 
     return FormsyHOC(ComponentHOC);
 
