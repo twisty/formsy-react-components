@@ -72,7 +72,7 @@ class MyForm extends Component {
   let frcForm = null;
 
   const resetForm = () => {
-    const formsyForm = frcform.formsyForm; // get the ref to the formsy-react form
+    const formsyForm = frcForm.formsyForm; // get the ref to the formsy-react form
     formsyForm.reset(); // call a formsy-react form method
   }
 
