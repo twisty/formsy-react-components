@@ -1,13 +1,13 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import { Wrapper as FormsyHOC } from 'formsy-react';
+import {Wrapper as FormsyHOC} from 'formsy-react';
 import styleClassNames from '../components/prop-types';
 
 function getDisplayName(component) {
   return (
     component.displayName ||
-        component.name ||
-        (typeof component === 'string' ? component : 'Component')
+    component.name ||
+    (typeof component === 'string' ? component : 'Component')
   );
 }
 
@@ -22,13 +22,14 @@ function getDisplayName(component) {
 // This allows us to set these properties 'as a whole' for each component in the
 // the form, while retaining the ability to override the prop on a per-component
 // basis.
-const FormsyReactComponent = (ComposedComponent) => {
+const FormsyReactComponent = ComposedComponent => {
   class ComponentHOC extends Component {
     // Use the following value for layout:
     // 1. layout prop (if supplied)
     // 2. [else] layout context (if defined)
     // 3. [else] 'horizontal' (default value)
-    getLayout = () => this.props.layout || (this.context.layout || 'horizontal')
+    getLayout = () =>
+      this.props.layout || (this.context.layout || 'horizontal');
 
     // Use the following value for validatePristine:
     // 1. validatePristine prop (if supplied)
@@ -39,7 +40,7 @@ const FormsyReactComponent = (ComposedComponent) => {
         return this.props.validatePristine;
       }
       return this.context.validatePristine || false;
-    }
+    };
 
     // Use the following value for validateOnSubmit:
     // 1. validateOnSubmit prop (if supplied)
@@ -50,7 +51,7 @@ const FormsyReactComponent = (ComposedComponent) => {
         return this.props.validateOnSubmit;
       }
       return this.context.validateOnSubmit || false;
-    }
+    };
 
     // getId
     // -----
@@ -61,29 +62,32 @@ const FormsyReactComponent = (ComposedComponent) => {
     // If we don't explicitly pass an `id` prop, we generate one based on the
     // `name` and `label` properties.
     getId = () => {
-      const { id, label, name } = this.props;
+      const {id, label, name} = this.props;
       if (id !== '') {
         return id;
       }
       return [
         'frc',
-        name.split('[').join('_').replace(']', ''),
+        name
+          .split('[')
+          .join('_')
+          .replace(']', ''),
         this.hashString(JSON.stringify(label)),
       ].join('-');
-    }
+    };
 
     // Combine a parent context value with a component prop value.
     // This is used for CSS classnames, where the value is passed to `JedWatson/classnames`.
-    combineContextWithProp = key => [this.context[key], this.props[key]]
+    combineContextWithProp = key => [this.context[key], this.props[key]];
 
-    hashString = (string) => {
+    hashString = string => {
       let hash = 0;
       for (let i = 0; i < string.length; i += 1) {
         // eslint-disable-next-line no-bitwise
-        hash = (((hash << 5) - hash) + string.charCodeAt(i)) & 0xFFFFFFFF;
+        hash = ((hash << 5) - hash + string.charCodeAt(i)) & 0xffffffff;
       }
       return hash;
-    }
+    };
 
     // Determine whether to show errors, or not.
     shouldShowErrors = () => {
@@ -97,14 +101,16 @@ const FormsyReactComponent = (ComposedComponent) => {
           return false;
         }
       }
-      return (this.props.isValid() === false);
-    }
+      return this.props.isValid() === false;
+    };
 
     // We pass through all unknown props, but delete some formsy HOC props
     // that we know we don't need.
     render() {
       const cssProps = {
-        elementWrapperClassName: this.combineContextWithProp('elementWrapperClassName'),
+        elementWrapperClassName: this.combineContextWithProp(
+          'elementWrapperClassName',
+        ),
         labelClassName: this.combineContextWithProp('labelClassName'),
         rowClassName: this.combineContextWithProp('rowClassName'),
       };
@@ -154,11 +160,7 @@ const FormsyReactComponent = (ComposedComponent) => {
       delete props.validateOnSubmit;
       delete props.validatePristine;
 
-      return (
-        <ComposedComponent
-          {...props}
-        />
-      );
+      return <ComposedComponent {...props} />;
     }
   }
 
@@ -175,7 +177,6 @@ const FormsyReactComponent = (ComposedComponent) => {
   };
 
   ComponentHOC.propTypes = {
-
     ...formsyPropTypes,
     ...styleClassNames,
 

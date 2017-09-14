@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import Formsy from 'formsy-react';
 import OptionsProvider from './hoc/options-provider';
@@ -14,13 +14,13 @@ class Form extends Component {
     delete formsyProps.validateOnSubmit;
 
     return (
-      <OptionsProvider
-        {...this.props}
-      >
+      <OptionsProvider {...this.props}>
         <Formsy.Form
           {...formsyProps}
           className={`form-${this.props.layout}`}
-          ref={(formsyForm) => { this.formsyForm = formsyForm; }}
+          ref={formsyForm => {
+            this.formsyForm = formsyForm;
+          }}
         >
           {this.props.children}
         </Formsy.Form>

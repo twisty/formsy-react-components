@@ -1,7 +1,7 @@
 /* globals jest, describe, it, expect, beforeEach */
 
 import React from 'react';
-import { mount } from 'enzyme';
+import {mount} from 'enzyme';
 import Input from '../input';
 import componentTest from './component';
 
@@ -12,33 +12,22 @@ describe('The <Input /> component', () => {
 
   describe('the initial render of the form control', () => {
     it('is `type="text"` by default', () => {
-      const wrapper = mount(
-        <Input
-          name="myTestInput"
-        />,
-      );
+      const wrapper = mount(<Input name="myTestInput" />);
       expect(wrapper.find('input').prop('type')).toEqual('text');
     });
 
     it('has an initial value passed by prop', () => {
-      const wrapper = mount(
-        <Input
-          name="myTestInput"
-          value="Initial value"
-        />,
-      );
+      const wrapper = mount(<Input name="myTestInput" value="Initial value" />);
       expect(wrapper.find('input').prop('value')).toEqual('Initial value');
     });
 
     it('has a placeholder value passed by prop', () => {
       const wrapper = mount(
-        <Input
-          name="myTestInput"
-          value=""
-          placeholder="My placeholder"
-        />,
+        <Input name="myTestInput" value="" placeholder="My placeholder" />,
       );
-      expect(wrapper.find('input').prop('placeholder')).toEqual('My placeholder');
+      expect(wrapper.find('input').prop('placeholder')).toEqual(
+        'My placeholder',
+      );
     });
   });
 
@@ -67,11 +56,17 @@ describe('The <Input /> component', () => {
     });
 
     // http://getbootstrap.com/css/#forms-help-text
-    it('has an `aria-describedby` prop on the form control when help text is present');
+    it(
+      'has an `aria-describedby` prop on the form control when help text is present',
+    );
 
-    it('has an `aria-invalid="true"` prop on the form control when validation has failed');
+    it(
+      'has an `aria-invalid="true"` prop on the form control when validation has failed',
+    );
 
-    it('has an `aria-required="true"` prop on the form control when validation is required');
+    it(
+      'has an `aria-required="true"` prop on the form control when validation is required',
+    );
 
     /*
      * aria-hidden="true" on status glyphicons
@@ -121,7 +116,7 @@ describe('The <Input /> component', () => {
 
     // Test that this is a controlled component.
     it('updates the input value from props', () => {
-      wrapper.setProps({ value: 'Changed value' });
+      wrapper.setProps({value: 'Changed value'});
       expect(inputNode.prop('value')).toEqual('Changed value');
     });
 
@@ -166,11 +161,7 @@ describe('The <Input /> component', () => {
   describe('for "hidden" type', () => {
     it('doesn’t render a label', () => {
       const wrapper = mount(
-        <Input
-          name="myTestInput"
-          type="hidden"
-          label="My Label"
-        />,
+        <Input name="myTestInput" type="hidden" label="My Label" />,
       );
       expect(wrapper.find('label').length).toBe(0);
     });

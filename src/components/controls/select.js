@@ -1,20 +1,22 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import ControlCommon from './control-common';
 
 class SelectControl extends Component {
-  initElementRef = (element) => {
+  initElementRef = element => {
     this.element = element;
-  }
+  };
 
   renderOption = (item, key) => {
     const optionProps = Object.assign({}, item);
     delete optionProps.label;
     delete optionProps.group;
     return (
-      <option key={key} {...optionProps}>{item.label}</option>
+      <option key={key} {...optionProps}>
+        {item.label}
+      </option>
     );
-  }
+  };
 
   render() {
     const options = this.props.options;
@@ -27,7 +29,9 @@ class SelectControl extends Component {
 
     if (groups.length === 0) {
       // eslint-disable-next-line react/no-array-index-key
-      optionNodes = options.map((item, index) => this.renderOption(item, index));
+      optionNodes = options.map((item, index) =>
+        this.renderOption(item, index),
+      );
     } else {
       // For items without groups.
       const itemsWithoutGroup = options.filter(item => !item.group);
@@ -40,10 +44,16 @@ class SelectControl extends Component {
       groups.forEach((group, groupIndex) => {
         const groupItems = options.filter(item => item.group === group);
 
-        const groupOptionNodes = groupItems.map((item, index) => this.renderOption(item, `${groupIndex}-${index}`));
+        const groupOptionNodes = groupItems.map((item, index) =>
+          this.renderOption(item, `${groupIndex}-${index}`),
+        );
 
         // eslint-disable-next-line react/no-array-index-key
-        optionNodes.push(<optgroup label={group} key={groupIndex}>{groupOptionNodes}</optgroup>);
+        optionNodes.push(
+          <optgroup label={group} key={groupIndex}>
+            {groupOptionNodes}
+          </optgroup>,
+        );
       });
     }
 

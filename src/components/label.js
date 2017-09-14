@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames/dedupe';
 import RequiredSymbol from './required-symbol';
 
-const Label = (props) => {
-  const { layout, label, htmlFor, labelClassName, fakeLabel, required } = props;
+const Label = props => {
+  const {layout, label, htmlFor, labelClassName, fakeLabel, required} = props;
 
   if (layout === 'elementOnly') {
     return null;
@@ -12,16 +12,13 @@ const Label = (props) => {
 
   const labelClassNames = classNames([
     'control-label',
-    (layout === 'horizontal') ? 'col-sm-3' : '',
+    layout === 'horizontal' ? 'col-sm-3' : '',
     labelClassName,
   ]);
 
   if (fakeLabel) {
     return (
-      <div
-        className={labelClassNames}
-        data-required={required}
-      >
+      <div className={labelClassNames} data-required={required}>
         <strong>
           {label}
           <RequiredSymbol required={required} />

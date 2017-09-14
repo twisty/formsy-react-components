@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import debounce from 'lodash.debounce';
 import ComponentCommon from './component-common';
@@ -10,50 +10,53 @@ import TextareaControl from './controls/textarea';
 class Textarea extends Component {
   constructor(props) {
     super(props);
-    this.state = { value: props.value };
-    this.changeDebounced = debounce(props.onSetValue, props.changeDebounceInterval);
+    this.state = {value: props.value};
+    this.changeDebounced = debounce(
+      props.onSetValue,
+      props.changeDebounceInterval,
+    );
     this.blurDebounced = debounce(props.onSetValue, props.blurDebounceInterval);
   }
 
-  componentWillReceiveProps = (nextProps) => {
+  componentWillReceiveProps = nextProps => {
     const isValueChanging = nextProps.value !== this.props.value;
     if (isValueChanging) {
-      this.setState({ value: nextProps.value });
+      this.setState({value: nextProps.value});
       this.props.onSetValue(nextProps.value);
     }
-  }
+  };
 
-  shouldUpdateOn = (eventName) => {
+  shouldUpdateOn = eventName => {
     const updateOnEventNames = this.props.updateOn.split(' ');
     return updateOnEventNames.includes(eventName);
-  }
+  };
 
-  handleChange = (event) => {
+  handleChange = event => {
     const value = event.currentTarget.value;
-    this.setState({ value });
+    this.setState({value});
     if (this.shouldUpdateOn('change')) {
       this.changeDebounced(value);
     }
     this.props.onChange(this.props.name, value);
-  }
+  };
 
-  handleBlur = (event) => {
+  handleBlur = event => {
     const value = event.currentTarget.value;
-    this.setState({ value });
+    this.setState({value});
     if (this.shouldUpdateOn('blur')) {
       this.changeDebounced.cancel();
       this.blurDebounced(value);
     }
     this.props.onBlur(this.props.name, value);
-  }
+  };
 
-  initElementRef = (control) => {
+  initElementRef = control => {
     this.element = control ? control.element : null;
-  }
+  };
 
   render() {
     const inputProps = Object.assign({}, this.props);
-    Object.keys(ComponentCommon.propTypes).forEach((key) => {
+    Object.keys(ComponentCommon.propTypes).forEach(key => {
       delete inputProps[key];
     });
     delete inputProps.blurDebounceInterval;
@@ -75,13 +78,12 @@ class Textarea extends Component {
     }
 
     return (
-      <Row
-        {...this.props}
-        htmlFor={this.props.id}
-      >
+      <Row {...this.props} htmlFor={this.props.id}>
         {element}
         {this.props.help ? <Help help={this.props.help} /> : null}
-        {this.props.showErrors ? <ErrorMessages messages={this.props.errorMessages} /> : null}
+        {this.props.showErrors ? (
+          <ErrorMessages messages={this.props.errorMessages} />
+        ) : null}
       </Row>
     );
   }

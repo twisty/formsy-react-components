@@ -1,13 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const RequiredSymbol = (props) => {
+const RequiredSymbol = props => {
   if (props.required === false) {
     return null;
   }
-  return (
-    <span className="required-symbol">{props.symbol}</span>
-  );
+  return <span className="required-symbol">{props.symbol}</span>;
 };
 
 RequiredSymbol.propTypes = {

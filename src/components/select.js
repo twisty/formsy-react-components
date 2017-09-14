@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import ComponentCommon from './component-common';
 import ErrorMessages from './error-messages';
@@ -7,55 +7,52 @@ import Row from './row';
 import SelectControl from './controls/select';
 
 class Select extends Component {
-    handleChange = (event) => {
-      const target = event.currentTarget;
-      let value;
-      if (this.props.multiple) {
-        value = target.options.filter(
-          option => option.selected,
-        ).map(
-          option => option.value,
-        );
-      } else {
-        value = target.value;
-      }
-      this.props.onSetValue(value);
-      this.props.onChange(this.props.name, value);
+  handleChange = event => {
+    const target = event.currentTarget;
+    let value;
+    if (this.props.multiple) {
+      value = target.options
+        .filter(option => option.selected)
+        .map(option => option.value);
+    } else {
+      value = target.value;
+    }
+    this.props.onSetValue(value);
+    this.props.onChange(this.props.name, value);
+  };
+
+  initElementRef = control => {
+    this.element = control ? control.element : null;
+  };
+
+  render() {
+    const inputProps = Object.assign({}, this.props);
+    Object.keys(ComponentCommon.propTypes).forEach(key => {
+      delete inputProps[key];
+    });
+
+    const control = (
+      <SelectControl
+        {...inputProps}
+        onChange={this.handleChange}
+        ref={this.initElementRef}
+      />
+    );
+
+    if (this.props.layout === 'elementOnly') {
+      return control;
     }
 
-    initElementRef = (control) => {
-      this.element = control ? control.element : null;
-    }
-
-    render() {
-      const inputProps = Object.assign({}, this.props);
-      Object.keys(ComponentCommon.propTypes).forEach((key) => {
-        delete inputProps[key];
-      });
-
-      const control = (
-        <SelectControl
-          {...inputProps}
-          onChange={this.handleChange}
-          ref={this.initElementRef}
-        />
-      );
-
-      if (this.props.layout === 'elementOnly') {
-        return control;
-      }
-
-      return (
-        <Row
-          {...this.props}
-          htmlFor={this.props.id}
-        >
-          {control}
-          {this.props.help ? <Help help={this.props.help} /> : null}
-          {this.props.showErrors ? <ErrorMessages messages={this.props.errorMessages} /> : null}
-        </Row>
-      );
-    }
+    return (
+      <Row {...this.props} htmlFor={this.props.id}>
+        {control}
+        {this.props.help ? <Help help={this.props.help} /> : null}
+        {this.props.showErrors ? (
+          <ErrorMessages messages={this.props.errorMessages} />
+        ) : null}
+      </Row>
+    );
+  }
 }
 
 Select.propTypes = {

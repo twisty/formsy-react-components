@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Formsy from 'formsy-react';
-import { mount } from 'enzyme';
+import {mount} from 'enzyme';
 import FormsyReactComponent from '../component';
 
 describe('The component HOC', () => {
@@ -15,20 +15,14 @@ describe('The component HOC', () => {
   });
 
   describe('props passed to the HOC', () => {
-    const TestComponent = (props) => {
-      const InnerComponent = () => (
-        <div />
-      );
-      return (
-        <InnerComponent {...props} />
-      );
+    const TestComponent = props => {
+      const InnerComponent = () => <div />;
+      return <InnerComponent {...props} />;
     };
     const FRC = FormsyReactComponent(TestComponent);
     const wrapper = mount(
       <Formsy.Form>
-        <FRC
-          name="testComponent"
-        />
+        <FRC name="testComponent" />
       </Formsy.Form>,
     );
     const componentProps = wrapper.find(TestComponent).props();
@@ -78,7 +72,9 @@ describe('The component HOC', () => {
     });
 
     describe('`validateOnSubmit`', () => {
-      it('determines whether to hide errors until an attempt to submit the form is made');
+      it(
+        'determines whether to hide errors until an attempt to submit the form is made',
+      );
       it('is merged with a master value set in a parent context');
       it('is not passed through to the composed component');
     });
@@ -138,7 +134,9 @@ describe('The component HOC', () => {
 
     describe('`onSetValue`', () => {
       it('is a function');
-      it('is just formsy setValue, with name changed to fit with project naming convention');
+      it(
+        'is just formsy setValue, with name changed to fit with project naming convention',
+      );
     });
   });
 });

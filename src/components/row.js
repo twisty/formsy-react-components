@@ -4,17 +4,20 @@ import classNames from 'classnames/dedupe';
 import styleClassNames from './prop-types';
 import Label from './label';
 
-const Row = (props) => {
-  const { elementWrapperClassName, required, rowClassName, showErrors, layout, label } = props;
+const Row = props => {
+  const {
+    elementWrapperClassName,
+    required,
+    rowClassName,
+    showErrors,
+    layout,
+    label,
+  } = props;
 
   let element = props.children;
 
   if (layout === 'elementOnly') {
-    return (
-      <span>
-        {element}
-      </span>
-    );
+    return <span>{element}</span>;
   }
 
   const cssClasses = {
@@ -29,7 +32,7 @@ const Row = (props) => {
 
   // We should render the label if there is label text defined, or if the
   // component is required (so a required symbol is displayed in the label tag)
-  const shouldRenderLabel = ((label !== null) || required);
+  const shouldRenderLabel = label !== null || required;
 
   if (layout === 'horizontal') {
     // Horizontal layout needs a 'row' class for Bootstrap 4
@@ -43,9 +46,7 @@ const Row = (props) => {
     cssClasses.elementWrapper.push(elementWrapperClassName);
 
     element = (
-      <div className={classNames(cssClasses.elementWrapper)}>
-        {element}
-      </div>
+      <div className={classNames(cssClasses.elementWrapper)}>{element}</div>
     );
   }
 
@@ -53,7 +54,7 @@ const Row = (props) => {
 
   return (
     <div className={classNames(cssClasses.row)}>
-      {(shouldRenderLabel) ? <Label {...props} /> : null}
+      {shouldRenderLabel ? <Label {...props} /> : null}
       {element}
     </div>
   );
