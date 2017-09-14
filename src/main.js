@@ -19,8 +19,8 @@ export const RadioGroup = FormsyReactComponent(RadioGroupComponent);
 export const Select = FormsyReactComponent(SelectComponent);
 export const Textarea = FormsyReactComponent(TextareaComponent);
 export {
-    Icon,
-    Form,
-    OptionsProvider,
-    Row
+  Icon,
+  Form,
+  OptionsProvider,
+  Row,
 };

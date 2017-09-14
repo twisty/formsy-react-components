@@ -4,39 +4,38 @@ import Formsy from 'formsy-react';
 import OptionsProvider from './hoc/options-provider';
 
 class Form extends Component {
+  render() {
+    const formsyProps = Object.assign({}, this.props);
+    delete formsyProps.elementWrapperClassName;
+    delete formsyProps.labelClassName;
+    delete formsyProps.layout;
+    delete formsyProps.rowClassName;
+    delete formsyProps.validatePristine;
+    delete formsyProps.validateOnSubmit;
 
-    render() {
-        let formsyProps = Object.assign({}, this.props);
-        delete formsyProps.elementWrapperClassName;
-        delete formsyProps.labelClassName;
-        delete formsyProps.layout;
-        delete formsyProps.rowClassName;
-        delete formsyProps.validatePristine;
-        delete formsyProps.validateOnSubmit;
-
-        return (
-            <OptionsProvider
-                {...this.props}
-            >
-                <Formsy.Form
-                    {...formsyProps}
-                    className={'form-' + this.props.layout}
-                    ref={(formsyForm) => { this.formsyForm = formsyForm }}
-                >
-                    {this.props.children}
-                </Formsy.Form>
-            </OptionsProvider>
-        );
-    }
+    return (
+      <OptionsProvider
+        {...this.props}
+      >
+        <Formsy.Form
+          {...formsyProps}
+          className={`form-${this.props.layout}`}
+          ref={(formsyForm) => { this.formsyForm = formsyForm; }}
+        >
+          {this.props.children}
+        </Formsy.Form>
+      </OptionsProvider>
+    );
+  }
 }
 
 Form.propTypes = {
-    layout: PropTypes.oneOf(['horizontal', 'vertical', 'elementOnly']).isRequired,
-    children: PropTypes.node
-}
+  layout: PropTypes.oneOf(['horizontal', 'vertical', 'elementOnly']).isRequired,
+  children: PropTypes.node.isRequired,
+};
 
 Form.defaultProps = {
-    layout: 'horizontal'
-}
+  layout: 'horizontal',
+};
 
 export default Form;

@@ -1,26 +1,33 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ControlCommon from './control-common';
 
-const TextareaControl = (props) => {
-    return (
+class TextareaControl extends Component {
+    initElementRef = (element) => {
+      this.element = element;
+    }
+
+    render() {
+      return (
         <textarea
-            {...props}
-        ></textarea>
-    );
+          {...this.props}
+          ref={this.initElementRef}
+        />
+      );
+    }
 }
 
 TextareaControl.propTypes = {
-    ...ControlCommon.propTypes,
-    className: PropTypes.string,
-    value: PropTypes.string
-}
+  ...ControlCommon.propTypes,
+  className: PropTypes.string,
+  value: PropTypes.string,
+};
 
 TextareaControl.defaultProps = {
-    className: 'form-control',
-    cols: 0, // React doesn't render the cols attribute if it is zero
-    rows: 3,
-    value: ''
-}
+  className: 'form-control',
+  cols: 0, // React doesn't render the cols attribute if it is zero
+  rows: 3,
+  value: '',
+};
 
 export default TextareaControl;
