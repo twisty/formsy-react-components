@@ -1,17 +1,24 @@
 # Common Component Props
 
 ## Props
-| Name                              | Type   | Default  | Required | Description |
-| --------------------------------- | ------ | -------- | -------- | ----------- |
-| errorMessages                     | Array  |          | false    |             |
-| help                              | String |          | false    |             |
-| label                             | String |          | false    |             |
-| [layout](#markdown-header-layout) | Enum   |          | false    |             |
-| showErrors                        | Bool   | false    | false    |             |
-| onChange                          | Func   | () => {} | false    |             |
-| onSetValue                        | Func   | () => {} | false    |             |
+| Name                                             | Type    | Default      | Required | Description |
+| ------------------------------------------------ | ------- | ------------ | -------- | ----------- |
+| onChange                                         | Func    | () => {}     | false    |             |
+| onSetValue                                       | Func    | () => {}     | false    |             |
+| [errorMessages](#markdown-header-error-messages) | Arrayof | []           | false    |             |
+| help                                             | String  | null         | false    |             |
+| label                                            | String  | null         | false    |             |
+| [layout](#markdown-header-layout)                | Enum    | 'horizontal' | false    |             |
+| showErrors                                       | Bool    | true         | false    |             |
 
 ## Complex Props
+
+### errorMessages
+Type: _Arrayof_
+
+**errorMessages** is an array of the following type:
+node
+--------------------------------------------------------------------------------
 
 ### layout
 Type: _Enum_

@@ -4,7 +4,7 @@
 | Name                                | Type    | Default | Required | Description |
 | ----------------------------------- | ------- | ------- | -------- | ----------- |
 | [options](#markdown-header-options) | Arrayof | []      | false    |             |
-| value                               | Array   | []      | false    |             |
+| [value](#markdown-header-value)     | Arrayof | []      | false    |             |
 
 ## Complex Props
 
@@ -18,3 +18,12 @@ Type: _Arrayof_
 | disabled | Bool   | false    |
 | value    | String | false    |
 | label    | String | false    |
+| key      | String | false    |
+
+--------------------------------------------------------------------------------
+
+### value
+Type: _Arrayof_
+
+**value** is an array of the following type:
+string
