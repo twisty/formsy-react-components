@@ -69,7 +69,7 @@ Select.propTypes = {
 };
 
 Select.defaultProps = {
-  ...ComponentCommon.defaultTypes,
+  ...ComponentCommon.defaultProps,
   options: [],
 };
 
