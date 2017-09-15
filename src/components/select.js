@@ -11,7 +11,7 @@ class Select extends Component {
     const target = event.currentTarget;
     let value;
     if (this.props.multiple) {
-      value = target.options
+      value = Array.from(target.options)
         .filter(option => option.selected)
         .map(option => option.value);
     } else {
