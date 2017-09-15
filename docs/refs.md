@@ -48,9 +48,9 @@ class MyForm extends Component {
 
 Each component exposes references to it’s form control DOM elements.
 
-For components that wrap a single element (`<Input />`, `<Select />`, `<Textarea />` etc.) the `ref` is named "`element`".
+For components that wrap a single element (`<Input />`, `<Select />`, `<Textarea />` etc.) the `ref` is named “`element`”.
 
-For components that wrap multiple form elements (`<CheckboxGroup />`, `<RadioGroup />`) the ref is named `elements`, this is an object where each form control is keyed by the `value` for that element.
+For components that wrap multiple form elements (`<CheckboxGroup />`, `<RadioGroup />`) the ref is named “`elements`”, this is an object where each form control is keyed by the `value` for that element.
 
 ```jsx
 // Component with single control
