@@ -62,15 +62,12 @@ class SelectControl extends Component {
     delete selectProps.options;
 
     return (
-      /* eslint-disable prettier/prettier */
       <select
         className="form-control"
         {...selectProps}
-        ref={this.initElementRef}
-      >
+        ref={this.initElementRef}>
         {optionNodes}
       </select>
-      /* eslint-enable */
     );
   }
 }

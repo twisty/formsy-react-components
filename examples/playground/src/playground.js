@@ -81,15 +81,13 @@ const Playground = props => {
   };
 
   return (
-    /* eslint-disable prettier/prettier */
     <Form
       onSubmit={submitForm}
       layout={layoutChoice}
       validateOnSubmit={validateOnSubmitChoice}
       validatePristine={validatePristineChoice}
       disabled={disabledChoice}
-      ref={refCallback}
-    >
+      ref={refCallback}>
       <fieldset>
         <legend>Input types</legend>
         <Input name="secret" value="I'm hidden!" type="hidden" />
@@ -331,7 +329,6 @@ const Playground = props => {
         </Row>
       </fieldset>
     </Form>
-    /* eslint-enable */
   );
 };
 
