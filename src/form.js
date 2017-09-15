@@ -13,15 +13,14 @@ class Form extends Component {
     delete formsyProps.validatePristine;
     delete formsyProps.validateOnSubmit;
 
+    const refCallback = formsyForm => {
+      this.formsyForm = formsyForm;
+    };
+
+    const className = `form-${this.props.layout}`;
     return (
       <OptionsProvider {...this.props}>
-        <Formsy.Form
-          {...formsyProps}
-          className={`form-${this.props.layout}`}
-          ref={formsyForm => {
-            this.formsyForm = formsyForm;
-          }}
-        >
+        <Formsy.Form {...formsyProps} className={className} ref={refCallback}>
           {this.props.children}
         </Formsy.Form>
       </OptionsProvider>

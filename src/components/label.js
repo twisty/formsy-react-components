@@ -28,6 +28,7 @@ const Label = props => {
   }
 
   return (
+    /* eslint-disable prettier/prettier */
     <label
       className={labelClassNames}
       data-required={required}
@@ -36,6 +37,7 @@ const Label = props => {
       {label}
       <RequiredSymbol required={required} />
     </label>
+    /* eslint-enable */
   );
 };
 

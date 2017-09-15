@@ -48,12 +48,13 @@ class SelectControl extends Component {
           this.renderOption(item, `${groupIndex}-${index}`),
         );
 
-        // eslint-disable-next-line react/no-array-index-key
+        /* eslint-disable react/no-array-index-key */
         optionNodes.push(
           <optgroup label={group} key={groupIndex}>
             {groupOptionNodes}
           </optgroup>,
         );
+        /* eslint-enable */
       });
     }
 
@@ -61,6 +62,7 @@ class SelectControl extends Component {
     delete selectProps.options;
 
     return (
+      /* eslint-disable prettier/prettier */
       <select
         className="form-control"
         {...selectProps}
@@ -68,6 +70,7 @@ class SelectControl extends Component {
       >
         {optionNodes}
       </select>
+      /* eslint-enable */
     );
   }
 }

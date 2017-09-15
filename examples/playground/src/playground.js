@@ -76,16 +76,19 @@ const Playground = props => {
     ...selectOptions,
   ];
 
+  const refCallback = form => {
+    myform = form;
+  };
+
   return (
+    /* eslint-disable prettier/prettier */
     <Form
       onSubmit={submitForm}
       layout={layoutChoice}
       validateOnSubmit={validateOnSubmitChoice}
       validatePristine={validatePristineChoice}
       disabled={disabledChoice}
-      ref={form => {
-        myform = form;
-      }}
+      ref={refCallback}
     >
       <fieldset>
         <legend>Input types</legend>
@@ -328,6 +331,7 @@ const Playground = props => {
         </Row>
       </fieldset>
     </Form>
+    /* eslint-enable */
   );
 };
 
