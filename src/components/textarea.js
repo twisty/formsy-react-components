@@ -56,7 +56,8 @@ class Textarea extends Component {
     });
     delete inputProps.blurDebounceInterval;
     delete inputProps.changeDebounceInterval;
-    delete inputProps.updateOn;
+    delete inputProps.updateOnBlur;
+    delete inputProps.updateOnChange;
 
     const element = (
       <TextareaControl
