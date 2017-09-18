@@ -26,15 +26,10 @@ class Textarea extends Component {
     }
   };
 
-  shouldUpdateOn = eventName => {
-    const updateOnEventNames = this.props.updateOn.split(' ');
-    return updateOnEventNames.includes(eventName);
-  };
-
   handleChange = event => {
     const value = event.currentTarget.value;
     this.setState({value});
-    if (this.shouldUpdateOn('change')) {
+    if (this.props.updateOnChange) {
       this.changeDebounced(value);
     }
     this.props.onChange(this.props.name, value);
@@ -43,7 +38,7 @@ class Textarea extends Component {
   handleBlur = event => {
     const value = event.currentTarget.value;
     this.setState({value});
-    if (this.shouldUpdateOn('blur')) {
+    if (this.props.updateOnBlur) {
       this.changeDebounced.cancel();
       this.blurDebounced(value);
     }
@@ -94,14 +89,16 @@ Textarea.propTypes = {
   ...TextareaControl.propTypes,
   blurDebounceInterval: PropTypes.number,
   changeDebounceInterval: PropTypes.number,
-  updateOn: PropTypes.string,
+  updateOnBlur: PropTypes.bool,
+  updateOnChange: PropTypes.bool,
   value: PropTypes.string,
   onBlur: PropTypes.func,
 };
 
 Textarea.defaultProps = {
   ...ComponentCommon.defaultProps,
-  updateOn: 'blur change',
+  updateOnBlur: true,
+  updateOnChange: true,
   blurDebounceInterval: 0,
   changeDebounceInterval: 500,
   onBlur: () => {},

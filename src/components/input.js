@@ -28,15 +28,10 @@ class Input extends Component {
     }
   };
 
-  shouldUpdateOn = eventName => {
-    const updateOnEventNames = this.props.updateOn.split(' ');
-    return updateOnEventNames.includes(eventName);
-  };
-
   handleChange = event => {
     const value = event.currentTarget.value;
     this.setState({value});
-    if (this.shouldUpdateOn('change')) {
+    if (this.props.updateOnChange) {
       this.changeDebounced(value);
     }
     this.props.onChange(this.props.name, value);
@@ -45,7 +40,7 @@ class Input extends Component {
   handleBlur = event => {
     const value = event.currentTarget.value;
     this.setState({value});
-    if (this.shouldUpdateOn('blur')) {
+    if (this.props.updateOnBlur) {
       this.changeDebounced.cancel();
       this.blurDebounced(value);
     }
@@ -67,7 +62,8 @@ class Input extends Component {
     delete inputProps.buttonBefore;
     delete inputProps.blurDebounceInterval;
     delete inputProps.changeDebounceInterval;
-    delete inputProps.updateOn;
+    delete inputProps.updateOnBlur;
+    delete inputProps.updateOnChange;
     delete inputProps.value;
     delete inputProps.onBlur;
 
@@ -140,7 +136,8 @@ Input.propTypes = {
     'url',
     'week',
   ]),
-  updateOn: PropTypes.string,
+  updateOnBlur: PropTypes.bool,
+  updateOnChange: PropTypes.bool,
   value: PropTypes.string,
   onBlur: PropTypes.func,
 };
@@ -150,7 +147,8 @@ Input.defaultProps = {
   ...InputGroup.defaultProps,
   type: 'text',
   value: '',
-  updateOn: 'blur change',
+  updateOnBlur: true,
+  updateOnChange: true,
   blurDebounceInterval: 0,
   changeDebounceInterval: 500,
   onBlur: () => {},

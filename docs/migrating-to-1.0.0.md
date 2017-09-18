@@ -46,3 +46,21 @@ Checkbox.propTypes = {
     value: PropTypes.bool         // checkbox checked
 };
 ```
+
+## Input and Textarea components
+
+It is now possible to modify when the `<Input />` and `<Textarea />` components notify changes in their value.
+
+You can also specify a delay to wait before the change in value is triggered. This is useful to prevent validation running on every keystroke.
+
+By default, we update with both `change` and `blur` events, but wait for a half-second after the last keystroke before triggering a change event. 
+
+Props:
+
+```
+  updateOnBlur   // default: true
+  updateOnChange // default: true
+
+  blurDebounceInterval   // default: 0
+  changeDebounceInterval // default: 500
+```
