@@ -59,4 +59,4 @@ const MyForm = (props) => {
 Documentation is a work in progress!
 
 * For a working code example, visit the [Playground](http://twisty.github.io/formsy-react-components/playground/), then examine the [source](https://github.com/twisty/formsy-react-components/tree/master/examples/playground).
-* There is some information in the [Wiki](https://github.com/twisty/formsy-react-components/wiki).
+* There is some information in [/docs](https://github.com/twisty/formsy-react-components/tree/master/docs).
