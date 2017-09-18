@@ -13,11 +13,18 @@ The components render markup to be quickly included in a [Bootstrap 3 form](http
 
 ## Install
 
+To install using `yarn`:
+
+```
+yarn add formsy-react@beta
+yarn add formsy-react-components@next
+```
+
 To install using `npm`:
 
 ```
-npm install --save formsy-react
-npm install --save formsy-react-components
+npm install --save formsy-react@beta
+npm install --save formsy-react-components@next
 ```
 
 ## Browser Support
