@@ -84,6 +84,7 @@ const Playground = props => {
     <Form
       onSubmit={submitForm}
       layout={layoutChoice}
+      className="custom-classname-is-rendered"
       validateOnSubmit={validateOnSubmitChoice}
       validatePristine={validatePristineChoice}
       disabled={disabledChoice}

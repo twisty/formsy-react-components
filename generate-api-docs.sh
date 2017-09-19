@@ -5,6 +5,7 @@ var reactDocs = require('react-docgen');
 var docsToMarkdown = require('react-docs-markdown');
 
 var docList = [
+    { file: './src/form.js',                        name: 'Form',          out: './docs/api/form.md' },
     { file: './src/components/checkbox-group.js',   name: 'CheckboxGroup', out: './docs/api/checkbox-group.md' },
     { file: './src/components/checkbox.js',         name: 'Checkbox',      out: './docs/api/checkbox.md' },
     { file: './src/components/component-common.js', name: 'Common Component Props', out: './docs/api/component-common.md' },

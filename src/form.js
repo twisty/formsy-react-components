@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+import classNames from 'classnames/dedupe';
 import Formsy from 'formsy-react';
 import OptionsProvider from './hoc/options-provider';
 
@@ -17,10 +18,17 @@ class Form extends Component {
       this.formsyForm = formsyForm;
     };
 
-    const className = `form-${this.props.layout}`;
+    const formClassNames = classNames([
+      `form-${this.props.layout}`,
+      this.props.className,
+    ]);
+
     return (
       <OptionsProvider {...this.props}>
-        <Formsy.Form {...formsyProps} className={className} ref={refCallback}>
+        <Formsy.Form
+          {...formsyProps}
+          className={formClassNames}
+          ref={refCallback}>
           {this.props.children}
         </Formsy.Form>
       </OptionsProvider>
@@ -29,12 +37,18 @@ class Form extends Component {
 }
 
 Form.propTypes = {
-  layout: PropTypes.oneOf(['horizontal', 'vertical', 'elementOnly']).isRequired,
   children: PropTypes.node.isRequired,
+  layout: PropTypes.oneOf(['horizontal', 'vertical', 'elementOnly']),
+  className: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.array,
+    PropTypes.object,
+  ]),
 };
 
 Form.defaultProps = {
   layout: 'horizontal',
+  className: '',
 };
 
 export default Form;
