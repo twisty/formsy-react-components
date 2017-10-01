@@ -47,6 +47,13 @@ class Input extends Component {
     this.props.onBlur(this.props.name, value);
   };
 
+  handleKeyDown = event => {
+    if (event.key === 'Enter') {
+      this.changeDebounced.flush();
+    }
+    this.props.onKeyDown(event);
+  };
+
   initElementRef = control => {
     this.element = control ? control.element : null;
   };
@@ -73,6 +80,7 @@ class Input extends Component {
         value={this.state.value}
         onChange={this.handleChange}
         onBlur={this.handleBlur}
+        onKeyDown={this.handleKeyDown}
         ref={this.initElementRef}
       />
     );
@@ -140,6 +148,7 @@ Input.propTypes = {
   updateOnChange: PropTypes.bool,
   value: PropTypes.string,
   onBlur: PropTypes.func,
+  onKeyDown: PropTypes.func,
 };
 
 Input.defaultProps = {
@@ -152,6 +161,7 @@ Input.defaultProps = {
   blurDebounceInterval: 0,
   changeDebounceInterval: 500,
   onBlur: () => {},
+  onKeyDown: () => {},
 };
 
 export default Input;
