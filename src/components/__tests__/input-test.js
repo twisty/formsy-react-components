@@ -92,7 +92,6 @@ describe('The <Input /> component', () => {
     let handleChange;
     let handleSetValue;
     let wrapper;
-    let inputNode;
 
     beforeEach(() => {
       handleBlur = jest.genMockFunction();
@@ -110,14 +109,12 @@ describe('The <Input /> component', () => {
           onSetValue={handleSetValue}
         />,
       );
-
-      inputNode = wrapper.find('input');
     });
 
     // Test that this is a controlled component.
     it('updates the input value from props', () => {
       wrapper.setProps({value: 'Changed value'});
-      expect(inputNode.prop('value')).toEqual('Changed value');
+      expect(wrapper.find('input').prop('value')).toEqual('Changed value');
     });
 
     it('executes a `props.onChange` callback', () => {
@@ -129,15 +126,17 @@ describe('The <Input /> component', () => {
        * @see https://github.com/facebook/react/issues/3151#issuecomment-74943529
        */
       expect(handleChange).not.toBeCalled();
+      const inputNode = wrapper.find('input');
       inputNode.getDOMNode().value = 'Changed value';
       inputNode.simulate('change');
       expect(handleChange).toBeCalled();
-      expect(inputNode.prop('value')).toEqual('Changed value');
+      expect(wrapper.find('input').prop('value')).toEqual('Changed value');
     });
 
     it('executes a debounced `props.onSetValue` callback', () => {
       expect(handleChange).not.toBeCalled();
       expect(handleSetValue).not.toBeCalled();
+      const inputNode = wrapper.find('input');
       inputNode.getDOMNode().value = 'Changed value';
       inputNode.simulate('change');
       expect(handleChange).toBeCalled();
