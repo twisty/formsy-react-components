@@ -10,6 +10,7 @@ ComponentCommon.propTypes = {
   ...styleClassNames,
   onChange: PropTypes.func,
   onSetValue: PropTypes.func,
+  isPristine: PropTypes.func.isRequired,
   errorMessages: PropTypes.arrayOf(PropTypes.node),
   help: PropTypes.string,
   label: PropTypes.string,

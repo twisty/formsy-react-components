@@ -21,7 +21,7 @@ class Input extends Component {
   }
 
   componentWillReceiveProps = nextProps => {
-    const isValueChanging = nextProps.value !== this.props.value;
+    const isValueChanging = nextProps.value !== this.state.value;
     if (isValueChanging) {
       this.setState({value: nextProps.value});
       this.props.onSetValue(nextProps.value);
@@ -42,7 +42,13 @@ class Input extends Component {
     this.setState({value});
     if (this.props.updateOnBlur) {
       this.changeDebounced.cancel();
-      this.blurDebounced(value);
+      if (this.props.isPristine()) {
+        // should update as we have just left a pristine input
+        this.blurDebounced(value);
+      } else if (this.props.value !== value) {
+        // should update because the value has changed
+        this.blurDebounced(value);
+      }
     }
     this.props.onBlur(this.props.name, value);
   };

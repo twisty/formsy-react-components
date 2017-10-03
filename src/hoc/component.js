@@ -136,7 +136,6 @@ const FormsyReactComponent = ComposedComponent => {
       delete props.hasValue;
       delete props.isFormDisabled;
       delete props.isFormSubmitted;
-      delete props.isPristine;
       delete props.isRequired;
       delete props.isValid;
       delete props.isValidValue;
