@@ -1,6 +1,6 @@
-node_modules/
 coverage/
-release/
 examples/build
-npm-debug.log
-yarn-error.log
+node_modules/
+notes/
+release/
+*.log
