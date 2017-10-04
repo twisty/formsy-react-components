@@ -10,6 +10,7 @@
 | updateOnChange                | Bool   | true     | false    |             |
 | value                         | String | ''       | false    |             |
 | onBlur                        | Func   | () => {} | false    |             |
+| onKeyDown                     | Func   | () => {} | false    |             |
 
 ## Complex Props
 

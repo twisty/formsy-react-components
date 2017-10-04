@@ -5,6 +5,7 @@
 | ------------------------------------------------ | ------- | ------------ | -------- | ----------- |
 | onChange                                         | Func    | () => {}     | false    |             |
 | onSetValue                                       | Func    | () => {}     | false    |             |
+| isPristine                                       | Func    |              | true     |             |
 | [errorMessages](#markdown-header-error-messages) | Arrayof | []           | false    |             |
 | help                                             | String  | null         | false    |             |
 | label                                            | String  | null         | false    |             |
