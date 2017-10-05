@@ -77,7 +77,7 @@
     "prettier": "^1.6.1",
     "react": "^15.6.1",
     "react-docgen": "^2.18.0",
-    "react-docs-markdown": "^0.3.4",
+    "react-docs-markdown": "^0.4.0",
     "react-dom": "^15.6.1",
     "react-test-renderer": "^15.6.1",
     "webpack": "^3.5.6",
