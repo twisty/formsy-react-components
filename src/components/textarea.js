@@ -27,7 +27,7 @@ class Textarea extends Component {
   };
 
   handleChange = event => {
-    const value = event.currentTarget.value;
+    const {value} = event.currentTarget;
     this.setState({value});
     if (this.props.updateOnChange) {
       this.changeDebounced(value);
@@ -36,7 +36,7 @@ class Textarea extends Component {
   };
 
   handleBlur = event => {
-    const value = event.currentTarget.value;
+    const {value} = event.currentTarget;
     this.setState({value});
     if (this.props.updateOnBlur) {
       this.changeDebounced.cancel();

@@ -19,7 +19,7 @@ class SelectControl extends Component {
   };
 
   render() {
-    const options = this.props.options;
+    const {options} = this.props;
 
     let groups = options.filter(item => item.group).map(item => item.group);
     // Get the unique items in group.

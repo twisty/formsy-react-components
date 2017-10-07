@@ -72,14 +72,16 @@ Row.propTypes = {
 };
 
 Row.defaultProps = {
+  /* eslint-disable react/default-props-match-prop-types */
   elementWrapperClassName: '',
+  labelClassName: '',
+  rowClassName: '',
+  /* eslint-enable */
   fakeLabel: false,
   htmlFor: null,
   label: null,
-  labelClassName: '',
   layout: 'horizontal',
   required: false,
-  rowClassName: '',
   showErrors: false,
 };
 

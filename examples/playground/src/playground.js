@@ -29,7 +29,7 @@ const Playground = props => {
 
   const resetForm = () => {
     console.log('Reset called'); // eslint-disable-line no-console
-    const formsyForm = myform.formsyForm;
+    const {formsyForm} = myform;
     formsyForm.reset();
   };
 

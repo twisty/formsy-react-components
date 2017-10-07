@@ -7,7 +7,7 @@ const componentTest = Component =>
   describe('acts like a formsy-react-component', () => {
     it('warns when no `id` prop is provided', () => {
       /* eslint-disable no-console */
-      const error = console.error;
+      const {error} = console;
       console.error = jest.fn();
       /* eslint-disable no-unused-vars */
       const wrapper = shallow(<Component name="myName" />);

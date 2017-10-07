@@ -15,6 +15,8 @@ class TextareaControl extends Component {
 TextareaControl.propTypes = {
   ...ControlCommon.propTypes,
   className: PropTypes.string,
+  cols: PropTypes.number,
+  rows: PropTypes.number,
   value: PropTypes.string,
 };
 

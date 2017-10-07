@@ -20,8 +20,8 @@ class InputControl extends Component {
 
 InputControl.propTypes = {
   ...ControlCommon.propTypes,
-  type: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
+  type: PropTypes.string,
   className: PropTypes.string,
 };
 

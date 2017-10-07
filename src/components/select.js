@@ -15,7 +15,7 @@ class Select extends Component {
         .filter(option => option.selected)
         .map(option => option.value);
     } else {
-      value = target.value;
+      ({value} = target);
     }
     this.props.onSetValue(value);
     this.props.onChange(this.props.name, value);

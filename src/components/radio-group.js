@@ -13,7 +13,7 @@ class RadioGroup extends Component {
   }
 
   handleChange = event => {
-    const value = event.currentTarget.value;
+    const {value} = event.currentTarget;
     this.props.onSetValue(value);
     this.props.onChange(this.props.name, value);
   };

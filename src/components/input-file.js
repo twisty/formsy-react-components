@@ -9,7 +9,7 @@ import FileControl from './controls/input-file';
 class File extends Component {
   handleChange = event => {
     const target = event.currentTarget;
-    const value = target.value;
+    const {value} = target;
     this.props.onSetValue(target.files);
 
     // We're passing an additional argument to the onChange handler here,
