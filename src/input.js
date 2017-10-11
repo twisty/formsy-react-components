@@ -4,13 +4,14 @@
 
 var React = require('react');
 var PropTypes = require('prop-types');
+var createReactClass = require('create-react-class');
 var Formsy = require('formsy-react');
 var ComponentMixin = require('./mixins/component');
 var Row = require('./row');
 var Icon = require('./icon');
 var propUtilities = require('./prop-utilities');
 
-var Input = React.createClass({
+var Input = createReactClass({
 
     mixins: [Formsy.Mixin, ComponentMixin],
 

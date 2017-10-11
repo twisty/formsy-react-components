@@ -3,10 +3,11 @@
 'use strict';
 
 var React = require('react');
+var createReactClass = require('create-react-class');
 var PropTypes = require('prop-types');
 var classNames = require('classnames/dedupe');
 
-var Row = React.createClass({
+var Row = createReactClass({
 
     propTypes: {
         label: PropTypes.node,

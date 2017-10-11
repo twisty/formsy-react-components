@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import createReactClass from 'create-react-class';
 import Formsy from 'formsy-react';
 import ParentContextMixin from './mixins/parent-context';
 
-var Form = React.createClass({
+var Form = createReactClass({
 
     mixins: [ParentContextMixin],
 
