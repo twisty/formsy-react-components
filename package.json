@@ -33,7 +33,7 @@
   },
   "peerDependencies": {
     "formsy-react": "0.18 - 0.19",
-    "react": "^15.5.0",
+    "react": "^15.5.0 || ^16.0.0",
     "create-react-class": "^15.5.0"
   },
   "dependencies": {
