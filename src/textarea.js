@@ -3,6 +3,7 @@
 'use strict';
 
 var React = require('react');
+var PropTypes = require('prop-types');
 var Formsy = require('formsy-react');
 var ComponentMixin = require('./mixins/component');
 var Row = require('./row');
@@ -13,8 +14,8 @@ var Textarea = React.createClass({
     mixins: [Formsy.Mixin, ComponentMixin],
 
     propTypes: {
-        rows: React.PropTypes.number,
-        cols: React.PropTypes.number
+        rows: PropTypes.number,
+        cols: PropTypes.number
     },
 
     getDefaultProps: function() {

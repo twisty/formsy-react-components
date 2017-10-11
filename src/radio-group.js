@@ -3,6 +3,7 @@
 'use strict';
 
 var React = require('react');
+var PropTypes = require('prop-types');
 var Formsy = require('formsy-react');
 var ComponentMixin = require('./mixins/component');
 var Row = require('./row');
@@ -12,9 +13,9 @@ var RadioGroup = React.createClass({
     mixins: [Formsy.Mixin, ComponentMixin],
 
     propTypes: {
-        name: React.PropTypes.string.isRequired,
-        type: React.PropTypes.oneOf(['inline', 'stacked']),
-        options: React.PropTypes.array.isRequired
+        name: PropTypes.string.isRequired,
+        type: PropTypes.oneOf(['inline', 'stacked']),
+        options: PropTypes.array.isRequired
     },
 
     getDefaultProps: function() {
