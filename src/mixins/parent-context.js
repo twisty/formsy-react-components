@@ -1,34 +1,35 @@
 'use strict';
 
 var React = require('react');
+var PropTypes = require('prop-types');
 
 module.exports = {
 
     childContextTypes: {
-        validateOnSubmit: React.PropTypes.bool.isRequired,
-        layout: React.PropTypes.string.isRequired,
-        validatePristine: React.PropTypes.bool.isRequired,
-        rowClassName: React.PropTypes.oneOfType([
-            React.PropTypes.string,
-            React.PropTypes.array,
-            React.PropTypes.object
+        layout: PropTypes.string,
+        validateOnSubmit: PropTypes.bool,
+        validatePristine: PropTypes.bool,
+        rowClassName: PropTypes.oneOfType([
+            PropTypes.string,
+            PropTypes.array,
+            PropTypes.object
         ]),
-        labelClassName: React.PropTypes.oneOfType([
-            React.PropTypes.string,
-            React.PropTypes.array,
-            React.PropTypes.object
+        labelClassName: PropTypes.oneOfType([
+            PropTypes.string,
+            PropTypes.array,
+            PropTypes.object
         ]),
-        elementWrapperClassName: React.PropTypes.oneOfType([
-            React.PropTypes.string,
-            React.PropTypes.array,
-            React.PropTypes.object
+        elementWrapperClassName: PropTypes.oneOfType([
+            PropTypes.string,
+            PropTypes.array,
+            PropTypes.object
         ])
     },
 
     getChildContext: function() {
         return {
-            validateOnSubmit: this.props.validateOnSubmit || false,
             layout: this.props.layout || 'horizontal',
+            validateOnSubmit: this.props.validateOnSubmit || false,
             validatePristine: this.props.validatePristine || false,
             rowClassName: this.props.rowClassName || '',
             labelClassName: this.props.labelClassName || '',

@@ -3,17 +3,19 @@
 'use strict';
 
 var React = require('react');
+var PropTypes = require('prop-types');
+var createReactClass = require('create-react-class');
 var Formsy = require('formsy-react');
 var ComponentMixin = require('./mixins/component');
 var Row = require('./row');
 var propUtilities = require('./prop-utilities');
 
-var Input = React.createClass({
+var Input = createReactClass({
 
     mixins: [Formsy.Mixin, ComponentMixin],
 
     propTypes: {
-        type: React.PropTypes.oneOf([
+        type: PropTypes.oneOf([
             'color',
             'date',
             'datetime',
@@ -31,16 +33,16 @@ var Input = React.createClass({
             'url',
             'week'
         ]),
-        addonBefore: React.PropTypes.oneOfType([
-            React.PropTypes.string,
-            React.PropTypes.node
+        addonBefore: PropTypes.oneOfType([
+            PropTypes.string,
+            PropTypes.node
         ]),
-        addonAfter: React.PropTypes.oneOfType([
-            React.PropTypes.string,
-            React.PropTypes.node
+        addonAfter: PropTypes.oneOfType([
+            PropTypes.string,
+            PropTypes.node
         ]),
-        buttonBefore: React.PropTypes.node,
-        buttonAfter: React.PropTypes.node
+        buttonBefore: PropTypes.node,
+        buttonAfter: PropTypes.node
     },
 
     getDefaultProps: function() {

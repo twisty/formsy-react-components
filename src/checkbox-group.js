@@ -3,17 +3,19 @@
 'use strict';
 
 var React = require('react');
+var PropTypes = require('prop-types');
+var createReactClass = require('create-react-class');
 var Formsy = require('formsy-react');
 var ComponentMixin = require('./mixins/component');
 var Row = require('./row');
 
-var CheckboxGroup = React.createClass({
+var CheckboxGroup = createReactClass({
 
     mixins: [Formsy.Mixin, ComponentMixin],
 
     propTypes: {
-        name: React.PropTypes.string.isRequired,
-        options: React.PropTypes.array.isRequired
+        name: PropTypes.string.isRequired,
+        options: PropTypes.array.isRequired
     },
 
     getDefaultProps: function() {

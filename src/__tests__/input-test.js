@@ -6,9 +6,9 @@ jest.autoMockOff();
 
 var React = require('react');
 var ReactDOM = require('react-dom');
+var TestUtils = require('react-dom/test-utils');
 var Formsy = require('formsy-react');
 var Input = require('../input.js');
-var TestUtils = require('react-addons-test-utils');
 
 describe('Input', function() {
 

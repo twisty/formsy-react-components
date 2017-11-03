@@ -3,12 +3,13 @@
 'use strict';
 
 var React = require('react');
+var createReactClass = require('create-react-class');
 var Formsy = require('formsy-react');
 var ComponentMixin = require('./mixins/component');
 var Row = require('./row');
 var propUtilities = require('./prop-utilities');
 
-var File = React.createClass({
+var File = createReactClass({
 
     mixins: [Formsy.Mixin, ComponentMixin],
 
