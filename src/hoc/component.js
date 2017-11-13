@@ -107,17 +107,13 @@ const FormsyReactComponent = ComposedComponent => {
     // We pass through all unknown props, but delete some formsy HOC props
     // that we know we don't need.
     render() {
-      const cssProps = {
+      const props = {
+        ...this.props,
         elementWrapperClassName: this.combineContextWithProp(
           'elementWrapperClassName',
         ),
         labelClassName: this.combineContextWithProp('labelClassName'),
         rowClassName: this.combineContextWithProp('rowClassName'),
-      };
-
-      const props = {
-        ...this.props,
-        ...cssProps,
         disabled: this.props.isFormDisabled() || this.props.disabled,
         errorMessages: this.props.getErrorMessages(),
         id: this.getId(),
@@ -129,43 +125,43 @@ const FormsyReactComponent = ComposedComponent => {
         onSetValue: this.props.setValue,
       };
 
-      // Formsy HOC props we don't use.
-      delete props.getErrorMessage;
-      delete props.getErrorMessages;
-      delete props.getValue;
-      delete props.hasValue;
-      delete props.isFormDisabled;
-      delete props.isFormSubmitted;
-      delete props.isRequired;
-      delete props.isValid;
-      delete props.isValidValue;
-      delete props.resetValue;
-      delete props.setValidations;
-      delete props.setValue;
-      delete props.showError;
-      delete props.showRequired;
+      // Props that we don't need to pass to our composed components.
+      const unusedPropNames = [
+        // From formsy-react HOC...
+        'getErrorMessage',
+        'getErrorMessages',
+        'getValue',
+        'hasValue',
+        'isFormDisabled',
+        'isFormSubmitted',
+        'isRequired',
+        'isValid',
+        'isValidValue',
+        'resetValue',
+        'setValidations',
+        'setValue',
+        'showError',
+        'showRequired',
+        'validationError',
+        'validationErrors',
+        'validations',
+        'innerRef',
+        // From formsy-react-component HOC...
+        'componentRef',
+        'validateOnSubmit',
+        'validatePristine',
+      ];
 
-      // Formsy props we don't use
-      delete props.validationError;
-      delete props.validationErrors;
-      delete props.validations;
-
-      // HOC refs
-      delete props.innerRef;
-      delete props.componentRef;
-
-      // These props aren't used by child components, they are only used by
-      // `shouldShowErrors` in this HOC.
-      delete props.validateOnSubmit;
-      delete props.validatePristine;
+      unusedPropNames.forEach(propName => {
+        delete props[propName];
+      });
 
       return <ComposedComponent {...props} />;
     }
   }
 
-  // These are the props that we require from the formsy-react HOC.
-  // There are others, but as we don't use them, we don't need to define their PropTypes.
-  const formsyPropTypes = {
+  ComponentHOC.propTypes = {
+    // These are the props that we require from the formsy-react HOC.
     getErrorMessages: PropTypes.func.isRequired,
     getValue: PropTypes.func.isRequired,
     isFormDisabled: PropTypes.func.isRequired,
@@ -173,10 +169,8 @@ const FormsyReactComponent = ComposedComponent => {
     isRequired: PropTypes.func.isRequired,
     isValid: PropTypes.func.isRequired,
     setValue: PropTypes.func.isRequired,
-  };
+    // End of formsy-react HOC props.
 
-  ComponentHOC.propTypes = {
-    ...formsyPropTypes,
     ...styleClassNames,
 
     name: PropTypes.string.isRequired,
