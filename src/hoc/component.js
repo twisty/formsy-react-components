@@ -117,6 +117,7 @@ const FormsyReactComponent = ComposedComponent => {
         disabled: this.props.isFormDisabled() || this.props.disabled,
         errorMessages: this.props.getErrorMessages(),
         id: this.getId(),
+        isPristine: this.props.isPristine,
         layout: this.getLayout(),
         ref: this.props.componentRef,
         required: this.props.isRequired(),
