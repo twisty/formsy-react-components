@@ -5,7 +5,7 @@
 | ---------------------------------------- | ----- | ------------ | -------- | ----------- |
 | children                                 | Node  |              | true     |             |
 | [layout](#markdown-header-layout)        | Enum  | 'horizontal' | false    |             |
-| [className](#markdown-header-class-name) | OneOf | ''           | false    |             |
+| [className](#markdown-header-class-name) | Union | ''           | false    |             |
 
 ## Complex Props
 
@@ -23,7 +23,7 @@ Type: _Enum_
 --------------------------------------------------------------------------------
 
 ### className
-Type: _OneOf_
+Type: _Union_
 
 **className** should be one of the following types:
 
