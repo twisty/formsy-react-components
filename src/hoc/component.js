@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {Wrapper as FormsyHOC} from 'formsy-react';
+import {withFormsy} from 'formsy-react';
 import styleClassNames from '../components/prop-types';
 
 function getDisplayName(component) {
@@ -226,7 +226,7 @@ const FormsyReactComponent = ComposedComponent => {
 
   ComponentHOC.displayName = `withFRC(${getDisplayName(ComposedComponent)})`;
 
-  return FormsyHOC(ComponentHOC);
+  return withFormsy(ComponentHOC);
 };
 
 export default FormsyReactComponent;

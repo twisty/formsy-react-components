@@ -21,9 +21,9 @@ describe('The component HOC', () => {
     };
     const FRC = FormsyReactComponent(TestComponent);
     const wrapper = mount(
-      <Formsy.Form>
+      <Formsy>
         <FRC name="testComponent" />
-      </Formsy.Form>,
+      </Formsy>,
     );
     const componentProps = wrapper.find(TestComponent).props();
 

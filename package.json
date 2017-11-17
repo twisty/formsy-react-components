@@ -36,8 +36,12 @@
       "./src",
       "./examples"
     ],
+    "setupFiles": [
+      "<rootDir>/src/components/__tests__/test-helper.js"
+    ],
     "testPathIgnorePatterns": [
-      "<rootDir>/src/components/__tests__/component.js"
+      "<rootDir>/src/components/__tests__/component.js",
+      "<rootDir>/src/components/__tests__/test-helper.js"
     ],
     "moduleNameMapper": {
       "formsy-react-components": "<rootDir>/src/main.js"
@@ -62,7 +66,8 @@
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
-    "enzyme": "^2.9.1",
+    "enzyme": "^3.1.1",
+    "enzyme-adapter-react-15": "^1.0.5",
     "eslint": "^4.6.1",
     "eslint-config-airbnb": "^16.0.0",
     "eslint-config-prettier": "^2.4.0",
