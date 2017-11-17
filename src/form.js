@@ -25,10 +25,7 @@ class Form extends Component {
 
     return (
       <OptionsProvider {...this.props}>
-        <Formsy
-          {...formsyProps}
-          className={formClassNames}
-          ref={refCallback}>
+        <Formsy {...formsyProps} className={formClassNames} ref={refCallback}>
           {this.props.children}
         </Formsy>
       </OptionsProvider>
