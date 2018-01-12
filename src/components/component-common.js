@@ -13,7 +13,7 @@ ComponentCommon.propTypes = {
   isPristine: PropTypes.func.isRequired,
   errorMessages: PropTypes.arrayOf(PropTypes.node),
   help: PropTypes.string,
-  label: PropTypes.string,
+  label: PropTypes.node,
   layout: PropTypes.oneOf(['horizontal', 'vertical', 'elementOnly']),
   showErrors: PropTypes.bool,
 };
