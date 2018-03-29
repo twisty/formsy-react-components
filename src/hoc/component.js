@@ -181,7 +181,7 @@ const FormsyReactComponent = ComposedComponent => {
     help: PropTypes.string,
 
     id: PropTypes.string,
-    label: PropTypes.string,
+    label: PropTypes.node,
     layout: PropTypes.string,
 
     // * validateOnSubmit
