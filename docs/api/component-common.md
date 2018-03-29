@@ -8,7 +8,7 @@
 | isPristine                                       | Func    |              | true     |             |
 | [errorMessages](#markdown-header-error-messages) | Arrayof | []           | false    |             |
 | help                                             | String  | null         | false    |             |
-| label                                            | String  | null         | false    |             |
+| label                                            | Node    | null         | false    |             |
 | [layout](#markdown-header-layout)                | Enum    | 'horizontal' | false    |             |
 | showErrors                                       | Bool    | true         | false    |             |
 
