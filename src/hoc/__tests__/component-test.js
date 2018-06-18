@@ -28,59 +28,57 @@ describe('The component HOC', () => {
     const componentProps = wrapper.find(TestComponent).props();
 
     describe('`name`', () => {
-      it('is required');
-      it('should be a string');
-      it('is passed through to the composed component');
+      it('is required', () => {});
+      it('should be a string', () => {});
+      it('is passed through to the composed component', () => {});
     });
 
     describe('`disabled`', () => {
-      it('is a boolean');
+      it('is a boolean', () => {});
       it('is passed through to the composed component', () => {
         expect(typeof componentProps.disabled).toBe('boolean');
       });
     });
 
     describe('`help`', () => {
-      it('should be a string');
-      it('is passed through to the composed component');
+      it('should be a string', () => {});
+      it('is passed through to the composed component', () => {});
     });
 
     describe('`label`', () => {
-      it('should be a string');
-      it('is passed through to the composed component');
+      it('should be a string', () => {});
+      it('is passed through to the composed component', () => {});
     });
 
     describe('`id`', () => {
-      it('should be a string');
+      it('should be a string', () => {});
       it('is generated for the composed component when not supplied', () => {
         expect(typeof componentProps.id).toBe('string');
         expect(componentProps.id.startsWith('frc-')).toBe(true);
       });
-      it('is passed through to the composed component');
+      it('is passed through to the composed component', () => {});
     });
 
     describe('`layout`', () => {
-      it('defaults to `horizontal` if not supplied');
-      it('is merged with a master value set in a parent context');
-      it('is passed through to the composed component');
+      it('defaults to `horizontal` if not supplied', () => {});
+      it('is merged with a master value set in a parent context', () => {});
+      it('is passed through to the composed component', () => {});
     });
 
     describe('`validatePristine`', () => {
-      it('determines whether to show errors on pristine (untouched) values');
-      it('is merged with a master value set in a parent context');
-      it('is not passed through to the composed component');
+      it('determines whether to show errors on pristine (untouched) values', () => {});
+      it('is merged with a master value set in a parent context', () => {});
+      it('is not passed through to the composed component', () => {});
     });
 
     describe('`validateOnSubmit`', () => {
-      it(
-        'determines whether to hide errors until an attempt to submit the form is made',
-      );
-      it('is merged with a master value set in a parent context');
-      it('is not passed through to the composed component');
+      it('determines whether to hide errors until an attempt to submit the form is made', () => {});
+      it('is merged with a master value set in a parent context', () => {});
+      it('is not passed through to the composed component', () => {});
     });
 
     describe('other props', () => {
-      it('are passed through to the composed component');
+      it('are passed through to the composed component', () => {});
     });
   });
 
@@ -88,29 +86,29 @@ describe('The component HOC', () => {
     // "Describle (v): To create a meaningless description."
 
     describe('`errorMessages`', () => {
-      it('is an array');
-      it('is the result of formsy `getErrorMessages`');
+      it('is an array', () => {});
+      it('is the result of formsy `getErrorMessages`', () => {});
       // errorMessages: this.props.getErrorMessages(),
     });
 
     describe('`id`', () => {
-      it('is a string');
+      it('is a string', () => {});
       // id: this.getId(),
     });
 
     describe('`layout`', () => {
-      it('is a string');
+      it('is a string', () => {});
       // layout: this.mergeLayoutContext(),
     });
 
     describe('`required`', () => {
-      it('is a boolean');
-      it('is the result of formsy `isRequired`');
+      it('is a boolean', () => {});
+      it('is the result of formsy `isRequired`', () => {});
       // required: this.props.isRequired(),
     });
 
     describe('`showErrors`', () => {
-      it('is a boolean');
+      it('is a boolean', () => {});
       // showErrors: this.shouldShowErrors(),
     });
 
@@ -123,20 +121,18 @@ describe('The component HOC', () => {
     });
 
     describe('`value`', () => {
-      it('`value` is the result of formsy getValue()');
+      it('`value` is the result of formsy getValue()', () => {});
     });
 
     describe('`disabled`', () => {
-      it('is a boolean');
+      it('is a boolean', () => {});
       // this.props.isFormDisabled() || this.props.disabled,
-      it('is overridden by formsy `isFormDisabled` (if true)');
+      it('is overridden by formsy `isFormDisabled` (if true)', () => {});
     });
 
     describe('`onSetValue`', () => {
-      it('is a function');
-      it(
-        'is just formsy setValue, with name changed to fit with project naming convention',
-      );
+      it('is a function', () => {});
+      it('is just formsy setValue, with name changed to fit with project naming convention', () => {});
     });
   });
 });

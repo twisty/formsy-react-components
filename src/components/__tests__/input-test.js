@@ -56,17 +56,11 @@ describe('The <Input /> component', () => {
     });
 
     // http://getbootstrap.com/css/#forms-help-text
-    it(
-      'has an `aria-describedby` prop on the form control when help text is present',
-    );
+    it('has an `aria-describedby` prop on the form control when help text is present', () => {});
 
-    it(
-      'has an `aria-invalid="true"` prop on the form control when validation has failed',
-    );
+    it('has an `aria-invalid="true"` prop on the form control when validation has failed', () => {});
 
-    it(
-      'has an `aria-required="true"` prop on the form control when validation is required',
-    );
+    it('has an `aria-required="true"` prop on the form control when validation is required', () => {});
 
     /*
      * aria-hidden="true" on status glyphicons
@@ -94,9 +88,9 @@ describe('The <Input /> component', () => {
     let wrapper;
 
     beforeEach(() => {
-      handleBlur = jest.genMockFunction();
-      handleChange = jest.genMockFunction();
-      handleSetValue = jest.genMockFunction();
+      handleBlur = jest.fn();
+      handleChange = jest.fn();
+      handleSetValue = jest.fn();
 
       wrapper = mount(
         <Input
@@ -151,10 +145,10 @@ describe('The <Input /> component', () => {
   });
 
   describe('includes an `<InputGroup />` component when', () => {
-    it('is triggered by an `addonBefore` prop');
-    it('is triggered by an `addonAfter` prop');
-    it('is triggered by an `buttonBefore` prop');
-    it('is triggered by an `buttonAfter` prop');
+    it('is triggered by an `addonBefore` prop', () => {});
+    it('is triggered by an `addonAfter` prop', () => {});
+    it('is triggered by an `buttonBefore` prop', () => {});
+    it('is triggered by an `buttonAfter` prop', () => {});
   });
 
   describe('for "hidden" type', () => {
