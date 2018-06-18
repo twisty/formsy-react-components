@@ -10,7 +10,7 @@ The following props can be set on the form components:
 - [`validatePristine`](#validatepristine)
 - [`validateOnSubmit`](#validateonsubmit)
 
-In addition, you can pass any [Formsy.Mixin property](https://github.com/christianalfoni/formsy-react/blob/master/API.md#formsymixin). At the least, components require a [`name`](https://github.com/christianalfoni/formsy-react/blob/master/API.md#name).
+In addition, you can pass any of Formsy’s [`withFormsy` properties](https://github.com/formsy/formsy-react/blob/master/API.md#withFormsy). At the least, components require a [`name`](https://github.com/formsy/formsy-react/blob/master/API.md#name).
 
 Other props are passed through and applied to the form control, React will render these according to it’s [HTML attribute whitelist](https://facebook.github.io/react/docs/tags-and-attributes.html). For example a <code>placeholder</code> property passed to the component would be applied to the form control within the component.
 

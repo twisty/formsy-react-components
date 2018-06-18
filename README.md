@@ -5,7 +5,7 @@
 [![GitHub release](https://img.shields.io/github/release/twisty/formsy-react-components.svg)](https://github.com/twisty/formsy-react-components/releases)
 [![GitHub contributors](https://img.shields.io/github/contributors/twisty/formsy-react-components.svg)](https://github.com/twisty/formsy-react-components/contributors)
 
-`formsy-react-components` is a selection of React components that render form elements for use in a [formsy-react](https://github.com/christianalfoni/formsy-react) form.
+`formsy-react-components` is a selection of React components that render form elements for use in a [formsy-react](https://github.com/formsy/formsy-react) form.
 
 The components render markup to be quickly included in a [Bootstrap 3 form](https://getbootstrap.com/docs/3.3/css/#forms). This includes a `<label>`, [help text](https://getbootstrap.com/docs/3.3/css/#forms-help-text), and some [validation styling](https://getbootstrap.com/docs/3.3/css/#forms-control-validation) tied to formsy’s validation state and validation messages.
 
