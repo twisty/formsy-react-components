@@ -3,26 +3,26 @@
 ## Props
 | Name                                             | Type    | Default      | Required | Description |
 | ------------------------------------------------ | ------- | ------------ | -------- | ----------- |
-| onChange                                         | Func    | () => {}     | false    |             |
-| onSetValue                                       | Func    | () => {}     | false    |             |
-| isPristine                                       | Func    |              | true     |             |
-| [errorMessages](#markdown-header-error-messages) | Arrayof | []           | false    |             |
-| help                                             | String  | null         | false    |             |
-| label                                            | Node    | null         | false    |             |
-| [layout](#markdown-header-layout)                | Enum    | 'horizontal' | false    |             |
-| showErrors                                       | Bool    | true         | false    |             |
+| onChange                                         | func    | () => {}     | false    |             |
+| onSetValue                                       | func    | () => {}     | false    |             |
+| isPristine                                       | func    |              | true     |             |
+| [errorMessages](#markdown-header-error-messages) | arrayOf | []           | false    |             |
+| help                                             | string  | null         | false    |             |
+| label                                            | node    | null         | false    |             |
+| [layout](#markdown-header-layout)                | enum    | 'horizontal' | false    |             |
+| showErrors                                       | bool    | true         | false    |             |
 
 ## Complex Props
 
 ### errorMessages
-Type: _Arrayof_
+Type: _arrayOf_
 
 **errorMessages** is an array of the following type:
 node
 --------------------------------------------------------------------------------
 
 ### layout
-Type: _Enum_
+Type: _enum_
 
 **layout** should be one of the following values:
 

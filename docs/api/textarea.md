@@ -3,9 +3,9 @@
 ## Props
 | Name                   | Type   | Default  | Required | Description |
 | ---------------------- | ------ | -------- | -------- | ----------- |
-| blurDebounceInterval   | Number | 0        | false    |             |
-| changeDebounceInterval | Number | 500      | false    |             |
-| updateOnBlur           | Bool   | true     | false    |             |
-| updateOnChange         | Bool   | true     | false    |             |
-| value                  | String |          | false    |             |
-| onBlur                 | Func   | () => {} | false    |             |
+| blurDebounceInterval   | number | 0        | false    |             |
+| changeDebounceInterval | number | 500      | false    |             |
+| updateOnBlur           | bool   | true     | false    |             |
+| updateOnChange         | bool   | true     | false    |             |
+| value                  | string |          | false    |             |
+| onBlur                 | func   | () => {} | false    |             |

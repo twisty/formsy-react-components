@@ -3,5 +3,5 @@
 ## Props
 | Name       | Type   | Default | Required | Description |
 | ---------- | ------ | ------- | -------- | ----------- |
-| value      | Bool   | false   | false    |             |
-| valueLabel | String | ''      | false    |             |
+| value      | bool   | false   | false    |             |
+| valueLabel | string | ''      | false    |             |

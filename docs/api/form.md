@@ -3,14 +3,14 @@
 ## Props
 | Name                                     | Type  | Default      | Required | Description |
 | ---------------------------------------- | ----- | ------------ | -------- | ----------- |
-| children                                 | Node  |              | true     |             |
-| [layout](#markdown-header-layout)        | Enum  | 'horizontal' | false    |             |
+| children                                 | node  |              | true     |             |
+| [layout](#markdown-header-layout)        | enum  | 'horizontal' | false    |             |
 | [className](#markdown-header-class-name) | Union | ''           | false    |             |
 
 ## Complex Props
 
 ### layout
-Type: _Enum_
+Type: _enum_
 
 **layout** should be one of the following values:
 
@@ -25,16 +25,14 @@ Type: _Enum_
 ### className
 Type: _Union_
 
-**className** should be one of the following types:
-
-#### String
+#### string
 string
 
 
-#### Array
+#### array
 array
 
 
-#### Object
+#### object
 object
 

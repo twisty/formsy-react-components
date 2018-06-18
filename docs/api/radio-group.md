@@ -3,26 +3,26 @@
 ## Props
 | Name                                | Type    | Default   | Required | Description |
 | ----------------------------------- | ------- | --------- | -------- | ----------- |
-| [options](#markdown-header-options) | Arrayof | []        | false    |             |
-| [type](#markdown-header-type)       | Enum    | 'stacked' | false    |             |
+| [options](#markdown-header-options) | arrayOf | []        | false    |             |
+| [type](#markdown-header-type)       | enum    | 'stacked' | false    |             |
 
 ## Complex Props
 
 ### options
-Type: _Arrayof_
+Type: _arrayOf_
 
 **options** is an array of the following type:
 
 | Name     | Type   | Required |
 | -------- | ------ | -------- |
-| disabled | Bool   | false    |
-| value    | String | false    |
-| label    | Node   | false    |
+| disabled | bool   | false    |
+| value    | string | false    |
+| label    | node   | false    |
 
 --------------------------------------------------------------------------------
 
 ### type
-Type: _Enum_
+Type: _enum_
 
 **type** should be one of the following values:
 

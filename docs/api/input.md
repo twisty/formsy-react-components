@@ -3,19 +3,19 @@
 ## Props
 | Name                          | Type   | Default  | Required | Description |
 | ----------------------------- | ------ | -------- | -------- | ----------- |
-| blurDebounceInterval          | Number | 0        | false    |             |
-| changeDebounceInterval        | Number | 500      | false    |             |
-| [type](#markdown-header-type) | Enum   | 'text'   | false    |             |
-| updateOnBlur                  | Bool   | true     | false    |             |
-| updateOnChange                | Bool   | true     | false    |             |
-| value                         | String | ''       | false    |             |
-| onBlur                        | Func   | () => {} | false    |             |
-| onKeyDown                     | Func   | () => {} | false    |             |
+| blurDebounceInterval          | number | 0        | false    |             |
+| changeDebounceInterval        | number | 500      | false    |             |
+| [type](#markdown-header-type) | enum   | 'text'   | false    |             |
+| updateOnBlur                  | bool   | true     | false    |             |
+| updateOnChange                | bool   | true     | false    |             |
+| value                         | string | ''       | false    |             |
+| onBlur                        | func   | () => {} | false    |             |
+| onKeyDown                     | func   | () => {} | false    |             |
 
 ## Complex Props
 
 ### type
-Type: _Enum_
+Type: _enum_
 
 **type** should be one of the following values:
 

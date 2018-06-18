@@ -3,27 +3,27 @@
 ## Props
 | Name                                | Type    | Default | Required | Description |
 | ----------------------------------- | ------- | ------- | -------- | ----------- |
-| [options](#markdown-header-options) | Arrayof | []      | false    |             |
-| [value](#markdown-header-value)     | Arrayof | []      | false    |             |
+| [options](#markdown-header-options) | arrayOf | []      | false    |             |
+| [value](#markdown-header-value)     | arrayOf | []      | false    |             |
 
 ## Complex Props
 
 ### options
-Type: _Arrayof_
+Type: _arrayOf_
 
 **options** is an array of the following type:
 
 | Name     | Type   | Required |
 | -------- | ------ | -------- |
-| disabled | Bool   | false    |
-| value    | String | false    |
-| label    | String | false    |
-| key      | String | false    |
+| disabled | bool   | false    |
+| value    | string | false    |
+| label    | string | false    |
+| key      | string | false    |
 
 --------------------------------------------------------------------------------
 
 ### value
-Type: _Arrayof_
+Type: _arrayOf_
 
 **value** is an array of the following type:
 string
