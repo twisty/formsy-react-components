@@ -1,7 +1,7 @@
 {
   "name": "formsy-react-components",
   "version": "1.0.0",
-  "description": "A set of React JS components for use in a formsy-react form. Markup adheres to Bootstrap structure.",
+  "description": "Bootstrap components for a formsy-react form.",
   "scripts": {
     "test": "jest",
     "test:watch": "jest --watch",
