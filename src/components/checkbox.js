@@ -9,8 +9,9 @@ import Row from './row';
 class Checkbox extends Component {
   handleChange = event => {
     const value = event.currentTarget.checked;
-    this.props.onSetValue(value);
-    this.props.onChange(this.props.name, value);
+    const {onSetValue, onChange, name} = this.props;
+    onSetValue(value);
+    onChange(name, value);
   };
 
   initElementRef = element => {
@@ -24,17 +25,18 @@ class Checkbox extends Component {
     });
     delete inputProps.valueLabel;
     delete inputProps.label;
+    const {value, valueLabel} = this.props;
     return (
       <div className="checkbox">
         <label>
           <input
             {...inputProps}
             type="checkbox"
-            checked={this.props.value === true}
+            checked={value === true}
             onChange={this.handleChange}
             ref={this.initElementRef}
           />{' '}
-          {this.props.valueLabel}
+          {valueLabel}
         </label>
       </div>
     );
@@ -42,18 +44,17 @@ class Checkbox extends Component {
 
   render() {
     const element = this.renderElement();
+    const {layout, id, help, showErrors, errorMessages} = this.props;
 
-    if (this.props.layout === 'elementOnly') {
+    if (layout === 'elementOnly') {
       return element;
     }
 
     return (
-      <Row {...this.props} fakeLabel htmlFor={this.props.id}>
+      <Row {...this.props} fakeLabel htmlFor={id}>
         {element}
-        {this.props.help ? <Help help={this.props.help} /> : null}
-        {this.props.showErrors ? (
-          <ErrorMessages messages={this.props.errorMessages} />
-        ) : null}
+        {help ? <Help help={help} /> : null}
+        {showErrors ? <ErrorMessages messages={errorMessages} /> : null}
       </Row>
     );
   }

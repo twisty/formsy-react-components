@@ -14,19 +14,20 @@ class CheckboxGroup extends Component {
 
   // Returns an array of the values of all checked items.
   handleChange = () => {
-    const {options, name} = this.props;
+    const {options, name, onSetValue, onChange} = this.props;
     const checkedOptions = options.filter(
       option => this.elements[option.value].checked,
     );
     const value = checkedOptions.map(option => option.value);
-    this.props.onSetValue(value);
-    this.props.onChange(name, value);
+    onSetValue(value);
+    onChange(name, value);
   };
 
   renderElement = () => {
-    const controls = this.props.options.map(checkbox => {
-      const checked = this.props.value.indexOf(checkbox.value) !== -1;
-      const disabled = checkbox.disabled || this.props.disabled;
+    const {options, value, disabled} = this.props;
+    const controls = options.map(checkbox => {
+      const checked = value.indexOf(checkbox.value) !== -1;
+      const isDisabled = checkbox.disabled || disabled;
       return (
         <div className="checkbox" key={checkbox.value}>
           <label>
@@ -38,7 +39,7 @@ class CheckboxGroup extends Component {
               type="checkbox"
               value={checkbox.value}
               onChange={this.handleChange}
-              disabled={disabled}
+              disabled={isDisabled}
             />{' '}
             {checkbox.label}
           </label>
@@ -50,18 +51,17 @@ class CheckboxGroup extends Component {
 
   render() {
     const element = this.renderElement();
+    const {layout, help, showErrors, errorMessages} = this.props;
 
-    if (this.props.layout === 'elementOnly') {
+    if (layout === 'elementOnly') {
       return <div>{element}</div>;
     }
 
     return (
       <Row {...this.props} fakeLabel>
         {element}
-        {this.props.help ? <Help help={this.props.help} /> : null}
-        {this.props.showErrors ? (
-          <ErrorMessages messages={this.props.errorMessages} />
-        ) : null}
+        {help ? <Help help={help} /> : null}
+        {showErrors ? <ErrorMessages messages={errorMessages} /> : null}
       </Row>
     );
   }

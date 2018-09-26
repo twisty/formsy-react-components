@@ -9,16 +9,17 @@ import SelectControl from './controls/select';
 class Select extends Component {
   handleChange = event => {
     const target = event.currentTarget;
+    const {multiple, onSetValue, onChange, name} = this.props;
     let value;
-    if (this.props.multiple) {
+    if (multiple) {
       value = Array.from(target.options)
         .filter(option => option.selected)
         .map(option => option.value);
     } else {
       ({value} = target);
     }
-    this.props.onSetValue(value);
-    this.props.onChange(this.props.name, value);
+    onSetValue(value);
+    onChange(name, value);
   };
 
   initElementRef = control => {
@@ -39,17 +40,17 @@ class Select extends Component {
       />
     );
 
-    if (this.props.layout === 'elementOnly') {
+    const {layout, id, help, showErrors, errorMessages} = this.props;
+
+    if (layout === 'elementOnly') {
       return control;
     }
 
     return (
-      <Row {...this.props} htmlFor={this.props.id}>
+      <Row {...this.props} htmlFor={id}>
         {control}
-        {this.props.help ? <Help help={this.props.help} /> : null}
-        {this.props.showErrors ? (
-          <ErrorMessages messages={this.props.errorMessages} />
-        ) : null}
+        {help ? <Help help={help} /> : null}
+        {showErrors ? <ErrorMessages messages={errorMessages} /> : null}
       </Row>
     );
   }

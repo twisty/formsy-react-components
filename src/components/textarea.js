@@ -10,39 +10,46 @@ import TextareaControl from './controls/textarea';
 class Textarea extends Component {
   constructor(props) {
     super(props);
-    this.state = {value: props.value};
-    this.changeDebounced = debounce(
-      props.onSetValue,
-      props.changeDebounceInterval,
-    );
-    this.blurDebounced = debounce(props.onSetValue, props.blurDebounceInterval);
+    const {
+      value,
+      onSetValue,
+      changeDebounceInterval,
+      blurDebounceInterval,
+    } = props;
+    this.state = {value};
+    this.changeDebounced = debounce(onSetValue, changeDebounceInterval);
+    this.blurDebounced = debounce(onSetValue, blurDebounceInterval);
   }
 
   componentWillReceiveProps = nextProps => {
-    const isValueChanging = nextProps.value !== this.state.value;
+    const {value: stateValue} = this.state;
+    const {onSetValue} = this.props;
+    const isValueChanging = nextProps.value !== stateValue;
     if (isValueChanging) {
       this.setState({value: nextProps.value});
-      this.props.onSetValue(nextProps.value);
+      onSetValue(nextProps.value);
     }
   };
 
   handleChange = event => {
+    const {updateOnChange, onChange, name} = this.props;
     const {value} = event.currentTarget;
     this.setState({value});
-    if (this.props.updateOnChange) {
+    if (updateOnChange) {
       this.changeDebounced(value);
     }
-    this.props.onChange(this.props.name, value);
+    onChange(name, value);
   };
 
   handleBlur = event => {
+    const {updateOnBlur, onBlur, name} = this.props;
     const {value} = event.currentTarget;
     this.setState({value});
-    if (this.props.updateOnBlur) {
+    if (updateOnBlur) {
       this.changeDebounced.cancel();
       this.blurDebounced(value);
     }
-    this.props.onBlur(this.props.name, value);
+    onBlur(name, value);
   };
 
   initElementRef = control => {
@@ -59,27 +66,28 @@ class Textarea extends Component {
     delete inputProps.updateOnBlur;
     delete inputProps.updateOnChange;
 
+    const {value} = this.state;
+    const {layout, id, help, showErrors, errorMessages} = this.props;
+
     const element = (
       <TextareaControl
         {...inputProps}
-        value={this.state.value}
+        value={value}
         onChange={this.handleChange}
         onBlur={this.handleBlur}
         ref={this.initElementRef}
       />
     );
 
-    if (this.props.layout === 'elementOnly') {
+    if (layout === 'elementOnly') {
       return element;
     }
 
     return (
-      <Row {...this.props} htmlFor={this.props.id}>
+      <Row {...this.props} htmlFor={id}>
         {element}
-        {this.props.help ? <Help help={this.props.help} /> : null}
-        {this.props.showErrors ? (
-          <ErrorMessages messages={this.props.errorMessages} />
-        ) : null}
+        {help ? <Help help={help} /> : null}
+        {showErrors ? <ErrorMessages messages={errorMessages} /> : null}
       </Row>
     );
   }

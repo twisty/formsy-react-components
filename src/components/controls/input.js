@@ -9,7 +9,8 @@ class InputControl extends Component {
 
   render() {
     let {className} = this.props;
-    if (['hidden', 'range'].indexOf(this.props.type) !== -1) {
+    const {type} = this.props;
+    if (['hidden', 'range'].indexOf(type) !== -1) {
       className = null;
     }
     return (

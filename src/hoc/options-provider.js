@@ -3,18 +3,27 @@ import PropTypes from 'prop-types';
 
 class OptionsProvider extends Component {
   getChildContext() {
+    const {
+      layout,
+      validateOnSubmit,
+      validatePristine,
+      rowClassName,
+      labelClassName,
+      elementWrapperClassName,
+    } = this.props;
     return {
-      layout: this.props.layout,
-      validateOnSubmit: this.props.validateOnSubmit,
-      validatePristine: this.props.validatePristine,
-      rowClassName: this.props.rowClassName,
-      labelClassName: this.props.labelClassName,
-      elementWrapperClassName: this.props.elementWrapperClassName,
+      layout,
+      validateOnSubmit,
+      validatePristine,
+      rowClassName,
+      labelClassName,
+      elementWrapperClassName,
     };
   }
 
   render() {
-    return Children.only(this.props.children);
+    const {children} = this.props;
+    return Children.only(children);
   }
 }
 

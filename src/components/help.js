@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Help = props => <span className="help-block">{props.help}</span>;
+const Help = ({help}) => <span className="help-block">{help}</span>;
 
 Help.propTypes = {
   help: PropTypes.string.isRequired,

@@ -12,9 +12,10 @@ const Row = props => {
     showErrors,
     layout,
     label,
+    children,
   } = props;
 
-  let element = props.children;
+  let element = children;
 
   if (layout === 'elementOnly') {
     return <span>{element}</span>;
