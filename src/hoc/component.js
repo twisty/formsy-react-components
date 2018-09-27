@@ -85,7 +85,11 @@ const FormsyReactComponent = ComposedComponent => {
 
     // Combine a parent context value with a component prop value.
     // This is used for CSS classnames, where the value is passed to `JedWatson/classnames`.
-    combineContextWithProp = key => [this.context[key], this.props[key]];
+    combineContextWithProp = key => {
+      const {[key]: contextValue} = this.context;
+      const {[key]: propsValue} = this.props;
+      return [contextValue, propsValue];
+    };
 
     hashString = string => {
       let hash = 0;

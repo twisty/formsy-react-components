@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import ComponentCommon from './component-common';
+import {componentPropTypes, componentDefaultProps} from './component-common';
 import ErrorMessages from './error-messages';
 import Help from './help';
 import Row from './row';
@@ -28,7 +28,7 @@ class Select extends Component {
 
   render() {
     const inputProps = Object.assign({}, this.props);
-    Object.keys(ComponentCommon.propTypes).forEach(key => {
+    Object.keys(componentPropTypes).forEach(key => {
       delete inputProps[key];
     });
 
@@ -58,7 +58,7 @@ class Select extends Component {
 
 Select.propTypes = {
   ...SelectControl.propTypes,
-  ...ComponentCommon.propTypes,
+  ...componentPropTypes,
   multiple: PropTypes.bool,
   options: PropTypes.arrayOf(
     PropTypes.shape({
@@ -70,7 +70,7 @@ Select.propTypes = {
 };
 
 Select.defaultProps = {
-  ...ComponentCommon.defaultProps,
+  ...componentDefaultProps,
   options: [],
 };
 

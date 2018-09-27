@@ -33,7 +33,7 @@ const classNamesType = PropTypes.oneOfType([
   PropTypes.object,
 ]);
 
-OptionsProvider.propTypes = {
+const optionsProviderPropTypes = {
   layout: PropTypes.string,
   validateOnSubmit: PropTypes.bool,
   validatePristine: PropTypes.bool,
@@ -42,6 +42,8 @@ OptionsProvider.propTypes = {
   rowClassName: classNamesType,
   children: PropTypes.node.isRequired,
 };
+
+OptionsProvider.propTypes = optionsProviderPropTypes;
 
 OptionsProvider.defaultProps = {
   layout: 'horizontal',
@@ -52,7 +54,7 @@ OptionsProvider.defaultProps = {
   rowClassName: '',
 };
 
-const {children, ...childContextTypes} = OptionsProvider.propTypes;
+const {children, ...childContextTypes} = optionsProviderPropTypes;
 OptionsProvider.childContextTypes = childContextTypes;
 
 export default OptionsProvider;

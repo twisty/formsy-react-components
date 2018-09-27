@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import debounce from 'lodash.debounce';
-import ComponentCommon from './component-common';
+import {componentPropTypes, componentDefaultProps} from './component-common';
 import ErrorMessages from './error-messages';
 import Help from './help';
 import Row from './row';
@@ -58,7 +58,7 @@ class Textarea extends Component {
 
   render() {
     const inputProps = Object.assign({}, this.props);
-    Object.keys(ComponentCommon.propTypes).forEach(key => {
+    Object.keys(componentPropTypes).forEach(key => {
       delete inputProps[key];
     });
     delete inputProps.blurDebounceInterval;
@@ -94,7 +94,7 @@ class Textarea extends Component {
 }
 
 Textarea.propTypes = {
-  ...ComponentCommon.propTypes,
+  ...componentPropTypes,
   ...TextareaControl.propTypes,
   blurDebounceInterval: PropTypes.number,
   changeDebounceInterval: PropTypes.number,
@@ -105,7 +105,7 @@ Textarea.propTypes = {
 };
 
 Textarea.defaultProps = {
-  ...ComponentCommon.defaultProps,
+  ...componentDefaultProps,
   updateOnBlur: true,
   updateOnChange: true,
   blurDebounceInterval: 0,

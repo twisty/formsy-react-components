@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import ControlCommon from './control-common';
+import commonPropTypes from './common-prop-types';
 
 class TextareaControl extends Component {
   initElementRef = element => {
@@ -13,7 +13,7 @@ class TextareaControl extends Component {
 }
 
 TextareaControl.propTypes = {
-  ...ControlCommon.propTypes,
+  ...commonPropTypes,
   className: PropTypes.string,
   cols: PropTypes.number,
   rows: PropTypes.number,

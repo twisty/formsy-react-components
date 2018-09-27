@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import ComponentCommon from './component-common';
-import ControlCommon from './controls/control-common';
+import {componentPropTypes, componentDefaultProps} from './component-common';
+import controlCommonPropTypes from './controls/common-prop-types';
 import ErrorMessages from './error-messages';
 import Help from './help';
 import Row from './row';
@@ -81,8 +81,8 @@ class RadioGroup extends Component {
 }
 
 RadioGroup.propTypes = {
-  ...ControlCommon.propTypes,
-  ...ComponentCommon.propTypes,
+  ...controlCommonPropTypes,
+  ...componentPropTypes,
   options: PropTypes.arrayOf(
     PropTypes.shape({
       disabled: PropTypes.bool,
@@ -94,7 +94,7 @@ RadioGroup.propTypes = {
 };
 
 RadioGroup.defaultProps = {
-  ...ComponentCommon.defaultProps,
+  ...componentDefaultProps,
   type: 'stacked',
   options: [],
 };

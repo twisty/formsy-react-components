@@ -1,12 +1,7 @@
-import React from 'react';
 import PropTypes from 'prop-types';
 import styleClassNames from './prop-types';
 
-const ComponentCommon = () => (
-  <h1>This component just holds props and default props.</h1>
-);
-
-ComponentCommon.propTypes = {
+export const componentPropTypes = {
   ...styleClassNames,
   onChange: PropTypes.func,
   onSetValue: PropTypes.func,
@@ -18,7 +13,7 @@ ComponentCommon.propTypes = {
   showErrors: PropTypes.bool,
 };
 
-ComponentCommon.defaultProps = {
+export const componentDefaultProps = {
   onChange: () => {},
   onSetValue: () => {},
   errorMessages: [],
@@ -27,5 +22,3 @@ ComponentCommon.defaultProps = {
   layout: 'horizontal',
   showErrors: true,
 };
-
-export default ComponentCommon;

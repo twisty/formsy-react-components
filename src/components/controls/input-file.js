@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import ControlCommon from './control-common';
+import commonPropTypes from './common-prop-types';
 
 // A file control can only be set to an empty string.
 // I think we need to keep this as an uncontrolled component, so we override the
@@ -18,7 +18,7 @@ class FileControl extends Component {
 }
 
 FileControl.propTypes = {
-  ...ControlCommon.propTypes,
+  ...commonPropTypes,
 };
 
 export default FileControl;

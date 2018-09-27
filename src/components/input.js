@@ -1,11 +1,13 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import debounce from 'lodash.debounce';
-import ComponentCommon from './component-common';
+import {componentPropTypes, componentDefaultProps} from './component-common';
 import ErrorMessages from './error-messages';
 import Help from './help';
 import Icon from './icon';
-import InputControl from './controls/input';
+import InputControl, {
+  propTypes as inputControlPropTypes,
+} from './controls/input';
 import InputGroup from './input-group';
 import Row from './row';
 
@@ -77,7 +79,7 @@ class Input extends Component {
 
   render() {
     const inputProps = Object.assign({}, this.props);
-    Object.keys(ComponentCommon.propTypes).forEach(key => {
+    Object.keys(componentPropTypes).forEach(key => {
       delete inputProps[key];
     });
     delete inputProps.addonAfter;
@@ -141,13 +143,13 @@ class Input extends Component {
   }
 }
 
-const [...inputGroupPropTypes] = InputControl.propTypes;
+const [...inputGroupPropTypes] = inputControlPropTypes;
 delete inputGroupPropTypes.children;
 
 Input.propTypes = {
-  ...InputControl.propTypes,
+  ...inputControlPropTypes,
   ...inputGroupPropTypes,
-  ...ComponentCommon.propTypes,
+  ...componentPropTypes,
   blurDebounceInterval: PropTypes.number,
   changeDebounceInterval: PropTypes.number,
   type: PropTypes.oneOf([
@@ -176,7 +178,7 @@ Input.propTypes = {
 };
 
 Input.defaultProps = {
-  ...ComponentCommon.defaultProps,
+  ...componentDefaultProps,
   ...InputGroup.defaultProps,
   type: 'text',
   value: '',

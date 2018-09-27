@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import ControlCommon from './control-common';
+import commonPropTypes from './common-prop-types';
 
 class InputControl extends Component {
   initElementRef = element => {
@@ -19,12 +19,14 @@ class InputControl extends Component {
   }
 }
 
-InputControl.propTypes = {
-  ...ControlCommon.propTypes,
+export const propTypes = {
+  ...commonPropTypes,
   value: PropTypes.string.isRequired,
   type: PropTypes.string,
   className: PropTypes.string,
 };
+
+InputControl.propTypes = propTypes;
 
 InputControl.defaultProps = {
   className: 'form-control',

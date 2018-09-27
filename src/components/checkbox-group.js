@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import ControlCommon from './controls/control-common';
-import ComponentCommon from './component-common';
+import controlCommonPropTypes from './controls/common-prop-types';
+import {componentPropTypes, componentDefaultProps} from './component-common';
 import ErrorMessages from './error-messages';
 import Help from './help';
 import Row from './row';
@@ -68,8 +68,8 @@ class CheckboxGroup extends Component {
 }
 
 CheckboxGroup.propTypes = {
-  ...ControlCommon.propTypes,
-  ...ComponentCommon.propTypes,
+  ...controlCommonPropTypes,
+  ...componentPropTypes,
   options: PropTypes.arrayOf(
     PropTypes.shape({
       disabled: PropTypes.bool,
@@ -82,7 +82,7 @@ CheckboxGroup.propTypes = {
 };
 
 CheckboxGroup.defaultProps = {
-  ...ComponentCommon.defaultProps,
+  ...componentDefaultProps,
   options: [],
   value: [],
 };
