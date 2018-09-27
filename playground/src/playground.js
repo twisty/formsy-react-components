@@ -29,7 +29,7 @@ const Playground = props => {
 
   const resetForm = () => {
     console.log('Reset called'); // eslint-disable-line no-console
-    const formsyForm = myform.formsyForm;
+    const {formsyForm} = myform;
     formsyForm.reset();
   };
 
@@ -84,6 +84,7 @@ const Playground = props => {
     <Form
       onSubmit={submitForm}
       layout={layoutChoice}
+      className="custom-classname-is-rendered"
       validateOnSubmit={validateOnSubmitChoice}
       validatePristine={validatePristineChoice}
       disabled={disabledChoice}
