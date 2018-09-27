@@ -7,6 +7,11 @@ module.exports = {
 
   devtool: 'source-map',
 
+  devServer: {
+    contentBase: __dirname,
+    port: 3000,
+  },
+
   entry: {
     playground: path.resolve(__dirname, './playground/src/index.js'),
     refs: path.resolve(__dirname, './refs/src/index.js'),
