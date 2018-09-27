@@ -10,7 +10,7 @@
     "prepublishOnly": "./scripts/prepublish.sh",
     "transpile": "rm -rf release && babel src -d release --ignore __tests__",
     "dev": "babel src --watch -d release --source-maps",
-    "examples": "webpack-serve --config examples/webpack.config.js --port 3000 --content examples",
+    "examples": "webpack-dev-server --config examples/webpack.config.js",
     "examples:build": "webpack -p --config examples/webpack.config",
     "gh-pages": "NODE_ENV=production yarn examples:build && gh-pages -d examples",
     "generate-docs": "./scripts/generate-docs.sh"
@@ -88,7 +88,7 @@
     "react-test-renderer": "^16.0.0",
     "webpack": "^4.12.0",
     "webpack-cli": "^3.0.8",
-    "webpack-serve": "^2.0.2"
+    "webpack-dev-server": "^3.1.9"
   },
   "config": {
     "commitizen": {
