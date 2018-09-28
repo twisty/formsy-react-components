@@ -8,7 +8,7 @@ import Icon from './icon';
 import InputControl, {
   propTypes as inputControlPropTypes,
 } from './controls/input';
-import InputGroup from './input-group';
+import InputGroup, {propTypes as inputGroupPropTypes} from './input-group';
 import Row from './row';
 
 class Input extends Component {
@@ -143,7 +143,6 @@ class Input extends Component {
   }
 }
 
-const [...inputGroupPropTypes] = inputControlPropTypes;
 delete inputGroupPropTypes.children;
 
 Input.propTypes = {

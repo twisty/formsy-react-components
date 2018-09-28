@@ -32,13 +32,15 @@ const InputGroup = props => {
   );
 };
 
-InputGroup.propTypes = {
+export const propTypes = {
   children: PropTypes.node.isRequired,
   addonAfter: PropTypes.node,
   addonBefore: PropTypes.node,
   buttonAfter: PropTypes.node,
   buttonBefore: PropTypes.node,
 };
+
+InputGroup.propTypes = propTypes;
 
 InputGroup.defaultProps = {
   addonAfter: null,
