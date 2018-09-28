@@ -19,24 +19,28 @@ const InputGroup = props => {
     return <span className="input-group-btn">{button}</span>;
   };
 
+  const {addonBefore, addonAfter, buttonBefore, buttonAfter, children} = props;
+
   return (
     <div className="input-group">
-      {renderAddon(props.addonBefore)}
-      {renderButton(props.buttonBefore)}
-      {props.children}
-      {renderAddon(props.addonAfter)}
-      {renderButton(props.buttonAfter)}
+      {renderAddon(addonBefore)}
+      {renderButton(buttonBefore)}
+      {children}
+      {renderAddon(addonAfter)}
+      {renderButton(buttonAfter)}
     </div>
   );
 };
 
-InputGroup.propTypes = {
+export const propTypes = {
   children: PropTypes.node.isRequired,
   addonAfter: PropTypes.node,
   addonBefore: PropTypes.node,
   buttonAfter: PropTypes.node,
   buttonBefore: PropTypes.node,
 };
+
+InputGroup.propTypes = propTypes;
 
 InputGroup.defaultProps = {
   addonAfter: null,

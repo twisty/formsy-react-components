@@ -5,14 +5,13 @@ module.exports = {
   rules: {
     "prettier/prettier": ["error", "fb"],
     "react/jsx-filename-extension": [1, { extensions: [".js", ".jsx"] }],
-    "jsx-a11y/label-has-for": [
-      2,
-      {
-        required: {
-          some: ["nesting", "id"]
-        },
-        allowChildren: false
-      }
-    ]
+    "jsx-a11y/label-has-for": "off",
+    'jsx-a11y/label-has-associated-control': ['error', {
+      labelComponents: [],
+      labelAttributes: [],
+      controlComponents: [],
+      assert: 'either',
+      depth: 25
+    }]
   }
 };

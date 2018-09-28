@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Icon = props => {
-  const classNames = ['glyphicon', `glyphicon-${props.symbol}`];
-  if (props.className) {
-    classNames.push(props.className);
+const Icon = ({symbol, className}) => {
+  const classNames = ['glyphicon', `glyphicon-${symbol}`];
+  if (className) {
+    classNames.push(className);
   }
   return <span className={classNames.join(' ')} aria-hidden="true" />;
 };

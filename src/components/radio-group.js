@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import ComponentCommon from './component-common';
-import ControlCommon from './controls/control-common';
+import {componentPropTypes, componentDefaultProps} from './component-common';
+import controlCommonPropTypes from './controls/common-prop-types';
 import ErrorMessages from './error-messages';
 import Help from './help';
 import Row from './row';
@@ -14,16 +14,18 @@ class RadioGroup extends Component {
 
   handleChange = event => {
     const {value} = event.currentTarget;
-    this.props.onSetValue(value);
-    this.props.onChange(this.props.name, value);
+    const {onSetValue, onChange, name} = this.props;
+    onSetValue(value);
+    onChange(name, value);
   };
 
   renderElement = () => {
-    const controls = this.props.options.map(radio => {
-      const checked = this.props.value === radio.value;
-      const disabled = radio.disabled || this.props.disabled;
-      const className = `radio${disabled ? ' disabled' : ''}`;
-      if (this.props.type === 'inline') {
+    const {options, value, disabled, type} = this.props;
+    const controls = options.map(radio => {
+      const checked = value === radio.value;
+      const isDisabled = radio.disabled || disabled;
+      const className = `radio${isDisabled ? ' disabled' : ''}`;
+      if (type === 'inline') {
         return (
           <label className="radio-inline" key={radio.value}>
             <input
@@ -34,7 +36,7 @@ class RadioGroup extends Component {
               type="radio"
               value={radio.value}
               onChange={this.handleChange}
-              disabled={disabled}
+              disabled={isDisabled}
             />{' '}
             {radio.label}
           </label>
@@ -51,7 +53,7 @@ class RadioGroup extends Component {
               type="radio"
               value={radio.value}
               onChange={this.handleChange}
-              disabled={disabled}
+              disabled={isDisabled}
             />{' '}
             {radio.label}
           </label>
@@ -63,26 +65,24 @@ class RadioGroup extends Component {
 
   render() {
     const element = this.renderElement();
-
-    if (this.props.layout === 'elementOnly') {
+    const {layout, help, showErrors, errorMessages} = this.props;
+    if (layout === 'elementOnly') {
       return <div>{element}</div>;
     }
 
     return (
       <Row {...this.props} fakeLabel>
         {element}
-        {this.props.help ? <Help help={this.props.help} /> : null}
-        {this.props.showErrors ? (
-          <ErrorMessages messages={this.props.errorMessages} />
-        ) : null}
+        {help ? <Help help={help} /> : null}
+        {showErrors ? <ErrorMessages messages={errorMessages} /> : null}
       </Row>
     );
   }
 }
 
 RadioGroup.propTypes = {
-  ...ControlCommon.propTypes,
-  ...ComponentCommon.propTypes,
+  ...controlCommonPropTypes,
+  ...componentPropTypes,
   options: PropTypes.arrayOf(
     PropTypes.shape({
       disabled: PropTypes.bool,
@@ -94,7 +94,7 @@ RadioGroup.propTypes = {
 };
 
 RadioGroup.defaultProps = {
-  ...ComponentCommon.defaultProps,
+  ...componentDefaultProps,
   type: 'stacked',
   options: [],
 };

@@ -18,15 +18,14 @@ class Form extends Component {
       this.formsyForm = formsyForm;
     };
 
-    const formClassNames = classNames([
-      `form-${this.props.layout}`,
-      this.props.className,
-    ]);
+    const {layout, className, children} = this.props;
+
+    const formClassNames = classNames([`form-${layout}`, className]);
 
     return (
       <OptionsProvider {...this.props}>
         <Formsy {...formsyProps} className={formClassNames} ref={refCallback}>
-          {this.props.children}
+          {children}
         </Formsy>
       </OptionsProvider>
     );

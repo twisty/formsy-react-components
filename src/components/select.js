@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import ComponentCommon from './component-common';
+import {componentPropTypes, componentDefaultProps} from './component-common';
 import ErrorMessages from './error-messages';
 import Help from './help';
 import Row from './row';
@@ -9,16 +9,17 @@ import SelectControl from './controls/select';
 class Select extends Component {
   handleChange = event => {
     const target = event.currentTarget;
+    const {multiple, onSetValue, onChange, name} = this.props;
     let value;
-    if (this.props.multiple) {
+    if (multiple) {
       value = Array.from(target.options)
         .filter(option => option.selected)
         .map(option => option.value);
     } else {
       ({value} = target);
     }
-    this.props.onSetValue(value);
-    this.props.onChange(this.props.name, value);
+    onSetValue(value);
+    onChange(name, value);
   };
 
   initElementRef = control => {
@@ -27,7 +28,7 @@ class Select extends Component {
 
   render() {
     const inputProps = Object.assign({}, this.props);
-    Object.keys(ComponentCommon.propTypes).forEach(key => {
+    Object.keys(componentPropTypes).forEach(key => {
       delete inputProps[key];
     });
 
@@ -39,17 +40,17 @@ class Select extends Component {
       />
     );
 
-    if (this.props.layout === 'elementOnly') {
+    const {layout, id, help, showErrors, errorMessages} = this.props;
+
+    if (layout === 'elementOnly') {
       return control;
     }
 
     return (
-      <Row {...this.props} htmlFor={this.props.id}>
+      <Row {...this.props} htmlFor={id}>
         {control}
-        {this.props.help ? <Help help={this.props.help} /> : null}
-        {this.props.showErrors ? (
-          <ErrorMessages messages={this.props.errorMessages} />
-        ) : null}
+        {help ? <Help help={help} /> : null}
+        {showErrors ? <ErrorMessages messages={errorMessages} /> : null}
       </Row>
     );
   }
@@ -57,7 +58,7 @@ class Select extends Component {
 
 Select.propTypes = {
   ...SelectControl.propTypes,
-  ...ComponentCommon.propTypes,
+  ...componentPropTypes,
   multiple: PropTypes.bool,
   options: PropTypes.arrayOf(
     PropTypes.shape({
@@ -69,7 +70,7 @@ Select.propTypes = {
 };
 
 Select.defaultProps = {
-  ...ComponentCommon.defaultProps,
+  ...componentDefaultProps,
   options: [],
 };
 

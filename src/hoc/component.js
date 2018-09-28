@@ -28,18 +28,23 @@ const FormsyReactComponent = ComposedComponent => {
     // 1. layout prop (if supplied)
     // 2. [else] layout context (if defined)
     // 3. [else] 'horizontal' (default value)
-    getLayout = () =>
-      this.props.layout || (this.context.layout || 'horizontal');
+    getLayout = () => {
+      const {layout} = this.props;
+      const {layout: layoutContext} = this.context;
+      return layout || (layoutContext || 'horizontal');
+    };
 
     // Use the following value for validatePristine:
     // 1. validatePristine prop (if supplied)
     // 2. [else] validatePristine context (if defined)
     // 3. [else] false (default value)
     getValidatePristine = () => {
-      if (typeof this.props.validatePristine === 'boolean') {
-        return this.props.validatePristine;
+      const {validatePristine} = this.props;
+      if (typeof validatePristine === 'boolean') {
+        return validatePristine;
       }
-      return this.context.validatePristine || false;
+      const {validatePristine: validatePristineContext} = this.context;
+      return validatePristineContext || false;
     };
 
     // Use the following value for validateOnSubmit:
@@ -47,10 +52,12 @@ const FormsyReactComponent = ComposedComponent => {
     // 2. [else] validateOnSubmit context (if defined)
     // 3. [else] false (default value)
     getValidateOnSubmit = () => {
-      if (typeof this.props.validateOnSubmit === 'boolean') {
-        return this.props.validateOnSubmit;
+      const {validateOnSubmit} = this.props;
+      if (typeof validateOnSubmit === 'boolean') {
+        return validateOnSubmit;
       }
-      return this.context.validateOnSubmit || false;
+      const {validateOnSubmit: validateOnSubmitContext} = this.context;
+      return validateOnSubmitContext || false;
     };
 
     // getId
@@ -78,7 +85,11 @@ const FormsyReactComponent = ComposedComponent => {
 
     // Combine a parent context value with a component prop value.
     // This is used for CSS classnames, where the value is passed to `JedWatson/classnames`.
-    combineContextWithProp = key => [this.context[key], this.props[key]];
+    combineContextWithProp = key => {
+      const {[key]: contextValue} = this.context;
+      const {[key]: propsValue} = this.props;
+      return [contextValue, propsValue];
+    };
 
     hashString = string => {
       let hash = 0;
@@ -91,22 +102,33 @@ const FormsyReactComponent = ComposedComponent => {
 
     // Determine whether to show errors, or not.
     shouldShowErrors = () => {
-      if (this.props.isPristine() === true) {
+      const {isPristine, isFormSubmitted, isValid} = this.props;
+      if (isPristine() === true) {
         if (this.getValidatePristine() === false) {
           return false;
         }
       }
       if (this.getValidateOnSubmit() === true) {
-        if (this.props.isFormSubmitted() === false) {
+        if (isFormSubmitted() === false) {
           return false;
         }
       }
-      return this.props.isValid() === false;
+      return isValid() === false;
     };
 
     // We pass through all unknown props, but delete some formsy HOC props
     // that we know we don't need.
     render() {
+      const {
+        componentRef,
+        disabled,
+        getErrorMessages,
+        getValue,
+        isFormDisabled,
+        isPristine,
+        isRequired,
+        setValue,
+      } = this.props;
       const props = {
         ...this.props,
         elementWrapperClassName: this.combineContextWithProp(
@@ -114,16 +136,16 @@ const FormsyReactComponent = ComposedComponent => {
         ),
         labelClassName: this.combineContextWithProp('labelClassName'),
         rowClassName: this.combineContextWithProp('rowClassName'),
-        disabled: this.props.isFormDisabled() || this.props.disabled,
-        errorMessages: this.props.getErrorMessages(),
+        disabled: isFormDisabled() || disabled,
+        errorMessages: getErrorMessages(),
         id: this.getId(),
-        isPristine: this.props.isPristine,
+        isPristine,
         layout: this.getLayout(),
-        ref: this.props.componentRef,
-        required: this.props.isRequired(),
+        ref: componentRef,
+        required: isRequired(),
         showErrors: this.shouldShowErrors(),
-        value: this.props.getValue(),
-        onSetValue: this.props.setValue,
+        value: getValue(),
+        onSetValue: setValue,
       };
 
       // Props that we don't need to pass to our composed components.

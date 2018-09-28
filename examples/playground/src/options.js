@@ -11,9 +11,11 @@ const Options = props => {
   const {
     disabledChoice,
     layoutChoice,
+    onChangeOption,
+    onToggle,
+    showing,
     validateOnSubmitChoice,
     validatePristineChoice,
-    onChangeOption,
   } = props;
 
   const optionsForm = (
@@ -57,11 +59,11 @@ const Options = props => {
   return (
     <div className="panel panel-default">
       <div className="panel-heading">
-        <button className="btn btn-default" onClick={props.onToggle}>
-          {props.showing ? 'Hide options' : 'Show options'}
+        <button type="button" className="btn btn-default" onClick={onToggle}>
+          {showing ? 'Hide options' : 'Show options'}
         </button>
       </div>
-      {props.showing ? <div className="panel-body">{optionsForm}</div> : null}
+      {showing ? <div className="panel-body">{optionsForm}</div> : null}
     </div>
   );
 };

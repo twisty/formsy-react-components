@@ -1,12 +1,14 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import debounce from 'lodash.debounce';
-import ComponentCommon from './component-common';
+import {componentPropTypes, componentDefaultProps} from './component-common';
 import ErrorMessages from './error-messages';
 import Help from './help';
 import Icon from './icon';
-import InputControl from './controls/input';
-import InputGroup from './input-group';
+import InputControl, {
+  propTypes as inputControlPropTypes,
+} from './controls/input';
+import InputGroup, {propTypes as inputGroupPropTypes} from './input-group';
 import Row from './row';
 
 class Input extends Component {
@@ -21,43 +23,54 @@ class Input extends Component {
   }
 
   componentWillReceiveProps = nextProps => {
-    const isValueChanging = nextProps.value !== this.state.value;
+    const {value: stateValue} = this.state;
+    const {onSetValue} = this.props;
+    const isValueChanging = nextProps.value !== stateValue;
     if (isValueChanging) {
       this.setState({value: nextProps.value});
-      this.props.onSetValue(nextProps.value);
+      onSetValue(nextProps.value);
     }
   };
 
   handleChange = event => {
     const {value} = event.currentTarget;
+    const {updateOnChange, onChange, name} = this.props;
     this.setState({value});
-    if (this.props.updateOnChange) {
+    if (updateOnChange) {
       this.changeDebounced(value);
     }
-    this.props.onChange(this.props.name, value);
+    onChange(name, value);
   };
 
   handleBlur = event => {
     const {value} = event.currentTarget;
+    const {
+      updateOnBlur,
+      isPristine,
+      onBlur,
+      name,
+      value: propValue,
+    } = this.props;
     this.setState({value});
-    if (this.props.updateOnBlur) {
+    if (updateOnBlur) {
       this.changeDebounced.cancel();
-      if (this.props.isPristine()) {
+      if (isPristine()) {
         // should update as we have just left a pristine input
         this.blurDebounced(value);
-      } else if (this.props.value !== value) {
+      } else if (propValue !== value) {
         // should update because the value has changed
         this.blurDebounced(value);
       }
     }
-    this.props.onBlur(this.props.name, value);
+    onBlur(name, value);
   };
 
   handleKeyDown = event => {
+    const {onKeyDown} = this.props;
     if (event.key === 'Enter') {
       this.changeDebounced.flush();
     }
-    this.props.onKeyDown(event);
+    onKeyDown(event);
   };
 
   initElementRef = control => {
@@ -66,7 +79,7 @@ class Input extends Component {
 
   render() {
     const inputProps = Object.assign({}, this.props);
-    Object.keys(ComponentCommon.propTypes).forEach(key => {
+    Object.keys(componentPropTypes).forEach(key => {
       delete inputProps[key];
     });
     delete inputProps.addonAfter;
@@ -80,10 +93,24 @@ class Input extends Component {
     delete inputProps.value;
     delete inputProps.onBlur;
 
+    const {value} = this.state;
+    const {
+      type,
+      addonBefore,
+      addonAfter,
+      buttonBefore,
+      buttonAfter,
+      layout,
+      id,
+      showErrors,
+      help,
+      errorMessages,
+    } = this.props;
+
     let control = (
       <InputControl
         {...inputProps}
-        value={this.state.value}
+        value={value}
         onChange={this.handleChange}
         onBlur={this.handleBlur}
         onKeyDown={this.handleKeyDown}
@@ -91,45 +118,37 @@ class Input extends Component {
       />
     );
 
-    if (this.props.type === 'hidden') {
+    if (type === 'hidden') {
       return control;
     }
 
-    if (
-      this.props.addonBefore ||
-      this.props.addonAfter ||
-      this.props.buttonBefore ||
-      this.props.buttonAfter
-    ) {
+    if (addonBefore || addonAfter || buttonBefore || buttonAfter) {
       control = <InputGroup {...this.props}>{control}</InputGroup>;
     }
 
-    if (this.props.layout === 'elementOnly') {
+    if (layout === 'elementOnly') {
       return control;
     }
 
     return (
-      <Row {...this.props} htmlFor={this.props.id}>
+      <Row {...this.props} htmlFor={id}>
         {control}
-        {this.props.showErrors ? (
+        {showErrors ? (
           <Icon symbol="remove" className="form-control-feedback" />
         ) : null}
-        {this.props.help ? <Help help={this.props.help} /> : null}
-        {this.props.showErrors ? (
-          <ErrorMessages messages={this.props.errorMessages} />
-        ) : null}
+        {help ? <Help help={help} /> : null}
+        {showErrors ? <ErrorMessages messages={errorMessages} /> : null}
       </Row>
     );
   }
 }
 
-const [...inputGroupPropTypes] = InputControl.propTypes;
 delete inputGroupPropTypes.children;
 
 Input.propTypes = {
-  ...InputControl.propTypes,
+  ...inputControlPropTypes,
   ...inputGroupPropTypes,
-  ...ComponentCommon.propTypes,
+  ...componentPropTypes,
   blurDebounceInterval: PropTypes.number,
   changeDebounceInterval: PropTypes.number,
   type: PropTypes.oneOf([
@@ -158,7 +177,7 @@ Input.propTypes = {
 };
 
 Input.defaultProps = {
-  ...ComponentCommon.defaultProps,
+  ...componentDefaultProps,
   ...InputGroup.defaultProps,
   type: 'text',
   value: '',

@@ -3,18 +3,27 @@ import PropTypes from 'prop-types';
 
 class OptionsProvider extends Component {
   getChildContext() {
+    const {
+      layout,
+      validateOnSubmit,
+      validatePristine,
+      rowClassName,
+      labelClassName,
+      elementWrapperClassName,
+    } = this.props;
     return {
-      layout: this.props.layout,
-      validateOnSubmit: this.props.validateOnSubmit,
-      validatePristine: this.props.validatePristine,
-      rowClassName: this.props.rowClassName,
-      labelClassName: this.props.labelClassName,
-      elementWrapperClassName: this.props.elementWrapperClassName,
+      layout,
+      validateOnSubmit,
+      validatePristine,
+      rowClassName,
+      labelClassName,
+      elementWrapperClassName,
     };
   }
 
   render() {
-    return Children.only(this.props.children);
+    const {children} = this.props;
+    return Children.only(children);
   }
 }
 
@@ -24,7 +33,7 @@ const classNamesType = PropTypes.oneOfType([
   PropTypes.object,
 ]);
 
-OptionsProvider.propTypes = {
+const optionsProviderPropTypes = {
   layout: PropTypes.string,
   validateOnSubmit: PropTypes.bool,
   validatePristine: PropTypes.bool,
@@ -33,6 +42,8 @@ OptionsProvider.propTypes = {
   rowClassName: classNamesType,
   children: PropTypes.node.isRequired,
 };
+
+OptionsProvider.propTypes = optionsProviderPropTypes;
 
 OptionsProvider.defaultProps = {
   layout: 'horizontal',
@@ -43,7 +54,7 @@ OptionsProvider.defaultProps = {
   rowClassName: '',
 };
 
-const {children, ...childContextTypes} = OptionsProvider.propTypes;
+const {children, ...childContextTypes} = optionsProviderPropTypes;
 OptionsProvider.childContextTypes = childContextTypes;
 
 export default OptionsProvider;

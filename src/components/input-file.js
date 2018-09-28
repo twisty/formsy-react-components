@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import ComponentCommon from './component-common';
+import {componentPropTypes, componentDefaultProps} from './component-common';
 import ErrorMessages from './error-messages';
 import Help from './help';
 import Row from './row';
@@ -10,7 +10,8 @@ class File extends Component {
   handleChange = event => {
     const target = event.currentTarget;
     const {value} = target;
-    this.props.onSetValue(target.files);
+    const {onSetValue, onChange, name} = this.props;
+    onSetValue(target.files);
 
     // We're passing an additional argument to the onChange handler here,
     // the 'value' of the field. This value is actually pretty useless,
@@ -19,7 +20,7 @@ class File extends Component {
     // if we select multiple files, it only returns a "fakepath" string for
     // the first file.
     // A web search for "C:\fakepath\" gives more details.
-    this.props.onChange(this.props.name, target.files, value);
+    onChange(name, target.files, value);
   };
 
   initElementRef = control => {
@@ -28,9 +29,11 @@ class File extends Component {
 
   render() {
     const inputProps = Object.assign({}, this.props);
-    Object.keys(ComponentCommon.propTypes).forEach(key => {
+    Object.keys(componentPropTypes).forEach(key => {
       delete inputProps[key];
     });
+
+    const {layout, id, showErrors, help, errorMessages} = this.props;
 
     const control = (
       <FileControl
@@ -40,20 +43,18 @@ class File extends Component {
       />
     );
 
-    if (this.props.layout === 'elementOnly') {
+    if (layout === 'elementOnly') {
       return control;
     }
 
     return (
-      <Row {...this.props} htmlFor={this.props.id}>
+      <Row {...this.props} htmlFor={id}>
         {control}
-        {this.props.showErrors ? (
+        {showErrors ? (
           <Icon symbol="remove" className="form-control-feedback" />
         ) : null}
-        {this.props.help ? <Help help={this.props.help} /> : null}
-        {this.props.showErrors ? (
-          <ErrorMessages messages={this.props.errorMessages} />
-        ) : null}
+        {help ? <Help help={help} /> : null}
+        {showErrors ? <ErrorMessages messages={errorMessages} /> : null}
       </Row>
     );
   }
@@ -61,11 +62,11 @@ class File extends Component {
 
 File.propTypes = {
   ...FileControl.propTypes,
-  ...ComponentCommon.propTypes,
+  ...componentPropTypes,
 };
 
 File.defaultProps = {
-  ...ComponentCommon.defaultProps,
+  ...componentDefaultProps,
 };
 
 export default File;
