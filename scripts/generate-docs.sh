@@ -2,6 +2,7 @@
 
 const fs = require('fs');
 const reactDocs = require('react-docgen');
+const externalProptypesHandler = require('react-docgen-external-proptypes-handler')
 const docsToMarkdown = require('react-docs-markdown');
 
 const docList = [
@@ -22,7 +23,7 @@ const docList = [
   },
   {
     name: 'Common Component Props',
-    file: './src/components/component-common.js',
+    file: './scripts/component-common-for-docs.js',
     out: './docs/api/component-common.md',
   },
   {
@@ -52,13 +53,16 @@ const docList = [
   },
 ];
 
-docList.map(item => {
-  var src = fs.readFile(item.file, 'utf8', (err, data) => {
+docList.forEach(item => {
+  fs.readFile(item.file, 'utf8', (err, data) => {
     if (err) throw err;
-    let api = reactDocs.parse(data);
-    let md = docsToMarkdown(api, item.name);
-    fs.writeFile(item.out, md, err => {
-      if (err) throw err;
+    const handlers = reactDocs.defaultHandlers.concat(
+      externalProptypesHandler(item.file),
+    );
+    const api = reactDocs.parse(data, null, handlers);
+    const md = docsToMarkdown(api, item.name);
+    fs.writeFile(item.out, md, writeError => {
+      if (writeError) throw writeError;
     });
   });
 });

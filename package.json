@@ -85,6 +85,7 @@
     "raf": "^3.4.0",
     "react": "^16.0.0",
     "react-docgen": "^2.18.0",
+    "react-docgen-external-proptypes-handler": "^1.0.0",
     "react-docs-markdown": "^0.7.0",
     "react-dom": "^16.0.0",
     "react-test-renderer": "^16.0.0",

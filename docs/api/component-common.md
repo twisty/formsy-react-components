@@ -1,16 +1,19 @@
 # Common Component Props
 
 ## Props
-| Name                                             | Type    | Default      | Required | Description |
-| ------------------------------------------------ | ------- | ------------ | -------- | ----------- |
-| onChange                                         | func    | () => {}     | false    |             |
-| onSetValue                                       | func    | () => {}     | false    |             |
-| isPristine                                       | func    |              | true     |             |
-| [errorMessages](#markdown-header-error-messages) | arrayOf | []           | false    |             |
-| help                                             | string  | null         | false    |             |
-| label                                            | node    | null         | false    |             |
-| [layout](#markdown-header-layout)                | enum    | 'horizontal' | false    |             |
-| showErrors                                       | bool    | true         | false    |             |
+| Name                                             | Type           | Default | Required | Description |
+| ------------------------------------------------ | -------------- | ------- | -------- | ----------- |
+| rowClassName                                     | styleClassName |         | false    |             |
+| labelClassName                                   | styleClassName |         | false    |             |
+| elementWrapperClassName                          | styleClassName |         | false    |             |
+| onChange                                         | func           |         | false    |             |
+| onSetValue                                       | func           |         | false    |             |
+| isPristine                                       | func           |         | true     |             |
+| [errorMessages](#markdown-header-error-messages) | arrayOf        |         | false    |             |
+| help                                             | string         |         | false    |             |
+| label                                            | node           |         | false    |             |
+| [layout](#markdown-header-layout)                | enum           |         | false    |             |
+| showErrors                                       | bool           | false   | false    |             |
 
 ## Complex Props
 
