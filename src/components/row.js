@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames/dedupe';
-import styleClassNames from './prop-types';
+import {styleClassNames} from './component-common';
 import Label from './label';
 
 const Row = props => {

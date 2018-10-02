@@ -1,15 +1,12 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {withFormsy} from 'formsy-react';
-import styleClassNames from '../components/prop-types';
+import {styleClassNames} from '../components/component-common';
 
-function getDisplayName(component) {
-  return (
-    component.displayName ||
-    component.name ||
-    (typeof component === 'string' ? component : 'Component')
-  );
-}
+const getDisplayName = component =>
+  component.displayName ||
+  component.name ||
+  (typeof component === 'string' ? component : 'Component');
 
 // Component HOC
 // -------------
