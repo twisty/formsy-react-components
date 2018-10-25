@@ -37,14 +37,14 @@ This should run on browsers where both [Bootstrap](https://getbootstrap.com/docs
 import { Form, Input } from 'formsy-react-components';
 
 const MyForm = (props) => {
-    return (
-        <Form onSubmit={(data) => { console.log(data) }}>
-            <Input
-                name="firstname"
-                label="What is your first name?"
-            />
-        </Form>
-    )
+  return (
+    <Form onSubmit={(data) => { console.log(data) }}>
+      <Input
+        name="firstname"
+        label="What is your first name?"
+      />
+    </Form>
+  )
 }
 ```
 
