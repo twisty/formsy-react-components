@@ -5,7 +5,10 @@ import {mount} from 'enzyme';
 import Input from '../input';
 import componentTest from './component';
 
-jest.useFakeTimers();
+const changeValue = (inputNode, value) => {
+  inputNode.getDOMNode().value = value;
+  inputNode.simulate('change');
+};
 
 describe('The <Input /> component', () => {
   componentTest(Input);
@@ -82,15 +85,17 @@ describe('The <Input /> component', () => {
   });
 
   describe('Input components do this', () => {
-    let handleBlur;
-    let handleChange;
-    let handleSetValue;
+    let onBlurProp;
+    let onChangeProp;
+    let onSetValueProp;
     let wrapper;
 
     beforeEach(() => {
-      handleBlur = jest.fn();
-      handleChange = jest.fn();
-      handleSetValue = jest.fn();
+      jest.useFakeTimers();
+
+      onBlurProp = jest.fn();
+      onChangeProp = jest.fn();
+      onSetValueProp = jest.fn();
 
       wrapper = mount(
         <Input
@@ -98,9 +103,9 @@ describe('The <Input /> component', () => {
           id="myId"
           label="My Label"
           value="Initial value"
-          onBlur={handleBlur}
-          onChange={handleChange}
-          onSetValue={handleSetValue}
+          onBlur={onBlurProp}
+          onChange={onChangeProp}
+          onSetValue={onSetValueProp}
         />,
       );
     });
@@ -111,7 +116,7 @@ describe('The <Input /> component', () => {
       expect(wrapper.find('input').prop('value')).toEqual('Changed value');
     });
 
-    it('executes a `props.onChange` callback', () => {
+    it('executes `props.onChange` when the <input /> value changes', () => {
       /*
        * The following doesn't work, we have to set the node's value directly:
        *
@@ -119,28 +124,33 @@ describe('The <Input /> component', () => {
        *
        * @see https://github.com/facebook/react/issues/3151#issuecomment-74943529
        */
-      expect(handleChange).not.toBeCalled();
+      expect(onChangeProp).not.toBeCalled();
       const inputNode = wrapper.find('input');
-      inputNode.getDOMNode().value = 'Changed value';
-      inputNode.simulate('change');
-      expect(handleChange).toBeCalled();
+      changeValue(inputNode, 'Changed value');
+      expect(onChangeProp).toBeCalled();
       expect(wrapper.find('input').prop('value')).toEqual('Changed value');
     });
 
-    it('executes a debounced `props.onSetValue` callback', () => {
-      expect(handleChange).not.toBeCalled();
-      expect(handleSetValue).not.toBeCalled();
+    it('debounces `props.onSetValue`', () => {
+      expect(onChangeProp).not.toBeCalled();
+      expect(onSetValueProp).not.toBeCalled();
+
       const inputNode = wrapper.find('input');
-      inputNode.getDOMNode().value = 'Changed value';
-      inputNode.simulate('change');
-      expect(handleChange).toBeCalled();
-      expect(handleSetValue).not.toBeCalled();
+      changeValue(inputNode, 'a');
+      changeValue(inputNode, 'b');
+      changeValue(inputNode, 'c');
+
+      expect(onChangeProp).toBeCalled();
+      expect(onChangeProp).toHaveBeenCalledTimes(3);
+
       /*
-       * The `handleSetValue` function should be called after a period of
+       * The `onSetValueProp` function should be called after a period of
        * 500ms (it is debounced for change events).
        */
+      expect(onSetValueProp).not.toBeCalled();
       jest.runAllTimers();
-      expect(handleSetValue).toBeCalled();
+      expect(onSetValueProp).toBeCalled();
+      expect(onSetValueProp).toHaveBeenCalledTimes(1);
     });
   });
 
