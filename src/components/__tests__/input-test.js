@@ -6,7 +6,8 @@ import Input from '../input';
 import componentTest from './component';
 
 const changeValue = (inputNode, value) => {
-  inputNode.getDOMNode().value = value;
+  const inputDOMNode = inputNode.getDOMNode();
+  inputDOMNode.value = value;
   inputNode.simulate('change');
 };
 

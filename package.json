@@ -52,7 +52,6 @@
     "react": "^15.6.1 || ^16.0.0"
   },
   "dependencies": {
-    "@instructure/debounce": "^5.43.0",
     "classnames": "^2.2.5",
     "prop-types": "^15.5.10"
   },
