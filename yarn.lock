@@ -714,6 +714,11 @@
     lodash "^4.17.11"
     to-fast-properties "^2.0.0"
 
+"@f/debounce@^1.0.5":
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/@f/debounce/-/debounce-1.0.5.tgz#4e35438e819bbd918c6947e3029a28ebeffae83c"
+  integrity sha1-TjVDjoGbvZGMaUfjApoo6+/66Dw=
+
 "@types/node@*":
   version "11.9.5"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-11.9.5.tgz#011eece9d3f839a806b63973e228f85967b79ed3"
@@ -4590,11 +4595,6 @@ locate-path@^3.0.0:
   dependencies:
     p-locate "^3.0.0"
     path-exists "^3.0.0"
-
-lodash.debounce@^4.0.6:
-  version "4.0.8"
-  resolved "https://registry.yarnpkg.com/lodash.debounce/-/lodash.debounce-4.0.8.tgz#82d79bff30a67c4005ffd5e2515300ad9ca4d7af"
-  integrity sha1-gteb/zCmfEAF/9XiUVMArZyk168=
 
 lodash.escape@^4.0.1:
   version "4.0.1"
