@@ -2,9 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {componentPropTypes, componentDefaultProps} from './component-common';
 import controlCommonPropTypes from './controls/common-prop-types';
-import ErrorMessages from './error-messages';
-import Help from './help';
-import Row from './row';
+import FormCheckGroup from './form-check-group';
 
 class RadioGroup extends Component {
   constructor(props) {
@@ -20,41 +18,42 @@ class RadioGroup extends Component {
   };
 
   renderElement = () => {
-    const {options, value, disabled, type} = this.props;
+    const {
+      options,
+      value,
+      disabled,
+      type,
+      id,
+      errorMessages,
+      required,
+    } = this.props;
     const controls = options.map(radio => {
       const checked = value === radio.value;
       const isDisabled = radio.disabled || disabled;
-      const className = `radio${isDisabled ? ' disabled' : ''}`;
-      if (type === 'inline') {
-        return (
-          <label className="radio-inline" key={radio.value}>
-            <input
-              ref={input => {
-                this.elements[radio.value] = input;
-              }}
-              checked={checked}
-              type="radio"
-              value={radio.value}
-              onChange={this.handleChange}
-              disabled={isDisabled}
-            />{' '}
-            {radio.label}
-          </label>
-        );
-      }
+      const className = `form-check${
+        type === 'inline' ? ' form-check-inline' : ''
+      }`;
+      const inputId = `${id}--${radio.value}`;
+      const inputClassName = `form-check-input${
+        errorMessages.length > 0 ? ' is-invalid' : ''
+      }`;
       return (
         <div className={className} key={radio.value}>
-          <label>
-            <input
-              ref={input => {
-                this.elements[radio.value] = input;
-              }}
-              checked={checked}
-              type="radio"
-              value={radio.value}
-              onChange={this.handleChange}
-              disabled={isDisabled}
-            />{' '}
+          <input
+            ref={input => {
+              this.elements[radio.value] = input;
+            }}
+            checked={checked}
+            type="radio"
+            value={radio.value}
+            onChange={this.handleChange}
+            disabled={isDisabled}
+            className={inputClassName}
+            name={id}
+            id={inputId}
+            required={required}
+          />
+          <label className="form-check-label" htmlFor={inputId}>
             {radio.label}
           </label>
         </div>
@@ -64,18 +63,8 @@ class RadioGroup extends Component {
   };
 
   render() {
-    const element = this.renderElement();
-    const {layout, help, showErrors, errorMessages} = this.props;
-    if (layout === 'elementOnly') {
-      return <div>{element}</div>;
-    }
-
     return (
-      <Row {...this.props} fakeLabel>
-        {element}
-        {help ? <Help help={help} /> : null}
-        {showErrors ? <ErrorMessages messages={errorMessages} /> : null}
-      </Row>
+      <FormCheckGroup {...this.props}>{this.renderElement()}</FormCheckGroup>
     );
   }
 }

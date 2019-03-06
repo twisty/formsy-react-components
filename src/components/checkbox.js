@@ -27,15 +27,16 @@ class Checkbox extends Component {
     delete inputProps.label;
     const {value, valueLabel} = this.props;
     return (
-      <div className="checkbox">
-        <label>
-          <input
-            {...inputProps}
-            type="checkbox"
-            checked={value === true}
-            onChange={this.handleChange}
-            ref={this.initElementRef}
-          />{' '}
+      <div className="form-check">
+        <input
+          {...inputProps}
+          className="form-check-input"
+          type="checkbox"
+          checked={value === true}
+          onChange={this.handleChange}
+          ref={this.initElementRef}
+        />
+        <label className="form-check-label" htmlFor={inputProps.id}>
           {valueLabel}
         </label>
       </div>
@@ -44,14 +45,25 @@ class Checkbox extends Component {
 
   render() {
     const element = this.renderElement();
-    const {layout, id, help, showErrors, errorMessages} = this.props;
+    const {
+      layout,
+      id,
+      help,
+      showErrors,
+      errorMessages,
+      labelClassName,
+    } = this.props;
 
     if (layout === 'elementOnly') {
       return element;
     }
 
     return (
-      <Row {...this.props} fakeLabel htmlFor={id}>
+      <Row
+        {...this.props}
+        fakeLabel
+        htmlFor={id}
+        labelClassName={['pt-0', labelClassName]}>
         {element}
         {help ? <Help help={help} /> : null}
         {showErrors ? <ErrorMessages messages={errorMessages} /> : null}

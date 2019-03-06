@@ -2,9 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import controlCommonPropTypes from './controls/common-prop-types';
 import {componentPropTypes, componentDefaultProps} from './component-common';
-import ErrorMessages from './error-messages';
-import Help from './help';
-import Row from './row';
+import FormCheckGroup from './form-check-group';
 
 class CheckboxGroup extends Component {
   constructor(props) {
@@ -24,23 +22,41 @@ class CheckboxGroup extends Component {
   };
 
   renderElement = () => {
-    const {options, value, disabled} = this.props;
+    const {
+      options,
+      value,
+      disabled,
+      type,
+      id,
+      errorMessages,
+      required,
+    } = this.props;
     const controls = options.map(checkbox => {
       const checked = value.indexOf(checkbox.value) !== -1;
       const isDisabled = checkbox.disabled || disabled;
+      const className = `form-check${
+        type === 'inline' ? ' form-check-inline' : ''
+      }`;
+      const inputId = `${id}--${checkbox.value}`;
+      const inputClassName = `form-check-input${
+        errorMessages.length > 0 ? ' is-invalid' : ''
+      }`;
       return (
-        <div className="checkbox" key={checkbox.value}>
-          <label>
-            <input
-              ref={input => {
-                this.elements[checkbox.value] = input;
-              }}
-              checked={checked}
-              type="checkbox"
-              value={checkbox.value}
-              onChange={this.handleChange}
-              disabled={isDisabled}
-            />{' '}
+        <div className={className} key={checkbox.value}>
+          <input
+            ref={input => {
+              this.elements[checkbox.value] = input;
+            }}
+            className={inputClassName}
+            checked={checked}
+            type="checkbox"
+            value={checkbox.value}
+            onChange={this.handleChange}
+            disabled={isDisabled}
+            id={inputId}
+            required={required}
+          />
+          <label className="form-check-label" htmlFor={inputId}>
             {checkbox.label}
           </label>
         </div>
@@ -50,19 +66,8 @@ class CheckboxGroup extends Component {
   };
 
   render() {
-    const element = this.renderElement();
-    const {layout, help, showErrors, errorMessages} = this.props;
-
-    if (layout === 'elementOnly') {
-      return <div>{element}</div>;
-    }
-
     return (
-      <Row {...this.props} fakeLabel>
-        {element}
-        {help ? <Help help={help} /> : null}
-        {showErrors ? <ErrorMessages messages={errorMessages} /> : null}
-      </Row>
+      <FormCheckGroup {...this.props}>{this.renderElement()}</FormCheckGroup>
     );
   }
 }
