@@ -28,7 +28,10 @@ class File extends Component {
   };
 
   render() {
-    const inputProps = Object.assign({}, this.props);
+    const inputProps = Object.assign(
+      {className: 'form-control-file'},
+      this.props,
+    );
     Object.keys(componentPropTypes).forEach(key => {
       delete inputProps[key];
     });
