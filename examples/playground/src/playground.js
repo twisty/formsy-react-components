@@ -215,6 +215,12 @@ const Playground = props => {
           help="Here, “Option A” and “Option C” are initially selected."
           options={radioOptions}
         />
+        <CheckboxGroup
+          name="checkboxGrp1"
+          type="inline"
+          label="Checkbox group (inline)"
+          options={radioOptions}
+        />
       </fieldset>
       <fieldset>
         <legend>Radio group</legend>
@@ -281,14 +287,14 @@ const Playground = props => {
           value=""
           label="Add-on before"
           type="text"
-          addonBefore={<span className="glyphicon glyphicon-search" />}
+          addonBefore={<span className="input-group-text">@</span>}
         />
         <Input
           name="addon-after"
           value=""
           label="Add-on after"
           type="text"
-          addonAfter={<span className="glyphicon glyphicon-search" />}
+          addonAfter={<span className="input-group-text">@example.com</span>}
         />
         <Input
           name="button-before"
@@ -296,7 +302,7 @@ const Playground = props => {
           label="Button before"
           type="text"
           buttonBefore={
-            <button className="btn btn-light" type="button">
+            <button className="btn btn-secondary" type="button">
               Go!
             </button>
           }
@@ -307,7 +313,7 @@ const Playground = props => {
           label="Button after"
           type="text"
           buttonAfter={
-            <button className="btn btn-light" type="button">
+            <button className="btn btn-secondary" type="button">
               Go!
             </button>
           }
