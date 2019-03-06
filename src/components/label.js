@@ -11,7 +11,7 @@ const Label = props => {
   }
 
   const labelClassNames = classNames([
-    'control-label',
+    'col-form-label',
     layout === 'horizontal' ? 'col-sm-3' : '',
     labelClassName,
   ]);
@@ -19,10 +19,8 @@ const Label = props => {
   if (fakeLabel) {
     return (
       <div className={labelClassNames} data-required={required}>
-        <strong>
-          {label}
-          <RequiredSymbol required={required} />
-        </strong>
+        {label}
+        <RequiredSymbol required={required} />
       </div>
     );
   }

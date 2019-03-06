@@ -25,8 +25,8 @@ const componentTest = Component =>
 
     it('renders a row label (when label prop is provided)', () => {
       const wrapper = mount(<Component name="myTestInput" label="My Label" />);
-      expect(wrapper.find('.control-label').length).toBe(1);
-      expect(wrapper.find('.control-label').text()).toEqual('My Label');
+      expect(wrapper.find('.col-form-label').length).toBe(1);
+      expect(wrapper.find('.col-form-label').text()).toEqual('My Label');
     });
 
     it('renders help text', () => {
