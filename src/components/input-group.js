@@ -5,29 +5,22 @@ import PropTypes from 'prop-types';
  * Wraps an input to implement a Bootstrap [Input Group](http://getbootstrap.com/components/#input-groups)
  */
 const InputGroup = props => {
-  const renderAddon = addon => {
+  const renderAddon = (addon, position) => {
     if (!addon) {
       return null;
     }
-    return <span className="input-group-addon">{addon}</span>;
-  };
-
-  const renderButton = button => {
-    if (!button) {
-      return null;
-    }
-    return <span className="input-group-btn">{button}</span>;
+    return <span className={`input-group-${position}`}>{addon}</span>;
   };
 
   const {addonBefore, addonAfter, buttonBefore, buttonAfter, children} = props;
 
   return (
     <div className="input-group">
-      {renderAddon(addonBefore)}
-      {renderButton(buttonBefore)}
+      {renderAddon(addonBefore, 'prepend')}
+      {renderAddon(buttonBefore, 'prepend')}
       {children}
-      {renderAddon(addonAfter)}
-      {renderButton(buttonAfter)}
+      {renderAddon(addonAfter, 'append')}
+      {renderAddon(buttonAfter, 'append')}
     </div>
   );
 };
