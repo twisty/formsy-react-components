@@ -27,8 +27,7 @@ const Row = props => {
   };
 
   if (showErrors) {
-    cssClasses.row.push('has-error');
-    cssClasses.row.push('has-feedback');
+    cssClasses.row.push('was-validated');
   }
 
   // We should render the label if there is label text defined, or if the

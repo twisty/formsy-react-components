@@ -66,23 +66,6 @@ describe('The <Input /> component', () => {
 
     it('has an `aria-required="true"` prop on the form control when validation is required', () => {});
 
-    /*
-     * aria-hidden="true" on status glyphicons
-     *
-     * add sr-only feedback and aria-describedby in addidition to glyphicons.
-     *
-     * <div class="form-group has-success has-feedback">
-     *   <label class="control-label" for="inputSuccess2">Input with success</label>
-     *   <input
-     *     type="text"
-     *     class="form-control"
-     *     id="inputSuccess2"
-     *     aria-describedby="inputSuccess2Status"
-     *   >
-     *   <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
-     *   <span id="inputSuccess2Status" class="sr-only">(success)</span>
-     * </div>
-     */
   });
 
   describe('Input components do this', () => {

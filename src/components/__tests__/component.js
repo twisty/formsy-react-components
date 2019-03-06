@@ -33,7 +33,8 @@ const componentTest = Component =>
       const wrapper = mount(
         <Component name="myTestInput" help="My help text." />,
       );
-      expect(wrapper.find('.help-block').length).toEqual(1);
+      const helpElement = wrapper.find('.form-text.text-muted');
+      expect(helpElement.length).toEqual(1);
     });
 
     it('indicates required content with a symbol', () => {
@@ -49,8 +50,8 @@ const componentTest = Component =>
           errorMessages={['An error message.']}
         />,
       );
-      expect(wrapper.find('.help-block.validation-message').length).toEqual(1);
-      expect(wrapper.find('div.has-error.has-feedback').length).toEqual(1);
+      expect(wrapper.find('.invalid-feedback').length).toEqual(1);
+      expect(wrapper.find('div.was-validated').length).toEqual(1);
     });
   });
 

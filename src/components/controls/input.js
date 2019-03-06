@@ -9,16 +9,13 @@ class InputControl extends Component {
   };
 
   render() {
-    const {className, hasErrors, type} = this.props;
-    const inputClassNames = [className];
+    const {className, type} = this.props;
+    const inputClassNames = ['form-control', className];
     if (['hidden', 'range'].indexOf(type) !== -1) {
       inputClassNames.push({'form-control': false});
     }
     if (type === 'range') {
       inputClassNames.push('form-control-range');
-    }
-    if (hasErrors) {
-      inputClassNames.push('is-invalid');
     }
     return (
       <input
@@ -34,15 +31,13 @@ export const propTypes = {
   ...commonPropTypes,
   value: PropTypes.string.isRequired,
   type: PropTypes.string,
-  hasErrors: PropTypes.boolean,
   className: PropTypes.string,
 };
 
 InputControl.propTypes = propTypes;
 
 InputControl.defaultProps = {
-  className: 'form-control',
-  hasErrors: false,
+  className: '',
   type: 'text',
 };
 
