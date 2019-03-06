@@ -111,6 +111,7 @@ class Input extends Component {
       <InputControl
         {...inputProps}
         value={value}
+        hasErrors={errorMessages.length > 0}
         onChange={this.handleChange}
         onBlur={this.handleBlur}
         onKeyDown={this.handleKeyDown}

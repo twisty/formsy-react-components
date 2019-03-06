@@ -4,11 +4,11 @@ import PropTypes from 'prop-types';
 const ErrorMessages = ({messages}) => {
   const messageNodes = messages.map((message, key) => (
     // eslint-disable-next-line react/no-array-index-key
-    <span key={key} className="help-block validation-message">
+    <div key={key}>
       {message}
-    </span>
+    </div>
   ));
-  return <div>{messageNodes}</div>;
+  return <div className="invalid-feedback">{messageNodes}</div>;
 };
 
 ErrorMessages.propTypes = {
