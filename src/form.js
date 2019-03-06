@@ -1,36 +1,50 @@
-import React from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import createReactClass from 'create-react-class';
+import classNames from 'classnames/dedupe';
 import Formsy from 'formsy-react';
-import ParentContextMixin from './mixins/parent-context';
+import OptionsProvider from './hoc/options-provider';
 
-var Form = createReactClass({
+class Form extends Component {
+  render() {
+    const formsyProps = Object.assign({}, this.props);
+    delete formsyProps.elementWrapperClassName;
+    delete formsyProps.labelClassName;
+    delete formsyProps.layout;
+    delete formsyProps.rowClassName;
+    delete formsyProps.validatePristine;
+    delete formsyProps.validateOnSubmit;
 
-    mixins: [ParentContextMixin],
+    const refCallback = formsyForm => {
+      this.formsyForm = formsyForm;
+    };
 
-    propTypes: {
-        children: PropTypes.node
-    },
+    const {layout, className, children} = this.props;
 
-    render() {
-        let formsyProps = Object.assign({}, this.props);
-        delete formsyProps.layout;
-        delete formsyProps.validateOnSubmit;
-        delete formsyProps.validatePristine;
-        delete formsyProps.rowClassName;
-        delete formsyProps.labelClassName;
-        delete formsyProps.elementWrapperClassName;
-        return (
-            <Formsy.Form
-                className={this.getLayoutClassName()}
-                {...formsyProps}
-                ref="formsy"
-            >
-                {this.props.children}
-            </Formsy.Form>
-        );
-    }
+    const formClassNames = classNames([`form-${layout}`, className]);
 
-});
+    return (
+      <OptionsProvider {...this.props}>
+        <Formsy {...formsyProps} className={formClassNames} ref={refCallback}>
+          {children}
+        </Formsy>
+      </OptionsProvider>
+    );
+  }
+}
 
-module.exports = Form;
+Form.propTypes = {
+  children: PropTypes.node.isRequired,
+  layout: PropTypes.oneOf(['horizontal', 'vertical', 'elementOnly']),
+  className: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.array,
+    PropTypes.object,
+  ]),
+};
+
+Form.defaultProps = {
+  layout: 'horizontal',
+  className: '',
+};
+
+export default Form;

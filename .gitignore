@@ -1,4 +1,6 @@
-node_modules/
 coverage/
+examples/build
+node_modules/
+notes/
 release/
-npm-debug.log
+*.log
