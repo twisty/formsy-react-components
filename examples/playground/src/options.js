@@ -57,13 +57,13 @@ const Options = props => {
   );
 
   return (
-    <div className="panel panel-default">
-      <div className="panel-heading">
-        <button type="button" className="btn btn-default" onClick={onToggle}>
+    <div className="card">
+      <div className="card-header">
+        <button type="button" className="btn btn-primary" onClick={onToggle}>
           {showing ? 'Hide options' : 'Show options'}
         </button>
       </div>
-      {showing ? <div className="panel-body">{optionsForm}</div> : null}
+      {showing ? <div className="card-body">{optionsForm}</div> : null}
     </div>
   );
 };

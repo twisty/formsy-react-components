@@ -296,7 +296,7 @@ const Playground = props => {
           label="Button before"
           type="text"
           buttonBefore={
-            <button className="btn btn-default" type="button">
+            <button className="btn btn-light" type="button">
               Go!
             </button>
           }
@@ -307,7 +307,7 @@ const Playground = props => {
           label="Button after"
           type="text"
           buttonAfter={
-            <button className="btn btn-default" type="button">
+            <button className="btn btn-light" type="button">
               Go!
             </button>
           }
@@ -316,7 +316,7 @@ const Playground = props => {
       <fieldset>
         <Row layout={layoutChoice}>
           <input
-            className="btn btn-default"
+            className="btn btn-secondary"
             onClick={resetForm}
             type="reset"
             defaultValue="Reset"
