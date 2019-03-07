@@ -39,9 +39,7 @@ class App extends Component {
     } = this.state;
     return (
       <div>
-        <div className="page-header">
-          <h1>Form Playground</h1>
-        </div>
+        <h1 className="pb-2 mt-4 mb-3 border-bottom">Form Playground</h1>
         <Options
           layoutChoice={layout}
           validateOnSubmitChoice={validateOnSubmit}
@@ -51,11 +49,7 @@ class App extends Component {
           onChangeOption={this.handleChangeOption}
           onToggle={this.handleToggleOptions}
         />
-        <div className="page-header">
-          <h2>
-            Layout: <code>{layout}</code>
-          </h2>
-        </div>
+        <h2 className="pb-2 mt-4 mb-3 border-bottom">Layout: <code>{layout}</code></h2>
         <Playground
           layoutChoice={layout}
           validateOnSubmitChoice={validateOnSubmit}

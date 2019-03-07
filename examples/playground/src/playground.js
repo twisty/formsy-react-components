@@ -80,6 +80,8 @@ const Playground = props => {
     myform = form;
   };
 
+  const legend = str => <legend className="pb-2 mt-4 mb-3 border-bottom">{str}</legend>;
+
   return (
     <Form
       onSubmit={submitForm}
@@ -90,7 +92,7 @@ const Playground = props => {
       disabled={disabledChoice}
       ref={refCallback}>
       <fieldset>
-        <legend>Input types</legend>
+        {legend('Input types')}
         <Input name="secret" value="I'm hidden!" type="hidden" />
         <Input
           name="text1"
@@ -168,7 +170,7 @@ const Playground = props => {
         />
       </fieldset>
       <fieldset>
-        <legend>Textarea</legend>
+        {legend('Textarea')}
         <Textarea
           rows={3}
           cols={40}
@@ -183,7 +185,7 @@ const Playground = props => {
         />
       </fieldset>
       <fieldset>
-        <legend>Select</legend>
+        {legend('Select')}
         <Select
           name="select1"
           label="Select"
@@ -201,7 +203,7 @@ const Playground = props => {
         />
       </fieldset>
       <fieldset>
-        <legend>Checkboxes</legend>
+        {legend('Checkboxes')}
         <Checkbox
           name="checkbox1"
           value
@@ -223,7 +225,7 @@ const Playground = props => {
         />
       </fieldset>
       <fieldset>
-        <legend>Radio group</legend>
+        {legend('Radio group')}
         <RadioGroup
           name="radioGrp1"
           value="b"
@@ -248,7 +250,7 @@ const Playground = props => {
         />
       </fieldset>
       <fieldset>
-        <legend>Layout tweaks</legend>
+        {legend('Layout tweaks')}
         <Input
           name="cssRowTweak"
           value=""
@@ -270,7 +272,7 @@ const Playground = props => {
         />
       </fieldset>
       <fieldset>
-        <legend>Disabled</legend>
+        {legend('Disabled')}
         <Input
           name="disabled"
           value="This field is always disabled."
@@ -281,7 +283,7 @@ const Playground = props => {
         />
       </fieldset>
       <fieldset>
-        <legend>Input groups</legend>
+        {legend('Input groups')}
         <Input
           name="addon-before"
           value=""
