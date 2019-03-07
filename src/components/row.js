@@ -35,8 +35,7 @@ const Row = props => {
   const shouldRenderLabel = label !== null || required;
 
   if (layout === 'horizontal') {
-    // Horizontal layout needs a 'row' class for Bootstrap 4
-    cssClasses.row.push('row');
+    cssClasses.row.push('form-row');
 
     if (!shouldRenderLabel) {
       cssClasses.elementWrapper.push('col-sm-offset-3');
