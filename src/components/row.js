@@ -38,7 +38,7 @@ const Row = props => {
     cssClasses.row.push('form-row');
 
     if (!shouldRenderLabel) {
-      cssClasses.elementWrapper.push('col-sm-offset-3');
+      cssClasses.elementWrapper.push('offset-sm-3');
     }
 
     cssClasses.elementWrapper.push('col-sm-9');
