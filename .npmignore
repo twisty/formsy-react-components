@@ -3,6 +3,9 @@
 .eslintrc.js
 .gitignore
 .travis.yml
+tags
+tags.lock
+*.temp
 coverage/
 examples/
 scripts/
