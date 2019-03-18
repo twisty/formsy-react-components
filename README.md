@@ -3,6 +3,7 @@
 [![Build Status](https://travis-ci.org/twisty/formsy-react-components.svg?branch=bootstrap-4-dev)](https://travis-ci.org/twisty/formsy-react-components)
 [![npm version](https://badge.fury.io/js/formsy-react-components.svg)](https://badge.fury.io/js/formsy-react-components)
 [![GitHub release](https://img.shields.io/github/release/twisty/formsy-react-components.svg)](https://github.com/twisty/formsy-react-components/releases)
+[![GitHub contributors](https://img.shields.io/github/contributors/twisty/formsy-react-components.svg)](https://github.com/twisty/formsy-react-components/contributors)
 
 **Note:** The work here on the [`master`](https://github.com/twisty/formsy-react-components/tree/master) branch is for upcoming release that supports Bootstrap 4. The source for current (1.x) releases can be found on the [`release-1.x`](https://github.com/twisty/formsy-react-components/tree/release-1.x) branch.
 
