@@ -4,7 +4,6 @@ import debounce from '../debounce';
 import {componentPropTypes, componentDefaultProps} from './component-common';
 import ErrorMessages from './error-messages';
 import Help from './help';
-import Icon from './icon';
 import InputControl, {
   propTypes as inputControlPropTypes,
 } from './controls/input';
@@ -134,9 +133,6 @@ class Input extends Component {
     return (
       <Row {...this.props} htmlFor={id}>
         {control}
-        {showErrors ? (
-          <Icon symbol="remove" className="form-control-feedback" />
-        ) : null}
         {help ? <Help help={help} /> : null}
         {showErrors ? <ErrorMessages messages={errorMessages} /> : null}
       </Row>
