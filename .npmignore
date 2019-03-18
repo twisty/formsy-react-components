@@ -1,9 +1,0 @@
-.babelrc
-.eslintignore
-.eslintrc.js
-.gitignore
-.travis.yml
-coverage/
-examples/
-scripts/
-src/

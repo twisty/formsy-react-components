@@ -1,6 +1,6 @@
 {
   "name": "formsy-react-components",
-  "version": "2.0.0",
+  "version": "2.0.0-alpha.1",
   "description": "Bootstrap components for a formsy-react form.",
   "scripts": {
     "test": "jest",
@@ -20,6 +20,9 @@
     "type": "git",
     "url": "https://github.com/twisty/formsy-react-components.git"
   },
+  "files": [
+    "/release"
+  ],
   "keywords": [
     "react",
     "formsy-react",
