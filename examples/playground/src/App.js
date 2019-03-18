@@ -49,7 +49,9 @@ class App extends Component {
           onChangeOption={this.handleChangeOption}
           onToggle={this.handleToggleOptions}
         />
-        <h2 className="pb-2 mt-4 mb-3 border-bottom">Layout: <code>{layout}</code></h2>
+        <h2 className="pb-2 mt-4 mb-3 border-bottom">
+          Layout: <code>{layout}</code>
+        </h2>
         <Playground
           layoutChoice={layout}
           validateOnSubmitChoice={validateOnSubmit}

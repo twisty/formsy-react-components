@@ -65,7 +65,6 @@ describe('The <Input /> component', () => {
     it('has an `aria-invalid="true"` prop on the form control when validation has failed', () => {});
 
     it('has an `aria-required="true"` prop on the form control when validation is required', () => {});
-
   });
 
   describe('Input components do this', () => {

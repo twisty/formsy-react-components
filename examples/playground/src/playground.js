@@ -80,7 +80,9 @@ const Playground = props => {
     myform = form;
   };
 
-  const legend = str => <legend className="pb-2 mt-4 mb-3 border-bottom">{str}</legend>;
+  const legend = str => (
+    <legend className="pb-2 mt-4 mb-3 border-bottom">{str}</legend>
+  );
 
   return (
     <Form
