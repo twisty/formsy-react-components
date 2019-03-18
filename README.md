@@ -1,8 +1,12 @@
-# formsy-react-components (Bootstrap v4)
+# formsy-react-components
 
 [![Build Status](https://travis-ci.org/twisty/formsy-react-components.svg?branch=bootstrap-4-dev)](https://travis-ci.org/twisty/formsy-react-components)
 [![npm version](https://badge.fury.io/js/formsy-react-components.svg)](https://badge.fury.io/js/formsy-react-components)
 [![GitHub release](https://img.shields.io/github/release/twisty/formsy-react-components.svg)](https://github.com/twisty/formsy-react-components/releases)
+
+**Note:** The work here on the [`master`](https://github.com/twisty/formsy-react-components/tree/master) branch is for upcoming release that supports Bootstrap 4. The source for current (1.x) releases can be found on the [`release-1.x`](https://github.com/twisty/formsy-react-components/tree/release-1.x) branch.
+
+---
 
 `formsy-react-components` is a selection of React components that render form elements for use in a [formsy-react](https://github.com/formsy/formsy-react) form.
 
@@ -14,14 +18,14 @@ To install using `yarn`:
 
 ```
 yarn add formsy-react
-yarn add formsy-react-components
+yarn add formsy-react-components@next
 ```
 
 To install using `npm`:
 
 ```
 npm install --save formsy-react
-npm install --save formsy-react-components
+npm install --save formsy-react-components@next
 ```
 
 ## Browser Support
