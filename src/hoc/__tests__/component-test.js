@@ -7,11 +7,9 @@ import FormsyReactComponent from '../component';
 
 describe('The component HOC', () => {
   describe('css classes', () => {
-    /*
-        elementWrapperClassName: styleClassName,
-        labelClassName: styleClassName,
-        rowClassName: styleClassName,
-        */
+    // elementWrapperClassName
+    // labelClassName
+    // rowClassNam
   });
 
   describe('props passed to the HOC', () => {
@@ -98,7 +96,6 @@ describe('The component HOC', () => {
 
     describe('`layout`', () => {
       it('is a string', () => {});
-      // layout: this.mergeLayoutContext(),
     });
 
     describe('`required`', () => {
@@ -113,11 +110,9 @@ describe('The component HOC', () => {
     });
 
     describe('css class name properties', () => {
-      /*
-            elementWrapperClassName: this.combineContextWithProp('elementWrapperClassName'),
-            labelClassName:          this.combineContextWithProp('labelClassName'),
-            rowClassName:            this.combineContextWithProp('rowClassName'),
-            */
+      // elementWrapperClassName
+      // labelClassName
+      // rowClassName
     });
 
     describe('`value`', () => {

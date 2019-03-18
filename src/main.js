@@ -6,9 +6,9 @@ import RadioGroupComponent from './components/radio-group';
 import SelectComponent from './components/select';
 import TextareaComponent from './components/textarea';
 import Form from './form';
-import Row from './components/row';
-import OptionsProvider from './hoc/options-provider';
 import FormsyReactComponent from './hoc/component';
+import FrcContext from './context/frc';
+import Row from './components/row';
 
 const Checkbox = FormsyReactComponent(CheckboxComponent);
 const CheckboxGroup = FormsyReactComponent(CheckboxGroupComponent);
@@ -20,7 +20,7 @@ const Textarea = FormsyReactComponent(TextareaComponent);
 
 export {
   Form,
-  OptionsProvider,
+  FrcContext,
   Row,
   Checkbox,
   CheckboxGroup,

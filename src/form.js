@@ -2,35 +2,52 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames/dedupe';
 import Formsy from 'formsy-react';
-import OptionsProvider from './hoc/options-provider';
+import FrcContext from './context/frc';
 
 class Form extends Component {
   render() {
-    const formsyProps = Object.assign({}, this.props);
-    delete formsyProps.elementWrapperClassName;
-    delete formsyProps.labelClassName;
-    delete formsyProps.layout;
-    delete formsyProps.rowClassName;
-    delete formsyProps.validatePristine;
-    delete formsyProps.validateOnSubmit;
+    const {
+      children,
+      className,
+      elementWrapperClassName,
+      labelClassName,
+      layout,
+      rowClassName,
+      validateOnSubmit,
+      validatePristine,
+      ...formsyProps
+    } = this.props;
+
+    const contextProps = {
+      elementWrapperClassName,
+      labelClassName,
+      layout,
+      rowClassName,
+      validateOnSubmit,
+      validatePristine,
+    };
 
     const refCallback = formsyForm => {
       this.formsyForm = formsyForm;
     };
 
-    const {layout, className, children} = this.props;
-
     const formClassNames = classNames([`form-${layout}`, className]);
 
     return (
-      <OptionsProvider {...this.props}>
+      <FrcContext.Provider value={contextProps}>
         <Formsy {...formsyProps} className={formClassNames} ref={refCallback}>
           {children}
         </Formsy>
-      </OptionsProvider>
+      </FrcContext.Provider>
     );
   }
 }
+
+const classNamesType = PropTypes.oneOfType([
+  PropTypes.string,
+  PropTypes.array,
+  PropTypes.object,
+]);
 
 Form.propTypes = {
   children: PropTypes.node.isRequired,
@@ -40,11 +57,21 @@ Form.propTypes = {
     PropTypes.array,
     PropTypes.object,
   ]),
+  validateOnSubmit: PropTypes.bool,
+  validatePristine: PropTypes.bool,
+  elementWrapperClassName: classNamesType,
+  labelClassName: classNamesType,
+  rowClassName: classNamesType,
 };
 
 Form.defaultProps = {
   layout: 'horizontal',
   className: '',
+  elementWrapperClassName: '',
+  labelClassName: '',
+  rowClassName: '',
+  validateOnSubmit: false,
+  validatePristine: false,
 };
 
 export default Form;
