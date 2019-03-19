@@ -23,24 +23,30 @@ class CheckboxGroup extends Component {
 
   renderElement = () => {
     const {
-      options,
-      value,
       disabled,
-      type,
-      id,
       errorMessages,
+      id,
+      options,
       required,
+      showErrors,
+      type,
+      value,
     } = this.props;
+
+    const markAsInvalid = showErrors && (errorMessages.length > 0 || required);
+
+    const className = `form-check${
+      type === 'inline' ? ' form-check-inline' : ''
+    }`;
+
+    const inputClassName = `form-check-input${
+      markAsInvalid ? ' is-invalid' : ''
+    }`;
+
     const controls = options.map(checkbox => {
       const checked = value.indexOf(checkbox.value) !== -1;
       const isDisabled = checkbox.disabled || disabled;
-      const className = `form-check${
-        type === 'inline' ? ' form-check-inline' : ''
-      }`;
       const inputId = `${id}--${checkbox.value}`;
-      const inputClassName = `form-check-input${
-        errorMessages.length > 0 ? ' is-invalid' : ''
-      }`;
       return (
         <div className={className} key={checkbox.value}>
           <input

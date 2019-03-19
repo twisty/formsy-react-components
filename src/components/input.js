@@ -94,23 +94,26 @@ class Input extends Component {
 
     const {value} = this.state;
     const {
-      type,
-      addonBefore,
       addonAfter,
-      buttonBefore,
+      addonBefore,
       buttonAfter,
-      layout,
-      id,
-      showErrors,
-      help,
+      buttonBefore,
       errorMessages,
+      required,
+      help,
+      id,
+      layout,
+      showErrors,
+      type,
     } = this.props;
+
+    const markAsInvalid = showErrors && (errorMessages.length > 0 || required);
 
     let control = (
       <InputControl
         {...inputProps}
         value={value}
-        className={errorMessages.length > 0 ? 'is-invalid' : ''}
+        className={markAsInvalid ? 'is-invalid' : ''}
         onChange={this.handleChange}
         onBlur={this.handleBlur}
         onKeyDown={this.handleKeyDown}

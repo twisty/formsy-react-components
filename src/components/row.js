@@ -27,7 +27,7 @@ const Row = props => {
     elementWrapper: [],
   };
 
-  if (showErrors && errorMessages.length > 0) {
+  if (showErrors && (errorMessages.length > 0 || required)) {
     cssClasses.row.push('text-danger');
   }
 
