@@ -24,42 +24,30 @@ const getDisplayName = component =>
  */
 const FormsyReactComponent = ComposedComponent => {
   class ComponentHOC extends Component {
+    getBooleanFromPropsAndContext = (
+      propsValue,
+      contextValue,
+      defaultValue,
+    ) => {
+      if (typeof propsValue === 'boolean') {
+        return propsValue;
+      }
+      if (typeof contextValue === 'boolean') {
+        return contextValue;
+      }
+      return defaultValue;
+    };
+
     /**
-     * Use the following value for validatePristine:
-     * 1. validatePristine prop (if supplied)
-     * 2. [else] validatePristine context (if defined)
-     * 3. [else] false (default value)
+     * getId
+     * -----
+     *
+     * The ID is used as an attribute on the form control, and is used to allow
+     * associating the label element with the form control.
+     *
+     * If we don't explicitly pass an `id` prop, we generate one based on the
+     * `name` and `label` properties.
      */
-    getValidatePristine = context => {
-      const {validatePristine} = this.props;
-      if (typeof validatePristine === 'boolean') {
-        return validatePristine;
-      }
-      const {validatePristine: validatePristineContext} = context;
-      return validatePristineContext || false;
-    };
-
-    // Use the following value for validateOnSubmit:
-    // 1. validateOnSubmit prop (if supplied)
-    // 2. [else] validateOnSubmit context (if defined)
-    // 3. [else] false (default value)
-    getValidateOnSubmit = context => {
-      const {validateOnSubmit} = this.props;
-      if (typeof validateOnSubmit === 'boolean') {
-        return validateOnSubmit;
-      }
-      const {validateOnSubmit: validateOnSubmitContext} = context;
-      return validateOnSubmitContext || false;
-    };
-
-    // getId
-    // -----
-    //
-    // The ID is used as an attribute on the form control, and is used to allow
-    // associating the label element with the form control.
-    //
-    // If we don't explicitly pass an `id` prop, we generate one based on the
-    // `name` and `label` properties.
     getId = () => {
       const {id, label, name} = this.props;
       if (id !== '') {
@@ -85,14 +73,14 @@ const FormsyReactComponent = ComposedComponent => {
     };
 
     // Determine whether to show errors, or not.
-    shouldShowErrors = context => {
+    shouldShowErrors = (validatePristine, validateOnSubmit) => {
       const {isPristine, isFormSubmitted, isValid} = this.props;
       if (isPristine() === true) {
-        if (this.getValidatePristine(context) === false) {
+        if (validatePristine === false) {
           return false;
         }
       }
-      if (this.getValidateOnSubmit(context) === true) {
+      if (validateOnSubmit === true) {
         if (isFormSubmitted() === false) {
           return false;
         }
@@ -116,12 +104,32 @@ const FormsyReactComponent = ComposedComponent => {
               isRequired,
               layout,
               setValue,
+              validateOnSubmit: propValidateOnSubmit,
+              validatePristine: propValidatePristine,
             } = this.props;
 
-            const {layout: contextLayout} = context;
+            const {
+              layout: contextLayout,
+              validateOnSubmit: contextValidateOnSubmit,
+              validatePristine: contextValidatePristine,
+            } = context;
 
-            // Combine a parent context value with a component prop value.
-            // This is used for CSS classnames, where the value is passed to `JedWatson/classnames`.
+            const validatePristine = this.getBooleanFromPropsAndContext(
+              propValidatePristine,
+              contextValidatePristine,
+              false,
+            );
+
+            const validateOnSubmit = this.getBooleanFromPropsAndContext(
+              propValidateOnSubmit,
+              contextValidateOnSubmit,
+              false,
+            );
+
+            /**
+             * Combine a parent context value with a component prop value.
+             * This is used for CSS classnames, where the value is passed to `JedWatson/classnames`.
+             */
             const combineContextWithProp = key => {
               const {[key]: contextValue} = context;
               const {[key]: propsValue} = this.props;
@@ -142,7 +150,10 @@ const FormsyReactComponent = ComposedComponent => {
               layout: layout || contextLayout,
               ref: componentRef,
               required: isRequired(),
-              showErrors: this.shouldShowErrors(context),
+              showErrors: this.shouldShowErrors(
+                validatePristine,
+                validateOnSubmit,
+              ),
               value: getValue(),
               onSetValue: setValue,
             };
