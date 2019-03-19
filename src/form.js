@@ -13,7 +13,7 @@ class Form extends Component {
       labelClassName,
       layout,
       rowClassName,
-      validateOnSubmit,
+      validateBeforeSubmit,
       validatePristine,
       ...formsyProps
     } = this.props;
@@ -23,7 +23,7 @@ class Form extends Component {
       labelClassName,
       layout,
       rowClassName,
-      validateOnSubmit,
+      validateBeforeSubmit,
       validatePristine,
     };
 
@@ -57,7 +57,7 @@ Form.propTypes = {
     PropTypes.array,
     PropTypes.object,
   ]),
-  validateOnSubmit: PropTypes.bool,
+  validateBeforeSubmit: PropTypes.bool,
   validatePristine: PropTypes.bool,
   elementWrapperClassName: classNamesType,
   labelClassName: classNamesType,
@@ -70,7 +70,7 @@ Form.defaultProps = {
   elementWrapperClassName: '',
   labelClassName: '',
   rowClassName: '',
-  validateOnSubmit: false,
+  validateBeforeSubmit: true,
   validatePristine: false,
 };
 

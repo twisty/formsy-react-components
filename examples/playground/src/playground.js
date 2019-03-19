@@ -17,14 +17,12 @@ import {
 } from 'formsy-react-components';
 /* eslint-enable */
 
-const Playground = props => {
-  const {
-    disabledChoice,
-    layoutChoice,
-    validateOnSubmitChoice,
-    validatePristineChoice,
-  } = props;
-
+const Playground = ({
+  disabledChoice,
+  layoutChoice,
+  validateBeforeSubmitChoice,
+  validatePristineChoice,
+}) => {
   let myform = null;
 
   const resetForm = () => {
@@ -89,7 +87,7 @@ const Playground = props => {
       onSubmit={submitForm}
       layout={layoutChoice}
       className="custom-classname-is-rendered"
-      validateOnSubmit={validateOnSubmitChoice}
+      validateBeforeSubmit={validateBeforeSubmitChoice}
       validatePristine={validatePristineChoice}
       disabled={disabledChoice}
       ref={refCallback}>
@@ -347,7 +345,7 @@ Playground.propTypes = {
   disabledChoice: PropTypes.bool.isRequired,
   layoutChoice: PropTypes.oneOf(['horizontal', 'vertical', 'elementOnly'])
     .isRequired,
-  validateOnSubmitChoice: PropTypes.bool.isRequired,
+  validateBeforeSubmitChoice: PropTypes.bool.isRequired,
   validatePristineChoice: PropTypes.bool.isRequired,
 };
 

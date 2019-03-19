@@ -4,62 +4,61 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 /* eslint-disable import/extensions, import/no-unresolved, import/no-extraneous-dependencies */
-import {Checkbox, RadioGroup, Form} from 'formsy-react-components';
+import {CheckboxGroup, RadioGroup, Form} from 'formsy-react-components';
 /* eslint-enable */
 
-const Options = props => {
-  const {
-    disabledChoice,
-    layoutChoice,
-    onChangeOption,
-    onToggle,
-    showing,
-    validateOnSubmitChoice,
-    validatePristineChoice,
-  } = props;
-
+const Options = ({
+  disabledChoice,
+  layoutChoice,
+  onChangeOption,
+  onToggle,
+  showing,
+  validateBeforeSubmitChoice,
+  validatePristineChoice,
+}) => {
   const optionsForm = (
     <Form>
       <RadioGroup
         name="layout"
-        type="inline"
-        label="layout"
+        label="Layout"
         value={layoutChoice}
         options={[
-          {value: 'horizontal', label: <code>horizontal</code>},
-          {value: 'vertical', label: <code>vertical</code>},
-          {value: 'elementOnly', label: <code>elementOnly</code>},
+          {value: 'horizontal', label: 'horizontal'},
+          {value: 'vertical', label: 'vertical'},
+          {value: 'elementOnly', label: 'elementOnly'},
         ]}
         onChange={onChangeOption}
       />
-      <Checkbox
-        name="validatePristine"
-        value={validatePristineChoice}
-        valueLabel="Yes"
-        label="validatePristine"
+      <CheckboxGroup
+        name="validationOptions"
+        options={[
+          {value: 'validatePristine', label: 'validatePristine'},
+          {value: 'validateBeforeSubmit', label: 'validateBeforeSubmit'},
+        ]}
+        value={[
+          validatePristineChoice ? 'validatePristine' : '',
+          validateBeforeSubmitChoice ? 'validateBeforeSubmit' : '',
+        ]}
+        label="Validation options"
         onChange={onChangeOption}
       />
-      <Checkbox
-        name="validateOnSubmit"
-        value={validateOnSubmitChoice}
-        valueLabel="Yes"
-        label="validateOnSubmit"
-        onChange={onChangeOption}
-      />
-      <Checkbox
-        name="disabled"
-        value={disabledChoice}
-        valueLabel="Yes"
-        label="disabled"
+      <CheckboxGroup
+        name="elementOptions"
+        options={[{value: 'disabled', label: 'disabled'}]}
+        value={[disabledChoice ? 'disabled' : '']}
+        label="Element options"
         onChange={onChangeOption}
       />
     </Form>
   );
 
   return (
-    <div className="card">
+    <div className="card bg-light">
       <div className="card-header">
-        <button type="button" className="btn btn-primary" onClick={onToggle}>
+        <button
+          type="button"
+          className="btn btn-outline-secondary"
+          onClick={onToggle}>
           {showing ? 'Hide options' : 'Show options'}
         </button>
       </div>
@@ -73,7 +72,7 @@ Options.propTypes = {
   layoutChoice: PropTypes.oneOf(['horizontal', 'vertical', 'elementOnly'])
     .isRequired,
   showing: PropTypes.bool.isRequired,
-  validateOnSubmitChoice: PropTypes.bool.isRequired,
+  validateBeforeSubmitChoice: PropTypes.bool.isRequired,
   validatePristineChoice: PropTypes.bool.isRequired,
   onChangeOption: PropTypes.func.isRequired,
   onToggle: PropTypes.func.isRequired,

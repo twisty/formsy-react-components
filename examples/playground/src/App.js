@@ -12,7 +12,7 @@ class App extends Component {
     this.state = {
       layout: 'horizontal',
       showingOptions: true,
-      validateOnSubmit: false,
+      validateBeforeSubmit: true,
       validatePristine: false,
       disabled: false,
     };
@@ -20,7 +20,20 @@ class App extends Component {
 
   handleChangeOption = (name, value) => {
     const newState = {};
-    newState[name] = value;
+    if (Array.isArray(value)) {
+      let options = [];
+      if (name === 'validationOptions') {
+        options = ['validatePristine', 'validateBeforeSubmit'];
+      }
+      if (name === 'elementOptions') {
+        options = ['disabled'];
+      }
+      options.forEach(option => {
+        newState[option] = value.indexOf(option) !== -1;
+      });
+    } else {
+      newState[name] = value;
+    }
     this.setState(newState);
   };
 
@@ -32,7 +45,7 @@ class App extends Component {
   render() {
     const {
       layout,
-      validateOnSubmit,
+      validateBeforeSubmit,
       validatePristine,
       showingOptions,
       disabled,
@@ -42,7 +55,7 @@ class App extends Component {
         <h1 className="pb-2 mt-4 mb-3 border-bottom">Form Playground</h1>
         <Options
           layoutChoice={layout}
-          validateOnSubmitChoice={validateOnSubmit}
+          validateBeforeSubmitChoice={validateBeforeSubmit}
           validatePristineChoice={validatePristine}
           showing={showingOptions}
           disabledChoice={disabled}
@@ -54,7 +67,7 @@ class App extends Component {
         </h2>
         <Playground
           layoutChoice={layout}
-          validateOnSubmitChoice={validateOnSubmit}
+          validateBeforeSubmitChoice={validateBeforeSubmit}
           validatePristineChoice={validatePristine}
           disabledChoice={disabled}
         />

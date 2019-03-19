@@ -2,7 +2,7 @@ import {createContext} from 'react';
 
 const defaultContextValue = {
   layout: 'horizontal',
-  validateOnSubmit: false,
+  validateBeforeSubmit: true,
   validatePristine: false,
   elementWrapperClassName: '',
   labelClassName: '',

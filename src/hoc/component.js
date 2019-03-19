@@ -73,14 +73,14 @@ const FormsyReactComponent = ComposedComponent => {
     };
 
     // Determine whether to show errors, or not.
-    shouldShowErrors = (validatePristine, validateOnSubmit) => {
+    shouldShowErrors = (validatePristine, validateBeforeSubmit) => {
       const {isPristine, isFormSubmitted, isValid} = this.props;
       if (isPristine() === true) {
         if (validatePristine === false) {
           return false;
         }
       }
-      if (validateOnSubmit === true) {
+      if (validateBeforeSubmit === false) {
         if (isFormSubmitted() === false) {
           return false;
         }
@@ -104,13 +104,13 @@ const FormsyReactComponent = ComposedComponent => {
               isRequired,
               layout,
               setValue,
-              validateOnSubmit: propValidateOnSubmit,
+              validateBeforeSubmit: propValidateBeforeSubmit,
               validatePristine: propValidatePristine,
             } = this.props;
 
             const {
               layout: contextLayout,
-              validateOnSubmit: contextValidateOnSubmit,
+              validateBeforeSubmit: contextValidateBeforeSubmit,
               validatePristine: contextValidatePristine,
             } = context;
 
@@ -120,10 +120,10 @@ const FormsyReactComponent = ComposedComponent => {
               false,
             );
 
-            const validateOnSubmit = this.getBooleanFromPropsAndContext(
-              propValidateOnSubmit,
-              contextValidateOnSubmit,
-              false,
+            const validateBeforeSubmit = this.getBooleanFromPropsAndContext(
+              propValidateBeforeSubmit,
+              contextValidateBeforeSubmit,
+              true,
             );
 
             /**
@@ -152,7 +152,7 @@ const FormsyReactComponent = ComposedComponent => {
               required: isRequired(),
               showErrors: this.shouldShowErrors(
                 validatePristine,
-                validateOnSubmit,
+                validateBeforeSubmit,
               ),
               value: getValue(),
               onSetValue: setValue,
@@ -181,7 +181,7 @@ const FormsyReactComponent = ComposedComponent => {
               'innerRef',
               // From formsy-react-component HOC...
               'componentRef',
-              'validateOnSubmit',
+              'validateBeforeSubmit',
               'validatePristine',
             ];
 
@@ -219,7 +219,7 @@ const FormsyReactComponent = ComposedComponent => {
     label: PropTypes.node,
     layout: PropTypes.string,
 
-    // * validateOnSubmit
+    // * validateBeforeSubmit
     // * validatePristine
     //
     // Neither of these props actually stop the validations from running,
@@ -228,7 +228,7 @@ const FormsyReactComponent = ComposedComponent => {
 
     // Whether to hide validation errors on components before the form is
     // submitted.
-    validateOnSubmit: PropTypes.bool,
+    validateBeforeSubmit: PropTypes.bool,
 
     // Whether to show validation errors on pristine (untouched) components.
     validatePristine: PropTypes.bool,
@@ -237,7 +237,7 @@ const FormsyReactComponent = ComposedComponent => {
   ComponentHOC.contextTypes = {
     ...styleClassNames,
     layout: PropTypes.string,
-    validateOnSubmit: PropTypes.bool,
+    validateBeforeSubmit: PropTypes.bool,
     validatePristine: PropTypes.bool,
   };
 
@@ -249,14 +249,14 @@ const FormsyReactComponent = ComposedComponent => {
   // The following props get their default values from the parent context.
   // * layout
   // * validatePristine: (See getValidatePristine, defaults to 'false'),
-  // * validateOnSubmit: (See getValidateOnSubmit, defaults to 'false'),
+  // * validateBeforeSubmit: (See getValidateOnSubmit, defaults to 'false'),
   ComponentHOC.defaultProps = {
     disabled: false,
     help: '',
     id: '',
     label: '',
     layout: '',
-    validateOnSubmit: null,
+    validateBeforeSubmit: null,
     validatePristine: null,
   };
 
