@@ -51,7 +51,7 @@ const componentTest = Component =>
         />,
       );
       expect(wrapper.find('.invalid-feedback').length).toEqual(1);
-      expect(wrapper.find('div.was-validated').length).toEqual(1);
+      expect(wrapper.find('div.text-danger').length).toEqual(1);
     });
   });
 
