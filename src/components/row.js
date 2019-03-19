@@ -7,6 +7,7 @@ import Label from './label';
 const Row = props => {
   const {
     elementWrapperClassName,
+    errorMessages,
     required,
     rowClassName,
     showErrors,
@@ -26,8 +27,8 @@ const Row = props => {
     elementWrapper: [],
   };
 
-  if (showErrors) {
-    cssClasses.row.push('was-validated');
+  if (showErrors && errorMessages.length > 0) {
+    cssClasses.row.push('text-danger');
   }
 
   // We should render the label if there is label text defined, or if the
