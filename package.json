@@ -11,7 +11,7 @@
     "transpile": "rm -rf release && babel src -d release --ignore __tests__",
     "dev": "babel src --watch -d release --source-maps",
     "examples": "webpack-dev-server --config examples/webpack.config.js",
-    "examples:build": "webpack -p --config examples/webpack.config",
+    "examples:build": "webpack -p --config examples/webpack.config.js",
     "gh-pages": "NODE_ENV=production yarn examples:build && gh-pages -d examples",
     "generate-docs": "./scripts/generate-docs.sh"
   },
