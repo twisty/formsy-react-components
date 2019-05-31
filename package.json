@@ -41,11 +41,11 @@
       "./examples"
     ],
     "setupFiles": [
-      "<rootDir>/src/components/__tests__/test-helper.js"
+      "<rootDir>/src/components/__tests__/test-helper.ts"
     ],
     "testPathIgnorePatterns": [
-      "<rootDir>/src/components/__tests__/component.js",
-      "<rootDir>/src/components/__tests__/test-helper.js"
+      "<rootDir>/src/components/__tests__/component.tsx",
+      "<rootDir>/src/components/__tests__/test-helper.ts"
     ],
     "moduleNameMapper": {
       "formsy-react-components": "<rootDir>/src/main.ts"

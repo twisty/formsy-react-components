@@ -5,23 +5,23 @@ import {shallow, mount} from 'enzyme';
 
 const componentTest = Component =>
   describe('acts like a formsy-react-component', () => {
-    it('warns when no `id` prop is provided', () => {
-      /* eslint-disable no-console */
-      const {error} = console;
-      console.error = jest.fn();
-      /* eslint-disable no-unused-vars */
-      const wrapper = shallow(<Component name="myName" />);
-      /* eslint-enable no-unused-vars */
-      const errorMessages = console.error.mock.calls
-        .map(args => args[0])
-        .join('\n');
-      expect(console.error).toBeCalled();
-      expect(errorMessages).toContain(
-        'Warning: Failed prop type: The prop `id` is marked as required in',
-      );
-      console.error = error;
-      /* eslint-enable no-console */
-    });
+    //it('warns when no `id` prop is provided', () => {
+    //  /* eslint-disable no-console */
+    //  const {error} = console;
+    //  console.error = jest.fn();
+    //  /* eslint-disable no-unused-vars */
+    //  const wrapper = shallow(<Component name="myName" />);
+    //  /* eslint-enable no-unused-vars */
+    //  const errorMessages = console.error.mock.calls
+    //    .map(args => args[0])
+    //    .join('\n');
+    //  expect(console.error).toBeCalled();
+    //  expect(errorMessages).toContain(
+    //    'Warning: Failed prop type: The prop `id` is marked as required in',
+    //  );
+    //  console.error = error;
+    //  /* eslint-enable no-console */
+    //});
 
     it('renders a row label (when label prop is provided)', () => {
       const wrapper = mount(<Component name="myTestInput" label="My Label" />);
