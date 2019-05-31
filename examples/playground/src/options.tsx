@@ -27,7 +27,7 @@ const Options = ({
           {value: 'vertical', label: 'vertical'},
           {value: 'elementOnly', label: 'elementOnly'},
         ]}
-        onChange={onChangeOption}
+        changeCallback={onChangeOption}
       />
       <CheckboxGroup
         name="validationOptions"
@@ -40,14 +40,14 @@ const Options = ({
           validateBeforeSubmitChoice ? 'validateBeforeSubmit' : '',
         ]}
         label="Validation options"
-        onChange={onChangeOption}
+        changeCallback={onChangeOption}
       />
       <CheckboxGroup
         name="elementOptions"
         options={[{value: 'disabled', label: 'disabled'}]}
         value={[disabledChoice ? 'disabled' : '']}
         label="Element options"
-        onChange={onChangeOption}
+        changeCallback={onChangeOption}
       />
     </Form>
   );

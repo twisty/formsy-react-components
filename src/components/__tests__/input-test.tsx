@@ -1,6 +1,6 @@
 /* globals jest, describe, it, expect, beforeEach */
 
-import React from 'react';
+import * as React from 'react';
 import {mount} from 'enzyme';
 import Input from '../input';
 import componentTest from './component';
@@ -16,18 +16,25 @@ describe('The <Input /> component', () => {
 
   describe('the initial render of the form control', () => {
     it('is `type="text"` by default', () => {
-      const wrapper = mount(<Input name="myTestInput" />);
+      const wrapper = mount(<Input name="myTestInput" id="testId" />);
       expect(wrapper.find('input').prop('type')).toEqual('text');
     });
 
     it('has an initial value passed by prop', () => {
-      const wrapper = mount(<Input name="myTestInput" value="Initial value" />);
+      const wrapper = mount(
+        <Input name="myTestInput" id="myId" value="Initial value" />,
+      );
       expect(wrapper.find('input').prop('value')).toEqual('Initial value');
     });
 
     it('has a placeholder value passed by prop', () => {
       const wrapper = mount(
-        <Input name="myTestInput" value="" placeholder="My placeholder" />,
+        <Input
+          name="myTestInput"
+          id="myId"
+          value=""
+          placeholder="My placeholder"
+        />,
       );
       expect(wrapper.find('input').prop('placeholder')).toEqual(
         'My placeholder',
@@ -69,7 +76,7 @@ describe('The <Input /> component', () => {
 
   describe('Input components do this', () => {
     let onBlurProp;
-    let onChangeProp;
+    let changeCallbackProp;
     let onSetValueProp;
     let wrapper;
 
@@ -77,7 +84,7 @@ describe('The <Input /> component', () => {
       jest.useFakeTimers();
 
       onBlurProp = jest.fn();
-      onChangeProp = jest.fn();
+      changeCallbackProp = jest.fn();
       onSetValueProp = jest.fn();
 
       wrapper = mount(
@@ -86,8 +93,8 @@ describe('The <Input /> component', () => {
           id="myId"
           label="My Label"
           value="Initial value"
-          onBlur={onBlurProp}
-          onChange={onChangeProp}
+          blurCallback={onBlurProp}
+          changeCallback={changeCallbackProp}
           onSetValue={onSetValueProp}
         />,
       );
@@ -99,7 +106,7 @@ describe('The <Input /> component', () => {
       expect(wrapper.find('input').prop('value')).toEqual('Changed value');
     });
 
-    it('executes `props.onChange` when the <input /> value changes', () => {
+    it('executes `props.changeCallback` when the <input /> value changes', () => {
       /*
        * The following doesn't work, we have to set the node's value directly:
        *
@@ -107,15 +114,15 @@ describe('The <Input /> component', () => {
        *
        * @see https://github.com/facebook/react/issues/3151#issuecomment-74943529
        */
-      expect(onChangeProp).not.toBeCalled();
+      expect(changeCallbackProp).not.toBeCalled();
       const inputNode = wrapper.find('input');
       changeValue(inputNode, 'Changed value');
-      expect(onChangeProp).toBeCalled();
+      expect(changeCallbackProp).toBeCalled();
       expect(wrapper.find('input').prop('value')).toEqual('Changed value');
     });
 
     it('debounces `props.onSetValue`', () => {
-      expect(onChangeProp).not.toBeCalled();
+      expect(changeCallbackProp).not.toBeCalled();
       expect(onSetValueProp).not.toBeCalled();
 
       const inputNode = wrapper.find('input');
@@ -123,8 +130,8 @@ describe('The <Input /> component', () => {
       changeValue(inputNode, 'b');
       changeValue(inputNode, 'c');
 
-      expect(onChangeProp).toBeCalled();
-      expect(onChangeProp).toHaveBeenCalledTimes(3);
+      expect(changeCallbackProp).toBeCalled();
+      expect(changeCallbackProp).toHaveBeenCalledTimes(3);
 
       /*
        * The `onSetValueProp` function should be called after a period of
@@ -147,7 +154,7 @@ describe('The <Input /> component', () => {
   describe('for "hidden" type', () => {
     it('doesn’t render a label', () => {
       const wrapper = mount(
-        <Input name="myTestInput" type="hidden" label="My Label" />,
+        <Input name="myTestInput" id="myId" type="hidden" label="My Label" />,
       );
       expect(wrapper.find('label').length).toBe(0);
     });

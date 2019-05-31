@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "outDir": "./release/",
+    "sourceMap": true,
+    "strictNullChecks": true,
+    "module": "es6",
+    "jsx": "react",
+    "target": "es5",
+    "declaration": true,
+    "moduleResolution": "node"
+  },
+  "exclude": [
+    "node_modules"
+  ],
+  "include": [
+    "./src/"
+  ]
+}

@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types';
+import * as PropTypes from 'prop-types';
 
 const propTypes = {
   id: PropTypes.string.isRequired,
@@ -6,4 +6,11 @@ const propTypes = {
   disabled: PropTypes.bool,
 };
 
+interface CommonProps {
+  id: string;
+  name: string;
+  disabled?: boolean;
+}
+
+export {CommonProps};
 export default propTypes;

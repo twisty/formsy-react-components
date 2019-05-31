@@ -1,14 +1,14 @@
-const debounce = (fn, time) => {
+const debounce = (fn: Function, time: number) => {
   let pending;
   let lastArgs;
   let lastThis;
 
-  const cancel = () => {
+  const cancel = (): void => {
     clearTimeout(pending);
     pending = undefined;
   };
 
-  const run = () => {
+  const run = (): void => {
     if (lastArgs) {
       const currentThis = lastThis;
       const currentArgs = lastArgs;
@@ -18,12 +18,12 @@ const debounce = (fn, time) => {
     }
   };
 
-  const flush = () => {
+  const flush = (): void => {
     cancel();
     run();
   };
 
-  function debounced(...args) {
+  function debounced(...args): void {
     lastThis = this;
     lastArgs = args;
     if (pending) {

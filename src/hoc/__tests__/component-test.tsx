@@ -1,6 +1,6 @@
 /* globals describe, expect, it */
 
-import React from 'react';
+import * as React from 'react';
 import Formsy from 'formsy-react';
 import {mount} from 'enzyme';
 import FormsyReactComponent from '../component';

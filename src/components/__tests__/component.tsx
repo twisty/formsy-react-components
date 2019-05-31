@@ -1,6 +1,6 @@
 /* globals console, jest, expect, describe, it */
 
-import React from 'react';
+import * as React from 'react';
 import {shallow, mount} from 'enzyme';
 
 const componentTest = Component =>

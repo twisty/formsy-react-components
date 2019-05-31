@@ -1,10 +1,63 @@
-import React, {Component} from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
+import * as PropTypes from 'prop-types';
 import {withFormsy} from 'formsy-react';
 import FrcContext from '../context/frc';
-import {styleClassNames} from '../components/component-common';
 
-const getDisplayName = component =>
+import {ClassNamesType} from '../types';
+
+const styleClassName = PropTypes.oneOfType([
+  PropTypes.string,
+  PropTypes.array,
+  PropTypes.object,
+]);
+
+interface Props {
+  // These are the props that we require from the formsy-react HOC.
+  getErrorMessages: Function;
+  getValue: Function;
+  isFormDisabled: Function;
+  isFormSubmitted: Function;
+  isPristine: Function;
+  isRequired: Function;
+  isValid: Function;
+  setValue: Function;
+  // End of formsy-react HOC props.
+
+  rowClassName: ClassNamesType;
+  labelClassName: ClassNamesType;
+  elementWrapperClassName: ClassNamesType;
+
+  name: string;
+  disabled: boolean;
+
+  // Composed components expect this to be a string.
+  help: string;
+
+  id: string;
+  label: React.ReactNode;
+  layout: 'horizontal' | 'vertical' | 'elementOnly';
+
+  componentRef: Function;
+
+  // * validateBeforeSubmit
+  // * validatePristine
+  //
+  // Neither of these props actually stop the validations from running,
+  // they just determine whether the error messages should be shown on
+  // components or not.
+
+  // Whether to hide validation errors on components before the form is
+  // submitted.
+  validateBeforeSubmit: boolean;
+
+  // Whether to show validation errors on pristine (untouched) components.
+  validatePristine: boolean;
+
+  // Keys of Props are strings.
+  [key: string]: any;
+}
+
+const getDisplayName = (component): string =>
   component.displayName ||
   component.name ||
   (typeof component === 'string' ? component : 'Component');
@@ -22,13 +75,43 @@ const getDisplayName = component =>
  * the form, while retaining the ability to override the prop on a per-component
  * basis.
  */
-const FormsyReactComponent = ComposedComponent => {
-  class ComponentHOC extends Component {
-    getBooleanFromPropsAndContext = (
+const FormsyReactComponent = (ComposedComponent): typeof React.Component => {
+  class ComponentHOC extends React.Component<Props, {}> {
+    public static displayName = `withFRC(${getDisplayName(ComposedComponent)})`;
+
+    public static contextTypes = {
+      rowClassName: styleClassName,
+      labelClassName: styleClassName,
+      elementWrapperClassName: styleClassName,
+      layout: PropTypes.string,
+      validateBeforeSubmit: PropTypes.bool,
+      validatePristine: PropTypes.bool,
+    };
+
+    // TODO: Should we add default props for the following?:
+    // * elementWrapperClassName
+    // * labelClassName
+    // * rowClassName
+
+    // The following props get their default values from the parent context.
+    // * layout
+    // * validatePristine: (See getValidatePristine, defaults to 'false'),
+    // * validateBeforeSubmit: (See getValidateOnSubmit, defaults to 'false'),
+    public static defaultProps = {
+      disabled: false,
+      help: '',
+      id: '',
+      label: '',
+      layout: '',
+      validateBeforeSubmit: null,
+      validatePristine: null,
+    };
+
+    private getBooleanFromPropsAndContext = (
       propsValue,
       contextValue,
-      defaultValue,
-    ) => {
+      defaultValue: boolean,
+    ): boolean => {
       if (typeof propsValue === 'boolean') {
         return propsValue;
       }
@@ -48,7 +131,7 @@ const FormsyReactComponent = ComposedComponent => {
      * If we don't explicitly pass an `id` prop, we generate one based on the
      * `name` and `label` properties.
      */
-    getId = () => {
+    private getId = (): string => {
       const {id, label, name} = this.props;
       if (id !== '') {
         return id;
@@ -63,17 +146,20 @@ const FormsyReactComponent = ComposedComponent => {
       ].join('-');
     };
 
-    hashString = string => {
+    private hashString = (inString: string): number => {
       let hash = 0;
-      for (let i = 0; i < string.length; i += 1) {
+      for (let i = 0; i < inString.length; i += 1) {
         // eslint-disable-next-line no-bitwise
-        hash = ((hash << 5) - hash + string.charCodeAt(i)) & 0xffffffff;
+        hash = ((hash << 5) - hash + inString.charCodeAt(i)) & 0xffffffff;
       }
       return hash;
     };
 
     // Determine whether to show errors, or not.
-    shouldShowErrors = (validatePristine, validateBeforeSubmit) => {
+    private shouldShowErrors = (
+      validatePristine,
+      validateBeforeSubmit,
+    ): boolean => {
       const {isPristine, isFormSubmitted, isValid} = this.props;
       if (isPristine() === true) {
         if (validatePristine === false) {
@@ -90,7 +176,7 @@ const FormsyReactComponent = ComposedComponent => {
 
     // We pass through all unknown props, but delete some formsy HOC props
     // that we know we don't need.
-    render() {
+    public render(): JSX.Element {
       return (
         <FrcContext.Consumer>
           {context => {
@@ -130,7 +216,7 @@ const FormsyReactComponent = ComposedComponent => {
              * Combine a parent context value with a component prop value.
              * This is used for CSS classnames, where the value is passed to `JedWatson/classnames`.
              */
-            const combineContextWithProp = key => {
+            const combineContextWithProp = (key: string) => {
               const {[key]: contextValue} = context;
               const {[key]: propsValue} = this.props;
               return [contextValue, propsValue];
@@ -185,9 +271,11 @@ const FormsyReactComponent = ComposedComponent => {
               'validatePristine',
             ];
 
-            unusedPropNames.forEach(propName => {
-              delete props[propName];
-            });
+            unusedPropNames.forEach(
+              (propName): void => {
+                delete props[propName];
+              },
+            );
 
             return <ComposedComponent {...props} />;
           }}
@@ -195,72 +283,6 @@ const FormsyReactComponent = ComposedComponent => {
       );
     }
   }
-
-  ComponentHOC.propTypes = {
-    // These are the props that we require from the formsy-react HOC.
-    getErrorMessages: PropTypes.func.isRequired,
-    getValue: PropTypes.func.isRequired,
-    isFormDisabled: PropTypes.func.isRequired,
-    isPristine: PropTypes.func.isRequired,
-    isRequired: PropTypes.func.isRequired,
-    isValid: PropTypes.func.isRequired,
-    setValue: PropTypes.func.isRequired,
-    // End of formsy-react HOC props.
-
-    ...styleClassNames,
-
-    name: PropTypes.string.isRequired,
-    disabled: PropTypes.bool,
-
-    // Composed components expect this to be a string.
-    help: PropTypes.string,
-
-    id: PropTypes.string,
-    label: PropTypes.node,
-    layout: PropTypes.string,
-
-    // * validateBeforeSubmit
-    // * validatePristine
-    //
-    // Neither of these props actually stop the validations from running,
-    // they just determine whether the error messages should be shown on
-    // components or not.
-
-    // Whether to hide validation errors on components before the form is
-    // submitted.
-    validateBeforeSubmit: PropTypes.bool,
-
-    // Whether to show validation errors on pristine (untouched) components.
-    validatePristine: PropTypes.bool,
-  };
-
-  ComponentHOC.contextTypes = {
-    ...styleClassNames,
-    layout: PropTypes.string,
-    validateBeforeSubmit: PropTypes.bool,
-    validatePristine: PropTypes.bool,
-  };
-
-  // TODO: Should we add default props for the following?:
-  // * elementWrapperClassName
-  // * labelClassName
-  // * rowClassName
-
-  // The following props get their default values from the parent context.
-  // * layout
-  // * validatePristine: (See getValidatePristine, defaults to 'false'),
-  // * validateBeforeSubmit: (See getValidateOnSubmit, defaults to 'false'),
-  ComponentHOC.defaultProps = {
-    disabled: false,
-    help: '',
-    id: '',
-    label: '',
-    layout: '',
-    validateBeforeSubmit: null,
-    validatePristine: null,
-  };
-
-  ComponentHOC.displayName = `withFRC(${getDisplayName(ComposedComponent)})`;
 
   return withFormsy(ComponentHOC);
 };

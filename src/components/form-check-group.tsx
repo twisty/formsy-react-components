@@ -1,10 +1,14 @@
-import React from 'react';
+import * as React from 'react';
 import ErrorMessages from './error-messages';
 import Help from './help';
 import Row from './row';
-import {componentPropTypes, componentDefaultProps} from './component-common';
+import {ComponentPropTypes, componentDefaultProps} from './component-common';
 
-const FormCheckGroup = props => {
+interface Props extends ComponentPropTypes {
+  children?: any;
+}
+
+const FormCheckGroup = (props: Props): JSX.Element => {
   const {
     layout,
     help,
@@ -20,14 +24,15 @@ const FormCheckGroup = props => {
 
   return (
     <Row {...props} labelClassName={['pt-0', labelClassName]} fakeLabel>
-      {children}
-      {help ? <Help help={help} /> : null}
-      {showErrors ? <ErrorMessages messages={errorMessages} /> : null}
+      <>
+        {children}
+        {help ? <Help help={help} /> : null}
+        {showErrors ? <ErrorMessages messages={errorMessages} /> : null}
+      </>
     </Row>
   );
 };
 
-FormCheckGroup.propTypes = componentPropTypes;
 FormCheckGroup.defaultProps = componentDefaultProps;
 
 export default FormCheckGroup;

@@ -1,11 +1,25 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 import classNames from 'classnames/dedupe';
 import RequiredSymbol from './required-symbol';
+import {ClassNamesType} from '../form';
 
-const Label = props => {
-  const {layout, label, htmlFor, labelClassName, fakeLabel, required} = props;
+interface Props {
+  fakeLabel: boolean;
+  htmlFor: string;
+  label: React.ReactNode;
+  labelClassName: ClassNamesType;
+  layout: 'horizontal' | 'vertical' | 'elementOnly';
+  required: boolean;
+}
 
+const Label = ({
+  fakeLabel = false,
+  htmlFor = '',
+  label = null,
+  labelClassName = '',
+  layout = 'horizontal',
+  required = false,
+}: Props): React.ReactElement<any> | null => {
   if (layout === 'elementOnly') {
     return null;
   }
@@ -34,28 +48,6 @@ const Label = props => {
       <RequiredSymbol required={required} />
     </label>
   );
-};
-
-Label.propTypes = {
-  fakeLabel: PropTypes.bool,
-  htmlFor: PropTypes.string,
-  label: PropTypes.node,
-  labelClassName: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.array,
-    PropTypes.object,
-  ]),
-  layout: PropTypes.oneOf(['horizontal', 'vertical', 'elementOnly']),
-  required: PropTypes.bool,
-};
-
-Label.defaultProps = {
-  fakeLabel: false,
-  htmlFor: null,
-  label: null,
-  labelClassName: '',
-  layout: 'horizontal',
-  required: false,
 };
 
 export default Label;

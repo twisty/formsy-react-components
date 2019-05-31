@@ -1,14 +1,14 @@
 /* globals describe, it, expect */
 
-import React from 'react';
+import * as React from 'react';
 import {mount} from 'enzyme';
 import Select from '../select';
 import componentTest from './component';
 
-describe('The <Select /> component', () => {
+describe('The <Select /> component', (): void => {
   componentTest(Select);
 
-  it('renders optgroups', () => {
+  it('renders optgroups', (): void => {
     const options = [
       {label: 'A-1', value: 'a1'},
       {label: 'B-1', value: 'b1', group: 'B-group'},
@@ -21,6 +21,7 @@ describe('The <Select /> component', () => {
 
     const wrapper = mount(
       <Select
+        id="myId"
         name="myTestInput"
         label="My Label"
         value="b1"

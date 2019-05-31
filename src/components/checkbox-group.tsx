@@ -1,27 +1,48 @@
-import React, {Component} from 'react';
-import PropTypes from 'prop-types';
-import controlCommonPropTypes from './controls/common-prop-types';
-import {componentPropTypes, componentDefaultProps} from './component-common';
+import * as React from 'react';
+import {ComponentPropTypes, componentDefaultProps} from './component-common';
+import {CommonProps} from './controls/common-prop-types';
 import FormCheckGroup from './form-check-group';
 
-class CheckboxGroup extends Component {
-  constructor(props) {
+type CommonPropsCleaned = Omit<CommonProps, 'id' | 'name'>;
+
+interface Props extends ComponentPropTypes, CommonPropsCleaned {
+  options: {
+    disabled: boolean;
+    value: string;
+    label: string;
+    key: string;
+  }[];
+  required: boolean;
+  value: string[];
+  type: 'inline' | 'stacked';
+}
+
+class CheckboxGroup extends React.Component<Props, {}> {
+  public elements;
+
+  public static defaultProps = {
+    ...componentDefaultProps,
+    options: [],
+    value: [],
+  };
+
+  public constructor(props) {
     super(props);
     this.elements = {};
   }
 
   // Returns an array of the values of all checked items.
-  handleChange = () => {
-    const {options, name, onSetValue, onChange} = this.props;
+  private handleChange = (): void => {
+    const {options, name, onSetValue, changeCallback} = this.props;
     const checkedOptions = options.filter(
-      option => this.elements[option.value].checked,
+      (option): boolean => this.elements[option.value].checked,
     );
-    const value = checkedOptions.map(option => option.value);
+    const value = checkedOptions.map((option): string => option.value);
     onSetValue(value);
-    onChange(name, value);
+    changeCallback(name, value);
   };
 
-  renderElement = () => {
+  private renderElement = (): JSX.Element[] => {
     const {
       disabled,
       errorMessages,
@@ -50,7 +71,7 @@ class CheckboxGroup extends Component {
       return (
         <div className={className} key={checkbox.value}>
           <input
-            ref={input => {
+            ref={(input): void => {
               this.elements[checkbox.value] = input;
             }}
             className={inputClassName}
@@ -71,31 +92,11 @@ class CheckboxGroup extends Component {
     return controls;
   };
 
-  render() {
+  public render(): FormCheckGroup {
     return (
       <FormCheckGroup {...this.props}>{this.renderElement()}</FormCheckGroup>
     );
   }
 }
-
-CheckboxGroup.propTypes = {
-  ...controlCommonPropTypes,
-  ...componentPropTypes,
-  options: PropTypes.arrayOf(
-    PropTypes.shape({
-      disabled: PropTypes.bool,
-      value: PropTypes.string,
-      label: PropTypes.string,
-      key: PropTypes.string,
-    }),
-  ),
-  value: PropTypes.arrayOf(PropTypes.string),
-};
-
-CheckboxGroup.defaultProps = {
-  ...componentDefaultProps,
-  options: [],
-  value: [],
-};
 
 export default CheckboxGroup;

@@ -1,10 +1,23 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 import classNames from 'classnames/dedupe';
-import {styleClassNames} from './component-common';
 import Label from './label';
+import {ClassNamesType} from '../types';
 
-const Row = props => {
+interface Props {
+  elementWrapperClassName: ClassNamesType;
+  rowClassName: ClassNamesType;
+  labelClassName: ClassNamesType;
+  label: React.ReactNode;
+  layout: 'horizontal' | 'vertical' | 'elementOnly';
+  showErrors: boolean;
+  errorMessages: JSX.Element[];
+  required: boolean;
+  fakeLabel: boolean;
+  htmlFor: string;
+  children?: React.ReactNode; //JSX.Element[] | JSX.Element;
+}
+
+const Row = (props: Props): React.ReactElement<any> => {
   const {
     elementWrapperClassName,
     errorMessages,
@@ -23,8 +36,8 @@ const Row = props => {
   }
 
   const cssClasses = {
-    row: ['form-group'],
-    elementWrapper: [],
+    row: ['form-group'] as ClassNamesType[],
+    elementWrapper: [] as ClassNamesType[],
   };
 
   if (showErrors && (errorMessages.length > 0 || required)) {
@@ -60,26 +73,13 @@ const Row = props => {
   );
 };
 
-Row.propTypes = {
-  ...styleClassNames,
-  children: PropTypes.node.isRequired,
-  fakeLabel: PropTypes.bool,
-  htmlFor: PropTypes.string,
-  label: PropTypes.node,
-  layout: PropTypes.oneOf(['horizontal', 'vertical', 'elementOnly']),
-  required: PropTypes.bool,
-  showErrors: PropTypes.bool,
-};
-
 Row.defaultProps = {
-  /* eslint-disable react/default-props-match-prop-types */
   elementWrapperClassName: '',
   labelClassName: '',
   rowClassName: '',
-  /* eslint-enable */
   fakeLabel: false,
-  htmlFor: null,
   label: null,
+  htmlFor: '',
   layout: 'horizontal',
   required: false,
   showErrors: false,

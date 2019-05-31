@@ -1,11 +1,20 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
+
+interface Props {
+  children?: React.ReactNode;
+  addonAfter?: React.ReactNode;
+  addonBefore?: React.ReactNode;
+  buttonAfter?: React.ReactNode;
+  buttonBefore?: React.ReactNode;
+}
+
+type ReactElementOrNull = React.ReactElement<any> | null;
 
 /**
  * Wraps an input to implement a Bootstrap [Input Group](http://getbootstrap.com/components/#input-groups)
  */
-const InputGroup = props => {
-  const renderAddon = (addon, position) => {
+const InputGroup = (props: Props): ReactElementOrNull => {
+  const renderAddon = (addon, position): ReactElementOrNull => {
     if (!addon) {
       return null;
     }
@@ -25,16 +34,6 @@ const InputGroup = props => {
   );
 };
 
-export const propTypes = {
-  children: PropTypes.node.isRequired,
-  addonAfter: PropTypes.node,
-  addonBefore: PropTypes.node,
-  buttonAfter: PropTypes.node,
-  buttonBefore: PropTypes.node,
-};
-
-InputGroup.propTypes = propTypes;
-
 InputGroup.defaultProps = {
   addonAfter: null,
   addonBefore: null,
@@ -42,4 +41,5 @@ InputGroup.defaultProps = {
   buttonBefore: null,
 };
 
+export {Props};
 export default InputGroup;
