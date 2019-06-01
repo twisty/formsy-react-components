@@ -1,13 +1,13 @@
 import * as React from 'react';
 import classNames from 'classnames/dedupe';
 import RequiredSymbol from './required-symbol';
-import {ClassNamesType} from '../form';
+import {ClassValue} from 'classnames/types';
 
 interface Props {
   fakeLabel: boolean;
   htmlFor: string;
   label: React.ReactNode;
-  labelClassName: ClassNamesType;
+  labelClassName: ClassValue;
   layout: 'horizontal' | 'vertical' | 'elementOnly';
   required: boolean;
 }

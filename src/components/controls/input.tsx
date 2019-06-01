@@ -1,19 +1,18 @@
 import * as React from 'react';
 import classNames from 'classnames/dedupe';
-import {ClassNamesType} from '../../form';
+import {ClassValue} from 'classnames/types';
 
-interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
-  type: string;
-  className: string;
-}
+const defaultProps = {
+  className: '',
+  type: 'text',
+};
+
+type Props = React.InputHTMLAttributes<HTMLInputElement> & typeof defaultProps;
 
 class InputControl extends React.Component<Props, {}> {
   public element: React.RefObject<HTMLInputElement>;
 
-  public static defaultProps = {
-    className: '',
-    type: 'text',
-  };
+  public static defaultProps = defaultProps;
 
   public constructor(props) {
     super(props);
@@ -22,7 +21,7 @@ class InputControl extends React.Component<Props, {}> {
 
   public render(): JSX.Element {
     const {className, type} = this.props;
-    const inputClassNames: ClassNamesType[] = ['form-control', className];
+    const inputClassNames: ClassValue[] = ['form-control', className];
     if (['hidden', 'range'].indexOf(type) !== -1) {
       inputClassNames.push({'form-control': false});
     }

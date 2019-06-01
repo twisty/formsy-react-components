@@ -1,12 +1,12 @@
 import * as React from 'react';
 import classNames from 'classnames/dedupe';
 import Label from './label';
-import {ClassNamesType} from '../types';
+import {ClassValue} from 'classnames/types';
 
 interface Props {
-  elementWrapperClassName: ClassNamesType;
-  rowClassName: ClassNamesType;
-  labelClassName: ClassNamesType;
+  elementWrapperClassName: ClassValue;
+  rowClassName: ClassValue;
+  labelClassName: ClassValue;
   label: React.ReactNode;
   layout: 'horizontal' | 'vertical' | 'elementOnly';
   showErrors: boolean;
@@ -36,8 +36,8 @@ const Row = (props: Props): React.ReactElement<any> => {
   }
 
   const cssClasses = {
-    row: ['form-group'] as ClassNamesType[],
-    elementWrapper: [] as ClassNamesType[],
+    row: ['form-group'] as ClassValue[],
+    elementWrapper: [] as ClassValue[],
   };
 
   if (showErrors && (errorMessages.length > 0 || required)) {

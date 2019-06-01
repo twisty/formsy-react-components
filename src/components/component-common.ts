@@ -1,10 +1,10 @@
-import {ClassNamesType} from '../types';
+import {ClassValue} from 'classnames/types';
 
 export interface ComponentPropTypes {
   id: string;
-  rowClassName: ClassNamesType;
-  labelClassName: ClassNamesType;
-  elementWrapperClassName: ClassNamesType;
+  rowClassName: ClassValue;
+  labelClassName: ClassValue;
+  elementWrapperClassName: ClassValue;
   name: string;
   changeCallback: (name: string, value) => {};
   onSetValue: (value) => {};

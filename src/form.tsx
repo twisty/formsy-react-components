@@ -2,17 +2,17 @@ import * as React from 'react';
 import classNames from 'classnames/dedupe';
 import Formsy from 'formsy-react';
 import FrcContext from './context/frc';
-import {ClassNamesType} from './types';
+import {ClassValue} from 'classnames/types';
 
 export interface Props {
   children: React.ReactNode;
   layout: 'horizontal' | 'vertical' | 'elementOnly';
-  className: ClassNamesType;
+  className: ClassValue;
   validateBeforeSubmit: boolean;
   validatePristine: boolean;
-  elementWrapperClassName: ClassNamesType;
-  labelClassName: ClassNamesType;
-  rowClassName: ClassNamesType;
+  elementWrapperClassName: ClassValue;
+  labelClassName: ClassValue;
+  rowClassName: ClassValue;
 }
 
 class Form extends React.Component<Props, {}> {
@@ -66,5 +66,4 @@ class Form extends React.Component<Props, {}> {
   }
 }
 
-export {ClassNamesType};
 export default Form;

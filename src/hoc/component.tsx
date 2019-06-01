@@ -3,7 +3,7 @@ import * as PropTypes from 'prop-types';
 import {withFormsy} from 'formsy-react';
 import FrcContext from '../context/frc';
 
-import {ClassNamesType} from '../types';
+import {ClassValue} from 'classnames/types';
 
 const styleClassName = PropTypes.oneOfType([
   PropTypes.string,
@@ -23,9 +23,9 @@ interface Props {
   setValue: Function;
   // End of formsy-react HOC props.
 
-  rowClassName: ClassNamesType;
-  labelClassName: ClassNamesType;
-  elementWrapperClassName: ClassNamesType;
+  rowClassName: ClassValue;
+  labelClassName: ClassValue;
+  elementWrapperClassName: ClassValue;
 
   name: string;
   disabled: boolean;

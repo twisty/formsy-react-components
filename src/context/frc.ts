@@ -1,14 +1,14 @@
 import {createContext} from 'react';
 
-import {ClassNamesType} from '../form';
+import {ClassValue} from 'classnames/types';
 
 export interface Props {
   layout: 'horizontal' | 'vertical' | 'elementOnly';
   validateBeforeSubmit: boolean;
   validatePristine: boolean;
-  elementWrapperClassName: ClassNamesType;
-  labelClassName: ClassNamesType;
-  rowClassName: ClassNamesType;
+  elementWrapperClassName: ClassValue;
+  labelClassName: ClassValue;
+  rowClassName: ClassValue;
   [key: string]: any;
 }
 
