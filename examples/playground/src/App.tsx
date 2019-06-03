@@ -1,48 +1,53 @@
 /* eslint-env node, browser */
 
-import React, {Component} from 'react';
+import * as React from 'react';
 import Playground from './playground';
 import Options from './options';
 
-class App extends Component {
-  constructor(props) {
-    super(props);
+const initialState = Object.freeze({
+  layout: 'horizontal',
+  showingOptions: true,
+  validateBeforeSubmit: true,
+  validatePristine: false,
+  disabled: false,
+});
 
-    // Default state
-    this.state = {
-      layout: 'horizontal',
-      showingOptions: true,
-      validateBeforeSubmit: true,
-      validatePristine: false,
-      disabled: false,
-    };
+type State = typeof initialState;
+
+class App extends React.Component<{}, State> {
+  public constructor(props) {
+    super(props);
+    this.state = initialState;
   }
 
-  handleChangeOption = (name, value) => {
+  private handleChangeOption = (name, value) => {
     const newState = {};
     if (Array.isArray(value)) {
-      let options = [];
+      let options: string[];
       if (name === 'validationOptions') {
         options = ['validatePristine', 'validateBeforeSubmit'];
-      }
-      if (name === 'elementOptions') {
+      } else if (name === 'elementOptions') {
         options = ['disabled'];
+      } else {
+        options = [];
       }
-      options.forEach(option => {
-        newState[option] = value.indexOf(option) !== -1;
-      });
+      options.forEach(
+        (option): void => {
+          newState[option] = value.indexOf(option) !== -1;
+        },
+      );
     } else {
       newState[name] = value;
     }
     this.setState(newState);
   };
 
-  handleToggleOptions = () => {
+  private handleToggleOptions = (): void => {
     const {showingOptions} = this.state;
     this.setState({showingOptions: !showingOptions});
   };
 
-  render() {
+  public render() {
     const {
       layout,
       validateBeforeSubmit,

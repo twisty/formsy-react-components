@@ -1,8 +1,8 @@
 /* eslint-env node, browser */
 
-import React, {Component} from 'react';
+import * as React from 'react';
 // eslint-disable-next-line import/no-extraneous-dependencies
-import ReactDOM from 'react-dom';
+import * as ReactDOM from 'react-dom';
 
 /* eslint-disable import/extensions, import/no-unresolved, import/no-extraneous-dependencies */
 import {
@@ -17,9 +17,17 @@ import {
 } from 'formsy-react-components';
 /* eslint-enable */
 
-class App extends Component {
-  componentDidMount() {
-    this.inputRef.element.focus();
+class App extends React.Component {
+  public inputRef;
+  public fileRef;
+  public radiosRef;
+  public checkboxRef;
+  public checkboxesRef;
+  public selectRef;
+  public textareaRef;
+
+  public componentDidMount(): void {
+    this.inputRef.element.current.focus();
 
     /* eslint-disable no-console */
     console.info(this.inputRef.element);
@@ -32,7 +40,7 @@ class App extends Component {
     /* eslint-enable no-console */
   }
 
-  render() {
+  public render(): JSX.Element {
     const multiOptions = [
       {label: 'Option 1', value: 'one'},
       {label: 'Option 2', value: 'two'},

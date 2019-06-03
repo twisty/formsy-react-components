@@ -1,7 +1,7 @@
 /* eslint-env node, browser */
 
-import React from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
+import * as PropTypes from 'prop-types';
 
 /* eslint-disable import/extensions, import/no-unresolved, import/no-extraneous-dependencies */
 import {
@@ -23,7 +23,7 @@ const Playground = ({
   validateBeforeSubmitChoice,
   validatePristineChoice,
 }) => {
-  let myform = null;
+  let myform;
 
   const resetForm = () => {
     console.log('Reset called'); // eslint-disable-line no-console

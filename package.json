@@ -17,6 +17,7 @@
     "generate-docs": "./scripts/generate-docs.sh"
   },
   "main": "./release/main.js",
+  "types": "./release/main.d.ts",
   "repository": {
     "type": "git",
     "url": "https://github.com/twisty/formsy-react-components.git"
@@ -67,6 +68,7 @@
     "@types/classnames": "^2.2.7",
     "@types/jest": "^24.0.13",
     "@types/react": "^16.8.15",
+    "@types/react-dom": "^16.8.4",
     "@typescript-eslint/eslint-plugin": "^1.9.0",
     "@typescript-eslint/parser": "^1.9.0",
     "awesome-typescript-loader": "^5.2.1",
