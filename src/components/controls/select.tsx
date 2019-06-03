@@ -12,7 +12,7 @@ interface SelectOption {
 
 interface Props extends CommonProps, ControlPropsCleaned {
   options: SelectOption[];
-  multiple?: boolean;
+  multiple: boolean;
 }
 
 class SelectControl extends React.Component<Props, {}> {

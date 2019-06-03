@@ -4,31 +4,32 @@ import Label from './label';
 import {ClassValue} from 'classnames/types';
 
 interface Props {
+  children?: React.ReactNode;
   elementWrapperClassName: ClassValue;
-  rowClassName: ClassValue;
-  labelClassName: ClassValue;
-  label: React.ReactNode;
-  layout: 'horizontal' | 'vertical' | 'elementOnly';
-  showErrors: boolean;
   errorMessages: JSX.Element[];
-  required: boolean;
   fakeLabel: boolean;
   htmlFor: string;
-  children?: React.ReactNode; //JSX.Element[] | JSX.Element;
+  label: React.ReactNode;
+  labelClassName: ClassValue;
+  layout: 'horizontal' | 'vertical' | 'elementOnly';
+  required: boolean;
+  rowClassName: ClassValue;
+  showErrors: boolean;
 }
 
-const Row = (props: Props): React.ReactElement<any> => {
-  const {
-    elementWrapperClassName,
-    errorMessages,
-    required,
-    rowClassName,
-    showErrors,
-    layout,
-    label,
-    children,
-  } = props;
-
+const Row = ({
+  children,
+  elementWrapperClassName,
+  errorMessages = [],
+  fakeLabel,
+  htmlFor,
+  label,
+  labelClassName,
+  layout,
+  required,
+  rowClassName,
+  showErrors,
+}: Props): React.ReactElement<any> => {
   let element = children;
 
   if (layout === 'elementOnly') {
@@ -67,7 +68,16 @@ const Row = (props: Props): React.ReactElement<any> => {
 
   return (
     <div className={classNames(cssClasses.row)}>
-      {shouldRenderLabel ? <Label {...props} /> : null}
+      {shouldRenderLabel ? (
+        <Label
+          fakeLabel={fakeLabel}
+          htmlFor={htmlFor}
+          label={label}
+          labelClassName={labelClassName}
+          layout={layout}
+          required={required}
+        />
+      ) : null}
       {element}
     </div>
   );
@@ -75,13 +85,14 @@ const Row = (props: Props): React.ReactElement<any> => {
 
 Row.defaultProps = {
   elementWrapperClassName: '',
-  labelClassName: '',
-  rowClassName: '',
+  errorMessages: [],
   fakeLabel: false,
-  label: null,
   htmlFor: '',
+  label: null,
+  labelClassName: '',
   layout: 'horizontal',
   required: false,
+  rowClassName: '',
   showErrors: false,
 };
 

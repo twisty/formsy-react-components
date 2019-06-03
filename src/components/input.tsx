@@ -11,6 +11,20 @@ import InputControl, {Props as InputControlProps} from './controls/input';
 import InputGroup, {Props as InputGroupProps} from './input-group';
 import Row from './row';
 
+const defaultProps = {
+  ...componentDefaultProps,
+  ...InputGroup.defaultProps,
+  type: 'text',
+  value: '',
+  updateOnBlur: true,
+  updateOnChange: true,
+  blurDebounceInterval: 0,
+  changeDebounceInterval: 500,
+  blurCallback: (): void => {},
+  keyDownCallback: (): void => {},
+  required: false,
+};
+
 type InputControlPropsCleaned = Omit<
   InputControlProps,
   'id' | 'name' | 'className'
@@ -58,19 +72,7 @@ class Input extends React.Component<Props, State> {
   private changeDebounced;
   private blurDebounced;
 
-  public static defaultProps = {
-    ...componentDefaultProps,
-    ...InputGroup.defaultProps,
-    type: 'text',
-    value: '',
-    updateOnBlur: true,
-    updateOnChange: true,
-    blurDebounceInterval: 0,
-    changeDebounceInterval: 500,
-    blurCallback: (): void => {},
-    keyDownCallback: (): void => {},
-    required: false,
-  };
+  public static defaultProps = defaultProps;
 
   public constructor(props) {
     super(props);

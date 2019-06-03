@@ -4,7 +4,24 @@ import Formsy from 'formsy-react';
 import FrcContext from './context/frc';
 import {ClassValue} from 'classnames/types';
 
-export interface Props {
+/**
+ * Formsy props taken from:
+ *
+ * - https://github.com/formsy/formsy-react/blob/master/API.md#formsy
+ */
+interface FormsyProps {
+  mapping?: Function;
+  validationErrors?: Function;
+  onSubmit?: Function;
+  onValid?: Function;
+  onInvalid?: Function;
+  onValidSubmit?: Function;
+  onInvalidSubmit?: Function;
+  onChange?: Function;
+  preventExternalInvalidation?: boolean;
+}
+
+export interface Props extends FormsyProps {
   children: React.ReactNode;
   layout: 'horizontal' | 'vertical' | 'elementOnly';
   className: ClassValue;
@@ -13,6 +30,7 @@ export interface Props {
   elementWrapperClassName: ClassValue;
   labelClassName: ClassValue;
   rowClassName: ClassValue;
+  disabled: boolean;
 }
 
 class Form extends React.Component<Props, {}> {
@@ -26,6 +44,7 @@ class Form extends React.Component<Props, {}> {
     rowClassName: '',
     validateBeforeSubmit: true,
     validatePristine: false,
+    disabled: false,
   };
 
   public render(): JSX.Element {

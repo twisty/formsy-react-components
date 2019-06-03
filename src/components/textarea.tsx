@@ -10,14 +10,17 @@ import Help from './help';
 import Row from './row';
 import TextareaControl, {TextareaControlProps} from './controls/textarea';
 
-interface Props extends ComponentPropTypes, TextareaControlProps {
-  blurDebounceInterval: number;
-  changeDebounceInterval: number;
-  updateOnBlur: boolean;
-  updateOnChange: boolean;
-  value: string;
-  blurCallback: (name: string, value: string) => {};
-}
+const defaultProps = {
+  ...componentDefaultProps,
+  value: '',
+  updateOnBlur: true,
+  updateOnChange: true,
+  blurDebounceInterval: 0,
+  changeDebounceInterval: 500,
+  blurCallback: (name: string, value: string): void => {},
+};
+
+type Props = ComponentPropTypes & TextareaControlProps & typeof defaultProps;
 
 interface State {
   value: string;
@@ -33,14 +36,7 @@ class Textarea extends React.Component<Props, State> {
   private changeDebounced: DebouncedFunction;
   private blurDebounced: DebouncedFunction;
 
-  public static defaultProps = {
-    ...componentDefaultProps,
-    updateOnBlur: true,
-    updateOnChange: true,
-    blurDebounceInterval: 0,
-    changeDebounceInterval: 500,
-    blurCallback: (): void => {},
-  };
+  public static defaultProps = defaultProps;
 
   public constructor(props) {
     super(props);

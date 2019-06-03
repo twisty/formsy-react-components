@@ -11,15 +11,17 @@ interface TextareaControlProps extends CommonProps, ControlPropsCleaned {
   value: string;
 }
 
+const defaultProps = {
+  className: 'form-control',
+  cols: 0, // React doesn't render the cols attribute if it is zero
+  rows: 3,
+  value: '',
+};
+
 class TextareaControl extends React.Component<TextareaControlProps, {}> {
   public element: React.RefObject<HTMLTextAreaElement>;
 
-  public static defaultProps = {
-    className: 'form-control',
-    cols: 0, // React doesn't render the cols attribute if it is zero
-    rows: 3,
-    value: '',
-  };
+  public static defaultProps = defaultProps;
 
   public constructor(props) {
     super(props);

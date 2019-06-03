@@ -10,7 +10,7 @@ export interface ComponentPropTypes {
   onSetValue: (value) => {};
   isPristine: () => {};
   errorMessages: JSX.Element[];
-  help: string | null;
+  help: string;
   label: React.ReactNode;
   layout: 'horizontal' | 'vertical' | 'elementOnly';
   showErrors: boolean;
@@ -34,7 +34,7 @@ export const componentDefaultProps = {
   changeCallback: (): void => {},
   onSetValue: (): void => {},
   errorMessages: [null],
-  help: null,
+  help: '',
   label: null,
   layout: 'horizontal',
   showErrors: true,
