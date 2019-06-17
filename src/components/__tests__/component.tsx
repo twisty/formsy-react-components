@@ -1,7 +1,7 @@
-/* globals console, jest, expect, describe, it */
+/* globals expect, describe, it */
 
 import * as React from 'react';
-import {shallow, mount} from 'enzyme';
+import {mount} from 'enzyme';
 
 const componentTest = Component =>
   describe('acts like a formsy-react-component', () => {

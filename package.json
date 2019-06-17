@@ -36,22 +36,6 @@
   "bugs": {
     "url": "https://github.com/twisty/formsy-react-components/issues"
   },
-  "jest": {
-    "roots": [
-      "./src",
-      "./examples"
-    ],
-    "setupFiles": [
-      "<rootDir>/src/components/__tests__/test-helper.ts"
-    ],
-    "testPathIgnorePatterns": [
-      "<rootDir>/src/components/__tests__/component.tsx",
-      "<rootDir>/src/components/__tests__/test-helper.ts"
-    ],
-    "moduleNameMapper": {
-      "formsy-react-components": "<rootDir>/src/main.ts"
-    }
-  },
   "peerDependencies": {
     "formsy-react": "^1.1.0",
     "react": "^16.3.0"
@@ -61,18 +45,14 @@
     "prop-types": "^15.5.10"
   },
   "devDependencies": {
-    "@babel/core": "^7.4.5",
-    "@babel/preset-env": "^7.4.5",
-    "@babel/preset-react": "^7.0.0",
-    "@babel/preset-typescript": "^7.3.3",
     "@types/classnames": "^2.2.7",
+    "@types/enzyme": "^3.9.3",
     "@types/jest": "^24.0.13",
     "@types/react": "^16.8.15",
     "@types/react-dom": "^16.8.4",
     "@typescript-eslint/eslint-plugin": "^1.9.0",
     "@typescript-eslint/parser": "^1.9.0",
     "awesome-typescript-loader": "^5.2.1",
-    "babel-jest": "^24.8.0",
     "cz-conventional-changelog": "^2.1.0",
     "enzyme": "^3.2.0",
     "enzyme-adapter-react-16": "^1.0.0",
@@ -93,6 +73,7 @@
     "react-dom": "^16.3.0",
     "react-test-renderer": "^16.3.0",
     "source-map-loader": "^0.2.4",
+    "ts-jest": "^24.0.2",
     "typescript": "^3.4.5",
     "webpack": "^4.12.0",
     "webpack-cli": "^3.0.8",
