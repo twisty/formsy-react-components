@@ -1,7 +1,6 @@
 /* eslint-env node, browser */
 
 import * as React from 'react';
-import * as PropTypes from 'prop-types';
 
 /* eslint-disable import/extensions, import/no-unresolved, import/no-extraneous-dependencies */
 import {
@@ -17,7 +16,16 @@ import {
 } from 'formsy-react-components';
 /* eslint-enable */
 
-const Playground = ({
+import {LayoutChoice} from './App';
+
+interface Props {
+  disabledChoice: boolean;
+  layoutChoice: LayoutChoice;
+  validateBeforeSubmitChoice: boolean;
+  validatePristineChoice: boolean;
+}
+
+const Playground: React.FunctionComponent<Props> = ({
   disabledChoice,
   layoutChoice,
   validateBeforeSubmitChoice,
@@ -25,13 +33,13 @@ const Playground = ({
 }) => {
   let myform;
 
-  const resetForm = () => {
+  const resetForm = (): void => {
     console.log('Reset called'); // eslint-disable-line no-console
     const {formsyForm} = myform;
     formsyForm.reset();
   };
 
-  const submitForm = data => {
+  const submitForm = (data): void => {
     console.log(data); // eslint-disable-line no-console
   };
 
@@ -74,11 +82,11 @@ const Playground = ({
     ...selectOptions,
   ];
 
-  const refCallback = form => {
+  const refCallback = (form): void => {
     myform = form;
   };
 
-  const legend = str => (
+  const legend = (str: string): JSX.Element => (
     <legend className="pb-2 mt-4 mb-3 border-bottom">{str}</legend>
   );
 
@@ -339,14 +347,6 @@ const Playground = ({
       </fieldset>
     </Form>
   );
-};
-
-Playground.propTypes = {
-  disabledChoice: PropTypes.bool.isRequired,
-  layoutChoice: PropTypes.oneOf(['horizontal', 'vertical', 'elementOnly'])
-    .isRequired,
-  validateBeforeSubmitChoice: PropTypes.bool.isRequired,
-  validatePristineChoice: PropTypes.bool.isRequired,
 };
 
 export default Playground;

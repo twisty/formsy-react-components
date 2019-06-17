@@ -17,6 +17,7 @@ module.exports = {
       jsxBracketSameLine: true
     }],
     "react/jsx-filename-extension": [1, { extensions: [".jsx", ".tsx"] }],
+    "react/prop-types": ["skipUndeclared"],
     "jsx-a11y/label-has-for": "off",
     'jsx-a11y/label-has-associated-control': ['error', {
       labelComponents: [],
@@ -24,6 +25,9 @@ module.exports = {
       controlComponents: [],
       assert: 'either',
       depth: 25
+    }],
+    "@typescript-eslint/explicit-function-return-type": ["warning", {
+      allowTypedFunctionExpressions: true
     }]
   },
   parserOptions: {

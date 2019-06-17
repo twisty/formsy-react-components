@@ -64,14 +64,14 @@ class App extends React.Component {
           <Input
             label="Text"
             name="input"
-            componentRef={component => {
+            componentRef={(component): void => {
               this.inputRef = component;
             }}
           />
           <File
             label="File picker"
             name="file"
-            componentRef={component => {
+            componentRef={(component): void => {
               this.fileRef = component;
             }}
           />
@@ -79,7 +79,7 @@ class App extends React.Component {
             label="Radio buttons"
             name="radios"
             options={multiOptions}
-            componentRef={component => {
+            componentRef={(component): void => {
               this.radiosRef = component;
             }}
           />
@@ -87,7 +87,7 @@ class App extends React.Component {
             label="Single checkbox"
             valueLabel="One option"
             name="checkbox"
-            componentRef={component => {
+            componentRef={(component): void => {
               this.checkboxRef = component;
             }}
           />
@@ -95,7 +95,7 @@ class App extends React.Component {
             label="Checkbox group"
             name="checkboxes"
             options={multiOptions}
-            componentRef={component => {
+            componentRef={(component): void => {
               this.checkboxesRef = component;
             }}
           />
@@ -103,14 +103,14 @@ class App extends React.Component {
             label="Select"
             name="select"
             options={multiOptions}
-            componentRef={component => {
+            componentRef={(component): void => {
               this.selectRef = component;
             }}
           />
           <Textarea
             label="Textarea"
             name="textarea"
-            componentRef={component => {
+            componentRef={(component): void => {
               this.textareaRef = component;
             }}
           />

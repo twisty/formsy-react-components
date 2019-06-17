@@ -145,11 +145,9 @@ class Input extends React.Component<Props, State> {
 
   public render(): JSX.Element {
     const inputProps = {...this.props};
-    ComponentPropKeys.forEach(
-      (key): void => {
-        delete inputProps[key];
-      },
-    );
+    ComponentPropKeys.forEach((key): void => {
+      delete inputProps[key];
+    });
     delete inputProps.addonAfter;
     delete inputProps.addonBefore;
     delete inputProps.buttonAfter;

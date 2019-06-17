@@ -71,26 +71,24 @@ class SelectControl extends React.Component<Props, {}> {
         },
       );
 
-      groups.forEach(
-        (group, groupIndex): void => {
-          const groupItems = options.filter(
-            (item): boolean => item.group === group,
-          );
+      groups.forEach((group, groupIndex): void => {
+        const groupItems = options.filter(
+          (item): boolean => item.group === group,
+        );
 
-          const groupOptionNodes = groupItems.map(
-            (item, index): JSX.Element =>
-              this.renderOption(item, `${groupIndex}-${index}`),
-          );
+        const groupOptionNodes = groupItems.map(
+          (item, index): JSX.Element =>
+            this.renderOption(item, `${groupIndex}-${index}`),
+        );
 
-          /* eslint-disable react/no-array-index-key */
-          optionNodes.push(
-            <optgroup label={group} key={groupIndex}>
-              {groupOptionNodes}
-            </optgroup>,
-          );
-          /* eslint-enable */
-        },
-      );
+        /* eslint-disable react/no-array-index-key */
+        optionNodes.push(
+          <optgroup label={group} key={groupIndex}>
+            {groupOptionNodes}
+          </optgroup>,
+        );
+        /* eslint-enable */
+      });
     }
 
     const selectProps = {...this.props};

@@ -47,11 +47,9 @@ class File extends React.Component<Props, {}> {
       {className: 'form-control-file'},
       this.props,
     );
-    ComponentPropKeys.forEach(
-      (key): void => {
-        delete inputProps[key];
-      },
-    );
+    ComponentPropKeys.forEach((key): void => {
+      delete inputProps[key];
+    });
 
     const {layout, id, showErrors, help, errorMessages} = this.props;
 

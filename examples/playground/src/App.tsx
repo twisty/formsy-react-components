@@ -4,8 +4,10 @@ import * as React from 'react';
 import Playground from './playground';
 import Options from './options';
 
+export type LayoutChoice = 'horizontal' | 'vertical' | 'elementOnly';
+
 const initialState = Object.freeze({
-  layout: 'horizontal',
+  layout: 'horizontal' as LayoutChoice,
   showingOptions: true,
   validateBeforeSubmit: true,
   validatePristine: false,
@@ -31,11 +33,9 @@ class App extends React.Component<{}, State> {
       } else {
         options = [];
       }
-      options.forEach(
-        (option): void => {
-          newState[option] = value.indexOf(option) !== -1;
-        },
-      );
+      options.forEach((option): void => {
+        newState[option] = value.indexOf(option) !== -1;
+      });
     } else {
       newState[name] = value;
     }

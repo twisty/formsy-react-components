@@ -271,11 +271,9 @@ const FormsyReactComponent = (ComposedComponent): typeof React.Component => {
               'validatePristine',
             ];
 
-            unusedPropNames.forEach(
-              (propName): void => {
-                delete props[propName];
-              },
-            );
+            unusedPropNames.forEach((propName): void => {
+              delete props[propName];
+            });
 
             return <ComposedComponent {...props} />;
           }}

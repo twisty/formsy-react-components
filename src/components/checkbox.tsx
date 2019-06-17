@@ -38,11 +38,9 @@ class Checkbox extends React.Component<Props, {}> {
 
   private renderElement = (): JSX.Element => {
     const {valueLabel, label, value, ...inputProps} = this.props;
-    ComponentPropKeys.forEach(
-      (key): void => {
-        delete inputProps[key];
-      },
-    );
+    ComponentPropKeys.forEach((key): void => {
+      delete inputProps[key];
+    });
 
     return (
       <div className="form-check">
