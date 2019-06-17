@@ -1,5 +1,5 @@
 import * as React from 'react';
-import debounce from '../debounce';
+import debounce, {DebouncedFunction} from '../debounce';
 import {
   ComponentPropTypes,
   ComponentPropKeys,
@@ -24,10 +24,6 @@ type Props = ComponentPropTypes & TextareaControlProps & typeof defaultProps;
 
 interface State {
   value: string;
-}
-
-interface DebouncedFunction extends Function {
-  cancel: Function;
 }
 
 class Textarea extends React.Component<Props, State> {

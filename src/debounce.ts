@@ -1,4 +1,9 @@
-const debounce = (fn: Function, time: number) => {
+export interface DebouncedFunction extends Function {
+  cancel: () => void;
+  flush: () => void;
+}
+
+export default (fn: Function, time: number): DebouncedFunction => {
   let pending;
   let lastArgs;
   let lastThis;
@@ -37,5 +42,3 @@ const debounce = (fn: Function, time: number) => {
 
   return debounced;
 };
-
-export default debounce;
