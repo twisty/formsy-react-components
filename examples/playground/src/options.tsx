@@ -1,13 +1,20 @@
 /* eslint-env node, browser */
 
 import * as React from 'react';
-import * as PropTypes from 'prop-types';
 
-/* eslint-disable import/extensions, import/no-unresolved, import/no-extraneous-dependencies */
 import {CheckboxGroup, RadioGroup, Form} from 'formsy-react-components';
-/* eslint-enable */
 
-const Options = ({
+interface Props {
+  disabledChoice: boolean;
+  layoutChoice: 'horizontal' | 'vertical' | 'elementOnly';
+  showing: boolean;
+  validateBeforeSubmitChoice: boolean;
+  validatePristineChoice: boolean;
+  onChangeOption: Function;
+  onToggle: () => void;
+}
+
+const Options: React.FunctionComponent<Props> = ({
   disabledChoice,
   layoutChoice,
   onChangeOption,
@@ -65,17 +72,6 @@ const Options = ({
       {showing ? <div className="card-body">{optionsForm}</div> : null}
     </div>
   );
-};
-
-Options.propTypes = {
-  disabledChoice: PropTypes.bool.isRequired,
-  layoutChoice: PropTypes.oneOf(['horizontal', 'vertical', 'elementOnly'])
-    .isRequired,
-  showing: PropTypes.bool.isRequired,
-  validateBeforeSubmitChoice: PropTypes.bool.isRequired,
-  validatePristineChoice: PropTypes.bool.isRequired,
-  onChangeOption: PropTypes.func.isRequired,
-  onToggle: PropTypes.func.isRequired,
 };
 
 export default Options;

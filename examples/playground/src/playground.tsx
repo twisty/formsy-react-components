@@ -2,7 +2,6 @@
 
 import * as React from 'react';
 
-/* eslint-disable import/extensions, import/no-unresolved, import/no-extraneous-dependencies */
 import {
   Checkbox,
   CheckboxGroup,
@@ -14,7 +13,6 @@ import {
   Textarea,
   Form,
 } from 'formsy-react-components';
-/* eslint-enable */
 
 import {LayoutChoice} from './App';
 

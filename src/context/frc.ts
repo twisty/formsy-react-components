@@ -2,7 +2,7 @@ import {createContext} from 'react';
 
 import {ClassValue} from 'classnames/types';
 
-export interface Props {
+export interface FrcContextType {
   layout: 'horizontal' | 'vertical' | 'elementOnly';
   validateBeforeSubmit: boolean;
   validatePristine: boolean;
@@ -12,7 +12,7 @@ export interface Props {
   [key: string]: any;
 }
 
-const defaultContextValue: Props = {
+const defaultContextValue: FrcContextType = {
   layout: 'horizontal',
   validateBeforeSubmit: true,
   validatePristine: false,

@@ -1,15 +1,8 @@
 import * as React from 'react';
-import * as PropTypes from 'prop-types';
 import {withFormsy} from 'formsy-react';
-import FrcContext from '../context/frc';
+import FrcContext, {FrcContextType} from '../context/frc';
 
 import {ClassValue} from 'classnames/types';
-
-const styleClassName = PropTypes.oneOfType([
-  PropTypes.string,
-  PropTypes.array,
-  PropTypes.object,
-]);
 
 interface Props {
   // These are the props that we require from the formsy-react HOC.
@@ -78,15 +71,6 @@ const getDisplayName = (component): string =>
 const FormsyReactComponent = (ComposedComponent): typeof React.Component => {
   class ComponentHOC extends React.Component<Props, {}> {
     public static displayName = `withFRC(${getDisplayName(ComposedComponent)})`;
-
-    public static contextTypes = {
-      rowClassName: styleClassName,
-      labelClassName: styleClassName,
-      elementWrapperClassName: styleClassName,
-      layout: PropTypes.string,
-      validateBeforeSubmit: PropTypes.bool,
-      validatePristine: PropTypes.bool,
-    };
 
     // TODO: Should we add default props for the following?:
     // * elementWrapperClassName
@@ -179,7 +163,7 @@ const FormsyReactComponent = (ComposedComponent): typeof React.Component => {
     public render(): JSX.Element {
       return (
         <FrcContext.Consumer>
-          {context => {
+          {(context: FrcContextType) => {
             const {
               componentRef,
               disabled,

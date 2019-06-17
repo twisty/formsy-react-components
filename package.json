@@ -41,8 +41,7 @@
     "react": "^16.3.0"
   },
   "dependencies": {
-    "classnames": "^2.2.5",
-    "prop-types": "^15.5.10"
+    "classnames": "^2.2.5"
   },
   "devDependencies": {
     "@types/classnames": "^2.2.7",
