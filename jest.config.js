@@ -1,3 +1,6 @@
+const {pathsToModuleNameMapper} = require('ts-jest/utils');
+const {compilerOptions} = require('./tsconfig');
+
 module.exports = {
   preset: 'ts-jest',
   testEnvironment: 'jsdom',
@@ -8,7 +11,7 @@ module.exports = {
     '<rootDir>/src/components/__tests__/component.tsx',
     '<rootDir>/src/components/__tests__/test-helper.ts',
   ],
-  moduleNameMapper: {
-    'formsy-react-components': '<rootDir>/src/main.ts',
-  },
+  moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths, {
+    prefix: '<rootDir>/',
+  }),
 };

@@ -10,7 +10,7 @@
     "moduleResolution": "node",
     "baseUrl": ".",
     "paths": {
-      "formsy-react-components": ["."]
+      "formsy-react-components": ["./src"]
     }
   },
   "exclude": [
