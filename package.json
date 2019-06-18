@@ -9,7 +9,6 @@
     "lint": "eslint src examples --ext .js,.jsx,.ts,.tsx",
     "build": "tsc",
     "prepublishOnly": "./scripts/prepublish.sh",
-    "transpile": "rm -rf release && babel src -d release --ignore __tests__",
     "dev": "tsc --watch",
     "examples": "webpack-dev-server --config examples/webpack.config.js",
     "examples:build": "webpack -p --config examples/webpack.config.js",
