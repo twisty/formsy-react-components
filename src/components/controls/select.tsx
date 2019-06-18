@@ -27,7 +27,7 @@ class SelectControl extends React.Component<Props, {}> {
     this.element = React.createRef();
   }
 
-  private renderOption = (item, key: string): JSX.Element => {
+  private renderOption = (item, key: string) => {
     const optionProps = Object.assign({}, item);
     delete optionProps.label;
     delete optionProps.group;
@@ -39,7 +39,7 @@ class SelectControl extends React.Component<Props, {}> {
     return option;
   };
 
-  public render(): JSX.Element {
+  public render() {
     const {options} = this.props;
 
     let groups = options
@@ -53,32 +53,27 @@ class SelectControl extends React.Component<Props, {}> {
 
     groups = groups.filter(onlyUnique);
 
-    let optionNodes: JSX.Element[];
+    let optionNodes: React.ReactNode[];
 
     if (groups.length === 0) {
-      optionNodes = options.map(
-        (item, index): JSX.Element => {
-          return this.renderOption(item, `${index}`);
-        },
-      );
+      optionNodes = options.map((item, index) => {
+        return this.renderOption(item, `${index}`);
+      });
     } else {
       // For items without groups.
       const itemsWithoutGroup = options.filter((item): boolean => !item.group);
 
-      optionNodes = itemsWithoutGroup.map(
-        (item, index): JSX.Element => {
-          return this.renderOption(item, `no-group-${index}`);
-        },
-      );
+      optionNodes = itemsWithoutGroup.map((item, index) => {
+        return this.renderOption(item, `no-group-${index}`);
+      });
 
       groups.forEach((group, groupIndex): void => {
         const groupItems = options.filter(
           (item): boolean => item.group === group,
         );
 
-        const groupOptionNodes = groupItems.map(
-          (item, index): JSX.Element =>
-            this.renderOption(item, `${groupIndex}-${index}`),
+        const groupOptionNodes = groupItems.map((item, index) =>
+          this.renderOption(item, `${groupIndex}-${index}`),
         );
 
         /* eslint-disable react/no-array-index-key */

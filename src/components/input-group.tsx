@@ -1,19 +1,18 @@
 import * as React from 'react';
 
 interface Props {
-  children?: React.ReactNode;
   addonAfter?: React.ReactNode;
   addonBefore?: React.ReactNode;
   buttonAfter?: React.ReactNode;
   buttonBefore?: React.ReactNode;
 }
 
-type ReactElementOrNull = React.ReactElement<any> | null;
+type ReactElementOrNull = React.ReactElement | null;
 
 /**
  * Wraps an input to implement a Bootstrap [Input Group](http://getbootstrap.com/components/#input-groups)
  */
-const InputGroup = (props: Props): ReactElementOrNull => {
+const InputGroup: React.FunctionComponent<Props> = props => {
   const renderAddon = (addon, position): ReactElementOrNull => {
     if (!addon) {
       return null;

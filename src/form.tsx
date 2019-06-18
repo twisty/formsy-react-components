@@ -47,7 +47,7 @@ class Form extends React.Component<Props, {}> {
     disabled: false,
   };
 
-  public render(): JSX.Element {
+  public render() {
     const {
       children,
       className,

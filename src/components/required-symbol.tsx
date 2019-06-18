@@ -2,10 +2,10 @@ import * as React from 'react';
 
 interface Props {
   required: boolean;
-  symbol: JSX.Element;
+  symbol?: React.ReactNode;
 }
 
-const RequiredSymbol = ({required, symbol}: Props): JSX.Element | null => {
+const RequiredSymbol: React.FunctionComponent<Props> = ({required, symbol}) => {
   if (required === false) {
     return null;
   }

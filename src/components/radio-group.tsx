@@ -37,7 +37,7 @@ class RadioGroup extends React.Component<Props, {}> {
     changeCallback(name, value);
   };
 
-  private renderElement = (): JSX.Element[] => {
+  private renderElement = () => {
     const {
       disabled,
       errorMessages,
@@ -59,40 +59,40 @@ class RadioGroup extends React.Component<Props, {}> {
       markAsInvalid ? ' is-invalid' : ''
     }`;
 
-    const controls = options.map(
-      (radio): JSX.Element => {
-        const checked = value === radio.value;
-        const isDisabled = radio.disabled || disabled;
-        const inputId = `${id}--${radio.value}`;
-        return (
-          <div className={className} key={radio.value}>
-            <input
-              ref={input => {
-                this.elements[radio.value] = input;
-              }}
-              checked={checked}
-              type="radio"
-              value={radio.value}
-              onChange={this.handleChange}
-              disabled={isDisabled}
-              className={inputClassName}
-              name={id}
-              id={inputId}
-              required={required}
-            />
-            <label className="form-check-label" htmlFor={inputId}>
-              {radio.label}
-            </label>
-          </div>
-        );
-      },
-    );
+    const controls = options.map(radio => {
+      const checked = value === radio.value;
+      const isDisabled = radio.disabled || disabled;
+      const inputId = `${id}--${radio.value}`;
+      return (
+        <div className={className} key={radio.value}>
+          <input
+            ref={input => {
+              this.elements[radio.value] = input;
+            }}
+            checked={checked}
+            type="radio"
+            value={radio.value}
+            onChange={this.handleChange}
+            disabled={isDisabled}
+            className={inputClassName}
+            name={id}
+            id={inputId}
+            required={required}
+          />
+          <label className="form-check-label" htmlFor={inputId}>
+            {radio.label}
+          </label>
+        </div>
+      );
+    });
     return controls;
   };
 
-  public render(): FormCheckGroup {
+  public render() {
     return (
-      <FormCheckGroup {...this.props}>{this.renderElement()}</FormCheckGroup>
+      <FormCheckGroup {...this.props}>
+        <>{this.renderElement()}</>
+      </FormCheckGroup>
     );
   }
 }

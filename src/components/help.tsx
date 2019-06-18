@@ -4,7 +4,7 @@ interface Props {
   help: string;
 }
 
-const Help = ({help}: Props): JSX.Element => (
+const Help: React.FunctionComponent<Props> = ({help}) => (
   <small className="form-text text-muted">{help}</small>
 );
 

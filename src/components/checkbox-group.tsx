@@ -42,7 +42,7 @@ class CheckboxGroup extends React.Component<Props, {}> {
     changeCallback(name, value);
   };
 
-  private renderElement = (): JSX.Element[] => {
+  private renderElement = () => {
     const {
       disabled,
       errorMessages,
@@ -92,9 +92,11 @@ class CheckboxGroup extends React.Component<Props, {}> {
     return controls;
   };
 
-  public render(): FormCheckGroup {
+  public render() {
     return (
-      <FormCheckGroup {...this.props}>{this.renderElement()}</FormCheckGroup>
+      <FormCheckGroup {...this.props}>
+        <>{this.renderElement()}</>
+      </FormCheckGroup>
     );
   }
 }

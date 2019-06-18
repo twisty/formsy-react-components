@@ -45,9 +45,6 @@ interface Props {
 
   // Whether to show validation errors on pristine (untouched) components.
   validatePristine: boolean;
-
-  // Keys of Props are strings.
-  [key: string]: any;
 }
 
 const getDisplayName = (component): string =>
@@ -160,7 +157,7 @@ const FormsyReactComponent = (ComposedComponent): typeof React.Component => {
 
     // We pass through all unknown props, but delete some formsy HOC props
     // that we know we don't need.
-    public render(): JSX.Element {
+    public render() {
       return (
         <FrcContext.Consumer>
           {(context: FrcContextType) => {
@@ -176,12 +173,18 @@ const FormsyReactComponent = (ComposedComponent): typeof React.Component => {
               setValue,
               validateBeforeSubmit: propValidateBeforeSubmit,
               validatePristine: propValidatePristine,
+              elementWrapperClassName,
+              labelClassName,
+              rowClassName,
             } = this.props;
 
             const {
               layout: contextLayout,
               validateBeforeSubmit: contextValidateBeforeSubmit,
               validatePristine: contextValidatePristine,
+              elementWrapperClassName: contextElementWrapperClassName,
+              labelClassName: contextLabelClassName,
+              rowClassName: contextRowClassName,
             } = context;
 
             const validatePristine = this.getBooleanFromPropsAndContext(
@@ -197,22 +200,25 @@ const FormsyReactComponent = (ComposedComponent): typeof React.Component => {
             );
 
             /**
-             * Combine a parent context value with a component prop value.
-             * This is used for CSS classnames, where the value is passed to `JedWatson/classnames`.
+             * For ClassNames:
+             *
+             * - elementWrapperClassName
+             * - labelClassName
+             * - rowClassName
+             *
+             * We combine the parent context value with the component prop
+             * value, the value from props comes second, so that it may override
+             * the value set in the context. This is used for CSS classnames,
+             * where the value is finally parsed using `JedWatson/classnames`.
              */
-            const combineContextWithProp = (key: string) => {
-              const {[key]: contextValue} = context;
-              const {[key]: propsValue} = this.props;
-              return [contextValue, propsValue];
-            };
-
             const props = {
               ...this.props,
-              elementWrapperClassName: combineContextWithProp(
-                'elementWrapperClassName',
-              ),
-              labelClassName: combineContextWithProp('labelClassName'),
-              rowClassName: combineContextWithProp('rowClassName'),
+              elementWrapperClassName: [
+                contextElementWrapperClassName,
+                elementWrapperClassName,
+              ],
+              labelClassName: [contextLabelClassName, labelClassName],
+              rowClassName: [contextRowClassName, rowClassName],
               disabled: isFormDisabled() || disabled,
               errorMessages: getErrorMessages(),
               id: this.getId(),

@@ -28,7 +28,7 @@ class TextareaControl extends React.Component<TextareaControlProps, {}> {
     this.element = React.createRef();
   }
 
-  public render(): JSX.Element {
+  public render() {
     return <textarea {...this.props} ref={this.element} />;
   }
 }

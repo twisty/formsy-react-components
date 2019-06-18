@@ -5,10 +5,10 @@ import Row from './row';
 import {ComponentPropTypes, componentDefaultProps} from './component-common';
 
 interface Props extends ComponentPropTypes {
-  children?: any;
+  children: React.ReactElement;
 }
 
-const FormCheckGroup = (props: Props): JSX.Element => {
+const FormCheckGroup: React.FunctionComponent<Props> = props => {
   const {
     layout,
     help,
@@ -22,13 +22,14 @@ const FormCheckGroup = (props: Props): JSX.Element => {
     return children;
   }
 
+  const {...passProps} = props;
+  delete passProps.children;
+
   return (
-    <Row {...props} labelClassName={['pt-0', labelClassName]} fakeLabel>
-      <>
-        {children}
-        {help ? <Help help={help} /> : null}
-        {showErrors ? <ErrorMessages messages={errorMessages} /> : null}
-      </>
+    <Row {...passProps} labelClassName={['pt-0', labelClassName]} fakeLabel>
+      {children}
+      {help ? <Help help={help} /> : null}
+      {showErrors ? <ErrorMessages messages={errorMessages} /> : null}
     </Row>
   );
 };

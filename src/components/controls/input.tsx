@@ -19,7 +19,7 @@ class InputControl extends React.Component<Props, {}> {
     this.element = React.createRef();
   }
 
-  public render(): JSX.Element {
+  public render() {
     const {className, type} = this.props;
     const inputClassNames: ClassValue[] = ['form-control', className];
     if (['hidden', 'range'].indexOf(type) !== -1) {

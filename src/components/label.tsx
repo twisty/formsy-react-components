@@ -12,14 +12,14 @@ interface Props {
   required: boolean;
 }
 
-const Label = ({
+const Label: React.FunctionComponent<Props> = ({
   fakeLabel = false,
   htmlFor = '',
   label = null,
   labelClassName = '',
   layout = 'horizontal',
   required = false,
-}: Props): React.ReactElement<any> | null => {
+}) => {
   if (layout === 'elementOnly') {
     return null;
   }

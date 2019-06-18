@@ -17,8 +17,10 @@ class FileControl extends React.Component<Props, {}> {
     this.element = React.createRef();
   }
 
-  public render(): JSX.Element {
-    const {value, ...props} = this.props;
+  public render() {
+    const {...props} = this.props;
+    delete props.value;
+
     return <input {...props} type="file" ref={this.element} />;
   }
 }

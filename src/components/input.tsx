@@ -143,7 +143,7 @@ class Input extends React.Component<Props, State> {
     this.element = control ? control.element : null;
   };
 
-  public render(): JSX.Element {
+  public render() {
     const inputProps = {...this.props};
     ComponentPropKeys.forEach((key): void => {
       delete inputProps[key];

@@ -9,7 +9,6 @@ export interface FrcContextType {
   elementWrapperClassName: ClassValue;
   labelClassName: ClassValue;
   rowClassName: ClassValue;
-  [key: string]: any;
 }
 
 const defaultContextValue: FrcContextType = {

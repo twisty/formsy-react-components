@@ -17,7 +17,8 @@ const defaultProps = {
   updateOnChange: true,
   blurDebounceInterval: 0,
   changeDebounceInterval: 500,
-  blurCallback: (name: string, value: string): void => {},
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  blurCallback: (name, value) => {},
 };
 
 type Props = ComponentPropTypes & TextareaControlProps & typeof defaultProps;
@@ -82,7 +83,7 @@ class Textarea extends React.Component<Props, State> {
     this.element = control ? control.element : null;
   };
 
-  public render(): JSX.Element {
+  public render() {
     const {...inputProps} = this.props;
     ComponentPropKeys.forEach((key): void => {
       delete inputProps[key];

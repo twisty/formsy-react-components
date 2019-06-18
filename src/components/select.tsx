@@ -48,7 +48,7 @@ class Select extends React.Component<Props, {}> {
     this.element = control ? control.element : null;
   };
 
-  public render(): JSX.Element {
+  public render() {
     const inputProps = Object.assign({}, this.props);
     ComponentPropKeys.forEach((key): void => {
       delete inputProps[key];

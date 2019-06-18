@@ -4,32 +4,31 @@ import Label from './label';
 import {ClassValue} from 'classnames/types';
 
 interface Props {
-  children?: React.ReactNode;
-  elementWrapperClassName: ClassValue;
-  errorMessages: JSX.Element[];
-  fakeLabel: boolean;
-  htmlFor: string;
-  label: React.ReactNode;
-  labelClassName: ClassValue;
-  layout: 'horizontal' | 'vertical' | 'elementOnly';
-  required: boolean;
-  rowClassName: ClassValue;
-  showErrors: boolean;
+  elementWrapperClassName?: ClassValue;
+  errorMessages?: React.ReactNode[];
+  fakeLabel?: boolean;
+  htmlFor?: string;
+  label?: React.ReactNode;
+  labelClassName?: ClassValue;
+  layout?: 'horizontal' | 'vertical' | 'elementOnly';
+  required?: boolean;
+  rowClassName?: ClassValue;
+  showErrors?: boolean;
 }
 
-const Row = ({
+const Row: React.FunctionComponent<Props> = ({
   children,
-  elementWrapperClassName,
+  elementWrapperClassName = '',
   errorMessages = [],
-  fakeLabel,
-  htmlFor,
-  label,
-  labelClassName,
-  layout,
-  required,
-  rowClassName,
-  showErrors,
-}: Props): React.ReactElement<any> => {
+  fakeLabel = false,
+  htmlFor = '',
+  label = null,
+  labelClassName = '',
+  layout = 'horizontal',
+  required = false,
+  rowClassName = '',
+  showErrors = false,
+}) => {
   let element = children;
 
   if (layout === 'elementOnly') {
@@ -81,19 +80,6 @@ const Row = ({
       {element}
     </div>
   );
-};
-
-Row.defaultProps = {
-  elementWrapperClassName: '',
-  errorMessages: [],
-  fakeLabel: false,
-  htmlFor: '',
-  label: null,
-  labelClassName: '',
-  layout: 'horizontal',
-  required: false,
-  rowClassName: '',
-  showErrors: false,
 };
 
 export default Row;
