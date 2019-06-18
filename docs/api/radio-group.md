@@ -1,32 +1,23 @@
 # RadioGroup
 
 ## Props
-| Name                                | Type    | Default   | Required | Description |
-| ----------------------------------- | ------- | --------- | -------- | ----------- |
-| [options](#markdown-header-options) | arrayOf | []        | false    |             |
-| [type](#markdown-header-type)       | enum    | 'stacked' | false    |             |
-
-## Complex Props
-
-### options
-Type: _arrayOf_
-
-**options** is an array of the following type:
-
-| Name     | Type   | Required |
-| -------- | ------ | -------- |
-| disabled | bool   | false    |
-| value    | string | false    |
-| label    | node   | false    |
-
---------------------------------------------------------------------------------
-
-### type
-Type: _enum_
-
-**type** should be one of the following values:
-
-| Value   | Type   |
-| ------- | ------ |
-| inline  | String |
-| stacked | String |
+| Name                    | Type                                                      | Default | Required | Description |
+| ----------------------- | --------------------------------------------------------- | ------- | -------- | ----------- |
+| options                 | { disabled: boolean; value: string; label: ReactNode; }[] |         | true     |             |
+| required                | boolean                                                   | false   | true     |             |
+| value                   | string                                                    |         | true     |             |
+| type                    | "stacked" | "inline"                                      | stacked | true     |             |
+| id                      | string                                                    |         | true     |             |
+| rowClassName            | ClassValue                                                |         | true     |             |
+| labelClassName          | ClassValue                                                |         | true     |             |
+| elementWrapperClassName | ClassValue                                                |         | true     |             |
+| name                    | string                                                    |         | true     |             |
+| changeCallback          | (name: string, value: any) => void                        |         | true     |             |
+| onSetValue              | (value: any) => void                                      |         | true     |             |
+| isPristine              | () => boolean                                             |         | true     |             |
+| errorMessages           | ReactNode[]                                               |         | true     |             |
+| help                    | string                                                    |         | true     |             |
+| label                   | ReactNode                                                 |         | true     |             |
+| layout                  | LayoutType                                                |         | true     |             |
+| showErrors              | boolean                                                   | false   | true     |             |
+| disabled                | boolean                                                   | false   | false    |             |

@@ -1,38 +1,22 @@
 # Form
 
 ## Props
-| Name                                     | Type  | Default      | Required | Description |
-| ---------------------------------------- | ----- | ------------ | -------- | ----------- |
-| children                                 | node  |              | true     |             |
-| [layout](#markdown-header-layout)        | enum  | 'horizontal' | false    |             |
-| [className](#markdown-header-class-name) | Union | ''           | false    |             |
-
-## Complex Props
-
-### layout
-Type: _enum_
-
-**layout** should be one of the following values:
-
-| Value       | Type   |
-| ----------- | ------ |
-| horizontal  | String |
-| vertical    | String |
-| elementOnly | String |
-
---------------------------------------------------------------------------------
-
-### className
-Type: _Union_
-
-#### string
-string
-
-
-#### array
-array
-
-
-#### object
-object
-
+| Name                        | Type                                      | Default         | Required | Description |
+| --------------------------- | ----------------------------------------- | --------------- | -------- | ----------- |
+| layout                      | "horizontal" | "vertical" | "elementOnly" | horizontal      | true     |             |
+| className                   | ClassValue                                | [object Object] | true     |             |
+| validateBeforeSubmit        | boolean                                   | true            | true     |             |
+| validatePristine            | boolean                                   | false           | true     |             |
+| elementWrapperClassName     | ClassValue                                | [object Object] | true     |             |
+| labelClassName              | ClassValue                                | [object Object] | true     |             |
+| rowClassName                | ClassValue                                | [object Object] | true     |             |
+| disabled                    | boolean                                   | false           | true     |             |
+| mapping                     | Function                                  |                 | false    |             |
+| validationErrors            | Function                                  |                 | false    |             |
+| onSubmit                    | Function                                  |                 | false    |             |
+| onValid                     | Function                                  |                 | false    |             |
+| onInvalid                   | Function                                  |                 | false    |             |
+| onValidSubmit               | Function                                  |                 | false    |             |
+| onInvalidSubmit             | Function                                  |                 | false    |             |
+| onChange                    | Function                                  |                 | false    |             |
+| preventExternalInvalidation | boolean                                   | false           | false    |             |
