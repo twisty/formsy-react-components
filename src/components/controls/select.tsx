@@ -1,4 +1,5 @@
 import * as React from 'react';
+import classNames from 'classnames/dedupe';
 import {CommonProps} from './common-prop-types';
 
 type ControlProps = React.SelectHTMLAttributes<HTMLSelectElement>;
@@ -76,21 +77,22 @@ class SelectControl extends React.Component<Props, {}> {
           this.renderOption(item, `${groupIndex}-${index}`),
         );
 
-        /* eslint-disable react/no-array-index-key */
         optionNodes.push(
           <optgroup label={group} key={groupIndex}>
             {groupOptionNodes}
           </optgroup>,
         );
-        /* eslint-enable */
       });
     }
 
-    const selectProps = {...this.props};
+    const {className, ...selectProps} = this.props;
     delete selectProps.options;
 
     return (
-      <select className="form-control" {...selectProps} ref={this.element}>
+      <select
+        {...selectProps}
+        className={classNames(['form-control', className])}
+        ref={this.element}>
         {optionNodes}
       </select>
     );

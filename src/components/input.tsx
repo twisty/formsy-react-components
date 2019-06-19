@@ -23,12 +23,10 @@ const defaultProps = {
   blurCallback: (): void => {},
   keyDownCallback: (): void => {},
   required: false,
+  className: '',
 };
 
-type InputControlPropsCleaned = Omit<
-  InputControlProps,
-  'id' | 'name' | 'className'
->;
+type InputControlPropsCleaned = Omit<InputControlProps, 'id' | 'name'>;
 
 type SupportedInputTypes =
   | 'color'
@@ -159,8 +157,8 @@ class Input extends React.Component<Props, State> {
     delete inputProps.value;
     delete inputProps.keyDownCallback;
     delete inputProps.blurCallback;
+    delete inputProps.className;
 
-    const {value} = this.state;
     const {
       addonAfter,
       addonBefore,
@@ -173,7 +171,10 @@ class Input extends React.Component<Props, State> {
       layout,
       showErrors,
       type,
+      className,
     } = this.props;
+
+    const {value} = this.state;
 
     const markAsInvalid = showErrors && (errorMessages.length > 0 || required);
 
@@ -181,7 +182,7 @@ class Input extends React.Component<Props, State> {
       <InputControl
         {...inputProps}
         value={value}
-        className={markAsInvalid ? 'is-invalid' : ''}
+        className={markAsInvalid ? `is-invalid ${className}` : className}
         onChange={this.handleChange}
         onBlur={this.handleBlur}
         onKeyDown={this.handleKeyDown}

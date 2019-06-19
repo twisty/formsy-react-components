@@ -276,6 +276,15 @@ const Playground: React.FunctionComponent<Props> = ({
           elementWrapperClassName={[{'col-sm-9': false}, 'col-sm-7']}
           help="The label and element-wrapper classes can be changed."
         />
+        <Input
+          name="cssInputTweaks"
+          value=""
+          label="Form control"
+          type="text"
+          className="border border-primary"
+          placeholder="‘border border-primary’ is set on this input control."
+          help="The className prop is passed through to the form control."
+        />
       </fieldset>
       <fieldset>
         {legend('Disabled')}

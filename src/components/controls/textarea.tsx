@@ -1,18 +1,17 @@
 import * as React from 'react';
+import classNames from 'classnames/dedupe';
 import {CommonProps} from './common-prop-types';
 
 type ControlProps = React.TextareaHTMLAttributes<HTMLTextAreaElement>;
 type ControlPropsCleaned = Omit<ControlProps, 'id' | 'name'>;
 
 interface TextareaControlProps extends CommonProps, ControlPropsCleaned {
-  className: string;
   cols: number;
   rows: number;
   value: string;
 }
 
 const defaultProps = {
-  className: 'form-control',
   cols: 0, // React doesn't render the cols attribute if it is zero
   rows: 3,
   value: '',
@@ -29,7 +28,14 @@ class TextareaControl extends React.Component<TextareaControlProps, {}> {
   }
 
   public render() {
-    return <textarea {...this.props} ref={this.element} />;
+    const {className, ...inputProps} = this.props;
+    return (
+      <textarea
+        {...inputProps}
+        className={classNames(['form-control', className])}
+        ref={this.element}
+      />
+    );
   }
 }
 
