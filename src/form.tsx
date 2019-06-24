@@ -4,12 +4,17 @@ import Formsy from 'formsy-react';
 import FrcContext from './context/frc';
 import {ClassValue} from 'classnames/types';
 
+type FormPropsCleaned = Omit<
+  React.FormHTMLAttributes<HTMLFormElement>,
+  'className' | 'onChange' | 'onInvalid' | 'onSubmit'
+>;
+
 /**
  * Formsy props taken from:
  *
  * - https://github.com/formsy/formsy-react/blob/master/API.md#formsy
  */
-interface FormsyProps {
+interface FormsyProps extends FormPropsCleaned {
   mapping?: Function;
   validationErrors?: Function;
   onSubmit?: Function;
