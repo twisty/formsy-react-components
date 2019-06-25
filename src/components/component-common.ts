@@ -10,7 +10,7 @@ export interface ComponentPropTypes {
   name: string;
   changeCallback: (name: string, value) => void;
   onSetValue: (value) => void;
-  isPristine: () => boolean;
+  isPristine: boolean;
   errorMessages: React.ReactNode[];
   help: string;
   label: React.ReactNode;
@@ -45,5 +45,5 @@ export const componentDefaultProps = {
   rowClassName: '',
   labelClassName: '',
   elementWrapperClassName: '',
-  isPristine: (): boolean => true,
+  isPristine: true,
 };

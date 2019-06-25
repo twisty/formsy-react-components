@@ -118,7 +118,7 @@ class Input extends React.Component<Props, State> {
     this.setState({value});
     if (updateOnBlur) {
       this.changeDebounced.cancel();
-      if (isPristine()) {
+      if (isPristine) {
         // should update as we have just left a pristine input
         this.blurDebounced(value);
       } else if (propValue !== value) {
