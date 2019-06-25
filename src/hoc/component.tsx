@@ -6,13 +6,11 @@ import {ClassValue} from 'classnames/types';
 
 interface Props {
   // These are the props that we require from the formsy-react HOC.
-  getErrorMessages: Function;
-  getValue: Function;
-  isFormDisabled: Function;
-  isFormSubmitted: Function;
-  isPristine: Function;
-  isRequired: Function;
-  isValid: Function;
+  isFormDisabled: boolean;
+  isFormSubmitted: boolean;
+  isPristine: boolean;
+  isRequired: boolean;
+  isValid: boolean;
   setValue: Function;
   // End of formsy-react HOC props.
 
@@ -138,21 +136,21 @@ const FormsyReactComponent = (ComposedComponent): typeof React.Component => {
 
     // Determine whether to show errors, or not.
     private shouldShowErrors = (
-      validatePristine,
-      validateBeforeSubmit,
+      validatePristine: boolean,
+      validateBeforeSubmit: boolean,
     ): boolean => {
       const {isPristine, isFormSubmitted, isValid} = this.props;
-      if (isPristine() === true) {
+      if (isPristine === true) {
         if (validatePristine === false) {
           return false;
         }
       }
       if (validateBeforeSubmit === false) {
-        if (isFormSubmitted() === false) {
+        if (isFormSubmitted === false) {
           return false;
         }
       }
-      return isValid() === false;
+      return isValid === false;
     };
 
     // We pass through all unknown props, but delete some formsy HOC props
@@ -164,8 +162,6 @@ const FormsyReactComponent = (ComposedComponent): typeof React.Component => {
             const {
               componentRef,
               disabled,
-              getErrorMessages,
-              getValue,
               isFormDisabled,
               isPristine,
               isRequired,
@@ -219,27 +215,23 @@ const FormsyReactComponent = (ComposedComponent): typeof React.Component => {
               ],
               labelClassName: [contextLabelClassName, labelClassName],
               rowClassName: [contextRowClassName, rowClassName],
-              disabled: isFormDisabled() || disabled,
-              errorMessages: getErrorMessages(),
+              disabled: isFormDisabled || disabled,
               id: this.getId(),
               isPristine,
               layout: layout || contextLayout,
               ref: componentRef,
-              required: isRequired(),
+              required: isRequired,
               showErrors: this.shouldShowErrors(
                 validatePristine,
                 validateBeforeSubmit,
               ),
-              value: getValue(),
               onSetValue: setValue,
             };
 
             // Props that we don't need to pass to our composed components.
             const unusedPropNames = [
               // From formsy-react HOC...
-              'getErrorMessage',
-              'getErrorMessages',
-              'getValue',
+              'errorMessage',
               'hasValue',
               'isFormDisabled',
               'isFormSubmitted',

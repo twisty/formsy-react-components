@@ -2662,10 +2662,10 @@ form-data@~2.3.2:
     combined-stream "^1.0.6"
     mime-types "^2.1.12"
 
-formsy-react@^1.1.0:
-  version "1.1.5"
-  resolved "https://registry.yarnpkg.com/formsy-react/-/formsy-react-1.1.5.tgz#ee0911bb70712eb6fb9924d56fdb974a19006955"
-  integrity sha512-nNWe4Vbp6aDQ/zSxJ7gVQgD5+avFRVbydcjA2Om42flxpQFrKE54AAbuyEj3Jvv+2b9LVl+WLMAPalyvLjwNcQ==
+formsy-react@^2.0.0-beta.2:
+  version "2.0.0-beta.2"
+  resolved "https://registry.yarnpkg.com/formsy-react/-/formsy-react-2.0.0-beta.2.tgz#298a2691ba5d281da263ffcff7b58f8ba9de8ae9"
+  integrity sha512-UuUxLrwN4B7DMvy4vbUjKg/pelUpXN4+kZxG8JN6jS3JVmf9j+9NJJ3qTZH3AGP4sAgBZs458U4lxIJIQHifkg==
   dependencies:
     form-data-to-object "^0.2.0"
     prop-types "^15.5.10"
