@@ -78,7 +78,10 @@ class Form extends React.Component<Props, {}> {
 
     return (
       <FrcContext.Provider value={contextProps}>
-        <Formsy {...formsyProps} className={formClassNames} ref={this.formsyForm}>
+        <Formsy
+          {...formsyProps}
+          className={formClassNames}
+          ref={this.formsyForm}>
           {children}
         </Formsy>
       </FrcContext.Provider>
