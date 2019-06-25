@@ -39,7 +39,7 @@ export interface Props extends FormsyProps {
 }
 
 class Form extends React.Component<Props, {}> {
-  public formsyForm: React.RefObject<Formsy>;
+  public formsyForm = React.createRef<Formsy>();
 
   public static defaultProps = {
     layout: 'horizontal',
@@ -74,15 +74,11 @@ class Form extends React.Component<Props, {}> {
       validatePristine,
     };
 
-    const refCallback = (formsyForm): void => {
-      this.formsyForm = formsyForm;
-    };
-
     const formClassNames = classNames([`form-${layout}`, className]);
 
     return (
       <FrcContext.Provider value={contextProps}>
-        <Formsy {...formsyProps} className={formClassNames} ref={refCallback}>
+        <Formsy {...formsyProps} className={formClassNames} ref={this.formsyForm}>
           {children}
         </Formsy>
       </FrcContext.Provider>

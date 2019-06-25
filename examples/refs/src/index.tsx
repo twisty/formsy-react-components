@@ -18,6 +18,7 @@ import {
 /* eslint-enable */
 
 class App extends React.Component {
+  public frcFormRef = React.createRef<Form>();
   public inputRef;
   public fileRef;
   public radiosRef;
@@ -30,6 +31,10 @@ class App extends React.Component {
     this.inputRef.element.current.focus();
 
     /* eslint-disable no-console */
+    console.info(this.frcFormRef);
+    if (this.frcFormRef.current !== null) {
+      console.info(this.frcFormRef.current.formsyForm);
+    }
     console.info(this.inputRef.element);
     console.info(this.fileRef.element);
     console.info(this.radiosRef.elements);
@@ -60,7 +65,7 @@ class App extends React.Component {
           Check the browser console for the form control elements that are
           exposed as refs.
         </p>
-        <Form>
+        <Form ref={this.frcFormRef}>
           <Input
             label="Text"
             name="input"
