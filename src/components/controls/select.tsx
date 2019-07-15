@@ -14,33 +14,30 @@ interface SelectOption {
 interface Props extends CommonProps, ControlPropsCleaned {
   options: SelectOption[];
   multiple: boolean;
+  elementRef: React.RefObject<HTMLSelectElement>;
 }
 
 class SelectControl extends React.Component<Props, {}> {
-  public element: React.RefObject<HTMLSelectElement>;
-
   public static defaultProps = {
     multiple: false,
+    elementRef: React.createRef<HTMLSelectElement>(),
   };
 
   public constructor(props) {
     super(props);
-    this.element = React.createRef();
   }
 
-  private renderOption = (item, key: string) => {
-    const optionProps = Object.assign({}, item);
-    delete optionProps.label;
-    delete optionProps.group;
+  private renderOption = (item: SelectOption, key: string): JSX.Element => {
+    const {label, value} = item;
     const option = (
-      <option key={key} {...optionProps}>
-        {item.label}
+      <option key={key} value={value}>
+        {label}
       </option>
     );
     return option;
   };
 
-  public render() {
+  public render(): JSX.Element {
     const {options} = this.props;
 
     let groups = options
@@ -85,14 +82,14 @@ class SelectControl extends React.Component<Props, {}> {
       });
     }
 
-    const {className, ...selectProps} = this.props;
+    const {className, elementRef, ...selectProps} = this.props;
     delete selectProps.options;
 
     return (
       <select
         {...selectProps}
         className={classNames(['form-control', className])}
-        ref={this.element}>
+        ref={elementRef}>
         {optionNodes}
       </select>
     );

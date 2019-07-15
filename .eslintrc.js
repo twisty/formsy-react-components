@@ -1,5 +1,4 @@
 module.exports = {
-  parser: "@typescript-eslint/parser",
   extends: [
     "plugin:@typescript-eslint/recommended",
     "plugin:jsx-a11y/recommended",
@@ -47,6 +46,7 @@ module.exports = {
       }
     ]
   },
+  parser: "@typescript-eslint/parser",
   parserOptions: {
     ecmaVersion: 2018,
     sourceType: "module",
@@ -57,6 +57,10 @@ module.exports = {
   settings: {
     react: {
       version: "detect"
+    },
+    "import/resolver": {
+      // use <root>/tsconfig.json
+      typescript: {}
     }
   }
 };

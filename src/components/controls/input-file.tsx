@@ -4,26 +4,24 @@ import {CommonProps} from './common-prop-types';
 type ControlProps = React.InputHTMLAttributes<HTMLInputElement>;
 type ControlPropsCleaned = Omit<ControlProps, 'id' | 'name'>;
 
-interface Props extends CommonProps, ControlPropsCleaned {}
+interface FileControlProps extends CommonProps, ControlPropsCleaned {
+  elementRef: React.RefObject<HTMLInputElement>;
+}
 
 // A file control can only be set to an empty string.
 // I think we need to keep this as an uncontrolled component, so we override the
 // value.prop.
-class FileControl extends React.Component<Props, {}> {
-  public element: React.RefObject<HTMLInputElement>;
-
-  public constructor(props) {
-    super(props);
-    this.element = React.createRef();
-  }
-
-  public render() {
-    const {...props} = this.props;
+class FileControl extends React.Component<FileControlProps, {}> {
+  public static defaultProps = {
+    elementRef: React.createRef<HTMLInputElement>(),
+  };
+  public render(): React.ReactElement<HTMLInputElement> {
+    const {elementRef, ...props} = this.props;
     delete props.value;
 
-    return <input {...props} type="file" ref={this.element} />;
+    return <input {...props} type="file" ref={elementRef} />;
   }
 }
 
-export {Props};
+export {FileControlProps};
 export default FileControl;

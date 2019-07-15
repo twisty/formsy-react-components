@@ -2,13 +2,13 @@ import * as React from 'react';
 import ErrorMessages from './error-messages';
 import Help from './help';
 import Row from './row';
-import {ComponentPropTypes, componentDefaultProps} from './component-common';
+import {componentDefaultProps} from './component-common';
 
-interface Props extends ComponentPropTypes {
+type FormCheckGroupProps = typeof componentDefaultProps & {
   children: React.ReactElement;
-}
+};
 
-const FormCheckGroup: React.FunctionComponent<Props> = props => {
+const FormCheckGroup: React.FunctionComponent<FormCheckGroupProps> = props => {
   const {
     layout,
     help,

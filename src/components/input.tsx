@@ -1,34 +1,20 @@
 import * as React from 'react';
 import debounce from '../debounce';
-import {
-  ComponentPropTypes,
-  ComponentPropKeys,
-  componentDefaultProps,
-} from './component-common';
+import {componentDefaultProps} from './component-common';
 import ErrorMessages from './error-messages';
 import Help from './help';
-import InputControl, {Props as InputControlProps} from './controls/input';
-import InputGroup, {Props as InputGroupProps} from './input-group';
+import InputControl, {InputControlProps} from './controls/input';
+import InputGroup, {InputGroupProps} from './input-group';
 import Row from './row';
 
-const defaultProps = {
-  ...componentDefaultProps,
-  ...InputGroup.defaultProps,
-  type: 'text',
-  value: '',
-  updateOnBlur: true,
-  updateOnChange: true,
-  blurDebounceInterval: 0,
-  changeDebounceInterval: 500,
-  blurCallback: (): void => {},
-  keyDownCallback: (): void => {},
-  required: false,
-  className: '',
-};
+type InputControlPropsCleaned = Omit<
+  InputControlProps,
+  'required' | 'value' | 'className' | 'elementRef' | 'id' | 'name' | 'type'
+>;
 
-type InputControlPropsCleaned = Omit<InputControlProps, 'id' | 'name'>;
+type InputGroupPropsCleaned = Omit<InputGroupProps, 'children'>;
 
-type SupportedInputTypes =
+type SupportedInputType =
   | 'color'
   | 'date'
   | 'datetime'
@@ -46,31 +32,40 @@ type SupportedInputTypes =
   | 'url'
   | 'week';
 
-interface Props
-  extends ComponentPropTypes,
-    InputControlPropsCleaned,
-    InputGroupProps {
-  type: SupportedInputTypes;
-  value: string;
-  blurDebounceInterval: number;
-  changeDebounceInterval: number;
-  updateOnBlur: boolean;
-  updateOnChange: boolean;
-  required: boolean;
-  blurCallback: (name, value) => {};
-  keyDownCallback: (event) => {};
-}
+const defaultProps = {
+  ...componentDefaultProps,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  blurCallback: (name: string, value: string): void => {},
+  blurDebounceInterval: 0,
+  changeDebounceInterval: 500,
+  className: '',
+  elementRef: React.createRef<HTMLInputElement>(),
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  keyDownCallback: (event: React.KeyboardEvent<HTMLInputElement>): void => {},
+  required: false,
+  type: 'text' as SupportedInputType,
+  updateOnBlur: true,
+  updateOnChange: true,
+  value: '',
+};
+
+type InputProps = InputControlPropsCleaned &
+  InputGroupPropsCleaned &
+  typeof componentDefaultProps &
+  InputGroupProps &
+  typeof defaultProps & {
+    name: string;
+  };
 
 interface State {
   value: string;
 }
 
-class Input extends React.Component<Props, State> {
-  private element;
-  private changeDebounced;
-  private blurDebounced;
-
+class Input extends React.Component<InputProps, State> {
   public static defaultProps = defaultProps;
+
+  public changeDebounced;
+  public blurDebounced;
 
   public constructor(props) {
     super(props);
@@ -80,7 +75,7 @@ class Input extends React.Component<Props, State> {
       changeDebounceInterval,
       blurDebounceInterval,
     } = props;
-    this.state = {value: value};
+    this.state = {value};
     this.changeDebounced = debounce(onSetValue, changeDebounceInterval);
     this.blurDebounced = debounce(onSetValue, blurDebounceInterval);
   }
@@ -96,97 +91,88 @@ class Input extends React.Component<Props, State> {
     }
   };
 
-  private handleChange = (event): void => {
-    const {value} = event.currentTarget;
-    const {updateOnChange, changeCallback, name} = this.props;
-    this.setState({value});
-    if (updateOnChange) {
-      this.changeDebounced(value);
-    }
-    changeCallback(name, value);
-  };
-
-  private handleBlur = (event): void => {
-    const {value} = event.currentTarget;
+  public render(): JSX.Element {
     const {
-      updateOnBlur,
-      isPristine,
-      blurCallback,
-      name,
-      value: propValue,
-    } = this.props;
-    this.setState({value});
-    if (updateOnBlur) {
-      this.changeDebounced.cancel();
-      if (isPristine) {
-        // should update as we have just left a pristine input
-        this.blurDebounced(value);
-      } else if (propValue !== value) {
-        // should update because the value has changed
-        this.blurDebounced(value);
-      }
-    }
-    blurCallback(name, value);
-  };
-
-  private handleKeyDown = (event): void => {
-    const {keyDownCallback} = this.props;
-    if (event.key === 'Enter') {
-      this.changeDebounced.flush();
-    }
-    keyDownCallback(event);
-  };
-
-  private initElementRef = (control): void => {
-    this.element = control ? control.element : null;
-  };
-
-  public render() {
-    const inputProps = {...this.props};
-    ComponentPropKeys.forEach((key): void => {
-      delete inputProps[key];
-    });
-    delete inputProps.addonAfter;
-    delete inputProps.addonBefore;
-    delete inputProps.buttonAfter;
-    delete inputProps.buttonBefore;
-    delete inputProps.blurDebounceInterval;
-    delete inputProps.changeDebounceInterval;
-    delete inputProps.updateOnBlur;
-    delete inputProps.updateOnChange;
-    delete inputProps.value;
-    delete inputProps.keyDownCallback;
-    delete inputProps.blurCallback;
-    delete inputProps.className;
-
-    const {
+      /* eslint-disable @typescript-eslint/no-unused-vars */
+      blurDebounceInterval,
+      changeDebounceInterval,
+      onSetValue,
+      /* eslint-enable @typescript-eslint/no-unused-vars */
       addonAfter,
       addonBefore,
+      blurCallback,
       buttonAfter,
       buttonBefore,
+      changeCallback,
+      className,
+      elementRef,
+      elementWrapperClassName,
       errorMessages,
-      required,
       help,
       id,
+      isPristine,
+      keyDownCallback,
+      label,
+      labelClassName,
       layout,
+      name,
+      required,
+      rowClassName,
       showErrors,
       type,
-      className,
+      updateOnBlur,
+      updateOnChange,
+      value: propValue,
+      ...passthoughProps
     } = this.props;
 
-    const {value} = this.state;
+    const handleChange = (event): void => {
+      const {value} = event.currentTarget;
+      this.setState({value: value});
+      if (updateOnChange) {
+        this.changeDebounced(value);
+      }
+      changeCallback(name, value);
+    };
+
+    const handleBlur = (event): void => {
+      const {value} = event.currentTarget;
+      this.setState({value: value});
+      if (updateOnBlur) {
+        this.changeDebounced.cancel();
+        if (isPristine) {
+          // should update as we have just left a pristine input
+          this.blurDebounced(value);
+        } else if (propValue !== value) {
+          // should update because the value has changed
+          this.blurDebounced(value);
+        }
+      }
+      blurCallback(name, value);
+    };
+
+    const handleKeyDown = (
+      event: React.KeyboardEvent<HTMLInputElement>,
+    ): void => {
+      if (event.key === 'Enter') {
+        this.changeDebounced.flush();
+      }
+      keyDownCallback(event);
+    };
 
     const markAsInvalid = showErrors && (errorMessages.length > 0 || required);
 
     let control = (
       <InputControl
-        {...inputProps}
-        value={value}
+        {...passthoughProps}
         className={markAsInvalid ? `is-invalid ${className}` : className}
-        onChange={this.handleChange}
-        onBlur={this.handleBlur}
-        onKeyDown={this.handleKeyDown}
-        ref={this.initElementRef}
+        id={id}
+        onBlur={handleBlur}
+        onChange={handleChange}
+        onKeyDown={handleKeyDown}
+        elementRef={elementRef}
+        type={type}
+        value={this.state.value}
       />
     );
 
@@ -194,8 +180,27 @@ class Input extends React.Component<Props, State> {
       return control;
     }
 
+    const inputGroupProps = {
+      addonAfter,
+      addonBefore,
+      buttonAfter,
+      buttonBefore,
+    };
+
+    const rowProps = {
+      elementWrapperClassName,
+      labelClassName,
+      rowClassName,
+      label,
+      errorMessages,
+      htmlFor: id,
+      layout,
+      required,
+      showErrors,
+    };
+
     if (addonBefore || addonAfter || buttonBefore || buttonAfter) {
-      control = <InputGroup {...this.props}>{control}</InputGroup>;
+      control = <InputGroup {...inputGroupProps}>{control}</InputGroup>;
     }
 
     if (layout === 'elementOnly') {
@@ -203,7 +208,7 @@ class Input extends React.Component<Props, State> {
     }
 
     return (
-      <Row {...this.props} htmlFor={id}>
+      <Row {...rowProps}>
         <>
           {control}
           {help ? <Help help={help} /> : null}
@@ -214,4 +219,4 @@ class Input extends React.Component<Props, State> {
   }
 }
 
-export default Input;
+export default Input; // as React.ComponentClass<InputProps>;

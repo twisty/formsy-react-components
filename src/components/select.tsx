@@ -1,9 +1,5 @@
 import * as React from 'react';
-import {
-  ComponentPropTypes,
-  ComponentPropKeys,
-  componentDefaultProps,
-} from './component-common';
+import {componentDefaultProps} from './component-common';
 import ErrorMessages from './error-messages';
 import Help from './help';
 import Row from './row';
@@ -15,19 +11,22 @@ interface SelectOption {
   group?: string;
 }
 
-interface Props extends ComponentPropTypes, SelectControlProps {
-  multiple: boolean;
-  options: SelectOption[];
-}
+const defaultProps = {
+  ...componentDefaultProps,
+  options: [] as SelectOption[],
+  multiple: false,
+  elementRef: React.createRef<HTMLSelectElement>(),
+};
 
-class Select extends React.Component<Props, {}> {
-  public element;
+type SelectProps = SelectControlProps & typeof defaultProps;
 
-  public static defaultProps = {
-    ...componentDefaultProps,
-    options: [],
-    multiple: false,
-  };
+class Select extends React.Component<SelectProps, {}> {
+  public static defaultProps = defaultProps;
+
+  // Need to supply a constructor to be recognised as ComponentClass?
+  public constructor(props) {
+    super(props);
+  }
 
   private handleChange = (event: React.FormEvent<HTMLSelectElement>): void => {
     const target = event.currentTarget;
@@ -44,25 +43,29 @@ class Select extends React.Component<Props, {}> {
     changeCallback(name, value);
   };
 
-  private initElementRef = (control): void => {
-    this.element = control ? control.element : null;
-  };
-
-  public render() {
-    const inputProps = Object.assign({}, this.props);
-    ComponentPropKeys.forEach((key): void => {
+  public render(): JSX.Element {
+    const {
+      errorMessages,
+      help,
+      id,
+      layout,
+      name,
+      showErrors,
+      ...inputProps
+    } = this.props;
+    Object.keys(componentDefaultProps).forEach((key): void => {
       delete inputProps[key];
     });
 
     const control = (
       <SelectControl
         {...inputProps}
+        elementRef={this.props.elementRef}
+        id={id}
+        name={name}
         onChange={this.handleChange}
-        ref={this.initElementRef}
       />
     );
-
-    const {layout, id, help, showErrors, errorMessages} = this.props;
 
     if (layout === 'elementOnly') {
       return control;
@@ -80,4 +83,5 @@ class Select extends React.Component<Props, {}> {
   }
 }
 
+export {SelectProps};
 export default Select;

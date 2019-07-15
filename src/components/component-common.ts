@@ -1,49 +1,18 @@
-import {ClassValue} from 'classnames/types';
-
-type LayoutType = 'horizontal' | 'vertical' | 'elementOnly';
-
-export interface ComponentPropTypes {
-  id: string;
-  rowClassName: ClassValue;
-  labelClassName: ClassValue;
-  elementWrapperClassName: ClassValue;
-  name: string;
-  changeCallback: (name: string, value) => void;
-  onSetValue: (value) => void;
-  isPristine: boolean;
-  errorMessages: React.ReactNode[];
-  help: string;
-  label: React.ReactNode;
-  layout: LayoutType;
-  showErrors: boolean;
-}
-
-export const ComponentPropKeys = [
-  'rowClassName',
-  'labelClassName',
-  'elementWrapperClassName',
-  'changeCallback',
-  'onSetValue',
-  'isPristine',
-  'errorMessages',
-  'help',
-  'label',
-  'layout',
-  'showErrors',
-];
+import {LayoutType, ComponentValue, ClassValue} from '../types';
 
 export const componentDefaultProps = {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  changeCallback: (name: string, value): void => {},
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  onSetValue: (value): void => {},
-  errorMessages: [],
+  changeCallback: (name: string, value: ComponentValue): void => {},
+  elementWrapperClassName: '' as ClassValue,
+  errorMessages: [] as React.ReactNode[],
   help: '',
-  label: null,
-  layout: 'horizontal' as LayoutType,
-  showErrors: true,
-  rowClassName: '',
-  labelClassName: '',
-  elementWrapperClassName: '',
+  id: '',
   isPristine: true,
+  label: null as React.ReactNode,
+  labelClassName: '' as ClassValue,
+  layout: 'horizontal' as LayoutType,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  onSetValue: (value: ComponentValue): void => {},
+  rowClassName: '' as ClassValue,
+  showErrors: true,
 };

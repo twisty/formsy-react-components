@@ -1,33 +1,38 @@
 import * as React from 'react';
-import {ComponentPropTypes, componentDefaultProps} from './component-common';
+import {componentDefaultProps} from './component-common';
 import {CommonProps as ControlCommonProps} from './controls/common-prop-types';
 import FormCheckGroup from './form-check-group';
 
 type ControlCommonPropsCleaned = Omit<ControlCommonProps, 'id' | 'name'>;
 
-interface Props extends ComponentPropTypes, ControlCommonPropsCleaned {
-  options: {
-    disabled: boolean;
-    value: string;
-    label: React.ReactNode;
-  }[];
-  required: boolean;
+type RadioLayoutType = 'inline' | 'stacked';
+
+interface Option {
+  disabled?: boolean;
+  label: React.ReactNode;
   value: string;
-  type: 'inline' | 'stacked';
 }
 
-class RadioGroup extends React.Component<Props, {}> {
-  public elements;
+const defaultProps = {
+  ...componentDefaultProps,
+  options: [] as Option[],
+  required: false,
+  type: 'stacked' as RadioLayoutType,
+  value: '',
+};
 
-  public static defaultProps = {
-    ...componentDefaultProps,
-    type: 'stacked',
-    options: [],
+type RadioGroupProps = ControlCommonPropsCleaned &
+  typeof defaultProps & {
+    name: string;
   };
+
+class RadioGroup extends React.Component<RadioGroupProps, {}> {
+  public elements = {};
+
+  public static defaultProps = defaultProps;
 
   public constructor(props) {
     super(props);
-    this.elements = {};
   }
 
   private handleChange = (event): void => {
@@ -37,11 +42,12 @@ class RadioGroup extends React.Component<Props, {}> {
     changeCallback(name, value);
   };
 
-  private renderElement = () => {
+  private renderElement = (): JSX.Element[] => {
     const {
       disabled,
       errorMessages,
       id,
+      name,
       options,
       required,
       showErrors,
@@ -63,19 +69,19 @@ class RadioGroup extends React.Component<Props, {}> {
       const checked = value === radio.value;
       const isDisabled = radio.disabled || disabled;
       const inputId = `${id}--${radio.value}`;
+      const ref = React.createRef<HTMLInputElement>();
+      this.elements[radio.value] = ref;
       return (
         <div className={className} key={radio.value}>
           <input
-            ref={input => {
-              this.elements[radio.value] = input;
-            }}
+            ref={ref}
             checked={checked}
             type="radio"
             value={radio.value}
             onChange={this.handleChange}
             disabled={isDisabled}
             className={inputClassName}
-            name={id}
+            name={name}
             id={inputId}
             required={required}
           />
@@ -88,7 +94,7 @@ class RadioGroup extends React.Component<Props, {}> {
     return controls;
   };
 
-  public render() {
+  public render(): JSX.Element {
     return (
       <FormCheckGroup {...this.props}>
         <>{this.renderElement()}</>

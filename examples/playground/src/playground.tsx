@@ -29,12 +29,16 @@ const Playground: React.FunctionComponent<Props> = ({
   validateBeforeSubmitChoice,
   validatePristineChoice,
 }) => {
-  let myform;
+  const formRef = React.createRef<Form>();
 
   const resetForm = (): void => {
     console.log('Reset called'); // eslint-disable-line no-console
-    const {formsyForm} = myform;
-    formsyForm.reset();
+    if (formRef.current !== null) {
+      const {formsyForm} = formRef.current;
+      if (formsyForm.current !== null) {
+        formsyForm.current.reset();
+      }
+    }
   };
 
   const submitForm = (data): void => {
@@ -80,10 +84,6 @@ const Playground: React.FunctionComponent<Props> = ({
     ...selectOptions,
   ];
 
-  const refCallback = (form): void => {
-    myform = form;
-  };
-
   const legend = (str: string): JSX.Element => (
     <legend className="pb-2 mt-4 mb-3 border-bottom">{str}</legend>
   );
@@ -96,7 +96,7 @@ const Playground: React.FunctionComponent<Props> = ({
       validateBeforeSubmit={validateBeforeSubmitChoice}
       validatePristine={validatePristineChoice}
       disabled={disabledChoice}
-      ref={refCallback}>
+      ref={formRef}>
       <fieldset>
         {legend('Input types')}
         <Input name="secret" value="I'm hidden!" type="hidden" />
@@ -224,7 +224,7 @@ const Playground: React.FunctionComponent<Props> = ({
           options={radioOptions}
         />
         <CheckboxGroup
-          name="checkboxGrp1"
+          name="checkboxGrp2"
           type="inline"
           label="Checkbox group (inline)"
           options={radioOptions}

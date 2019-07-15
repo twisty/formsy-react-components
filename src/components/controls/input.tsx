@@ -1,26 +1,21 @@
-import * as React from 'react';
+import React from 'react';
 import classNames from 'classnames/dedupe';
-import {ClassValue} from 'classnames/types';
+import {ClassValue} from '../../types';
 
 const defaultProps = {
-  className: '',
+  className: '' as ClassValue,
   type: 'text',
+  elementRef: React.createRef<HTMLInputElement>(),
 };
 
-type Props = React.InputHTMLAttributes<HTMLInputElement> & typeof defaultProps;
+type InputControlProps = React.InputHTMLAttributes<HTMLInputElement> &
+  typeof defaultProps;
 
-class InputControl extends React.Component<Props, {}> {
-  public element: React.RefObject<HTMLInputElement>;
-
+class InputControl extends React.Component<InputControlProps, {}> {
   public static defaultProps = defaultProps;
 
-  public constructor(props) {
-    super(props);
-    this.element = React.createRef();
-  }
-
-  public render() {
-    const {className, type} = this.props;
+  public render(): JSX.Element {
+    const {className, type, elementRef, ...passthroughProps} = this.props;
     const inputClassNames: ClassValue[] = ['form-control', className];
     if (['hidden', 'range'].indexOf(type) !== -1) {
       inputClassNames.push({'form-control': false});
@@ -30,13 +25,14 @@ class InputControl extends React.Component<Props, {}> {
     }
     return (
       <input
-        {...this.props}
+        {...passthroughProps}
         className={classNames(inputClassNames)}
-        ref={this.element}
+        ref={elementRef}
+        type={type}
       />
     );
   }
 }
 
-export {Props};
+export {InputControlProps};
 export default InputControl;

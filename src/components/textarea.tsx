@@ -1,10 +1,6 @@
 import * as React from 'react';
 import debounce, {DebouncedFunction} from '../debounce';
-import {
-  ComponentPropTypes,
-  ComponentPropKeys,
-  componentDefaultProps,
-} from './component-common';
+import {componentDefaultProps} from './component-common';
 import ErrorMessages from './error-messages';
 import Help from './help';
 import Row from './row';
@@ -17,23 +13,23 @@ const defaultProps = {
   updateOnChange: true,
   blurDebounceInterval: 0,
   changeDebounceInterval: 500,
+  cols: 0,
+  rows: 3,
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  blurCallback: (name, value) => {},
+  blurCallback: (name: string, value: string): void => {},
 };
 
-type Props = ComponentPropTypes & TextareaControlProps & typeof defaultProps;
+type TextareaProps = TextareaControlProps & typeof defaultProps;
 
 interface State {
   value: string;
 }
 
-class Textarea extends React.Component<Props, State> {
-  public element;
+class Textarea extends React.Component<TextareaProps, State> {
+  public static defaultProps = defaultProps;
 
   private changeDebounced: DebouncedFunction;
   private blurDebounced: DebouncedFunction;
-
-  public static defaultProps = defaultProps;
 
   public constructor(props) {
     super(props);
@@ -79,13 +75,9 @@ class Textarea extends React.Component<Props, State> {
     blurCallback(name, value);
   };
 
-  private initElementRef = (control): void => {
-    this.element = control ? control.element : null;
-  };
-
-  public render() {
+  public render(): JSX.Element {
     const {...inputProps} = this.props;
-    ComponentPropKeys.forEach((key): void => {
+    Object.keys(componentDefaultProps).forEach((key): void => {
       delete inputProps[key];
     });
     delete inputProps.blurDebounceInterval;
@@ -95,15 +87,25 @@ class Textarea extends React.Component<Props, State> {
     delete inputProps.blurCallback;
 
     const {value} = this.state;
-    const {layout, id, help, showErrors, errorMessages} = this.props;
+    const {
+      elementRef,
+      errorMessages,
+      help,
+      id,
+      layout,
+      name,
+      showErrors,
+    } = this.props;
 
     const element = (
       <TextareaControl
         {...inputProps}
+        id={id}
         value={value}
+        name={name}
         onChange={this.handleChange}
         onBlur={this.handleBlur}
-        ref={this.initElementRef}
+        elementRef={elementRef}
       />
     );
 

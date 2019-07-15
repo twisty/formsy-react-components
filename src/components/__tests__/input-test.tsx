@@ -1,11 +1,12 @@
 /* globals jest, describe, it, expect, beforeEach */
 
-import * as React from 'react';
+import React from 'react';
 import {mount} from 'enzyme';
+
 import Input from '../input';
 import componentTest from './component';
 
-const changeValue = (inputNode, value) => {
+const changeValue = (inputNode, value: string): void => {
   const inputDOMNode = inputNode.getDOMNode();
   inputDOMNode.value = value;
   inputNode.simulate('change');

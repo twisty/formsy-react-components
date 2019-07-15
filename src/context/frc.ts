@@ -1,23 +1,13 @@
 import {createContext} from 'react';
+import {ClassValue, LayoutType} from '../types';
 
-import {ClassValue} from 'classnames/types';
-
-export interface FrcContextType {
-  layout: 'horizontal' | 'vertical' | 'elementOnly';
-  validateBeforeSubmit: boolean;
-  validatePristine: boolean;
-  elementWrapperClassName: ClassValue;
-  labelClassName: ClassValue;
-  rowClassName: ClassValue;
-}
-
-const defaultContextValue: FrcContextType = {
-  layout: 'horizontal',
+const defaultContextValue = {
+  elementWrapperClassName: '' as ClassValue,
+  labelClassName: '' as ClassValue,
+  layout: 'horizontal' as LayoutType,
+  rowClassName: '' as ClassValue,
   validateBeforeSubmit: true,
   validatePristine: false,
-  elementWrapperClassName: '',
-  labelClassName: '',
-  rowClassName: '',
 };
 
 const FrcContext = createContext(defaultContextValue);

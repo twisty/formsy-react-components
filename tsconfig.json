@@ -4,8 +4,9 @@
     "sourceMap": true,
     "strictNullChecks": true,
     "module": "es6",
-    "jsx": "react",
     "target": "es5",
+    "esModuleInterop": true,
+    "jsx": "react",
     "declaration": true,
     "moduleResolution": "node",
     "baseUrl": ".",
@@ -14,5 +15,5 @@
     }
   },
   "exclude": ["node_modules"],
-  "include": ["./src/"]
+  "include": ["./src/", "./examples/"]
 }

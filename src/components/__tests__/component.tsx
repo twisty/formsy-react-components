@@ -3,7 +3,7 @@
 import * as React from 'react';
 import {mount} from 'enzyme';
 
-const componentTest = Component =>
+const componentTest = (Component): void =>
   describe('acts like a formsy-react-component', () => {
     //it('warns when no `id` prop is provided', () => {
     //  /* eslint-disable no-console */

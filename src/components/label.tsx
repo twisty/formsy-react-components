@@ -1,14 +1,14 @@
 import * as React from 'react';
 import classNames from 'classnames/dedupe';
 import RequiredSymbol from './required-symbol';
-import {ClassValue} from 'classnames/types';
+import {ClassValue, LayoutType} from '../types';
 
 interface Props {
   fakeLabel: boolean;
   htmlFor: string;
   label: React.ReactNode;
   labelClassName: ClassValue;
-  layout: 'horizontal' | 'vertical' | 'elementOnly';
+  layout: LayoutType;
   required: boolean;
 }
 

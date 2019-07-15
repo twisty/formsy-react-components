@@ -1,34 +1,39 @@
 import * as React from 'react';
-import {ComponentPropTypes, componentDefaultProps} from './component-common';
+import {componentDefaultProps} from './component-common';
 import {CommonProps} from './controls/common-prop-types';
 import FormCheckGroup from './form-check-group';
 
 type CommonPropsCleaned = Omit<CommonProps, 'id' | 'name'>;
 
-interface Props extends ComponentPropTypes, CommonPropsCleaned {
-  options: {
-    disabled: boolean;
-    value: string;
-    label: string;
-    key: string;
-  }[];
-  required: boolean;
-  value: string[];
-  type: 'inline' | 'stacked';
+interface Option {
+  disabled?: boolean;
+  value: string;
+  label: string;
 }
 
-class CheckboxGroup extends React.Component<Props, {}> {
-  public elements;
+type CheckboxLayout = 'inline' | 'stacked';
 
-  public static defaultProps = {
-    ...componentDefaultProps,
-    options: [],
-    value: [],
+const defaultProps = {
+  ...componentDefaultProps,
+  options: [] as Option[],
+  value: [] as string[],
+  type: 'stacked' as CheckboxLayout,
+  required: false,
+};
+
+type CheckboxGroupProps = typeof defaultProps &
+  CommonPropsCleaned & {
+    name: string;
   };
 
+class CheckboxGroup extends React.Component<CheckboxGroupProps, {}> {
+  public static defaultProps = defaultProps;
+
+  public elements = {};
+
+  // Constructor must be present to determine type of component?
   public constructor(props) {
     super(props);
-    this.elements = {};
   }
 
   // Returns an array of the values of all checked items.
@@ -42,7 +47,7 @@ class CheckboxGroup extends React.Component<Props, {}> {
     changeCallback(name, value);
   };
 
-  private renderElement = () => {
+  private renderElement = (): JSX.Element[] => {
     const {
       disabled,
       errorMessages,
@@ -51,6 +56,7 @@ class CheckboxGroup extends React.Component<Props, {}> {
       required,
       showErrors,
       type,
+      name,
       value,
     } = this.props;
 
@@ -80,6 +86,7 @@ class CheckboxGroup extends React.Component<Props, {}> {
             value={checkbox.value}
             onChange={this.handleChange}
             disabled={isDisabled}
+            name={name}
             id={inputId}
             required={required}
           />
@@ -92,7 +99,7 @@ class CheckboxGroup extends React.Component<Props, {}> {
     return controls;
   };
 
-  public render() {
+  public render(): JSX.Element {
     return (
       <FormCheckGroup {...this.props}>
         <>{this.renderElement()}</>

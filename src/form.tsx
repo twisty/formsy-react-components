@@ -1,58 +1,41 @@
 import * as React from 'react';
 import classNames from 'classnames/dedupe';
-import Formsy from 'formsy-react';
+import Formsy, {FormsyProps} from 'formsy-react';
+import {ClassValue, LayoutType} from './types';
 import FrcContext from './context/frc';
-import {ClassValue} from 'classnames/types';
 
 type FormPropsCleaned = Omit<
   React.FormHTMLAttributes<HTMLFormElement>,
-  'className' | 'onChange' | 'onInvalid' | 'onSubmit'
+  'className' | 'onChange' | 'onInvalid' | 'onSubmit' | 'onError' | 'onReset'
 >;
 
-/**
- * Formsy props taken from:
- *
- * - https://github.com/formsy/formsy-react/blob/master/API.md#formsy
- */
-interface FormsyProps extends FormPropsCleaned {
-  mapping?: Function;
-  validationErrors?: Function;
-  onSubmit?: Function;
-  onValid?: Function;
-  onInvalid?: Function;
-  onValidSubmit?: Function;
-  onInvalidSubmit?: Function;
-  onChange?: Function;
-  preventExternalInvalidation?: boolean;
-}
+type FormsyPropsCleaned = Omit<FormsyProps, 'className'>;
 
-export interface Props extends FormsyProps {
-  children: React.ReactNode;
-  layout: 'horizontal' | 'vertical' | 'elementOnly';
-  className: ClassValue;
-  validateBeforeSubmit: boolean;
-  validatePristine: boolean;
-  elementWrapperClassName: ClassValue;
-  labelClassName: ClassValue;
-  rowClassName: ClassValue;
-  disabled: boolean;
-}
+const formDefaultProps = {
+  layout: 'horizontal' as LayoutType,
+  className: '' as ClassValue,
+  elementWrapperClassName: '' as ClassValue,
+  labelClassName: '' as ClassValue,
+  rowClassName: '' as ClassValue,
+  validateBeforeSubmit: true,
+  validatePristine: false,
+  disabled: false,
+};
 
-class Form extends React.Component<Props, {}> {
+type DefaultProps = typeof formDefaultProps;
+
+type FormProps = FormPropsCleaned & Partial<FormsyPropsCleaned> & DefaultProps;
+
+class Form extends React.Component<FormProps, {}> {
+  public static defaultProps = formDefaultProps;
+
   public formsyForm = React.createRef<Formsy>();
 
-  public static defaultProps = {
-    layout: 'horizontal',
-    className: '',
-    elementWrapperClassName: '',
-    labelClassName: '',
-    rowClassName: '',
-    validateBeforeSubmit: true,
-    validatePristine: false,
-    disabled: false,
-  };
+  public constructor(props) {
+    super(props);
+  }
 
-  public render() {
+  public render(): JSX.Element {
     const {
       children,
       className,
@@ -62,7 +45,7 @@ class Form extends React.Component<Props, {}> {
       rowClassName,
       validateBeforeSubmit,
       validatePristine,
-      ...formsyProps
+      ...formsyPassthroughProps
     } = this.props;
 
     const contextProps = {
@@ -74,13 +57,11 @@ class Form extends React.Component<Props, {}> {
       validatePristine,
     };
 
-    const formClassNames = classNames([`form-${layout}`, className]);
-
     return (
       <FrcContext.Provider value={contextProps}>
         <Formsy
-          {...formsyProps}
-          className={formClassNames}
+          {...formsyPassthroughProps}
+          className={classNames([`form-${layout}`, className])}
           ref={this.formsyForm}>
           {children}
         </Formsy>

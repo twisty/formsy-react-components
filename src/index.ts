@@ -1,3 +1,4 @@
+import {withFormsy} from 'formsy-react';
 import CheckboxComponent from './components/checkbox';
 import CheckboxGroupComponent from './components/checkbox-group';
 import InputComponent from './components/input';
@@ -6,17 +7,17 @@ import RadioGroupComponent from './components/radio-group';
 import SelectComponent from './components/select';
 import TextareaComponent from './components/textarea';
 import Form from './form';
-import FormsyReactComponent from './hoc/component';
 import FrcContext from './context/frc';
 import Row from './components/row';
+import withFRC from './hoc/component';
 
-const Checkbox = FormsyReactComponent(CheckboxComponent);
-const CheckboxGroup = FormsyReactComponent(CheckboxGroupComponent);
-const Input = FormsyReactComponent(InputComponent);
-const File = FormsyReactComponent(FileComponent);
-const RadioGroup = FormsyReactComponent(RadioGroupComponent);
-const Select = FormsyReactComponent(SelectComponent);
-const Textarea = FormsyReactComponent(TextareaComponent);
+const Checkbox = withFormsy(withFRC(CheckboxComponent));
+const CheckboxGroup = withFormsy(withFRC(CheckboxGroupComponent));
+const Input = withFormsy(withFRC(InputComponent));
+const File = withFormsy(withFRC(FileComponent));
+const RadioGroup = withFormsy(withFRC(RadioGroupComponent));
+const Select = withFormsy(withFRC(SelectComponent));
+const Textarea = withFormsy(withFRC(TextareaComponent));
 
 export {
   Form,
@@ -24,8 +25,8 @@ export {
   Row,
   Checkbox,
   CheckboxGroup,
-  Input,
   File,
+  Input,
   RadioGroup,
   Select,
   Textarea,

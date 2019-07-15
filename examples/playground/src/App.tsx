@@ -17,12 +17,9 @@ const initialState = Object.freeze({
 type State = typeof initialState;
 
 class App extends React.Component<{}, State> {
-  public constructor(props) {
-    super(props);
-    this.state = initialState;
-  }
+  public readonly state: Readonly<State> = initialState;
 
-  private handleChangeOption = (name, value) => {
+  private handleChangeOption = (name, value): void => {
     const newState = {};
     if (Array.isArray(value)) {
       let options: string[];
@@ -47,7 +44,7 @@ class App extends React.Component<{}, State> {
     this.setState({showingOptions: !showingOptions});
   };
 
-  public render() {
+  public render(): JSX.Element {
     const {
       layout,
       validateBeforeSubmit,

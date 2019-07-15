@@ -1,26 +1,37 @@
 import * as React from 'react';
 
-interface Props {
+interface InputGroupProps {
   addonAfter?: React.ReactNode;
   addonBefore?: React.ReactNode;
   buttonAfter?: React.ReactNode;
   buttonBefore?: React.ReactNode;
 }
 
-type ReactElementOrNull = React.ReactElement | null;
+type InputGroupPosition = 'prepend' | 'append';
+
+type InputGroupPropsWithChildren = InputGroupProps & {
+  children: JSX.Element;
+};
 
 /**
  * Wraps an input to implement a Bootstrap [Input Group](http://getbootstrap.com/components/#input-groups)
  */
-const InputGroup: React.FunctionComponent<Props> = props => {
-  const renderAddon = (addon, position): ReactElementOrNull => {
-    if (!addon) {
+const InputGroup = ({
+  children,
+  addonBefore = null,
+  addonAfter = null,
+  buttonBefore = null,
+  buttonAfter = null,
+}: InputGroupPropsWithChildren): JSX.Element => {
+  const renderAddon = (
+    addon: React.ReactNode,
+    position: InputGroupPosition,
+  ): React.ReactNode => {
+    if (addon === null) {
       return null;
     }
     return <span className={`input-group-${position}`}>{addon}</span>;
   };
-
-  const {addonBefore, addonAfter, buttonBefore, buttonAfter, children} = props;
 
   return (
     <div className="input-group">
@@ -33,12 +44,5 @@ const InputGroup: React.FunctionComponent<Props> = props => {
   );
 };
 
-InputGroup.defaultProps = {
-  addonAfter: null,
-  addonBefore: null,
-  buttonAfter: null,
-  buttonBefore: null,
-};
-
-export {Props};
+export {InputGroupProps};
 export default InputGroup;

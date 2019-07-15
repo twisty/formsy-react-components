@@ -1,7 +1,7 @@
 import * as React from 'react';
 import classNames from 'classnames/dedupe';
 import Label from './label';
-import {ClassValue} from 'classnames/types';
+import {ClassValue, LayoutType} from '../types';
 
 interface Props {
   elementWrapperClassName?: ClassValue;
@@ -10,7 +10,7 @@ interface Props {
   htmlFor?: string;
   label?: React.ReactNode;
   labelClassName?: ClassValue;
-  layout?: 'horizontal' | 'vertical' | 'elementOnly';
+  layout?: LayoutType;
   required?: boolean;
   rowClassName?: ClassValue;
   showErrors?: boolean;

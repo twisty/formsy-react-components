@@ -1,6 +1,6 @@
 /* eslint-env node, browser */
 
-import * as React from 'react';
+import React from 'react';
 
 import {CheckboxGroup, RadioGroup, Form} from 'formsy-react-components';
 
@@ -10,11 +10,11 @@ interface Props {
   showing: boolean;
   validateBeforeSubmitChoice: boolean;
   validatePristineChoice: boolean;
-  onChangeOption: Function;
+  onChangeOption: (name: string, value) => void;
   onToggle: () => void;
 }
 
-const Options: React.FunctionComponent<Props> = ({
+const Options = ({
   disabledChoice,
   layoutChoice,
   onChangeOption,
@@ -22,7 +22,7 @@ const Options: React.FunctionComponent<Props> = ({
   showing,
   validateBeforeSubmitChoice,
   validatePristineChoice,
-}) => {
+}: Props): JSX.Element => {
   const optionsForm = (
     <Form>
       <RadioGroup

@@ -1,29 +1,31 @@
 import * as React from 'react';
 import {CommonProps as CommonControlProps} from './controls/common-prop-types';
-import {
-  ComponentPropTypes,
-  ComponentPropKeys,
-  componentDefaultProps,
-} from './component-common';
+import {componentDefaultProps} from './component-common';
 import ErrorMessages from './error-messages';
 import Help from './help';
 import Row from './row';
 
 type CommonControlPropsCleaned = Omit<CommonControlProps, 'id' | 'name'>;
 
-interface Props extends ComponentPropTypes, CommonControlPropsCleaned {
-  value: boolean;
-  valueLabel: string;
-}
+const defaultProps = {
+  ...componentDefaultProps,
+  value: false,
+  valueLabel: '',
+  elementRef: React.createRef<HTMLInputElement>(),
+};
+
+type Props = CommonControlPropsCleaned &
+  typeof defaultProps & {
+    name: string;
+  };
 
 class Checkbox extends React.Component<Props, {}> {
-  public element;
+  public static defaultProps = defaultProps;
 
-  public static defaultProps = {
-    ...componentDefaultProps,
-    value: false,
-    valueLabel: '',
-  };
+  // Need to supply a constructor to be recognised as ComponentClass?
+  public constructor(props) {
+    super(props);
+  }
 
   private handleChange = (event): void => {
     const value = event.currentTarget.checked;
@@ -32,13 +34,16 @@ class Checkbox extends React.Component<Props, {}> {
     changeCallback(name, value);
   };
 
-  private initElementRef = (element): void => {
-    this.element = element;
-  };
-
-  private renderElement = () => {
-    const {valueLabel, label, value, ...inputProps} = this.props;
-    ComponentPropKeys.forEach((key): void => {
+  private renderElement = (): JSX.Element => {
+    const {
+      elementRef,
+      id,
+      label,
+      value,
+      valueLabel,
+      ...inputProps
+    } = this.props;
+    Object.keys(componentDefaultProps).forEach((key): void => {
       delete inputProps[key];
     });
 
@@ -46,28 +51,29 @@ class Checkbox extends React.Component<Props, {}> {
       <div className="form-check">
         <input
           {...inputProps}
-          className="form-check-input"
-          type="checkbox"
           checked={value === true}
+          className="form-check-input"
+          id={id}
           onChange={this.handleChange}
-          ref={this.initElementRef}
+          ref={elementRef}
+          type="checkbox"
         />
-        <label className="form-check-label" htmlFor={inputProps.id}>
+        <label className="form-check-label" htmlFor={id}>
           {valueLabel}
         </label>
       </div>
     );
   };
 
-  public render() {
+  public render(): JSX.Element {
     const element = this.renderElement();
     const {
-      layout,
-      id,
-      help,
-      showErrors,
       errorMessages,
+      help,
+      id,
       labelClassName,
+      layout,
+      showErrors,
     } = this.props;
 
     if (layout === 'elementOnly') {
@@ -90,4 +96,5 @@ class Checkbox extends React.Component<Props, {}> {
   }
 }
 
+export {Props};
 export default Checkbox;
