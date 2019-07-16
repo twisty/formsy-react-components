@@ -3,7 +3,7 @@ import classNames from 'classnames/dedupe';
 import Label from './label';
 import {ClassValue, LayoutType} from '../types';
 
-interface Props {
+interface RowProps {
   elementWrapperClassName?: ClassValue;
   errorMessages?: React.ReactNode[];
   fakeLabel?: boolean;
@@ -16,7 +16,27 @@ interface Props {
   showErrors?: boolean;
 }
 
-const Row: React.FunctionComponent<Props> = ({
+interface HorizontalElementWrapperProps {
+  elementWrapperClassName: ClassValue;
+  renderLabel: boolean;
+}
+
+const HorizontalElementWrapper: React.FC<HorizontalElementWrapperProps> = ({
+  children,
+  elementWrapperClassName,
+  renderLabel,
+}) => {
+  const wrapperClassNames = [] as ClassValue[];
+  if (!renderLabel) {
+    wrapperClassNames.push('offset-sm-3');
+  }
+  wrapperClassNames.push('col-sm-9');
+  wrapperClassNames.push(elementWrapperClassName);
+
+  return <div className={classNames(wrapperClassNames)}>{children}</div>;
+};
+
+const Row: React.FunctionComponent<RowProps> = ({
   children,
   elementWrapperClassName = '',
   errorMessages = [],
@@ -29,45 +49,26 @@ const Row: React.FunctionComponent<Props> = ({
   rowClassName = '',
   showErrors = false,
 }) => {
-  let element = children;
-
   if (layout === 'elementOnly') {
-    return <span>{element}</span>;
+    return <span>{children}</span>;
   }
 
-  const cssClasses = {
-    row: ['form-group'] as ClassValue[],
-    elementWrapper: [] as ClassValue[],
-  };
-
+  const rowClassNames = ['form-group'] as ClassValue[];
   if (showErrors && (errorMessages.length > 0 || required)) {
-    cssClasses.row.push('text-danger');
+    rowClassNames.push('text-danger');
   }
+  if (layout === 'horizontal') {
+    rowClassNames.push('form-row');
+  }
+  rowClassNames.push(rowClassName);
 
   // We should render the label if there is label text defined, or if the
   // component is required (so a required symbol is displayed in the label tag)
-  const shouldRenderLabel = label !== null || required;
-
-  if (layout === 'horizontal') {
-    cssClasses.row.push('form-row');
-
-    if (!shouldRenderLabel) {
-      cssClasses.elementWrapper.push('offset-sm-3');
-    }
-
-    cssClasses.elementWrapper.push('col-sm-9');
-    cssClasses.elementWrapper.push(elementWrapperClassName);
-
-    element = (
-      <div className={classNames(cssClasses.elementWrapper)}>{element}</div>
-    );
-  }
-
-  cssClasses.row.push(rowClassName);
+  const renderLabel = label !== null || required;
 
   return (
-    <div className={classNames(cssClasses.row)}>
-      {shouldRenderLabel ? (
+    <div className={classNames(rowClassNames)}>
+      {renderLabel ? (
         <Label
           fakeLabel={fakeLabel}
           htmlFor={htmlFor}
@@ -77,7 +78,15 @@ const Row: React.FunctionComponent<Props> = ({
           required={required}
         />
       ) : null}
-      {element}
+      {layout === 'horizontal' ? (
+        <HorizontalElementWrapper
+          elementWrapperClassName={elementWrapperClassName}
+          renderLabel={renderLabel}>
+          {children}
+        </HorizontalElementWrapper>
+      ) : (
+        children
+      )}
     </div>
   );
 };
