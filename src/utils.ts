@@ -26,11 +26,7 @@ export const shouldShowErrors = (
   return isValid === false;
 };
 
-export const getFallbackBoolean = <A, B>(
-  a: A,
-  b: B,
-  c: boolean,
-): boolean => {
+export const getFallbackBoolean = <A, B>(a: A, b: B, c: boolean): boolean => {
   if (typeof a === 'boolean') {
     return a;
   }
