@@ -88,7 +88,7 @@ class SelectControl extends React.Component<Props, {}> {
     return (
       <select
         {...selectProps}
-        className={classNames(['form-control', className])}
+        className={classNames(['custom-select', className])}
         ref={elementRef}>
         {optionNodes}
       </select>

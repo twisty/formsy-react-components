@@ -63,11 +63,11 @@ class CheckboxGroup extends React.Component<CheckboxGroupProps, {}> {
 
     const markAsInvalid = showErrors && (errorMessages.length > 0 || required);
 
-    const className = `form-check${
-      type === 'inline' ? ' form-check-inline' : ''
+    const className = `custom-control custom-checkbox${
+      type === 'inline' ? ' custom-control-inline' : ''
     }`;
 
-    const inputClassName = `form-check-input${
+    const inputClassName = `custom-control-input${
       markAsInvalid ? ' is-invalid' : ''
     }`;
 
@@ -94,7 +94,7 @@ class CheckboxGroup extends React.Component<CheckboxGroupProps, {}> {
             id={inputId}
             required={required}
           />
-          <label className="form-check-label" htmlFor={inputId}>
+          <label className="custom-control-label" htmlFor={inputId}>
             {checkbox.label}
           </label>
           {isLast && showErrors ? <ErrorMessages messages={errorMessages} /> : null}

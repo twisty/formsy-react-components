@@ -57,11 +57,11 @@ class RadioGroup extends React.Component<RadioGroupProps, {}> {
 
     const markAsInvalid = showErrors && (errorMessages.length > 0 || required);
 
-    const className = `form-check${
-      type === 'inline' ? ' form-check-inline' : ''
+    const className = `custom-control custom-radio${
+      type === 'inline' ? ' custom-control-inline' : ''
     }`;
 
-    const inputClassName = `form-check-input${
+    const inputClassName = `custom-control-input${
       markAsInvalid ? ' is-invalid' : ''
     }`;
 
@@ -85,7 +85,7 @@ class RadioGroup extends React.Component<RadioGroupProps, {}> {
             id={inputId}
             required={required}
           />
-          <label className="form-check-label" htmlFor={inputId}>
+          <label className="custom-control-label" htmlFor={inputId}>
             {radio.label}
           </label>
         </div>

@@ -21,7 +21,7 @@ class InputControl extends React.Component<InputControlProps, {}> {
       inputClassNames.push({'form-control': false});
     }
     if (type === 'range') {
-      inputClassNames.push('form-control-range');
+      inputClassNames.push('custom-range');
     }
     return (
       <input

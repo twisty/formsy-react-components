@@ -48,17 +48,17 @@ class Checkbox extends React.Component<Props, {}> {
     });
 
     return (
-      <div className="form-check">
+      <div className="custom-control custom-checkbox">
         <input
           {...inputProps}
           checked={value === true}
-          className="form-check-input"
+          className="custom-control-input"
           id={id}
           onChange={this.handleChange}
           ref={elementRef}
           type="checkbox"
         />
-        <label className="form-check-label" htmlFor={id}>
+        <label className="custom-control-label" htmlFor={id}>
           {valueLabel}
         </label>
       </div>
