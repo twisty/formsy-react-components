@@ -2,6 +2,7 @@ import * as React from 'react';
 import {componentDefaultProps} from './component-common';
 import {CommonProps} from './controls/common-prop-types';
 import FormCheckGroup from './form-check-group';
+import ErrorMessages from './error-messages';
 
 type CommonPropsCleaned = Omit<CommonProps, 'id' | 'name'>;
 
@@ -70,11 +71,14 @@ class CheckboxGroup extends React.Component<CheckboxGroupProps, {}> {
       markAsInvalid ? ' is-invalid' : ''
     }`;
 
-    const controls = options.map(checkbox => {
+    const controls = [] as JSX.Element[];
+    for(let i = 0; i < options.length; i++) {
+      const checkbox = options[i];
       const checked = value.indexOf(checkbox.value) !== -1;
       const isDisabled = checkbox.disabled || disabled;
       const inputId = `${id}--${checkbox.value}`;
-      return (
+      const isLast = i == options.length - 1;
+      const control = (
         <div className={className} key={checkbox.value}>
           <input
             ref={(input): void => {
@@ -93,9 +97,11 @@ class CheckboxGroup extends React.Component<CheckboxGroupProps, {}> {
           <label className="form-check-label" htmlFor={inputId}>
             {checkbox.label}
           </label>
+          {isLast && showErrors ? <ErrorMessages messages={errorMessages} /> : null}
         </div>
       );
-    });
+      controls.push(control);
+    }
     return controls;
   };
 
