@@ -28,9 +28,9 @@ class SelectControl extends React.Component<Props, {}> {
   }
 
   private renderOption = (item: SelectOption, key: string): JSX.Element => {
-    const {label, value} = item;
+    const {label, value, ...rest} = item;
     const option = (
-      <option key={key} value={value}>
+      <option key={key} value={value} {...rest}>
         {label}
       </option>
     );

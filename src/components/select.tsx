@@ -8,6 +8,8 @@ import SelectControl, {Props as SelectControlProps} from './controls/select';
 interface SelectOption {
   value: string;
   label: string;
+  disabled?: boolean;
+  className?: string;
   group?: string;
 }
 
