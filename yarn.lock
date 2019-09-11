@@ -2828,10 +2828,9 @@ form-data@~2.3.2:
     combined-stream "^1.0.6"
     mime-types "^2.1.12"
 
-formsy-react@^2.0.0-beta.2:
+formsy-react@formsy/formsy-react#cbce6b1:
   version "2.0.0-beta.4"
-  resolved "https://registry.yarnpkg.com/formsy-react/-/formsy-react-2.0.0-beta.4.tgz#14c95f26c2d607f1d1a447362680e73a692d20b3"
-  integrity sha512-6o42LbZ6IO8UQIBGQaOoo0yjYfr1rDSv2fKNgRXZHQTGWoZU8vnBe7RttCCIxYp5AeTO67A86SGiAmsKsqh+/A==
+  resolved "https://codeload.github.com/formsy/formsy-react/tar.gz/cbce6b1f7ff8b3721ccf22d05f3aba0b7c9185f4"
   dependencies:
     form-data-to-object "^0.2.0"
     prop-types "^15.7.2"

@@ -37,7 +37,7 @@
     "url": "https://github.com/twisty/formsy-react-components/issues"
   },
   "peerDependencies": {
-    "formsy-react": "^2.0.0-beta.2",
+    "formsy-react": "formsy/formsy-react#cbce6b1",
     "react": "^16.3.0"
   },
   "dependencies": {
@@ -62,7 +62,7 @@
     "eslint-plugin-jsx-a11y": "^6.2.1",
     "eslint-plugin-prettier": "^3.0.0",
     "eslint-plugin-react": "^7.14.2",
-    "formsy-react": "^2.0.0-beta.2",
+    "formsy-react": "formsy/formsy-react#cbce6b1",
     "gh-pages": "^2.0.0",
     "jest": "^24.1.0",
     "prettier": "^1.6.1",
