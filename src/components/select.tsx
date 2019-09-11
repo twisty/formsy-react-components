@@ -67,7 +67,9 @@ class Select extends React.Component<SelectProps, {}> {
     const control = (
       <SelectControl
         {...inputProps}
-        className={classNames(markAsInvalid ? ['is-invalid', className] : className)}
+        className={classNames(
+          markAsInvalid ? ['is-invalid', className] : className,
+        )}
         elementRef={this.props.elementRef}
         id={id}
         name={name}
