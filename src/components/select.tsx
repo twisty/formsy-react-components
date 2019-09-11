@@ -1,4 +1,5 @@
 import * as React from 'react';
+import classNames from 'classnames/dedupe';
 import {componentDefaultProps} from './component-common';
 import ErrorMessages from './error-messages';
 import Help from './help';
@@ -47,11 +48,13 @@ class Select extends React.Component<SelectProps, {}> {
 
   public render(): JSX.Element {
     const {
+      className,
       errorMessages,
       help,
       id,
       layout,
       name,
+      required,
       showErrors,
       ...inputProps
     } = this.props;
@@ -59,9 +62,12 @@ class Select extends React.Component<SelectProps, {}> {
       delete inputProps[key];
     });
 
+    const markAsInvalid = showErrors && (errorMessages.length > 0 || required);
+
     const control = (
       <SelectControl
         {...inputProps}
+        className={classNames(markAsInvalid ? ['is-invalid', className] : className)}
         elementRef={this.props.elementRef}
         id={id}
         name={name}
