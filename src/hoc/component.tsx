@@ -45,7 +45,9 @@ interface RequiredFromOriginalComponentProps {
   disabled: boolean;
   id: string;
   label: React.ReactNode;
+  /* eslint-disable @typescript-eslint/no-explicit-any */
   componentRef: React.RefObject<any>;
+  /* eslint-enable @typescript-eslint/no-explicit-any */
 }
 
 /**
@@ -60,6 +62,7 @@ interface RequiredFromOriginalComponentProps {
  * the form, while retaining the ability to override the prop on a per-component
  * basis.
  */
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 const withFRC = <TOriginalProps extends {}>(
   Component:
     | React.ComponentClass<TOriginalProps>

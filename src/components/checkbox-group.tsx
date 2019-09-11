@@ -72,7 +72,7 @@ class CheckboxGroup extends React.Component<CheckboxGroupProps, {}> {
     }`;
 
     const controls = [] as JSX.Element[];
-    for(let i = 0; i < options.length; i++) {
+    for (let i = 0; i < options.length; i++) {
       const checkbox = options[i];
       const checked = value.indexOf(checkbox.value) !== -1;
       const isDisabled = checkbox.disabled || disabled;
@@ -97,7 +97,9 @@ class CheckboxGroup extends React.Component<CheckboxGroupProps, {}> {
           <label className="custom-control-label" htmlFor={inputId}>
             {checkbox.label}
           </label>
-          {isLast && showErrors ? <ErrorMessages messages={errorMessages} /> : null}
+          {isLast && showErrors ? (
+            <ErrorMessages messages={errorMessages} />
+          ) : null}
         </div>
       );
       controls.push(control);
