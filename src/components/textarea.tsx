@@ -88,18 +88,23 @@ class Textarea extends React.Component<TextareaProps, State> {
 
     const {value} = this.state;
     const {
+      className,
       elementRef,
       errorMessages,
       help,
       id,
       layout,
       name,
+      required,
       showErrors,
     } = this.props;
+
+    const markAsInvalid = showErrors && (errorMessages.length > 0 || required);
 
     const element = (
       <TextareaControl
         {...inputProps}
+        className={markAsInvalid ? `is-invalid ${className}` : className}
         id={id}
         value={value}
         name={name}
