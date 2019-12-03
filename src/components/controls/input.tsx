@@ -1,6 +1,6 @@
 import React from 'react';
 import classNames from 'classnames/dedupe';
-import {ClassValue} from '../../types';
+import {ClassValue} from 'classnames/types';
 
 const defaultProps = {
   className: '' as ClassValue,

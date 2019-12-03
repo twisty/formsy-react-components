@@ -1,7 +1,8 @@
 import * as React from 'react';
 import classNames from 'classnames/dedupe';
 import Label from './label';
-import {ClassValue, LayoutType} from '../types';
+import {ClassValue} from 'classnames/types';
+import {LayoutType} from '../types';
 
 interface RowProps {
   elementWrapperClassName?: ClassValue;

@@ -1,7 +1,8 @@
 import * as React from 'react';
 import classNames from 'classnames/dedupe';
 import Formsy, {FormsyProps} from 'formsy-react';
-import {ClassValue, LayoutType} from './types';
+import {ClassValue} from 'classnames/types';
+import {LayoutType} from './types';
 import FrcContext from './context/frc';
 
 type FormPropsCleaned = Omit<
