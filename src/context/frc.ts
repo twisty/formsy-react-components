@@ -1,5 +1,6 @@
 import {createContext} from 'react';
-import {ClassValue, LayoutType} from '../types';
+import {ClassValue} from 'classnames/types';
+import {LayoutType} from '../types';
 
 const defaultContextValue = {
   elementWrapperClassName: '' as ClassValue,

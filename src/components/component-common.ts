@@ -1,4 +1,5 @@
-import {LayoutType, ComponentValue, ClassValue} from '../types';
+import {ClassValue} from 'classnames/types';
+import {LayoutType, ComponentValue} from '../types';
 
 export const componentDefaultProps = {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars

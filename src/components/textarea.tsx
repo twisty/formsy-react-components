@@ -44,7 +44,7 @@ class Textarea extends React.Component<TextareaProps, State> {
     this.blurDebounced = debounce(onSetValue, blurDebounceInterval);
   }
 
-  public componentWillReceiveProps = (nextProps): void => {
+  public UNSAFE_componentWillReceiveProps = (nextProps): void => {
     const {value: stateValue} = this.state;
     const {onSetValue} = this.props;
     const isValueChanging = nextProps.value !== stateValue;
@@ -88,18 +88,23 @@ class Textarea extends React.Component<TextareaProps, State> {
 
     const {value} = this.state;
     const {
+      className,
       elementRef,
       errorMessages,
       help,
       id,
       layout,
       name,
+      required,
       showErrors,
     } = this.props;
+
+    const markAsInvalid = showErrors && (errorMessages.length > 0 || required);
 
     const element = (
       <TextareaControl
         {...inputProps}
+        className={markAsInvalid ? `is-invalid ${className}` : className}
         id={id}
         value={value}
         name={name}
