@@ -15,7 +15,7 @@ const defaultProps = {
   changeDebounceInterval: 500,
   cols: 0,
   rows: 3,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-empty-function
   blurCallback: (name: string, value: string): void => {},
 };
 

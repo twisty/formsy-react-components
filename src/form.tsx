@@ -1,7 +1,7 @@
 import * as React from 'react';
 import classNames from 'classnames/dedupe';
 import Formsy, {FormsyProps} from 'formsy-react';
-import {ClassValue} from 'classnames/types';
+import {ClassValue} from 'classnames/types'; // eslint-disable-line import/no-unresolved
 import {LayoutType} from './types';
 import FrcContext from './context/frc';
 

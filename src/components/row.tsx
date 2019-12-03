@@ -1,7 +1,7 @@
 import * as React from 'react';
 import classNames from 'classnames/dedupe';
 import Label from './label';
-import {ClassValue} from 'classnames/types';
+import {ClassValue} from 'classnames/types'; // eslint-disable-line import/no-unresolved
 import {LayoutType} from '../types';
 
 interface RowProps {

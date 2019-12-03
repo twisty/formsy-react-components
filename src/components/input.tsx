@@ -34,13 +34,13 @@ type SupportedInputType =
 
 const defaultProps = {
   ...componentDefaultProps,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-empty-function
   blurCallback: (name: string, value: string): void => {},
   blurDebounceInterval: 0,
   changeDebounceInterval: 500,
   className: '',
   elementRef: React.createRef<HTMLInputElement>(),
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-empty-function
   keyDownCallback: (event: React.KeyboardEvent<HTMLInputElement>): void => {},
   required: false,
   type: 'text' as SupportedInputType,
