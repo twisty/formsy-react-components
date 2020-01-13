@@ -1,6 +1,6 @@
 {
   "name": "formsy-react-components",
-  "version": "2.0.0-alpha.4",
+  "version": "2.0.0-alpha.5",
   "description": "Bootstrap components for a formsy-react form.",
   "scripts": {
     "test": "jest",
@@ -37,7 +37,7 @@
     "url": "https://github.com/twisty/formsy-react-components/issues"
   },
   "peerDependencies": {
-    "formsy-react": "2.0.0-beta.6",
+    "formsy-react": "2.0.0-beta.7",
     "react": "^16.3.0"
   },
   "dependencies": {
@@ -57,12 +57,12 @@
     "enzyme-adapter-react-16": "^1.0.0",
     "eslint": "^6.0.1",
     "eslint-config-prettier": "^6.3.0",
-    "eslint-import-resolver-typescript": "^1.1.1",
+    "eslint-import-resolver-typescript": "^2.0.0",
     "eslint-plugin-import": "^2.18.0",
     "eslint-plugin-jsx-a11y": "^6.2.1",
     "eslint-plugin-prettier": "^3.0.0",
     "eslint-plugin-react": "^7.14.2",
-    "formsy-react": "2.0.0-beta.6",
+    "formsy-react": "2.0.0-beta.7",
     "gh-pages": "^2.0.0",
     "jest": "^24.1.0",
     "prettier": "^1.6.1",
