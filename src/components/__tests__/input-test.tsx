@@ -1,6 +1,6 @@
 /* globals jest, describe, it, expect, beforeEach */
 
-import React from 'react';
+import * as React from 'react';
 import {mount} from 'enzyme';
 
 import Input from '../input';

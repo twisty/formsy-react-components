@@ -1,5 +1,5 @@
 import * as React from 'react';
-import classNames from 'classnames/dedupe';
+import classNames from 'classnames/dedupe'; // eslint-disable-line import/default
 import {componentDefaultProps} from './component-common';
 import ErrorMessages from './error-messages';
 import Help from './help';

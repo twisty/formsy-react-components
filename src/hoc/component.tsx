@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import FrcContext from '../context/frc';
 import {
   getId,

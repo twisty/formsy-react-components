@@ -1,7 +1,7 @@
 /* eslint-env node, browser */
 
-import React from 'react';
-import ReactDOM from 'react-dom';
+import * as React from 'react';
+import {render} from 'react-dom';
 
 import {
   Form,
@@ -105,4 +105,4 @@ class App extends React.Component {
   }
 }
 
-ReactDOM.render(<App />, document.getElementById('root'));
+render(<App />, document.getElementById('root'));

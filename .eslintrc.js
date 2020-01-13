@@ -12,6 +12,7 @@ module.exports = {
   ],
   plugins: ["prettier"],
   rules: {
+    "import/no-unresolved": "error",
     "prettier/prettier": [
       "error",
       {
@@ -57,6 +58,9 @@ module.exports = {
   settings: {
     react: {
       version: "detect"
+    },
+    "import/parsers": {
+      "@typescript-eslint/parser": [".ts", ".tsx"]
     },
     "import/resolver": {
       // use <root>/tsconfig.json

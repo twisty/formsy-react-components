@@ -1,6 +1,6 @@
 /* eslint-env node, browser */
 
-import React from 'react';
+import * as React from 'react';
 
 import {CheckboxGroup, RadioGroup, Form} from 'formsy-react-components';
 
