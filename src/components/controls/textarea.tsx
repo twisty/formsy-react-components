@@ -1,5 +1,5 @@
 import * as React from 'react';
-import classNames from 'classnames/dedupe';
+import classNames from 'classnames/dedupe'; // eslint-disable-line import/default
 import {CommonProps} from './common-prop-types';
 
 type ControlProps = React.TextareaHTMLAttributes<HTMLTextAreaElement>;
