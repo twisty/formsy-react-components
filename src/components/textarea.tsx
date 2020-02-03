@@ -45,12 +45,13 @@ class Textarea extends React.Component<TextareaProps, State> {
   }
 
   public UNSAFE_componentWillReceiveProps = (nextProps): void => {
+    const {value: nextValue} = nextProps;
     const {value: stateValue} = this.state;
-    const {onSetValue} = this.props;
-    const isValueChanging = nextProps.value !== stateValue;
+    const isValueChanging = nextValue !== stateValue;
     if (isValueChanging) {
-      this.setState({value: nextProps.value});
-      onSetValue(nextProps.value);
+      const {onSetValue} = this.props;
+      this.setState({value: nextValue});
+      onSetValue(nextValue);
     }
   };
 

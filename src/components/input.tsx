@@ -83,9 +83,9 @@ class Input extends React.Component<InputProps, State> {
   public UNSAFE_componentWillReceiveProps = (nextProps): void => {
     const {value: nextValue} = nextProps;
     const {value: stateValue} = this.state;
-    const {onSetValue} = this.props;
     const isValueChanging = nextValue !== stateValue;
     if (isValueChanging) {
+      const {onSetValue} = this.props;
       this.setState({value: nextValue});
       onSetValue(nextValue);
     }
