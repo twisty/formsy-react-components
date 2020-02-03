@@ -1,9 +1,13 @@
 /* eslint-env node */
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const path = require('path');
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const {TsConfigPathsPlugin} = require('awesome-typescript-loader');
+
 module.exports = {
-  mode: 'production',
+  mode: 'development',
 
   devtool: 'source-map',
 
@@ -13,8 +17,8 @@ module.exports = {
   },
 
   entry: {
-    playground: path.resolve(__dirname, './playground/src/index.js'),
-    refs: path.resolve(__dirname, './refs/src/index.js'),
+    playground: path.resolve(__dirname, './playground/src/index.tsx'),
+    refs: path.resolve(__dirname, './refs/src/index.tsx'),
   },
 
   output: {
@@ -26,18 +30,14 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.js$/,
-        exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader',
-        },
+        test: /\.tsx?$/,
+        loader: 'awesome-typescript-loader',
       },
     ],
   },
 
   resolve: {
-    alias: {
-      'formsy-react-components': path.resolve(__dirname, '../src/main'),
-    },
+    extensions: ['.ts', '.tsx', '.js'],
+    plugins: [new TsConfigPathsPlugin()],
   },
 };

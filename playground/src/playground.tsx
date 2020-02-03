@@ -1,9 +1,7 @@
 /* eslint-env node, browser */
 
-import React from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 
-/* eslint-disable import/extensions, import/no-unresolved, import/no-extraneous-dependencies */
 import {
   Checkbox,
   CheckboxGroup,
@@ -15,25 +13,35 @@ import {
   Textarea,
   Form,
 } from 'formsy-react-components';
-/* eslint-enable */
 
-const Playground = props => {
-  const {
-    disabledChoice,
-    layoutChoice,
-    validateOnSubmitChoice,
-    validatePristineChoice,
-  } = props;
+import {LayoutChoice} from './App';
 
-  let myform = null;
+interface Props {
+  disabledChoice: boolean;
+  layoutChoice: LayoutChoice;
+  validateBeforeSubmitChoice: boolean;
+  validatePristineChoice: boolean;
+}
 
-  const resetForm = () => {
+const Playground: React.FunctionComponent<Props> = ({
+  disabledChoice,
+  layoutChoice,
+  validateBeforeSubmitChoice,
+  validatePristineChoice,
+}) => {
+  const formRef = React.createRef<Form>();
+
+  const resetForm = (): void => {
     console.log('Reset called'); // eslint-disable-line no-console
-    const {formsyForm} = myform;
-    formsyForm.reset();
+    if (formRef.current !== null) {
+      const {formsyForm} = formRef.current;
+      if (formsyForm.current !== null) {
+        formsyForm.current.reset();
+      }
+    }
   };
 
-  const submitForm = data => {
+  const submitForm = (data): void => {
     console.log(data); // eslint-disable-line no-console
   };
 
@@ -76,21 +84,21 @@ const Playground = props => {
     ...selectOptions,
   ];
 
-  const refCallback = form => {
-    myform = form;
-  };
+  const legend = (str: string): JSX.Element => (
+    <legend className="pb-2 mt-4 mb-3 border-bottom">{str}</legend>
+  );
 
   return (
     <Form
       onSubmit={submitForm}
       layout={layoutChoice}
       className="custom-classname-is-rendered"
-      validateOnSubmit={validateOnSubmitChoice}
+      validateBeforeSubmit={validateBeforeSubmitChoice}
       validatePristine={validatePristineChoice}
       disabled={disabledChoice}
-      ref={refCallback}>
+      ref={formRef}>
       <fieldset>
-        <legend>Input types</legend>
+        {legend('Input types')}
         <Input name="secret" value="I'm hidden!" type="hidden" />
         <Input
           name="text1"
@@ -168,7 +176,7 @@ const Playground = props => {
         />
       </fieldset>
       <fieldset>
-        <legend>Textarea</legend>
+        {legend('Textarea')}
         <Textarea
           rows={3}
           cols={40}
@@ -183,7 +191,7 @@ const Playground = props => {
         />
       </fieldset>
       <fieldset>
-        <legend>Select</legend>
+        {legend('Select')}
         <Select
           name="select1"
           label="Select"
@@ -201,7 +209,7 @@ const Playground = props => {
         />
       </fieldset>
       <fieldset>
-        <legend>Checkboxes</legend>
+        {legend('Checkboxes')}
         <Checkbox
           name="checkbox1"
           value
@@ -215,9 +223,15 @@ const Playground = props => {
           help="Here, “Option A” and “Option C” are initially selected."
           options={radioOptions}
         />
+        <CheckboxGroup
+          name="checkboxGrp2"
+          type="inline"
+          label="Checkbox group (inline)"
+          options={radioOptions}
+        />
       </fieldset>
       <fieldset>
-        <legend>Radio group</legend>
+        {legend('Radio group')}
         <RadioGroup
           name="radioGrp1"
           value="b"
@@ -242,7 +256,7 @@ const Playground = props => {
         />
       </fieldset>
       <fieldset>
-        <legend>Layout tweaks</legend>
+        {legend('Layout tweaks')}
         <Input
           name="cssRowTweak"
           value=""
@@ -262,9 +276,18 @@ const Playground = props => {
           elementWrapperClassName={[{'col-sm-9': false}, 'col-sm-7']}
           help="The label and element-wrapper classes can be changed."
         />
+        <Input
+          name="cssInputTweaks"
+          value=""
+          label="Form control"
+          type="text"
+          className="border border-primary"
+          placeholder="‘border border-primary’ is set on this input control."
+          help="The className prop is passed through to the form control."
+        />
       </fieldset>
       <fieldset>
-        <legend>Disabled</legend>
+        {legend('Disabled')}
         <Input
           name="disabled"
           value="This field is always disabled."
@@ -275,20 +298,20 @@ const Playground = props => {
         />
       </fieldset>
       <fieldset>
-        <legend>Input groups</legend>
+        {legend('Input groups')}
         <Input
           name="addon-before"
           value=""
           label="Add-on before"
           type="text"
-          addonBefore={<span className="glyphicon glyphicon-search" />}
+          addonBefore={<span className="input-group-text">@</span>}
         />
         <Input
           name="addon-after"
           value=""
           label="Add-on after"
           type="text"
-          addonAfter={<span className="glyphicon glyphicon-search" />}
+          addonAfter={<span className="input-group-text">@example.com</span>}
         />
         <Input
           name="button-before"
@@ -296,7 +319,7 @@ const Playground = props => {
           label="Button before"
           type="text"
           buttonBefore={
-            <button className="btn btn-default" type="button">
+            <button className="btn btn-secondary" type="button">
               Go!
             </button>
           }
@@ -307,7 +330,7 @@ const Playground = props => {
           label="Button after"
           type="text"
           buttonAfter={
-            <button className="btn btn-default" type="button">
+            <button className="btn btn-secondary" type="button">
               Go!
             </button>
           }
@@ -316,7 +339,7 @@ const Playground = props => {
       <fieldset>
         <Row layout={layoutChoice}>
           <input
-            className="btn btn-default"
+            className="btn btn-secondary"
             onClick={resetForm}
             type="reset"
             defaultValue="Reset"
@@ -331,14 +354,6 @@ const Playground = props => {
       </fieldset>
     </Form>
   );
-};
-
-Playground.propTypes = {
-  disabledChoice: PropTypes.bool.isRequired,
-  layoutChoice: PropTypes.oneOf(['horizontal', 'vertical', 'elementOnly'])
-    .isRequired,
-  validateOnSubmitChoice: PropTypes.bool.isRequired,
-  validatePristineChoice: PropTypes.bool.isRequired,
 };
 
 export default Playground;
