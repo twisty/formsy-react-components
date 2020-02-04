@@ -44,17 +44,6 @@ class Textarea extends React.Component<TextareaProps, State> {
     this.blurDebounced = debounce(onSetValue, blurDebounceInterval);
   }
 
-  public UNSAFE_componentWillReceiveProps = (nextProps): void => {
-    const {value: nextValue} = nextProps;
-    const {value: stateValue} = this.state;
-    const isValueChanging = nextValue !== stateValue;
-    if (isValueChanging) {
-      const {onSetValue} = this.props;
-      this.setState({value: nextValue});
-      onSetValue(nextValue);
-    }
-  };
-
   private handleChange = (event): void => {
     const {updateOnChange, changeCallback, name} = this.props;
     const {value} = event.currentTarget;

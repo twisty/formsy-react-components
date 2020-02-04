@@ -99,12 +99,6 @@ describe('The <Input /> component', () => {
       );
     });
 
-    // Test that this is a controlled component.
-    it('updates the input value from props', () => {
-      wrapper.setProps({value: 'Changed value'});
-      expect(wrapper.find('input').prop('value')).toEqual('Changed value');
-    });
-
     it('executes `props.changeCallback` when the <input /> value changes', () => {
       /*
        * The following doesn't work, we have to set the node's value directly:

@@ -80,17 +80,6 @@ class Input extends React.Component<InputProps, State> {
     this.blurDebounced = debounce(onSetValue, blurDebounceInterval);
   }
 
-  public UNSAFE_componentWillReceiveProps = (nextProps): void => {
-    const {value: nextValue} = nextProps;
-    const {value: stateValue} = this.state;
-    const isValueChanging = nextValue !== stateValue;
-    if (isValueChanging) {
-      const {onSetValue} = this.props;
-      this.setState({value: nextValue});
-      onSetValue(nextValue);
-    }
-  };
-
   public render(): JSX.Element {
     const {
       /* eslint-disable @typescript-eslint/no-unused-vars */
