@@ -58,7 +58,9 @@ type InputProps = InputControlPropsCleaned &
   };
 
 interface State {
-  value: string;
+  currentValue: string;
+  incomingPropValue: string;
+  valueIsChanging: boolean;
 }
 
 class Input extends React.Component<InputProps, State> {
@@ -75,9 +77,37 @@ class Input extends React.Component<InputProps, State> {
       changeDebounceInterval,
       blurDebounceInterval,
     } = props;
-    this.state = {value};
+    this.state = {
+      currentValue: value,
+      incomingPropValue: value,
+      valueIsChanging: false,
+    };
     this.changeDebounced = debounce(onSetValue, changeDebounceInterval);
     this.blurDebounced = debounce(onSetValue, blurDebounceInterval);
+  }
+
+  public static getDerivedStateFromProps(props, state): any {
+    const {value: incomingPropValue} = props;
+    if (incomingPropValue !== state.incomingPropValue) {
+      return {
+        valueIsChanging: true,
+        incomingPropValue,
+      };
+    }
+    return null;
+  }
+
+  public shouldComponentUpdate(nextProps, nextState): any {
+    const {valueIsChanging, incomingPropValue} = nextState;
+    if (valueIsChanging === true) {
+      this.setState({
+        valueIsChanging: false,
+        currentValue: incomingPropValue,
+      });
+      this.props.onSetValue(incomingPropValue);
+      return false;
+    }
+    return true;
   }
 
   public render(): JSX.Element {
@@ -117,7 +147,7 @@ class Input extends React.Component<InputProps, State> {
 
     const handleChange = (event): void => {
       const {value} = event.currentTarget;
-      this.setState({value: value});
+      this.setState({currentValue: value});
       if (updateOnChange) {
         this.changeDebounced(value);
       }
@@ -126,7 +156,7 @@ class Input extends React.Component<InputProps, State> {
 
     const handleBlur = (event): void => {
       const {value} = event.currentTarget;
-      this.setState({value: value});
+      this.setState({currentValue: value});
       if (updateOnBlur) {
         this.changeDebounced.cancel();
         if (isPristine) {
@@ -161,7 +191,7 @@ class Input extends React.Component<InputProps, State> {
         onKeyDown={handleKeyDown}
         elementRef={elementRef}
         type={type}
-        value={this.state.value}
+        value={this.state.currentValue}
       />
     );
 

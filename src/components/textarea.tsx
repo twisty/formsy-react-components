@@ -22,7 +22,9 @@ const defaultProps = {
 type TextareaProps = TextareaControlProps & typeof defaultProps;
 
 interface State {
-  value: string;
+  currentValue: string;
+  incomingPropValue: string;
+  valueIsChanging: boolean;
 }
 
 class Textarea extends React.Component<TextareaProps, State> {
@@ -39,15 +41,42 @@ class Textarea extends React.Component<TextareaProps, State> {
       changeDebounceInterval,
       blurDebounceInterval,
     } = props;
-    this.state = {value};
+    this.state = {
+      currentValue: value,
+      incomingPropValue: value,
+      valueIsChanging: false,
+    };
     this.changeDebounced = debounce(onSetValue, changeDebounceInterval);
     this.blurDebounced = debounce(onSetValue, blurDebounceInterval);
   }
 
+  public static getDerivedStateFromProps(props, state): any {
+    const {value: incomingPropValue} = props;
+    if (incomingPropValue !== state.incomingPropValue) {
+      return {
+        valueIsChanging: true,
+        incomingPropValue,
+      };
+    }
+    return null;
+  }
+
+  public shouldComponentUpdate(nextProps, nextState): any {
+    const {valueIsChanging, incomingPropValue} = nextState;
+    if (valueIsChanging === true) {
+      this.setState({
+        valueIsChanging: false,
+        currentValue: incomingPropValue,
+      });
+      this.props.onSetValue(incomingPropValue);
+      return false;
+    }
+    return true;
+  }
   private handleChange = (event): void => {
     const {updateOnChange, changeCallback, name} = this.props;
     const {value} = event.currentTarget;
-    this.setState({value});
+    this.setState({currentValue: value});
     if (updateOnChange) {
       this.changeDebounced(value);
     }
@@ -57,7 +86,7 @@ class Textarea extends React.Component<TextareaProps, State> {
   private handleBlur = (event): void => {
     const {updateOnBlur, blurCallback, name} = this.props;
     const {value} = event.currentTarget;
-    this.setState({value});
+    this.setState({currentValue: value});
     if (updateOnBlur) {
       this.changeDebounced.cancel();
       this.blurDebounced(value);
@@ -76,7 +105,7 @@ class Textarea extends React.Component<TextareaProps, State> {
     delete inputProps.updateOnChange;
     delete inputProps.blurCallback;
 
-    const {value} = this.state;
+    const {currentValue} = this.state;
     const {
       className,
       elementRef,
@@ -96,7 +125,7 @@ class Textarea extends React.Component<TextareaProps, State> {
         {...inputProps}
         className={markAsInvalid ? `is-invalid ${className}` : className}
         id={id}
-        value={value}
+        value={currentValue}
         name={name}
         onChange={this.handleChange}
         onBlur={this.handleBlur}
