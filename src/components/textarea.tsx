@@ -50,7 +50,7 @@ class Textarea extends React.Component<TextareaProps, State> {
     this.blurDebounced = debounce(onSetValue, blurDebounceInterval);
   }
 
-  public static getDerivedStateFromProps(props, state): any {
+  public static getDerivedStateFromProps(props, state): null | Partial<State> {
     const {value: incomingPropValue} = props;
     if (incomingPropValue !== state.incomingPropValue) {
       return {
@@ -61,7 +61,7 @@ class Textarea extends React.Component<TextareaProps, State> {
     return null;
   }
 
-  public shouldComponentUpdate(nextProps, nextState): any {
+  public shouldComponentUpdate(nextProps, nextState): boolean {
     const {valueIsChanging, incomingPropValue} = nextState;
     if (valueIsChanging === true) {
       this.setState({
