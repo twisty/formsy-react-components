@@ -86,7 +86,7 @@ class Input extends React.Component<InputProps, State> {
     this.blurDebounced = debounce(onSetValue, blurDebounceInterval);
   }
 
-  public static getDerivedStateFromProps(props, state): any {
+  public static getDerivedStateFromProps(props, state): null | Partial<State> {
     const {value: incomingPropValue} = props;
     if (incomingPropValue !== state.incomingPropValue) {
       return {
@@ -97,7 +97,7 @@ class Input extends React.Component<InputProps, State> {
     return null;
   }
 
-  public shouldComponentUpdate(nextProps, nextState): any {
+  public shouldComponentUpdate(nextProps, nextState): boolean {
     const {valueIsChanging, incomingPropValue} = nextState;
     if (valueIsChanging === true) {
       this.setState({
@@ -110,74 +110,82 @@ class Input extends React.Component<InputProps, State> {
     return true;
   }
 
+  public handleBlur = (event): void => {
+    const {value} = event.currentTarget;
+    const {
+      updateOnBlur,
+      isPristine,
+      value: propValue,
+      blurCallback,
+    } = this.props;
+    this.setState({currentValue: value});
+    if (updateOnBlur) {
+      this.changeDebounced.cancel();
+      if (isPristine) {
+        // should update as we have just left a pristine input
+        this.blurDebounced(value);
+      } else if (propValue !== value) {
+        // should update because the value has changed
+        this.blurDebounced(value);
+      }
+    }
+    blurCallback(name, value);
+  };
+
+  public handleChange = (event): void => {
+    const {value} = event.currentTarget;
+    const {updateOnChange, changeCallback} = this.props;
+    this.setState({currentValue: value});
+    if (updateOnChange) {
+      this.changeDebounced(value);
+    }
+    changeCallback(name, value);
+  };
+
+  public handleKeyDown = (
+    event: React.KeyboardEvent<HTMLInputElement>,
+  ): void => {
+    const {keyDownCallback} = this.props;
+    if (event.key === 'Enter') {
+      this.changeDebounced.flush();
+    }
+    keyDownCallback(event);
+  };
+
   public render(): JSX.Element {
     const {
       /* eslint-disable @typescript-eslint/no-unused-vars */
+      blurCallback,
       blurDebounceInterval,
+      changeCallback,
       changeDebounceInterval,
+      isPristine,
+      keyDownCallback,
+      name,
       onSetValue,
+      updateOnBlur,
+      updateOnChange,
+      value,
       /* eslint-enable @typescript-eslint/no-unused-vars */
       addonAfter,
       addonBefore,
-      blurCallback,
       buttonAfter,
       buttonBefore,
-      changeCallback,
       className,
       elementRef,
       elementWrapperClassName,
       errorMessages,
       help,
       id,
-      isPristine,
-      keyDownCallback,
       label,
       labelClassName,
       layout,
-      name,
       required,
       rowClassName,
       showErrors,
       type,
-      updateOnBlur,
-      updateOnChange,
-      value: propValue,
       ...passthoughProps
     } = this.props;
-
-    const handleChange = (event): void => {
-      const {value} = event.currentTarget;
-      this.setState({currentValue: value});
-      if (updateOnChange) {
-        this.changeDebounced(value);
-      }
-      changeCallback(name, value);
-    };
-
-    const handleBlur = (event): void => {
-      const {value} = event.currentTarget;
-      this.setState({currentValue: value});
-      if (updateOnBlur) {
-        this.changeDebounced.cancel();
-        if (isPristine) {
-          // should update as we have just left a pristine input
-          this.blurDebounced(value);
-        } else if (propValue !== value) {
-          // should update because the value has changed
-          this.blurDebounced(value);
-        }
-      }
-      blurCallback(name, value);
-    };
-
-    const handleKeyDown = (
-      event: React.KeyboardEvent<HTMLInputElement>,
-    ): void => {
-      if (event.key === 'Enter') {
-        this.changeDebounced.flush();
-      }
-      keyDownCallback(event);
-    };
 
     const markAsInvalid = showErrors && (errorMessages.length > 0 || required);
 
@@ -186,9 +194,9 @@ class Input extends React.Component<InputProps, State> {
         {...passthoughProps}
         className={markAsInvalid ? `is-invalid ${className}` : className}
         id={id}
-        onBlur={handleBlur}
-        onChange={handleChange}
-        onKeyDown={handleKeyDown}
+        onBlur={this.handleBlur}
+        onChange={this.handleChange}
+        onKeyDown={this.handleKeyDown}
         elementRef={elementRef}
         type={type}
         value={this.state.currentValue}
