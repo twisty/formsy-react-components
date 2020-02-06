@@ -1,6 +1,6 @@
 {
   "name": "formsy-react-components",
-  "version": "2.0.0-beta.1",
+  "version": "2.0.0-beta.2",
   "description": "Bootstrap components for a formsy-react form.",
   "scripts": {
     "test": "jest",
