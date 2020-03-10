@@ -13,4 +13,6 @@ const defaultContextValue = {
 
 const FrcContext = createContext(defaultContextValue);
 
+FrcContext.displayName = 'FrcContext';
+
 export default FrcContext;
