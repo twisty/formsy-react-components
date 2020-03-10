@@ -65,7 +65,8 @@ export const getId = (
     name
       .split('[')
       .join('_')
-      .replace(']', ''),
+      .replace(']', '')
+      .replace('.', '_'),
     hashString(JSON.stringify(label)),
   ].join('-');
 };
