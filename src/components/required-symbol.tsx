@@ -16,4 +16,4 @@ RequiredSymbol.defaultProps = {
   symbol: ' *',
 };
 
-export default RequiredSymbol;
+export default React.memo(RequiredSymbol);

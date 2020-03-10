@@ -38,7 +38,7 @@
   },
   "peerDependencies": {
     "formsy-react": "^2.0.2",
-    "react": "^16.3.0"
+    "react": "^16.6.0"
   },
   "dependencies": {
     "classnames": "^2.2.5"
@@ -67,11 +67,11 @@
     "jest": "^25.1.0",
     "prettier": "^1.6.1",
     "raf": "^3.4.0",
-    "react": "^16.3.0",
+    "react": "^16.6.0",
     "react-docgen-typescript": "^1.12.5",
     "react-docs-markdown": "^0.8.0",
-    "react-dom": "^16.3.0",
-    "react-test-renderer": "^16.3.0",
+    "react-dom": "^16.6.0",
+    "react-test-renderer": "^16.6.0",
     "source-map-loader": "^0.2.4",
     "ts-jest": "^25.2.0",
     "typescript": "^3.6.3",
