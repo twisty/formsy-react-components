@@ -1876,17 +1876,6 @@ core-util-is@1.0.2, core-util-is@~1.0.0:
   resolved "https://registry.yarnpkg.com/core-util-is/-/core-util-is-1.0.2.tgz#b5fd54220aa2bc5ab57aab7140c940754503c1a7"
   integrity sha1-tf1UIgqivFq1eqtxQMlAdUUDwac=
 
-coveralls@^3.0.9:
-  version "3.0.9"
-  resolved "https://registry.yarnpkg.com/coveralls/-/coveralls-3.0.9.tgz#8cfc5a5525f84884e2948a0bf0f1c0e90aac0420"
-  integrity sha512-nNBg3B1+4iDox5A5zqHKzUTiwl2ey4k2o0NEcVZYvl+GOSJdKBj4AJGKLv6h3SvWch7tABHePAQOSZWM9E2hMg==
-  dependencies:
-    js-yaml "^3.13.1"
-    lcov-parse "^1.0.0"
-    log-driver "^1.2.7"
-    minimist "^1.2.0"
-    request "^2.88.0"
-
 create-ecdh@^4.0.0:
   version "4.0.3"
   resolved "https://registry.yarnpkg.com/create-ecdh/-/create-ecdh-4.0.3.tgz#c9111b6f33045c4697f144787f9254cdc77c45ff"
@@ -3162,11 +3151,6 @@ forever-agent@~0.6.1:
   resolved "https://registry.yarnpkg.com/forever-agent/-/forever-agent-0.6.1.tgz#fbc71f0c41adeb37f96c577ad1ed42d8fdacca91"
   integrity sha1-+8cfDEGt6zf5bFd60e1C2P2sypE=
 
-form-data-to-object@^0.2.0:
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/form-data-to-object/-/form-data-to-object-0.2.0.tgz#f7a8e68ddd910a1100a65e25ac6a484143ff8168"
-  integrity sha1-96jmjd2RChEApl4lrGpIQUP/gWg=
-
 form-data@~2.3.2:
   version "2.3.3"
   resolved "https://registry.yarnpkg.com/form-data/-/form-data-2.3.3.tgz#dcce52c05f644f298c6a7ab936bd724ceffbf3a6"
@@ -3176,13 +3160,15 @@ form-data@~2.3.2:
     combined-stream "^1.0.6"
     mime-types "^2.1.12"
 
-formsy-react@2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/formsy-react/-/formsy-react-2.0.0.tgz#09804869ed957826e2f5fe5bf025547195ae6ee8"
-  integrity sha512-vAIzrAkg/9w41PBDb8yjPEUOZikNubhDWhP667Vf/G6ChgE3/UNMFKjznxHa35G0aVvmCbTJZX8uBUUG4gy6yw==
+formsy-react@^2.0.2:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/formsy-react/-/formsy-react-2.0.2.tgz#d70f17950058e906edfe23e686a9d46263a51a2a"
+  integrity sha512-KER+im2fDWS3OOiRdGu3PvRurk8edAXhpiFQvZk4F+hqnhZu3WjVYViE3gla+2WN2NXNq+DDARiS6yjuKnAmkA==
   dependencies:
-    coveralls "^3.0.9"
-    form-data-to-object "^0.2.0"
+    lodash.get "^4.4.2"
+    lodash.has "^4.5.2"
+    lodash.isplainobject "^4.0.6"
+    lodash.set "^4.3.2"
     prop-types "^15.7.2"
 
 forwarded@~0.1.2:
@@ -4666,11 +4652,6 @@ lcid@^2.0.0:
   dependencies:
     invert-kv "^2.0.0"
 
-lcov-parse@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/lcov-parse/-/lcov-parse-1.0.0.tgz#eb0d46b54111ebc561acb4c408ef9363bdc8f7e0"
-  integrity sha1-6w1GtUER68VhrLTECO+TY73I9+A=
-
 leven@^3.1.0:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/leven/-/leven-3.1.0.tgz#77891de834064cccba82ae7842bb6b14a13ed7f2"
@@ -4741,15 +4722,35 @@ lodash.flattendeep@^4.4.0:
   resolved "https://registry.yarnpkg.com/lodash.flattendeep/-/lodash.flattendeep-4.4.0.tgz#fb030917f86a3134e5bc9bec0d69e0013ddfedb2"
   integrity sha1-+wMJF/hqMTTlvJvsDWngAT3f7bI=
 
+lodash.get@^4.4.2:
+  version "4.4.2"
+  resolved "https://registry.yarnpkg.com/lodash.get/-/lodash.get-4.4.2.tgz#2d177f652fa31e939b4438d5341499dfa3825e99"
+  integrity sha1-LRd/ZS+jHpObRDjVNBSZ36OCXpk=
+
+lodash.has@^4.5.2:
+  version "4.5.2"
+  resolved "https://registry.yarnpkg.com/lodash.has/-/lodash.has-4.5.2.tgz#d19f4dc1095058cccbe2b0cdf4ee0fe4aa37c862"
+  integrity sha1-0Z9NwQlQWMzL4rDN9O4P5Ko3yGI=
+
 lodash.isequal@^4.5.0:
   version "4.5.0"
   resolved "https://registry.yarnpkg.com/lodash.isequal/-/lodash.isequal-4.5.0.tgz#415c4478f2bcc30120c22ce10ed3226f7d3e18e0"
   integrity sha1-QVxEePK8wwEgwizhDtMib30+GOA=
 
+lodash.isplainobject@^4.0.6:
+  version "4.0.6"
+  resolved "https://registry.yarnpkg.com/lodash.isplainobject/-/lodash.isplainobject-4.0.6.tgz#7c526a52d89b45c45cc690b88163be0497f550cb"
+  integrity sha1-fFJqUtibRcRcxpC4gWO+BJf1UMs=
+
 lodash.memoize@4.x:
   version "4.1.2"
   resolved "https://registry.yarnpkg.com/lodash.memoize/-/lodash.memoize-4.1.2.tgz#bcc6c49a42a2840ed997f323eada5ecd182e0bfe"
   integrity sha1-vMbEmkKihA7Zl/Mj6tpezRguC/4=
+
+lodash.set@^4.3.2:
+  version "4.3.2"
+  resolved "https://registry.yarnpkg.com/lodash.set/-/lodash.set-4.3.2.tgz#d8757b1da807dde24816b0d6a84bea1a76230b23"
+  integrity sha1-2HV7HagH3eJIFrDWqEvqGnYjCyM=
 
 lodash.sortby@^4.7.0:
   version "4.7.0"
@@ -4760,11 +4761,6 @@ lodash@^4.15.0, lodash@^4.17.11, lodash@^4.17.13, lodash@^4.17.14, lodash@^4.17.
   version "4.17.15"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.15.tgz#b447f6670a0455bbfeedd11392eff330ea097548"
   integrity sha512-8xOcRHvCjnocdS5cpwXQXVzmmh5e5+saE2QGoeQmbKmRS6J3VQppPOIt0MnmE+4xlZoumy0GPG0D0MVIQbNA1A==
-
-log-driver@^1.2.7:
-  version "1.2.7"
-  resolved "https://registry.yarnpkg.com/log-driver/-/log-driver-1.2.7.tgz#63b95021f0702fedfa2c9bb0a24e7797d71871d8"
-  integrity sha512-U7KCmLdqsGHBLeWqYlFA0V0Sl6P08EE1ZrmA9cxjUE0WVqT9qnyVDPz1kzpFEP0jdJuFnasWIfSd7fsaNXkpbg==
 
 log-symbols@^2.1.0:
   version "2.2.0"
