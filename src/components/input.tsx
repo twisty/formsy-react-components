@@ -71,20 +71,23 @@ class Input extends React.Component<InputProps, State> {
 
   public constructor(props) {
     super(props);
-    const {
-      value,
-      onSetValue,
-      changeDebounceInterval,
-      blurDebounceInterval,
-    } = props;
+    const {value, changeDebounceInterval, blurDebounceInterval} = props;
     this.state = {
       currentValue: value,
       incomingPropValue: value,
       valueIsChanging: false,
     };
-    this.changeDebounced = debounce(onSetValue, changeDebounceInterval);
-    this.blurDebounced = debounce(onSetValue, blurDebounceInterval);
+    this.changeDebounced = debounce(this.setValue, changeDebounceInterval);
+    this.blurDebounced = debounce(this.setValue, blurDebounceInterval);
   }
+
+  public setValue = (value): void => {
+    if (this.state.incomingPropValue !== value) {
+      this.blurDebounced.cancel();
+      this.changeDebounced.cancel();
+      this.props.onSetValue(value);
+    }
+  };
 
   public static getDerivedStateFromProps(props, state): null | Partial<State> {
     const {value: incomingPropValue} = props;
@@ -100,11 +103,15 @@ class Input extends React.Component<InputProps, State> {
   public shouldComponentUpdate(nextProps, nextState): boolean {
     const {valueIsChanging, incomingPropValue} = nextState;
     if (valueIsChanging === true) {
-      this.setState({
-        valueIsChanging: false,
-        currentValue: incomingPropValue,
-      });
-      this.props.onSetValue(incomingPropValue);
+      this.setState(
+        {
+          valueIsChanging: false,
+          currentValue: incomingPropValue,
+        },
+        () => {
+          this.setValue(incomingPropValue);
+        },
+      );
       return false;
     }
     return true;
