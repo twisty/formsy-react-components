@@ -111,7 +111,7 @@ const Playground: React.FunctionComponent<Props> = ({
           required
         />
         <Input
-          name="date[0]"
+          name="date"
           value=""
           label="Date"
           type="date"
