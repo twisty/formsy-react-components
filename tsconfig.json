@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "outDir": "./release/",
+    "outDir": "./dist-esm/",
     "sourceMap": true,
     "strictNullChecks": true,
     "module": "es6",
@@ -14,6 +14,6 @@
       "formsy-react-components": ["./src"]
     }
   },
-  "exclude": ["node_modules"],
+  "exclude": ["node_modules", "**/__tests__"],
   "include": ["./src/"]
 }

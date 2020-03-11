@@ -8,22 +8,25 @@
     "test:full": "jest --coverage --verbose",
     "lint": "eslint src examples --ext .js,.jsx,.ts,.tsx",
     "format:configs": "prettier .eslintrc.js jest.config.js tsconfig.json --write",
-    "build": "tsc",
+    "build": "tsc && webpack --mode=none && webpack --mode=production",
     "prepublishOnly": "./scripts/prepublish.sh",
     "dev": "tsc --watch",
     "examples": "webpack-dev-server --config webpack.examples.config.js",
-    "examples:build": "webpack -p --config webpack.examples.config.js",
+    "examples:build": "webpack --mode=production --config webpack.examples.config.js",
     "gh-pages": "NODE_ENV=production yarn examples:build && gh-pages -d examples",
     "generate-docs": "./scripts/generate-docs.sh"
   },
-  "main": "./release/index.js",
-  "types": "./release/index.d.ts",
+  "browser": "./dist-umd/main.min.js",
+  "main": "./dist-umd/main.js",
+  "types": "./dist-esm/index.d.ts",
+  "module": "./dist-esm/index.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/twisty/formsy-react-components.git"
   },
   "files": [
-    "/release"
+    "/dist-esm",
+    "/dist-umd"
   ],
   "keywords": [
     "react",
