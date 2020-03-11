@@ -4,7 +4,7 @@
 const path = require('path');
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const {TsConfigPathsPlugin} = require('awesome-typescript-loader');
+const {TsconfigPathsPlugin} = require('tsconfig-paths-webpack-plugin');
 
 module.exports = {
   mode: 'development',
@@ -12,32 +12,32 @@ module.exports = {
   devtool: 'source-map',
 
   devServer: {
-    contentBase: __dirname,
+    contentBase: './examples',
     port: 3000,
   },
 
   entry: {
-    playground: path.resolve(__dirname, './playground/src/index.tsx'),
-    refs: path.resolve(__dirname, './refs/src/index.tsx'),
+    playground: './examples/playground/src/index.tsx',
+    refs: './examples/refs/src/index.tsx',
   },
 
   output: {
     filename: '[name].js',
-    path: path.resolve(__dirname, 'build'),
-    publicPath: '/build',
+    path: path.resolve(__dirname, './examples/build'),
+    publicPath: '/examples',
   },
 
   module: {
     rules: [
       {
         test: /\.tsx?$/,
-        loader: 'awesome-typescript-loader',
+        loader: 'ts-loader',
       },
     ],
   },
 
   resolve: {
     extensions: ['.ts', '.tsx', '.js'],
-    plugins: [new TsConfigPathsPlugin()],
+    plugins: [new TsconfigPathsPlugin()],
   },
 };
