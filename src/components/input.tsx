@@ -142,7 +142,7 @@ class Input extends React.Component<InputProps, State> {
 
   public handleChange = (event): void => {
     const {value} = event.currentTarget;
-    const {updateOnChange, changeCallback} = this.props;
+    const {updateOnChange, changeCallback, name} = this.props;
     this.setState({currentValue: value});
     if (updateOnChange) {
       this.changeDebounced(value);
