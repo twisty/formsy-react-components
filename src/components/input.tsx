@@ -124,6 +124,7 @@ class Input extends React.Component<InputProps, State> {
       isPristine,
       value: propValue,
       blurCallback,
+      name,
     } = this.props;
     this.setState({currentValue: value});
     if (updateOnBlur) {
