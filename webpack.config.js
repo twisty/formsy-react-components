@@ -18,6 +18,7 @@ const config = {
     path: path.resolve(__dirname, './dist-umd'),
     library: 'formsy-react-components',
     libraryTarget: 'umd',
+    globalObject: 'this',
   },
 
   module: {

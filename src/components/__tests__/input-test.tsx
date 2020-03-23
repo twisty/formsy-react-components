@@ -74,7 +74,7 @@ describe('The <Input /> component', () => {
   });
 
   describe('Input components do this', () => {
-    let onBlurProp;
+    let blurCallbackProp;
     let changeCallbackProp;
     let onSetValueProp;
     let wrapper;
@@ -82,7 +82,7 @@ describe('The <Input /> component', () => {
     beforeEach(() => {
       jest.useFakeTimers();
 
-      onBlurProp = jest.fn();
+      blurCallbackProp = jest.fn();
       changeCallbackProp = jest.fn();
       onSetValueProp = jest.fn();
 
@@ -92,7 +92,7 @@ describe('The <Input /> component', () => {
           id="myId"
           label="My Label"
           value="Initial value"
-          blurCallback={onBlurProp}
+          blurCallback={blurCallbackProp}
           changeCallback={changeCallbackProp}
           onSetValue={onSetValueProp}
         />,
@@ -106,6 +106,18 @@ describe('The <Input /> component', () => {
       expect(wrapper.find('input').prop('value')).toEqual('Changed value');
     });
 
+    it('executes `props.blurCallback` when the <input /> field blurs', () => {
+      expect(blurCallbackProp).not.toHaveBeenCalled();
+      const inputNode = wrapper.find('input');
+      changeValue(inputNode, 'Changed value');
+      expect(blurCallbackProp).not.toHaveBeenCalled();
+      inputNode.simulate('blur');
+      expect(blurCallbackProp).toHaveBeenCalledWith(
+        'myTestInput',
+        'Changed value',
+      );
+    });
+
     it('executes `props.changeCallback` when the <input /> value changes', () => {
       /*
        * The following doesn't work, we have to set the node's value directly:
@@ -114,32 +126,35 @@ describe('The <Input /> component', () => {
        *
        * @see https://github.com/facebook/react/issues/3151#issuecomment-74943529
        */
-      expect(changeCallbackProp).not.toBeCalled();
+      expect(changeCallbackProp).not.toHaveBeenCalled();
       const inputNode = wrapper.find('input');
       changeValue(inputNode, 'Changed value');
-      expect(changeCallbackProp).toBeCalled();
+      expect(changeCallbackProp).toHaveBeenCalled();
       expect(wrapper.find('input').prop('value')).toEqual('Changed value');
     });
 
     it('debounces `props.onSetValue`', () => {
-      expect(changeCallbackProp).not.toBeCalled();
-      expect(onSetValueProp).not.toBeCalled();
+      expect(changeCallbackProp).not.toHaveBeenCalled();
+      expect(onSetValueProp).not.toHaveBeenCalled();
 
       const inputNode = wrapper.find('input');
       changeValue(inputNode, 'a');
+      expect(changeCallbackProp).toHaveBeenCalledWith('myTestInput', 'a');
       changeValue(inputNode, 'b');
+      expect(changeCallbackProp).toHaveBeenCalledWith('myTestInput', 'b');
       changeValue(inputNode, 'c');
+      expect(changeCallbackProp).toHaveBeenCalledWith('myTestInput', 'c');
 
-      expect(changeCallbackProp).toBeCalled();
+      expect(changeCallbackProp).toHaveBeenCalled();
       expect(changeCallbackProp).toHaveBeenCalledTimes(3);
 
       /*
        * The `onSetValueProp` function should be called after a period of
        * 500ms (it is debounced for change events).
        */
-      expect(onSetValueProp).not.toBeCalled();
+      expect(onSetValueProp).not.toHaveBeenCalled();
       jest.runAllTimers();
-      expect(onSetValueProp).toBeCalled();
+      expect(onSetValueProp).toHaveBeenCalled();
       expect(onSetValueProp).toHaveBeenCalledTimes(1);
     });
   });
