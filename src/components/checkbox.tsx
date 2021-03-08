@@ -19,7 +19,9 @@ type Props = CommonControlPropsCleaned &
     name: string;
   };
 
-class Checkbox extends React.Component<Props, {}> {
+type State = Record<string, unknown>;
+
+class Checkbox extends React.Component<Props, State> {
   public static defaultProps = defaultProps;
 
   // Need to supply a constructor to be recognised as ComponentClass?

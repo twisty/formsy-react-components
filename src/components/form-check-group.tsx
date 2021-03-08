@@ -8,7 +8,9 @@ type FormCheckGroupProps = typeof componentDefaultProps & {
   children: React.ReactElement;
 };
 
-const FormCheckGroup: React.FunctionComponent<FormCheckGroupProps> = props => {
+const FormCheckGroup: React.FunctionComponent<FormCheckGroupProps> = (
+  props,
+) => {
   const {
     layout,
     help,
@@ -23,7 +25,7 @@ const FormCheckGroup: React.FunctionComponent<FormCheckGroupProps> = props => {
   }
 
   const {...passProps} = props;
-  delete passProps.children;
+  //delete passProps.children;
 
   return (
     <Row {...passProps} labelClassName={['pt-0', labelClassName]} fakeLabel>

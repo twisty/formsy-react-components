@@ -91,7 +91,9 @@ class Textarea extends React.Component<TextareaProps, State> {
       this.changeDebounced.cancel();
       this.blurDebounced(value);
     }
-    blurCallback(name, value);
+    if (blurCallback) {
+      blurCallback(name, value);
+    }
   };
 
   public render(): JSX.Element {
@@ -99,11 +101,17 @@ class Textarea extends React.Component<TextareaProps, State> {
     Object.keys(componentDefaultProps).forEach((key): void => {
       delete inputProps[key];
     });
-    delete inputProps.blurDebounceInterval;
-    delete inputProps.changeDebounceInterval;
-    delete inputProps.updateOnBlur;
-    delete inputProps.updateOnChange;
-    delete inputProps.blurCallback;
+
+    /* eslint-disable @typescript-eslint/no-unused-vars */
+    const {
+      blurDebounceInterval,
+      changeDebounceInterval,
+      updateOnBlur,
+      updateOnChange,
+      blurCallback,
+      ...filteredInputProps
+    } = inputProps;
+    /* eslint-enable @typescript-eslint/no-unused-vars */
 
     const {currentValue} = this.state;
     const {
@@ -122,7 +130,7 @@ class Textarea extends React.Component<TextareaProps, State> {
 
     const element = (
       <TextareaControl
-        {...inputProps}
+        {...filteredInputProps}
         className={markAsInvalid ? `is-invalid ${className}` : className}
         id={id}
         value={currentValue}

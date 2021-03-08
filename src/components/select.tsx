@@ -23,7 +23,9 @@ const defaultProps = {
 
 type SelectProps = SelectControlProps & typeof defaultProps;
 
-class Select extends React.Component<SelectProps, {}> {
+type State = Record<string, unknown>;
+
+class Select extends React.Component<SelectProps, State> {
   public static defaultProps = defaultProps;
 
   // Need to supply a constructor to be recognised as ComponentClass?

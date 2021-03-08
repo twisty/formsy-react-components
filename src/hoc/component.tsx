@@ -8,30 +8,12 @@ import {
 } from '../utils';
 import {LayoutType, ComponentValue} from '../types';
 
+import type {PassDownProps} from 'formsy-react/dist/withFormsy';
+
 /**
  * Props coming from the `withFormsy` hoc.
  */
-interface ExternalProps {
-  /* eslint-disable @typescript-eslint/no-explicit-any */
-  errorMessage: any;
-  hasValue: any;
-  innerRef: any;
-  isFormDisabled: boolean;
-  isFormSubmitted: boolean;
-  isPristine: boolean;
-  isRequired: boolean;
-  isValid: boolean;
-  isValidValue: boolean;
-  resetValue: any;
-  setValidations: any;
-  setValue: any;
-  showError: boolean;
-  showRequired: boolean;
-  validationError: any;
-  validationErrors: any;
-  validations: any;
-  /* eslint-enable @typescript-eslint/no-explicit-any */
-}
+type ExternalProps<V> = PassDownProps<V>;
 
 /**
  * Props that come from our components.
@@ -62,17 +44,20 @@ interface RequiredFromOriginalComponentProps {
  * the form, while retaining the ability to override the prop on a per-component
  * basis.
  */
-// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-const withFRC = <TOriginalProps extends {}>(
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type, @typescript-eslint/explicit-module-boundary-types
+const withFRC = <TOriginalProps extends Record<string, unknown>>(
   Component:
     | React.ComponentClass<TOriginalProps>
     | React.FunctionComponent<TOriginalProps>,
 ) => {
   type ResultProps = TOriginalProps &
-    ExternalProps &
+    ExternalProps<TOriginalProps> &
     RequiredFromOriginalComponentProps;
 
-  const result = class FrcWrapper extends React.Component<ResultProps, {}> {
+  const result = class FrcWrapper extends React.Component<
+    ResultProps,
+    Record<string, unknown>
+  > {
     public static displayName = `withFRC(${getDisplayName(Component)})`;
     public static contextType = FrcContext;
 

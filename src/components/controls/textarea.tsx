@@ -19,7 +19,9 @@ const defaultProps = {
   elementRef: React.createRef<HTMLTextAreaElement>(),
 };
 
-class TextareaControl extends React.Component<TextareaControlProps, {}> {
+type State = Record<string, unknown>;
+
+class TextareaControl extends React.Component<TextareaControlProps, State> {
   public static defaultProps = defaultProps;
 
   public constructor(props) {

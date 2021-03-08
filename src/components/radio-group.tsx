@@ -26,7 +26,10 @@ type RadioGroupProps = ControlCommonPropsCleaned &
     name: string;
   };
 
-class RadioGroup extends React.Component<RadioGroupProps, {}> {
+class RadioGroup extends React.Component<
+  RadioGroupProps,
+  Record<string, unknown>
+> {
   public elements = {};
 
   public static defaultProps = defaultProps;
@@ -65,7 +68,7 @@ class RadioGroup extends React.Component<RadioGroupProps, {}> {
       markAsInvalid ? ' is-invalid' : ''
     }`;
 
-    const controls = options.map(radio => {
+    const controls = options.map((radio) => {
       const checked = value === radio.value;
       const isDisabled = radio.disabled || disabled;
       const inputId = `${id}--${radio.value}`;

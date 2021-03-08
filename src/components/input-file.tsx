@@ -12,7 +12,9 @@ const defaultProps = {
 
 type FileProps = FileControlProps & typeof defaultProps;
 
-class File extends React.Component<FileProps, {}> {
+type State = Record<string, unknown>;
+
+class File extends React.Component<FileProps, State> {
   public static defaultProps = defaultProps;
 
   // Need to supply a constructor to be recognised as ComponentClass?

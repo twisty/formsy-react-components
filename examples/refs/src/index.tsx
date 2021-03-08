@@ -14,7 +14,7 @@ import {
   Textarea,
 } from 'formsy-react-components';
 
-const logRef = <T extends object>(ref: React.RefObject<T>): void => {
+const logRef = <T extends unknown>(ref: React.RefObject<T>): void => {
   const {current} = ref;
   if (current !== null) {
     // eslint-disable-next-line no-console

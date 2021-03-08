@@ -8,10 +8,12 @@ interface FileControlProps extends CommonProps, ControlPropsCleaned {
   elementRef: React.RefObject<HTMLInputElement>;
 }
 
+type State = Record<string, unknown>;
+
 // A file control can only be set to an empty string.
 // I think we need to keep this as an uncontrolled component, so we override the
 // value.prop.
-class FileControl extends React.Component<FileControlProps, {}> {
+class FileControl extends React.Component<FileControlProps, State> {
   public static defaultProps = {
     elementRef: React.createRef<HTMLInputElement>(),
   };
