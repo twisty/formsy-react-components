@@ -3,7 +3,9 @@ export interface DebouncedFunction extends Function {
   flush: () => void;
 }
 
-export default (fn: Function, time: number): DebouncedFunction => {
+type Fn = (args?) => unknown;
+
+export default (fn: Fn, time: number): DebouncedFunction => {
   let pending;
   let lastArgs;
   let lastThis;

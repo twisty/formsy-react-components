@@ -27,7 +27,9 @@ type CheckboxGroupProps = typeof defaultProps &
     name: string;
   };
 
-class CheckboxGroup extends React.Component<CheckboxGroupProps, {}> {
+type State = Record<string, unknown>;
+
+class CheckboxGroup extends React.Component<CheckboxGroupProps, State> {
   public static defaultProps = defaultProps;
 
   public elements = {};

@@ -17,7 +17,9 @@ interface Props extends CommonProps, ControlPropsCleaned {
   elementRef: React.RefObject<HTMLSelectElement>;
 }
 
-class SelectControl extends React.Component<Props, {}> {
+type State = Record<string, unknown>;
+
+class SelectControl extends React.Component<Props, State> {
   public static defaultProps = {
     multiple: false,
     elementRef: React.createRef<HTMLSelectElement>(),
@@ -83,7 +85,7 @@ class SelectControl extends React.Component<Props, {}> {
     }
 
     const {className, elementRef, ...selectProps} = this.props;
-    delete selectProps.options;
+    //delete selectProps.options;
 
     return (
       <select

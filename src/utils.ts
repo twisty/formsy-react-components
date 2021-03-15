@@ -1,4 +1,4 @@
-export const getDisplayName = (component: React.ComponentType): string =>
+export const getDisplayName = (component: React.ComponentType<any>): string =>
   component.displayName ||
   component.name ||
   (typeof component === 'string' ? component : 'Component');
@@ -62,11 +62,7 @@ export const getId = (
   }
   return [
     'frc',
-    name
-      .split('[')
-      .join('_')
-      .replace(']', '')
-      .replace('.', '_'),
+    name.split('[').join('_').replace(']', '').replace('.', '_'),
     hashString(JSON.stringify(label)),
   ].join('-');
 };

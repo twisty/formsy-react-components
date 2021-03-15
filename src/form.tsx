@@ -1,9 +1,11 @@
 import * as React from 'react';
 import classNames from 'classnames/dedupe'; // eslint-disable-line import/default
 import {ClassValue} from 'classnames/types'; // eslint-disable-line import/no-unresolved
-import Formsy, {FormsyProps} from 'formsy-react';
+import Formsy from 'formsy-react';
 import {LayoutType} from './types';
 import FrcContext from './context/frc';
+
+import type {FormsyProps} from 'formsy-react/dist/Formsy';
 
 type FormPropsCleaned = Omit<
   React.FormHTMLAttributes<HTMLFormElement>,
@@ -27,7 +29,9 @@ type DefaultProps = typeof formDefaultProps;
 
 type FormProps = FormPropsCleaned & Partial<FormsyPropsCleaned> & DefaultProps;
 
-class Form extends React.Component<FormProps, {}> {
+type State = Record<string, unknown>;
+
+class Form extends React.Component<FormProps, State> {
   public static defaultProps = formDefaultProps;
 
   public formsyForm = React.createRef<Formsy>();

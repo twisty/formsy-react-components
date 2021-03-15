@@ -11,7 +11,9 @@ const defaultProps = {
 type InputControlProps = React.InputHTMLAttributes<HTMLInputElement> &
   typeof defaultProps;
 
-class InputControl extends React.Component<InputControlProps, {}> {
+type State = Record<string, unknown>;
+
+class InputControl extends React.Component<InputControlProps, State> {
   public static defaultProps = defaultProps;
 
   public render(): JSX.Element {
