@@ -74,15 +74,19 @@ const withFRC = <TOriginalProps extends Record<string, unknown>>(
 
       const {
         /* eslint-disable @typescript-eslint/no-unused-vars */
+        attachToForm,
+        detachFromForm,
         errorMessage,
         hasValue,
         innerRef,
         isRequired,
         isValidValue,
         resetValue,
+        runValidation,
         setValidations,
         showError,
         showRequired,
+        validate,
         validationError,
         validationErrors,
         validations,

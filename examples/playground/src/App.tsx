@@ -16,7 +16,7 @@ const initialState = Object.freeze({
 
 type State = typeof initialState;
 
-class App extends React.Component<null, State> {
+class App extends React.Component<Record<string, never>, State> {
   public readonly state: Readonly<State> = initialState;
 
   private handleChangeOption = (name, value): void => {
