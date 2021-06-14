@@ -1,23 +1,23 @@
 # RadioGroup
 
 ## Props
-| Name                    | Type                                                      | Default | Required | Description |
-| ----------------------- | --------------------------------------------------------- | ------- | -------- | ----------- |
-| options                 | { disabled: boolean; value: string; label: ReactNode; }[] |         | true     |             |
-| required                | boolean                                                   | false   | true     |             |
-| value                   | string                                                    |         | true     |             |
-| type                    | "stacked" | "inline"                                      | stacked | true     |             |
-| id                      | string                                                    |         | true     |             |
-| rowClassName            | ClassValue                                                |         | true     |             |
-| labelClassName          | ClassValue                                                |         | true     |             |
-| elementWrapperClassName | ClassValue                                                |         | true     |             |
-| name                    | string                                                    |         | true     |             |
-| changeCallback          | (name: string, value: any) => void                        |         | true     |             |
-| onSetValue              | (value: any) => void                                      |         | true     |             |
-| isPristine              | () => boolean                                             |         | true     |             |
-| errorMessages           | ReactNode[]                                               |         | true     |             |
-| help                    | string                                                    |         | true     |             |
-| label                   | ReactNode                                                 |         | true     |             |
-| layout                  | LayoutType                                                |         | true     |             |
-| showErrors              | boolean                                                   | false   | true     |             |
-| disabled                | boolean                                                   | false   | false    |             |
+| Name                    | Type                                          | Default                      | Required | Description |
+| ----------------------- | --------------------------------------------- | ---------------------------- | -------- | ----------- |
+| disabled                | boolean                                       | false                        | false    |             |
+| options                 | Option[]                                      | [] as Option[]               | false    |             |
+| required                | boolean                                       | [object Object]              | false    |             |
+| type                    | RadioLayoutType                               | 'stacked' as RadioLayoutType | false    |             |
+| value                   | string                                        | [object Object]              | false    |             |
+| changeCallback          | (name: string, value: ComponentValue) => void |                              | true     |             |
+| elementWrapperClassName | Argument                                      |                              | true     |             |
+| errorMessages           | ReactNode[]                                   |                              | true     |             |
+| help                    | string                                        |                              | true     |             |
+| id                      | string                                        |                              | true     |             |
+| isPristine              | boolean                                       | false                        | true     |             |
+| label                   | ReactNode                                     |                              | true     |             |
+| labelClassName          | Argument                                      |                              | true     |             |
+| layout                  | LayoutType                                    |                              | true     |             |
+| onSetValue              | (value: ComponentValue) => void               |                              | true     |             |
+| rowClassName            | Argument                                      |                              | true     |             |
+| showErrors              | boolean                                       | false                        | true     |             |
+| name                    | string                                        |                              | true     |             |
