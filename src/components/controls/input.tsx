@@ -1,6 +1,6 @@
 import * as React from 'react';
-import classNames from 'classnames/dedupe'; // eslint-disable-line import/default
-import {ClassValue} from 'classnames/types'; // eslint-disable-line import/no-unresolved
+import classNames from 'classnames/dedupe';
+import {Argument as ClassValue} from 'classnames';
 
 const defaultProps = {
   className: '' as ClassValue,

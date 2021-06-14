@@ -1,4 +1,4 @@
-import {ClassValue} from 'classnames/types'; // eslint-disable-line import/no-unresolved
+import {Argument as ClassValue} from 'classnames';
 import {LayoutType, ComponentValue} from '../types';
 
 export const componentDefaultProps = {

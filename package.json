@@ -47,7 +47,6 @@
     "classnames": "^2.2.5"
   },
   "devDependencies": {
-    "@types/classnames": "^2.2.7",
     "@types/enzyme": "^3.9.4",
     "@types/jest": "^26.0.20",
     "@types/react": "^17.0.1",

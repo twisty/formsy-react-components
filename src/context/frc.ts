@@ -1,5 +1,5 @@
 import {createContext} from 'react';
-import {ClassValue} from 'classnames/types'; // eslint-disable-line import/no-unresolved
+import {Argument as ClassValue} from 'classnames';
 import {LayoutType} from '../types';
 
 const defaultContextValue = {
