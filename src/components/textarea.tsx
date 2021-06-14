@@ -35,12 +35,8 @@ class Textarea extends React.Component<TextareaProps, State> {
 
   public constructor(props) {
     super(props);
-    const {
-      value,
-      onSetValue,
-      changeDebounceInterval,
-      blurDebounceInterval,
-    } = props;
+    const {value, onSetValue, changeDebounceInterval, blurDebounceInterval} =
+      props;
     this.state = {
       currentValue: value,
       incomingPropValue: value,

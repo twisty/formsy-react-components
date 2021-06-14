@@ -11,14 +11,8 @@ type FormCheckGroupProps = typeof componentDefaultProps & {
 const FormCheckGroup: React.FunctionComponent<FormCheckGroupProps> = (
   props,
 ) => {
-  const {
-    layout,
-    help,
-    showErrors,
-    errorMessages,
-    labelClassName,
-    children,
-  } = props;
+  const {layout, help, showErrors, errorMessages, labelClassName, children} =
+    props;
 
   if (layout === 'elementOnly') {
     return children;

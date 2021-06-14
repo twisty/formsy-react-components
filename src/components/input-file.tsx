@@ -34,14 +34,8 @@ class File extends React.Component<FileProps, State> {
   };
 
   public render(): JSX.Element {
-    const {
-      errorMessages,
-      help,
-      id,
-      layout,
-      showErrors,
-      ...inputProps
-    } = this.props;
+    const {errorMessages, help, id, layout, showErrors, ...inputProps} =
+      this.props;
     Object.keys(componentDefaultProps).forEach((key): void => {
       delete inputProps[key];
     });

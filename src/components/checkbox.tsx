@@ -37,14 +37,8 @@ class Checkbox extends React.Component<Props, State> {
   };
 
   private renderElement = (): JSX.Element => {
-    const {
-      elementRef,
-      id,
-      label,
-      value,
-      valueLabel,
-      ...inputProps
-    } = this.props;
+    const {elementRef, id, label, value, valueLabel, ...inputProps} =
+      this.props;
     Object.keys(componentDefaultProps).forEach((key): void => {
       delete inputProps[key];
     });
@@ -69,14 +63,8 @@ class Checkbox extends React.Component<Props, State> {
 
   public render(): JSX.Element {
     const element = this.renderElement();
-    const {
-      errorMessages,
-      help,
-      id,
-      labelClassName,
-      layout,
-      showErrors,
-    } = this.props;
+    const {errorMessages, help, id, labelClassName, layout, showErrors} =
+      this.props;
 
     if (layout === 'elementOnly') {
       return element;
