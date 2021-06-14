@@ -7,8 +7,6 @@ module.exports = {
     "plugin:import/errors",
     "plugin:import/warnings",
     "plugin:import/typescript",
-    "prettier/react",
-    "prettier/@typescript-eslint"
   ],
   plugins: ["prettier"],
   rules: {
@@ -19,15 +17,15 @@ module.exports = {
         singleQuote: true,
         trailingComma: "all",
         bracketSpacing: false,
-        jsxBracketSameLine: true
-      }
+        jsxBracketSameLine: true,
+      },
     ],
     "react/jsx-filename-extension": [1, { extensions: [".jsx", ".tsx"] }],
     "react/prop-types": [
       "error",
       {
-        skipUndeclared: true
-      }
+        skipUndeclared: true,
+      },
     ],
     "jsx-a11y/label-has-for": "off",
     "jsx-a11y/label-has-associated-control": [
@@ -37,34 +35,34 @@ module.exports = {
         labelAttributes: [],
         controlComponents: [],
         assert: "either",
-        depth: 25
-      }
+        depth: 25,
+      },
     ],
     "@typescript-eslint/explicit-function-return-type": [
       "warn",
       {
-        allowTypedFunctionExpressions: true
-      }
-    ]
+        allowTypedFunctionExpressions: true,
+      },
+    ],
   },
   parser: "@typescript-eslint/parser",
   parserOptions: {
     ecmaVersion: 2018,
     sourceType: "module",
     ecmaFeatures: {
-      jsx: true
-    }
+      jsx: true,
+    },
   },
   settings: {
     react: {
-      version: "detect"
+      version: "detect",
     },
     "import/parsers": {
-      "@typescript-eslint/parser": [".ts", ".tsx"]
+      "@typescript-eslint/parser": [".ts", ".tsx"],
     },
     "import/resolver": {
       // use <root>/tsconfig.json
-      typescript: {}
-    }
-  }
+      typescript: {},
+    },
+  },
 };

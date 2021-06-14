@@ -9,9 +9,9 @@ module.exports = {
   setupFilesAfterEnv: ["<rootDir>/src/components/__tests__/test-helper.ts"],
   testPathIgnorePatterns: [
     "<rootDir>/src/components/__tests__/component.tsx",
-    "<rootDir>/src/components/__tests__/test-helper.ts"
+    "<rootDir>/src/components/__tests__/test-helper.ts",
   ],
   moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths, {
-    prefix: "<rootDir>/"
-  })
+    prefix: "<rootDir>/",
+  }),
 };
