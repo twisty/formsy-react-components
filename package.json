@@ -68,7 +68,7 @@
     "prettier": "^2.2.1",
     "raf": "^3.4.0",
     "react": "^17.0.1",
-    "react-docgen-typescript": "^1.21.0",
+    "react-docgen-typescript": "^2.0.0",
     "react-docs-markdown": "^0.8.0",
     "react-dom": "^17.0.1",
     "react-test-renderer": "^17.0.1",
